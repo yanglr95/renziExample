@@ -1,0 +1,77 @@
+<form id="dialogForm">
+    <ul class="easyui-tree listTree"></ul>
+    <button type="button" onclick="confirmChoice()" class="main_btn" style="margin-left: 19%;position: absolute;bottom:20px;">确定</button>
+</form>
+<script>
+    var selectData = null;
+        var treeData = [{
+        "id": "10554005",
+        "parentKey": "",
+        "text": "国网青岛供电公司本部",
+        'state': 'open'
+    },
+    {
+        "id": "100554194",
+        "parentKey": "10554005",
+        "text": "营销部（农电工作部）"
+    },
+    {
+        "id": "14110182",
+        "parentKey": "100554194",
+        "text": "主任"
+    },
+    {
+        "id": "14110970",
+        "parentKey": "100554194",
+        "text": "党支部书记"
+    },
+    {
+        "id": "14110181",
+        "parentKey": "100554194",
+        "text": "副主任"
+    }]
+
+    $(".listTree").tree({
+        data: toTree(treeData),
+        onLoadSuccess: function () {
+            $(this).find("ul>li>ul>li:not(:has(ul))").find('.tree-node');
+        },
+        onClick: function (rows) {
+            console.log(rows)
+            selectData = rows;
+        }
+    })
+
+    function toTree(data) {
+        data.forEach(function (item) {
+            delete item.children;
+        });
+
+        var map = {};
+        data.forEach(function (item) {
+            map[item.id] = item;
+        });
+        var val = [];
+        data.forEach(function (item) {
+            var parent = map[item.parentKey];
+            if (parent) {
+                (parent.children || (parent.children = [])).push(item);
+            } else {
+                val.push(item);
+            }
+        });
+        return val;
+    }
+
+    function confirmChoice() {
+        var detail = parent.$('#orgJobTree');
+        if(selectData.parentKey!='100554194'){
+            $.messager.alert("提示信息", "请正确选择岗位信息");
+            return
+        }
+        selectData.parentName ='营销部（农电工作部）';
+        selectData.topName ='国网青岛供电公司本部';
+        window.parent.setData(selectData);
+        detail.dialog("close");        
+    };
+</script>

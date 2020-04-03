@@ -1,0 +1,437 @@
+<div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+    <div class="tab_card">
+        <div style="padding: 20px 0 20px 20px">
+            <p class="box-title">竞聘考评</p>
+        </div>
+        <!--<div class="title_line">
+                    <div class="box-title">人员信息</div>
+                    <div class="title_record">申请记录</div>
+                </div>-->
+        <div style="width:100%;height: 100%;padding: 0 20px;">
+            <div id="peoplelayout" class="easyui-layout" style="width:100%;height: 100%;">
+                <div class="people-left" data-options="region:'west',split:true,collapsedSize: 1" style="width:250px;">
+                    <div class="peoples_west">
+
+                        <div style="margin: 10px 0;">
+                            <input name="uuu" class="" id="jpkp_nian" data-options="width:120 , height:30 ">
+                        </div>
+                        <div style="margin-bottom: 10px;"><input style="width: 100%;" class="input_seach"
+                                placeholder="请输入关键字"></div>
+                        <ul id="jpkp_timeTree">
+                            
+                        </ul>
+                    </div>
+                    <div class="collapse collapsejpkp"></div>
+                </div>
+
+                <div class="people-right" data-options="region:'center',split:true">
+                    <div id="jpkp-right" style="padding: 0 0 0 20px;width: 100%;height: 100%;">
+                        <div>
+                            <div class="box-title jpkp_title">高级岗位人员配置(国网层级)</div>
+                        </div>
+                        <div class="peizhi_box" style="margin: 20px 0;">
+                            <div> 配置单号：<span class="jpkp_dh">738236283729</span></div>
+                            <div style="margin-left:120px;"> 报名有效期：<span class="jpkp_yxq">2019-04-01-2019-06-01</span></div>
+                        </div>
+                        <div style="margin: 20px 0;overflow: hidden;">
+                            <div class="lf">
+                                <button class="primary-btn" id="jpkp_submit">提交</button>
+                                <button class="border-btn" id="jpkp_edit">保存</button>
+                                <!-- <button class="border-btn" onclick="$('#daoru_box').dialog('open')">导入</button>导入前请先
+                                <a href="" style="color:blue">下载模版</a> -->
+                            </div>
+                            <div class="table_seach_right">
+                                <span style="margin-left: 20px;">状态:</span>
+                                <input name="" id="jpkp_type" data-options="width:120 , height:34">
+                                <span style="margin-left: 20px;">姓名:</span>
+                                <input id="jpkp_namesearch" name="" style="border:1px solid #eee; line-height: 30px;">
+                                <button class="primary-btn ">查询</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="easyui-layout" fit="true">
+                        <div id="jpkpTable"></div>
+                    </div>
+                    <div class="expand expandjpkp"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="daoru_box" class="easyui-dialog" closed="true" title="导入"
+    style="width:800px;height:500px;padding:10px;display: none;">
+    <div class="file_top">
+        <div class="tishi"><img src="assets/home/icon_tishi.png" alt=""> 上传提示</div>
+        <div class="file_zhi">
+            请确认您所上传的表格人员信息正确，请
+            <span>
+                不要更改模板格式（Excel）
+            </span>
+            ，否则将上传失败！
+        </div>
+
+    </div>
+    <div class="file_con" style="position: relative;width: 100%;">
+        <input type="file" style="position: absolute;z-index: 20;opacity: 0;left: 0;top: 0;right: 0;bottom: 0;width: 100%;">
+        <img src="assets/home/icon_file.png" alt="">
+        <div>点击或将文件拖拽到这里上传</div>
+    </div>
+    <div class="file_bom">
+        <div>文件上传</div>
+        <div class="file_tiao">
+            <div></div>
+        </div>
+        <div>正在上传</div>
+    </div>
+    <div class="file_foot">
+        <button class="primary-btn" id="jpkp_col">取消</button>
+        <button class="border-btn">确定</button>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        // $('#daoru_box').dialog('open')
+        //面板收缩
+        $(".collapsejpkp").click(function () {
+            $("#peoplelayout").layout("collapse", "west");
+            $(".expandjpkp").show();
+            $(this).hide();
+        });
+        //面板展开
+        $(".expandjpkp").click(function () {
+            $("#peoplelayout").layout("expand", "west");
+            $(".collapsejpkp").show();
+            $(this).hide();
+        });
+        $("#jpkp_col").on("click", function () {
+            $('#daoru_box').dialog('close');
+        })
+        $('#jpkp_namesearch').textbox({
+            prompt: '请输入',
+            width: 150,
+            height: 34,
+        });
+        $('#jpkp_type').combobox({
+            placeholder: '请输入关键字',
+            valueField: "id",
+            textField: "text",
+            editable: false,
+            data: [
+                { id: "", text: "全部" },
+                { id: 1, text: "通过" },
+                { id: 2, text: "不通过" }
+            ]
+        });
+        //年
+        var year = new Date().getYear();
+        var yr = year > 1900 ? year : (1900 + year);
+        $('#jpkp_nian').combobox({
+            valueField: "id",
+            textField: "text",
+            editable: false,
+            data: [
+                { id: "2019", text: "2019年", "selected":true },
+                { id: "2018", text: "2018年" },
+                { id: "2017", text: "2017年" },
+                { id: "2016", text: "2016年" },
+                { id: "2015", text: "2015年" }
+            ],
+            onSelect: function(rec){
+                console.log(rec);
+                getJpkpTree(rec.id);
+            }
+        });
+
+        // $('#jpkp_timeTree').textbox('textbox').keydown(function(e){
+        //     var code = e.keyCode || e.which;
+        //     if(code == 13){
+        //         console.log("回车")
+        //         //保存更改 第一次编辑可能不会改变值
+        //         $('#jpkpTable').datagrid('acceptChanges');
+        //         $('#jpkpTable').datagrid('endEdit', editIndex);
+        //         //do something
+        //     }
+        // });
+    }); 
+    //获取树方法
+    //var resultValuearr=[];
+    function getJpkpTree(id){
+        $.ajax({
+            url: BASE_URL3+"/empApply/queryStaffingByMonth",
+            method: "get",
+            data:{
+                "year":id           
+            },
+            contentType:'application/json',
+            success:function(data){
+                console.log(data,'树')
+                //resultValuearr.push(data.resultValue.children);
+                jpkpTree(data.resultValue.children);                  
+            },
+            error: function(rel){
+                console.log(rel);
+            }               
+        });
+    }
+    function jpkpTree(data){
+        $("#jpkp_timeTree").tree({
+            data:data,
+            onClick: function(node){
+                var childList = $(this).tree('getChildren',node.target);
+                if(childList.length==0){
+                    EmpsCheckInfo(node.id);
+                }
+            },
+            onLoadSuccess:function(node,data){   
+                console.log(data);
+                $("#jpkp_timeTree li:eq(0) ul li:eq(0)").find("div").addClass("tree-node-selected");//设置第一个最后子节点高亮   
+                var n = $("#jpkp_timeTree").tree("getSelected");
+                if(n!=null){   
+                    $("#jpkp_timeTree").tree("select",n.target);//相当于默认点击了一下第一个最后子节点，执行onSelect方法  
+                    EmpsCheckInfo(n.id);
+                }
+            } 
+        });
+    }       
+  
+    //var id= '6004'; 
+    //EmpsCheckInfo(id);         
+    function EmpsCheckInfo(id){           
+        $.ajax({
+            type:'post',
+            url:BASE_URL3+'/empApply/queryEmpsCheckInfoByPost',
+            contentType:'application/json',
+            data:JSON.stringify({
+                "staffingId":id              
+            }),
+            success:function(data){
+                console.log(data,'表格数据')
+                var container = "#jpkp-right";
+                if(data.resultValue!=null){
+                    $(container).show();
+                    setjpkpTitle(data.resultValue);//设置头部数据
+                    var tableData1=data.resultValue.applyEmpCheckInfoByPostVOs;               
+                    jpkpTable(tableData1);
+                }else{
+                    console.log("没有数据");                   
+                    //$("<a class='nodata'>没有数据</a>").appendTo(container);
+                    $(container).hide();
+                }
+            },
+            error: function(rel){
+                console.log(rel,'表格数据请求失败');
+            }
+        });
+    }
+    //设置头部数据
+    function setjpkpTitle(rows){
+        $(".jpkp_title").text(rows.staffingName);//配置单名称
+        $(".jpkp_dh").text(rows.staffingId);//配置单单号
+        $(".jpkp_yxq").text(formatString(rows.validDate,"--"));//报名有效期
+    }
+    var editIndex = undefined;
+    function endEditing() {
+        if (editIndex == undefined) { return true }
+        if ($('#jpkpTable').datagrid('validateRow', editIndex)) {
+            $('#jpkpTable').datagrid('endEdit', editIndex);
+            editIndex = undefined;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function onClickCell(index, field) {
+        console.log(index, field)
+        if (editIndex != index) {
+            if (endEditing()) {
+                $('#jpkpTable').datagrid('selectRow', index).datagrid('beginEdit', index);
+                var ed = $('#jpkpTable').datagrid('getEditor', { index: index, field: field });
+                if (ed) {
+                    ($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
+                }
+                editIndex = index;
+            } else {
+                setTimeout(function () {
+                    $('#jpkpTable').datagrid('selectRow', editIndex);
+                }, 0);
+            }
+        }
+    }
+    function onEndEdit(index, row){
+        var ed = $(this).datagrid('getEditor', {
+            index: index,
+            field: 'examineStatus'
+        });
+        //row.examineStatus = $(ed.target).combobox('getText');
+
+    }
+    function onBeforeEdit(index,row){//当用户开始编辑一行时触发        
+        responseId = row.responseId;
+        writeExamScore  = row.writeExamScore;
+        interviewScore = row.interviewScore;
+        otherScore = row.otherScore;
+        generalScore = row.generalScore;
+        examineStatus = row.examineStatus;
+        console.log("开始编辑行");
+        
+    }
+    function onAfterEdit(index, row,changes){//当用户编辑完成时触发
+        var responseId = row.responseId;
+        var writeExamScore1  = row.writeExamScore;
+        var interviewScore1 = row.interviewScore;
+        var otherScore1 = row.otherScore;
+        var generalScore1 = row.generalScore;
+        var examineStatus1 = row.examineStatus; 
+        if(writeExamScore1>100 || interviewScore1>100 || otherScore1>100 || generalScore1>100){
+        		$.messager.alert("提示信息", "输入的成绩不能大于100" );         		
+            //$('#jpkpTable').datagrid('selectRow', index).datagrid('beginEdit', index);
+            //editIndex = index;
+            
+        		return false;
+        }
+        if(writeExamScore!=writeExamScore1||interviewScore!=interviewScore1||otherScore!=otherScore1||generalScore!=generalScore1||examineStatus!=examineStatus1){
+            console.log("修改了");
+            udpateEmpsScore(responseId,writeExamScore1,interviewScore1,otherScore1,generalScore1,examineStatus1);
+        }
+        console.log("取消编辑行");
+        //console.log(interviewScore1);
+        
+    }
+    //考评竞聘修改成绩
+    function udpateEmpsScore(responseId,writeExamScore1,interviewScore1,otherScore1,generalScore1,examineStatus1){           
+        $.ajax({
+            type:'post',
+            url:BASE_URL3+'/empApply/udpateEmpsScoreByResponseId',
+            contentType:'application/json',
+            data:JSON.stringify({
+                "responseId":responseId,
+                "writeExamScore":writeExamScore1,
+                "interviewScore":interviewScore1,
+                "otherScore":otherScore1,              
+                "generalScore":generalScore1,
+                "examineStatus":examineStatus1                                    
+            }),
+            success:function(data){
+                console.log(data,'考评竞聘修改成绩')
+                if(data.resultCode =="200"){                          
+                    $.messager.alert("提示信息", "考评竞聘修改成绩成功" ); 
+                    //$('#alreadySubmittedTable').datagrid('reload');
+                    EmpsCheckInfo($(".jpkp_dh").text());//刷新页面
+                }else{
+                    $.messager.alert("提示信息", "考评竞聘修改成绩失败" ); 
+                }
+            },
+            error: function(rel){
+                console.log(rel);
+            }
+        });
+    }
+
+    function jpkpTable(mainData){
+        $('#jpkpTable').datagrid({ 
+            width:'100%',
+            //height: $(window).height-30,
+            height: 400,
+            selectOnCheck: true,
+            checkOnSelect: true,
+            collapsible:true,
+            fitColumns: true,
+            pagination: true,
+            striped: true,       
+            onClickCell: onClickCell,
+            //onEndEdit: onEndEdit,//在完成编辑但编辑器还没有销毁之前触发
+            onBeforeEdit:onBeforeEdit,//当用户开始编辑一行时触发
+            onAfterEdit: onAfterEdit,//当用户编辑完成时触发
+            ////onCancelEdit: onCancelEdit,//在用户取消编辑一行的时候触发
+            data:mainData,   
+            columns: [[
+                    //{ field: 'checkbox', checkbox: "true", halign: 'center', align: 'center', width: '5%' },
+                    {
+                        field: 'index', title: '序号', width: '4%', halign: 'center', align: 'center', formatter:function(value, row, index) {
+                            return `<span>${index + 1}</span>`
+                        }
+                    },
+                    {field: 'empId', title: '人员编号', width: '10%', halign: 'left', align: 'left'},
+                    { field: 'name', title: '人员姓名', width: '7%', halign: 'center', align: 'center' },
+                    { field: 'unitName', title: '所在单位', width: '10%', halign: 'center', align: 'center' },
+                    { field: 'deptName', title: '所在部门', width: '10%', halign: 'center', align: 'center', formatter(value, row, index) { return value; } },
+                    { field: 'objTest', title: '所在岗位', width: '8%', halign: 'center', align: 'center' },
+                    { field: 'objTest', title: '竞聘岗位', width: '10%', halign: 'center', align: 'center' },
+                    { field: 'writeExamScore', editor:{type:'numberbox',options:{min:0}},  title: '笔试成绩', width: '8%', halign: 'center', align: 'center' },
+                    { field: 'interviewScore', editor:{type:'numberbox',options:{min:0}}, title: '面试成绩', width: '8%', halign: 'center', align: 'center' },
+                    { field: 'otherScore', editor:{type:'numberbox',options:{min:0}}, title: '其他成绩', width: '8%', halign: 'center', align: 'center' },
+                    { field: 'generalScore', editor:{type:'numberbox',options:{min:0}}, title: '综合成绩', width: '8%', halign: 'center', align: 'center' },
+                    { field: 'examineStatus', title: '状态', width: '5%', halign: 'center', align: 'center',formatter:function(value,row,index){
+                        if(row.examineStatus=="1"){
+                            return '<span>通过</span>';
+                        }else if(row.examineStatus=="2"){
+                            return '<span>不通过</span>';
+                        }
+                    },editor:{
+                            type:'combobox',
+                            options:{
+                                valueField:'id',                              
+                                textField: "text",
+                                editable: false,
+                                //value: "",
+                                data: [
+                                    { id: "1", text: "通过" },
+                                    { id: "2", text: "不通过" }
+                                ]
+                            }
+                        }
+                    },
+                    { 
+                    		field: 'upfile',  title: '上传附件', width: '5%', halign: 'center', align: 'center',
+                    		formatter(value, row, index) { return '<span style="cursor:pointer;color:#00a09f;text-decoration:underline;">上传附件</span>'; }
+                    },
+                ]],
+            
+        });
+    }
+    //提交
+    $("#jpkp_submit").on("click",function(){
+        var dataIds = $(".jpkp_dh").text();//配置单单号        
+        $.messager.confirm("操作确认", "确定要提交考评吗？", function(ok){
+            if(ok){               
+                jpkpSub(dataIds);                   
+            }
+        });          
+        function jpkpSub(id){
+            $.ajax({
+                type:'get',
+                url:BASE_URL3+'/empApply/CheckSubmit',
+                contentType:'application/json',
+                data:{
+                    staffingId:id
+                },
+                success:function(data){
+                    console.log(data,'提交接口')
+                    if(data.resultCode =="200"){
+                        $.messager.alert("提示信息", "成功" ); 
+                        //$('#jpkpTable').datagrid('reload');
+                        EmpsCheckInfo($(".jpkp_dh").text());//刷新页面                    
+                    }else{
+                        $.messager.alert("提示信息","失败！");
+                    }
+                },
+                error: function(rel){
+                    console.log(rel);
+                }
+            });
+        }
+    });
+    //保存成绩
+    $("#jpkp_edit").on("click", function () {
+        saveGrade();
+    });
+    function saveGrade() {
+        var addrows = $("#jpkpTable").datagrid('getRows');
+        //onClickCell(index, field)
+        for (var i = 0; i < addrows.length; i++) {
+            $('#jpkpTable').datagrid('selectRow', i).datagrid('endEdit', i);
+            editIndex = undefined;
+        }
+    }
+
+</script>

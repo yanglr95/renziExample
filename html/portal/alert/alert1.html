@@ -1,0 +1,336 @@
+<div class="fnc-edit">
+    <div class="fnc-tree">
+        <ul id="fnc-tree"></ul>
+    </div>
+    <div class="fnc-right">
+        <div class="fnc-edit-btn" style="text-align: right;">
+            <button class="border-btn fnc-cancel">取消</button>
+            <button class="disabled-btn disabled-save">保存</button>
+            <button class="primary-btn fnc-save" style="display: none;">保存</button>
+        </div>
+        <ul class="fnc-current">
+            <li class="fnc-item">
+                <img src="" class="current-img">
+                <img src="assets/icon/add_img_icon.png" class="img-placeholder">
+                <div class="current-name"></div>
+                <div class="fnc-del-icon">
+                    <img src="assets/icon/del_icon.png">
+                </div>
+            </li>
+            <li class="fnc-item">
+                <img src="" class="current-img">
+                <img src="assets/icon/add_img_icon.png" class="img-placeholder">
+                <div class="current-name"></div>
+                <div class="fnc-del-icon">
+                    <img src="assets/icon/del_icon.png">
+                </div>
+            </li>
+            <li class="fnc-item">
+                <img src="" class="current-img">
+                <img src="assets/icon/add_img_icon.png" class="img-placeholder">
+                <div class="current-name"></div>
+                <div class="fnc-del-icon">
+                    <img src="assets/icon/del_icon.png">
+                </div>
+            </li>
+            <li class="fnc-item">
+                <img src="" class="current-img">
+                <img src="assets/icon/add_img_icon.png" class="img-placeholder">
+                <div class="current-name"></div>
+                <div class="fnc-del-icon">
+                    <img src="assets/icon/del_icon.png">
+                </div>
+            </li>
+            <li class="fnc-item">
+                <img src="" class="current-img">
+                <img src="assets/icon/add_img_icon.png" class="img-placeholder">
+                <div class="current-name"></div>
+                <div class="fnc-del-icon">
+                    <img src="assets/icon/del_icon.png">
+                </div>
+            </li>
+            <li class="fnc-item">
+                <img src="" class="current-img">
+                <img src="assets/icon/add_img_icon.png" class="img-placeholder">
+                <div class="current-name"></div>
+                <div class="fnc-del-icon">
+                    <img src="assets/icon/del_icon.png">
+                </div>
+            </li>
+            <li class="fnc-item">
+                <img src="" class="current-img">
+                <img src="assets/icon/add_img_icon.png" class="img-placeholder">
+                <div class="current-name"></div>
+                <div class="fnc-del-icon">
+                    <img src="assets/icon/del_icon.png">
+                </div>
+            </li>
+            <li class="fnc-item">
+                <img src="" class="current-img">
+                <img src="assets/icon/add_img_icon.png" class="img-placeholder">
+                <div class="current-name"></div>
+                <div class="fnc-del-icon">
+                    <img src="assets/icon/del_icon.png">
+                </div>
+            </li>
+        </ul>
+        <ul class="icon-library"></ul>
+    </div>
+</div>
+<script>
+    $(function(){
+        var addParams = [
+            {
+                "icoClassName": "",
+                "resourceAlias": "",
+                "resourceId": "",//recordId
+                "resourceUrl": "",
+                "sortNo":"",
+                "useDeviceType": "P"
+            },
+            {
+                "icoClassName": "",
+                "resourceAlias": "",
+                "resourceId": "",//recordId
+                "resourceUrl": "",
+                "sortNo":"",
+                "useDeviceType": "P"
+            },
+            {
+                "icoClassName": "",
+                "resourceAlias": "",
+                "resourceId": "",//recordId
+                "resourceUrl": "",
+                "sortNo":"",
+                "useDeviceType": "P"
+            },
+            {
+                "icoClassName": "",
+                "resourceAlias": "",
+                "resourceId": "",//recordId
+                "resourceUrl": "",
+                "sortNo":"",
+                "useDeviceType": "P"
+            },
+            {
+                "icoClassName": "",
+                "resourceAlias": "",
+                "resourceId": "",//recordId
+                "resourceUrl": "",
+                "sortNo":"",
+                "useDeviceType": "P"
+            },
+            {
+                "icoClassName": "",
+                "resourceAlias": "",
+                "resourceId": "",//recordId
+                "resourceUrl": "",
+                "sortNo":"",
+                "useDeviceType": "P"
+            },
+            {
+                "icoClassName": "",
+                "resourceAlias": "",
+                "resourceId": "",//recordId
+                "resourceUrl": "",
+                "sortNo":"",
+                "useDeviceType": "P"
+            },
+            {
+                "icoClassName": "",
+                "resourceAlias": "",
+                "resourceId": "",//recordId
+                "resourceUrl": "",
+                "sortNo":"",
+                "useDeviceType": "P"
+            }
+        ];
+        var imgIndex = null;
+        var iconLibraryList = [ //图标库
+            'http://192.168.100.66/static/common/image/icon_fnc_1.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_2.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_3.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_4.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_5.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_6.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_7.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_8.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_1.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_2.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_3.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_4.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_5.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_6.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_7.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_8.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_1.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_2.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_3.png',
+            'http://192.168.100.66/static/common/image/icon_fnc_4.png',
+        ];
+        //图标库
+        for (var i = 0; i < iconLibraryList.length; i++) {
+            $('.icon-library').append('<li><img src="'+iconLibraryList[i]+'"></li>')
+        }
+        //常用功能查询
+        $.ajax({
+            type:'get',
+            url:BASE_URL+'/index/commonUseFunction',
+            data:{
+                token:''
+            },
+            success:function(data){
+                // console.log(data,'常用功能')
+                if (data.resultCode==200) {
+                    var fucList = data.resultValue;
+                    for (var i = 0; i < fucList.length; i++) {
+                        addParams[i] = fucList[i];
+                        $('.current-img').eq(i).attr('src',fucList[i].icoClassName);
+                        $('.current-name').eq(i).text(fucList[i].resourceAlias)
+                    }
+                    filterImg();
+                }
+            }
+        })
+        // 配置图片
+        $('.img-placeholder').click(function(){
+            $('.icon-library').show();
+            imgIndex = $('.img-placeholder').index(this);
+        })
+        // 配置图片
+        $('.icon-library>li').click(function(){
+            $('.current-img').eq(imgIndex).attr('src',iconLibraryList[$('.icon-library>li').index(this)])
+            addParams[imgIndex].icoClassName = iconLibraryList[$('.icon-library>li').index(this)];
+            filterImg();
+            $('.icon-library').hide();
+            canSave();
+        })
+        //保存
+        $('.fnc-save').click(function(){
+            var endParams = [];
+            for (var i = 0; i < addParams.length; i++) {
+                if (addParams[i].resourceId!='') {
+                    endParams.push(addParams[i]);
+                }
+            }
+            var that = this;
+            $.ajax({
+                type:'post',
+                url:BASE_URL+'/index/saveCommonUseFunction',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                data:JSON.stringify(endParams),
+                success:function(data){
+                    // console.log(data,'654454')
+                    if (data.resultCode==200) {
+                        funQuery();
+                        hideAlert(that);
+                    }
+                }
+            })
+        })
+        //取消
+        $('.fnc-cancel').click(function(){
+            hideAlert(this)
+        })
+        //删除图标点击
+        $('.fnc-del-icon').click(function(){
+            var index = $('.fnc-del-icon').index(this);
+            $('.current-img').eq(index).attr('src','');
+            $('.current-name').eq(index).text('');
+            filterImg();
+            addParams[index].resourceId = '';
+            addParams[index].icoClassName = '';
+            addParams[index].resourceAlias = '';
+            addParams[index].sortNo = '';
+            canSave();
+        })
+        //图片显示规则
+        function filterImg(){
+            for (var i = 0; i < 8; i++) {
+                if ($('.fnc-item').eq(i).children('.current-img').attr('src')=='' && $('.fnc-item').eq(i).children('.current-name').text()=='') {
+                    $('.fnc-del-icon').eq(i).hide();
+                    $('.current-img').eq(i).hide();
+                    $('.img-placeholder').eq(i).show();
+                    continue;
+                }
+                if ($('.fnc-item').eq(i).children('.current-img').attr('src')!='') {
+                    $('.current-img').eq(i).show();
+                    $('.img-placeholder').eq(i).hide();
+                    $('.fnc-del-icon').eq(i).show();
+                }
+                if ($('.fnc-item').eq(i).children('.current-name').text()!='') {
+                    $('.fnc-del-icon').eq(i).show();
+                }
+            }
+        }
+        //按钮显示规则
+        function canSave(){
+            for (var i = 0; i < addParams.length; i++) {
+                if ((addParams[i].icoClassName==''&&addParams[i].resourceAlias!='')||(addParams[i].icoClassName!=''&&addParams[i].resourceAlias=='')) {
+                    $('.disabled-save').show();
+                    $('.fnc-save').hide();
+                    return
+                }
+            }
+            $('.disabled-save').hide();
+            $('.fnc-save').show();
+        }
+        //配置字段
+        $('#fnc-tree').tree({
+            url:BASE_URL+'/index/queryMenu',
+            method: 'get',
+            queryParams:{
+                id:0
+            },
+            formatter:function(node){
+                return node.text
+            },
+            onLoadSuccess:function(node,data){
+                //去除末级展开图标
+                console.log(data,'2323232323232')
+                for (var i = 0; i < data.length; i++) {
+                    if (!data[i].attributes.isChild) {
+                        var test = []
+                        for (var j = 0; j < $('.tree-title').length; j++) {
+                            if ($('.tree-title').eq(j).text()==data[i].text) {
+                                test.push($('.tree-title').eq(j))
+                            }
+                        }
+                        test.forEach(el=>{
+                            el.siblings('.tree-hit').css({
+                                'visibility': 'hidden'
+                            });
+                            if (el.parent().parent().parent().prev().children('.tree-title').text()==el.text()) {
+                                el.parent().parent().parent().prev().children('.tree-title').siblings('.tree-hit').css({
+                                    'visibility': 'visible'
+                                })
+                            }
+                        })
+                    }
+                }
+            },
+            onClick:function(node){
+                if (node.attributes.isChild) {
+                    return
+                }else{
+                    for (var i = 0; i < addParams.length; i++) {
+                        if (node.text=='首页') {
+                            break;
+                        }
+                        if (addParams[i].resourceId=='') {
+                            addParams[i].resourceAlias = node.text;
+                            addParams[i].resourceId = node.attributes.recordId;
+                            addParams[i].sortNo = node.attributes.sortNo;
+                            $('.current-name').eq(i).text(node.text);
+                            filterImg();
+                            canSave();
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+    })
+</script>

@@ -1,0 +1,341 @@
+<!-- <div id="navbar-example1">
+    <ul class="nav may_nav" role="tablist">
+        <li><a href="#one1">基本信息</a></li>
+        <li><a href="#two1">工作简历</a></li>
+        <li><a href="#three1">教育经历</a></li>
+        <li><a href="#four1">专家人才</a></li>
+        <li><a href="#five1">绩效信息</a></li>
+    </ul>
+</div> -->
+<div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+    <div class="easyui-layout" style="width:100%;height: 100%;font-size: 14px;">
+
+        <div data-options="region:'west',split:true" style="padding: 20px;position: relative;" class="per_west11"
+            data-spy="scroll" data-target="#navbar-example1">
+
+            <div id="per_west_detail" class="per_west_box per_west_detail" style="position: relative;">
+                <div class="top_box" style="margin-top: 0;padding-top: 0;">
+                    <img class="top_edit_btn" src="assets/home/top_edit_btn.png" alt="">
+                    <div class="top_img"><img src="assets/icon/ava.png" alt=""></div>
+                    <div class="top_con">
+                        <div class="top_con_name" style="height: 30px;font-size: 14px;">
+                            <span>姓名：</span> <b class="name_top">孙明一</b>
+                            <input style="display: none;" class="name_top_edit" type="text" value="张小小">
+                        </div>
+                        <div class="top_con_list" style="height: 30px;font-size: 14px;">
+                            <span>人员编码：</span><b class="peo-empId">10554186</b>
+                            <span>部门：</span><b class="peo-deptName">廊供其他虚拟机构廊供明源变电工程处二次三班</b>
+                            <span>岗位：</span><b class="peo-postName">电网规划</b>
+                        </div>
+                    </div>
+                </div>
+                <div class="per_main_list" id="one1" style="font-size: 14px;">
+                    <div class="box-title">基本信息</div>
+                    <div class="per_main_con">
+                            <div><span>性别：</span> <b>女</b></div>
+                            <div><span>年龄：</span> <b>23岁</b></div>
+                            <div><span>民族：</span> <b>汉</b></div>
+                            <div><span>政治面貌：</span> <b>党员</b></div>
+                            <div><span>入职时间：</span> <b>2000.02</b></div>
+                            <div><span>职称：</span> <b>副高级</b></div>
+                            <div><span>技能等级：</span> <b>高级工程师</b></div>
+                            <div><span>固定电话：</span> <b>13999999999</b></div>
+
+                    </div>
+                </div>
+                <div class="per_main_list" id="two1" style="font-size: 14px;">
+
+                    <div class="box-title">工作履历 </div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name">太原供电公司变电检修工区</b>
+                            <span class="cv_state">检修部</span>
+                            <span class="cv_department">变检二班作业</span>
+                            <span class="cv_level">科院</span>
+                            <img style="top: 8px;width: 13px;" class="top_edit_btn" src="assets/home/top_edit_btn.png"
+                                alt="">
+                        </div>
+                    </div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name">太原供电公司变电检修工区</b>
+                            <span class="cv_state">见习</span>
+                            <span class="cv_department">科院</span>
+                            <span class="cv_level">科长</span>
+                            <img style="top: 8px;width: 13px;" class="top_edit_btn" src="assets/home/top_edit_btn.png"
+                                alt="">
+                        </div>
+
+                    </div>
+                    <div class="per_cv_con_add" style="margin-top: 5px;display: none;">
+                        <div class="per_cv_con_edit">
+                            <div class="per_cv_con_edit_span">
+                                <span>* 任职单位</span><input class="cv_name_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 部门名称</span><input class="cv_state_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 职务名称</span><input class="cv_department_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 职务级别</span><input class="cv_level_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 时间</span>
+                                <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:140px;height: 25px;">
+                                至
+                                <input class="easyui-datebox cv_time_end_edit" label=""
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:140px;height: 25px;">
+                            </div>
+                            <div class="per_cv_con_edit_p">
+                                <span> 上传附件 </span><button class="file_box">上传 <input name="uploadImage"
+                                        id="uploadImage" type="file" /></button> <b id="prevPic">上传材料.jpg <span
+                                        class='basis_x'></span></b>
+                                <div class="save_group">
+                                    <button class="save_group_add">添加</button>
+                                    <button class="save_group_col_add save_group_col">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="per_main_list" id="three1" style="font-size: 14px;">
+                    <div class="box-title">教育经历 </div>
+                    <!-- 演示暂增 class education-first-->
+                    <div class="per_cv_con education-first">
+                        <div class="education-items">
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name act" style="color: #333;">清华大学（全日制）</b>
+                            <span class="cv_state">本科</span>
+                            <span class="cv_department">学士 </span>
+                            <span class="cv_level material" style="color: #333;">计算机-网络编程</span>
+                            <span class="cv_data material">证明材料</span>
+                            <!-- <img style="top: 8px;width: 13px;" class="top_edit_btn" src="assets/home/top_edit_btn.png"
+                                alt=""> -->
+                                <!-- 演示 -->
+                            <img style="position: absolute;right: 15%;top: 50%;width: 15px;display:none" class="education_edit_btn" src="assets/home/top_edit_btn.png"
+                            alt="">
+                        </div>
+                    </div>
+                    <div class="per_cv_con_add" style="margin-top: 5px;display: none;">
+                        <div class="per_cv_con_edit">
+                            <div class="per_cv_con_edit_span">
+                                <span>* 毕业学校</span><input class="cv_name_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 职务级别</span><input class="cv_state_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 所学专业</span><input class="cv_department_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 专业名称</span><input class="cv_level_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 学历</span><input class="cv_level_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 是否是最高学历</span><input class="cv_level_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 学位</span><input class="cv_level_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 时间</span>
+                                <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:140px;height: 25px;">
+                                至
+                                <input class="easyui-datebox cv_time_end_edit" label=""
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:140px;height: 25px;">
+                            </div>
+                            <div class="per_cv_con_edit_p">
+                                <span> 上传附件</span><button>上传</button> <b>上传材料.jpg</b>
+                                <div class="save_group">
+                                    <button class="save_group_add">确认</button>
+                                    <button class="save_group_col_add save_group_col">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 演示--暂增class education_edit_box-->
+                    <div class="education_edit_box" style="margin-top: 5px;display: none;background: #E6F1F1;">
+                        <div class="per_cv_con_edit">
+                            <div class="per_cv_con_edit_span">
+                                <span>* 时间</span>
+                                <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    value="1987-09-01"
+                                    style="width:140px;height: 25px;">
+                                至
+                                <input class="easyui-datebox cv_time_end_edit" label=""
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    value="1990-09-01"
+                                    style="width:140px;height: 25px;">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 毕业学校</span><input class="cv_name_edit" type="text" disabled>
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 教育类型</span><input class="jylx" type="text" disabled>
+                            </div>
+                            <!-- <div class="per_cv_con_edit_span">
+                                <span>* 所学专业</span><input class="cv_department_edit" type="text" disabled>
+                            </div> -->
+                            <div class="per_cv_con_edit_span">
+                                <span>* 专业名称</span><input class="cv_department_edit" type="text" disabled>
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 学历</span><input class="xueli" type="text" disabled>
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span style="width: 150px;">* 是否是最高学历</span><input class="is-Top-education" type="text" disabled>
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 学位</span><input class="xuewei" type="text" disabled>
+                            </div>
+                            <div class="per_cv_con_edit_p">
+                                <span> 上传附件</span><button>上传</button> <b>上传材料.jpg</b>
+                                <div class="save_group">
+                                    <button class="education-save">确定</button>
+                                    <button class="education-cancel save_group_col">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ------以上演示暂增------- -->
+                </div>
+                <div class="per_main_list" id="four1" style="font-size: 14px;">
+                    <div class="box-title">专家人才 </div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name">太原供电公司变电检修工区</b>
+                            <span class="cv_state">见习</span>
+                            <span class="cv_department">科院</span>
+                            <span class="cv_level">科长</span>
+                            <img style="top: 8px;width: 13px;" class="top_edit_btn" src="assets/home/top_edit_btn.png"
+                                alt="">
+                        </div>
+                    </div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name">太原供电公司变电检修工区</b>
+                            <span class="cv_state">见习</span>
+                            <span class="cv_department">科院</span>
+                            <span class="cv_level">科长</span>
+                            <img style="top: 8px;width: 13px;" class="top_edit_btn" src="assets/home/top_edit_btn.png"
+                                alt="">
+                        </div>
+                    </div>
+                    <div class="per_cv_con_add" style="margin-top: 5px;display: none;">
+                        <div class="per_cv_con_edit">
+                            <div class="per_cv_con_edit_span">
+                                <span>* 任职单位</span><input class="cv_name_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 部门名称</span><input class="cv_state_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 职务名称</span><input class="cv_department_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 职务级别</span><input class="cv_level_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 时间</span>
+                                <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:140px;height: 25px;">
+                                至
+                                <input class="easyui-datebox cv_time_end_edit" label=""
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:140px;height: 25px;">
+                            </div>
+                            <div class="per_cv_con_edit_p">
+                                <span> 上传附件</span><button>上传</button> <b>上传材料.jpg</b>
+                                <div class="save_group">
+                                    <button class="save_group_add">添加</button>
+                                    <button class="save_group_col_add save_group_col">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="per_main_list" id="five">
+                    <div class="box-title">绩效信息</div>
+                    <div class="easyui-tabs content-tabs">
+                        <div title="月度绩效"></div>
+                        <div title="季度绩效"></div>
+                        <div title="年度绩效"></div>
+                    </div>
+                    <div class="nian_box" style="padding: 10px 0;">
+                        年份： <input class="easyui-datebox cv_time_end_edit" label=""
+                            data-options="formatter:myformatter,parser:myparser" style="width:140px;height: 25px;">
+                    </div>
+                    <div style="height: 500px;">
+                        <table id="peoplesDetail" class="easyui-datagrid" data-options="singleSelect:true,collapsible:true,"
+                            style="border: 1px solid #eee;"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+$('#peoplesDetail').datagrid({
+    width: '100%',
+    fitColumns: true,
+    //pagination: true,
+    striped: true,
+    data:[
+        {
+            num: '20190382',
+            name: '月度',
+            date: '2019年11月',
+            total: '130,000,000',
+            endTime: '2019.06.03',
+            state: '无',
+            cfdate: '2019.06.03',
+            fhdate: '2019.06.03',
+            ccdate: '2019.06.03',
+            reason: '无',
+            adress: '详情',
+            file: '无'
+        },
+    ],
+    columns: [[{ field: 'cfdate', title: '出发日期', halign: 'center', align: 'center' },
+    { field: 'fhdate', title: '返回日期', halign: 'center', align: 'center' },
+    { field: 'ccdate', title: '出差时长（天）', halign: 'center', align: 'center' },
+    { field: 'reason', title: '事由', halign: 'center', align: 'center' },
+    {
+        field: 'adress', title: '行程', halign: 'center', align: 'center', formatter(value, row, index) {
+            return "90"
+        }
+    }
+    ]]
+});
+</script>

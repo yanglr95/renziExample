@@ -1,0 +1,45 @@
+[
+    {
+        "id": 1,
+        "menuText": "首页",
+        "icon": "icon_nav_1.png",
+        "iconact": "icon_nav_1_active.png",
+        "link": "Employee/index",
+        "secondary":false
+    },{
+        "id": 2,
+        "menuText": "我的信息",
+        "icon": "icon_yf_2.png",
+        "iconact": "icon_yf_2_active.png",
+        "link": "Employee/personInfo/index",
+        "secondary":false
+    },{
+        "id": 3,
+        "menuText": "人才发展",
+        "icon": "icon_yf_3.png",
+        "iconact": "icon_yf_3_active.png",
+        "link": "Employee/personDevelop/index",
+        "secondary":false
+    },{
+        "id": 4,
+        "menuText": "薪档积分",
+        "icon": "icon_yf_4.png",
+        "iconact": "icon_yf_4_active.png",
+        "link": "Employee/SalaryPoints/index",
+        "secondary":false
+    },{
+        "id": 1002,
+        "menuText": "人人",
+        "icon": "icon_nav_1002.png",
+        "iconact": "icon_nav_1002_active.png",
+        "link": "http://192.168.100.66/renren/index.html",
+        "secondary":true
+    },{
+        "id": 1003,
+        "menuText": "人物",
+        "icon": "icon_nav_1003.png",
+        "iconact": "icon_nav_1003_active.png",
+        "link": "http://192.168.100.66/object/index.html",
+        "secondary":true
+    }
+]

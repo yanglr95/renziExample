@@ -1,0 +1,31 @@
+<div id="delete" class="delete">
+        <p class="tips">确定下发该任务吗？</p>
+        <button class="border-btn" onclick="sure(this)">确认</button>
+        <button class="border-btn" onclick="cancel(this)">取消</button>
+    </div>
+    <script>
+    $(function(){
+    })
+        function sure(e){
+            //奖金下发-index-下发 
+            $.ajax({
+                type:'get',
+                url:BASE_URL+'/rewardIssueMA/issue',
+                data:{
+                    pacakgeId:jjxfissueId
+                },
+                success:function(data){
+                    console.log(data,'奖金下发-index-下发')
+                    if(data.resultCode == '200'){
+                        tablelist();
+                        hideAlert(e);
+                    }
+                    
+                }
+            });               
+                
+        }
+        function cancel(e){
+            hideAlert(e);
+        }
+    </script>

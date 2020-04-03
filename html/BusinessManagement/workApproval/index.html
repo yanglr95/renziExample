@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+</head>
+<body>
+    <div style="padding:20px;">
+        <div>
+            <p class="box-title">考勤审批</p>
+        </div>
+        <div id="atteasyui" style="margin-top: 20px;" class="easyui-tabs content-tabs">
+            <div title="待审批">
+                <div id="dsp-top" class="zlk-top">
+                    <ul>
+                        <li id="" class="active liposi">出差申请</li>
+                        <li id="" class="liposi">请假申请</li>
+                        <li id="" class="liposi">加班申请</li>
+                    </ul>
+                </div>
+                <div class="easyui-layout tableHeight" fit="true">
+                    <div id="dsp-center" data-options="region:'center',border:false,split:false,href:'html/BusinessManagement/workApproval/data/dsp_cc.html'" style="height:400px;" >
+                    </div>
+                </div>
+            </div>
+            <div title="已审批">
+                <div id="ysp-top" class="zlk-top">
+                    <ul>
+                        <li class="active">出差申请</li>
+                        <li>请假申请</li>
+                        <li>加班申请</li>
+                    </ul>
+                </div>
+                <div class="easyui-layout tableHeight" fit="true">
+                    <div id="ysp-center" data-options="region:'center',border:false,split:false,href:'html/BusinessManagement/workApproval/data/ysp_cc.html'" style="height:400px;" >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="alert"></div>
+    <script type="text/javascript">
+        $(function(){
+            var id=null;
+            $("#dsp-top li").click(function(){
+                $(this).addClass("active").siblings().removeClass("active");
+                switch($(this).index()){
+                    case 0:
+                        $("#dsp-center").panel("refresh","html/BusinessManagement/workApproval/data/dsp_cc.html");
+                        break;
+                    case 1:
+                        $("#dsp-center").panel("refresh","html/BusinessManagement/workApproval/data/dsp_qj.html");
+                        break;
+                    case 2:
+                        $("#dsp-center").panel("refresh","html/BusinessManagement/workApproval/data/dsp_jb.html");
+                        break;
+                }
+            })
+
+            $("#ysp-top li").click(function(){
+                $(this).addClass("active").siblings().removeClass("active");
+                switch($(this).index()){
+                    case 0:
+                        $("#ysp-center").panel("refresh","html/BusinessManagement/workApproval/data/ysp_cc.html");
+                        break;           
+                    case 1:           	
+                        $("#ysp-center").panel("refresh","html/BusinessManagement/workApproval/data/ysp_qj.html");
+                        break; 
+                    case 2:
+                        $("#ysp-center").panel("refresh","html/BusinessManagement/workApproval/data/ysp_jb.html");
+                        break;                
+                }
+            })
+    
+            
+    
+        })
+    </script>
+</body>
+<!-- <script type="text/javascript" src="../../common/js/jquery.min.js"></script>
+<script type="text/javascript" src="../../common/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../common/js/common.js"></script>
+<script type="text/javascript" src="../../common/js/easyui-lang-zh_CN.js"></script> -->
+
+
+</html>

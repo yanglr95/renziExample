@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+        <div class="tab_card">
+            <div class="title_line">
+                <div class="tab_title">数据共享申请列表</div>
+            </div>
+            <div class="scroll_record" data-options="region:'center',split:true" style="padding: 0px 20px 20px 20px;">
+                <!-- <div class="easyui-tabs content-tabs" style="margin-bottom: 10px;"> -->
+                <div>
+                    <div class="easyui-layout tableHeight" fit="true">
+                        <div class="table_seach" style="height: 36px;margin: 10px 0;">
+                            <div class="save_group_seach" style="float: left;">
+                                <button class="save_group_add" onclick="toadd()">新增</button>
+                            </div>
+                            <div class="table_seach_right" style="line-height: 30px;">
+                                <!-- 下拉选择 -->
+                                <span>申请部门:</span>
+                                <input id="ap_department" editable="false" style="float: left;margin-right: 10px;">
+                                <span>状态:</span>
+                                <input id="ap_status" editable="false" style="float: left;margin-right: 10px;">
+                                <button onclick="sqjlsearch()">查询</button>
+                            </div>
+                        </div>
+                        <table id="recordTableList" class="easyui-datagrid"
+                            data-options="singleSelect:true,collapsible:true," style="border: 1px solid #eee;"></table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- </div> -->
+    </div>
+    </div>
+
+    <script type="text/javascript">
+
+        $(function () {
+            $('#ap_department').combobox({
+                valueField: 'id',
+                textField: 'text',
+                height: 34,
+                data: [
+                    {
+                        'id': '',//默认显示第一项
+                        'text': '全部'
+                    },
+                    {
+                        'id': '营销部',
+                        'text': '营销部'
+                    },
+                    {
+                        'id': '财务部',
+                        'text': '财务部'
+                    },
+                    {
+                        'id': '技术管理部',
+                        'text': '技术管理部'
+                    },
+                    {
+                        'id': '客户服务中心',
+                        'text': '客户服务中心'
+                    },
+                    {
+                        'id': '人力资源部',
+                        'text': '人力资源部'
+                    }
+                ]
+            });
+            $('#ap_status').combobox({
+                valueField: 'id',
+                textField: 'text',
+                height: 34,
+                data: [
+                    {
+                        'id': '',//
+                        'text': '全部'
+                    },
+                    {
+                        'id': '1',//默认显示第一项
+                        'text': '已提交'
+                    },
+                    {
+                        'id': '3',
+                        'text': '已保存'
+                    },
+                    {
+                        'id': '2',
+                        'text': '已通过'
+                    },
+                    {
+                        'id': '7',
+                        'text': '已驳回'
+                    }
+                ]
+            });
+            
+            $('#recordTableList').datagrid({
+                method: 'get',
+                height: $(window).height-180,
+                width: '100%',
+                fitColumns: true,
+                // pagination: true,
+                striped: true,
+                // url: BASE_URL3+'/sharingApply/queryApplyList',
+                url: BASE_URL+'/sharingApply/queryApplyList',
+                queryParams:{
+                    'status': '',
+                    'organId': ''
+                },
+                selectOnCheck: false,
+                checkOnSelect: false,
+                onLoadSuccess: function (data) {
+                    console.log('data',data)
+                    var scrolly = 0
+                    $(".scroll_record").scroll(function (x) {
+                        scrolly = $(this).scrollTop()
+                    });
+                    $(".easyui-tooltipa").hover(function (e) {
+
+                        $(".more_and_more").show()
+                        var hoverDomObj = e.target;
+
+                        var top = $(hoverDomObj).position().top
+                        var left = $(hoverDomObj).position().left
+                        console.log(top)
+                        if (scrolly > top - 50) {
+                            $(".more_and_more").css({
+                                top: top + 85 + 40,
+                                left: left - 150,
+                            })
+                        } else {
+                            $(".more_and_more").css({
+                                top: top + 85 - 140,
+                                left: left - 150,
+                            })
+                        }
+
+                    }, function () {
+                        $(".more_and_more").hide()
+                    })
+                },
+                onCheckAll: function () {
+                    InsexFun()
+                },
+                onUncheckAll: function () {
+                    InsexFun()
+                },
+                onCheck: function (index, row) {
+                    InsexFun()
+                },
+                onUncheck: function () {
+                    InsexFun()
+                },
+                columns: [
+                    [
+                        // { field: 'checkbox', checkbox: "true", halign: 'center', align: 'center', width: '5%' },
+                        {
+                            field: 'index', title: '序号', width: '5%', halign: 'center', align: 'center', formatter(value, row, index) {
+                                return `<span>${index + 1}</span>`
+                            }
+                        },
+                        {
+                            field: 'batchNo', title: '申请单号', width: '7%', halign: 'left', align: 'left', formatter(value, row, index) {
+                                return "<span class='view' onclick='sqjlxqalert("+row.batchNo+")'  style='color:rgb(24,98,223);cursor:pointer'>" + value + "</span> "
+                            }
+                        },
+                        { field: 'userName', title: '申请人', width: '5%', halign: 'left', align: 'left' },
+                        { field: 'organName', title: '申请部门', width: '10%', halign: 'left', align: 'left' },
+                        { field: 'applySystemName', title: '申请系统名称', width: '10%', halign: 'left', align: 'left' },
+                        { field: 'beginDate', title: '申请日期', width: '8%', halign: 'left', align: 'left',
+                            formatter: function(value, row, index){
+                                if(value){
+                                    return '<span>'+timeType(value)+'</span>'
+                                }else{
+                                    return ''
+                                }                                
+                            }
+                         },
+                        { field: 'authDate', title: '授权时间', width: '8%', halign: 'left', align: 'left', 
+                            formatter(value, row, index) { 
+                                if(value){
+                                    return '<span>'+timeType(value)+'</span>'
+                                }else{
+                                    return ''
+                                }
+                            } 
+                        },
+                        { field: 'transFrequency', title: '传输频率', width: '7%', halign: 'left', align: 'left',
+                            formatter: function(value, row, index){
+                                if(value == '1'){
+                                    return '实时更新'
+                                }else if(value == '2'){
+                                    return '单一'
+                                }else if(value == '3'){
+                                    return '每日一次'
+                                }
+                            }
+                         },
+                        {
+                            field: 'file', title: '附件', width: '5%', halign: 'left', align: 'left',
+                            formatter(value, row, index) { return ' <a href="#" title="" class="easyui-tooltipa"><img style="width:12px" src="/assets/home/icon_edit.png"/></a>'; }
+                        },
+                        { field: 'remark', title: '备注内容', width: '8%', halign: 'left', align: 'left' },
+                        { field: 'approveDate', title: '审批日期', width: '6%', halign: 'left', align: 'left',
+                            formatter: function(value, row, index){
+                                if(value){
+                                    return '<span>'+timeType(value)+'</span>'
+                                }else{
+                                    return ''
+                                }
+                            }
+                         },
+                        { field: 'applyStatus', title: '状态', width: '5%', halign: 'left', align: 'left',
+                            formatter: function(value, row, index){
+                                if(value == '3'){
+                                    return '已保存'
+                                }else if(value == '4'){
+                                    return '已提交'
+                                }else if(value == '5'){
+                                    return '已通过'
+                                }else if(value == '7'){
+                                    return '已驳回'
+                                }
+                            }
+                         },
+                        { field: 'interfaceAddress', title: '接口地址', width: '10%', halign: 'left', align: 'left',
+                            formatter: function(value, row, index){
+                                if(row.applyStatus == '5'){
+                                    return '163.168.192:8899'
+                                }else{
+                                    return ''
+                                }
+                            }
+                         },
+                        {
+                            field: 'handle', title: '操作', width: '6%', halign: 'left', align: 'left', formatter(value, row, index) {
+                                if(row.applyStatus == '3'){
+                                    return "<span onclick='sqjltj("+row.id+")' style='color:rgb(24,98,223);cursor:pointer'>提交 </span>"+"<span onclick='toedit()' style='color:rgb(24,98,223);cursor:pointer'> 编辑</span>"
+                                }else if(row.applyStatus == '1'){
+                                    return "<span onclick='' style='color:rgb(24,98,223);cursor:pointer'>撤回</span> "
+                                }else if(row.applyStatus == '7'){
+                                    return "<span onclick='' style='color:rgb(24,98,223);cursor:pointer'>编辑</span> "
+                                }
+                            }
+                        }
+                    ]]
+            });
+
+        });
+
+        //查询
+        function sqjlsearch(){
+            $('#recordTableList').datagrid('reload',{'organId':2656589,'status': 3})
+        }
+        //获取已选个数
+        function InsexFun() {
+            var len = $('#recordTable').datagrid('getChecked').length
+            $(".index_ok").html("已选择 " + len + " 项")
+        }
+
+        //点击单号-跳转详情页
+        function sqjlxqalert(id){
+            closetabTitle("数据申请详情");//删除已有的数据
+            opentab("reviewers/data/sharedview", "数据申请详情", false, id);
+        }
+
+        //新增
+        function toadd() {
+            //opentab("reviewers/peoplesedit", "数据共享新增", false);
+        };
+
+        //
+        function toedit(id, type) {
+            opentab("reviewers/peoplesedit", "111", false);
+        };
+    </script>
+</body>
+
+</html>

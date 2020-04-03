@@ -1,0 +1,18 @@
+[
+    {
+        "id": 11,
+        "menuText": "增减员管理",
+        "secondary":true,
+        "link":"http://192.168.100.66/sgcchr20/html/dispose/attrition.html"
+    },
+    {
+        "id": 10,
+        "menuText": "用工配置管理",
+        "secondary":false
+    },
+    {
+        "id": 12,
+        "menuText": "劳动合同管理",
+        "secondary":false
+    }
+]

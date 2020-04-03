@@ -1,0 +1,117 @@
+<body>
+    <div class="department-detail" style="padding: 20px;">
+        <div class="back">
+            <div onclick="closeTab()">
+                <span></span>
+                <span>返回</span>
+            </div>
+        </div>
+        <div class="db-header">
+            <ul>
+                <li>
+                    <span>总金额：</span>
+                    <span class="totalAmount">1,000,000</span>
+                </li>
+                <li>
+                    <span>待分配：</span>
+                    <span class="residueMoney">2,000</span>
+                </li>
+                <li class="end-time primary-date">
+                    截止时间：还有<span class="days">24</span>天(<span id="end">2019-05-09</span>)
+                </li>
+            </ul>
+        </div>
+        <div class="db-baseinfo">
+            <h1 class="box-title">基本信息</h1>
+            <ul>
+                <li>
+                    <span>奖金名称：</span>
+                    <span class='bonus-name'>月度</span>
+                </li>
+                <li>
+                    <span>创建时间：</span>
+                    <span id='start'>2019年1月</span>
+                </li>
+                <li>
+                    <span>分配单号：</span>
+                    <span class="code">20190931</span>
+                </li>
+                <li>
+                    <span>下发人：</span>
+                    <span class="empName">凉音</span>
+                </li>
+                <li>
+                    <span>下发部门：</span>
+                    <span class='deptName'>组织部</span>
+                </li>
+            </ul>
+        </div>
+        <div class="db-sharesinfo">
+            <h1 class="box-title" style="margin-bottom: 20px;">分配信息</h1>
+            <div id="detail-table"></div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            detailTableAjax()
+            
+        })
+        function detailTable(dataDetail){
+            $('#detail-table').datagrid({
+                fitColumns:true,
+                data:dataDetail,
+                striped:true,
+                columns:[[
+                    {field:'index',title:'序号',width:'6%',halign:'left',align:'left',formatter:function(value,row,index){
+                        return '<span>'+(index+1)+'</span>'
+                    }},
+                    {field:'empName',title:'姓名',width:'10%',halign:'center',align:'left'},
+                    {field:'empId',title:'人员编码',width:'12%',halign:'center',align:'left'},
+                    {field:'postName',title:'岗位',width:'20%',halign:'center',align:'left'},
+                    {field:'dutyGrade',title:'职级',width:'10%',halign:'center',align:'left'},
+                    {field:'sericeYears',title:'服务年限',width:'10%',halign:'center',align:'left'},
+                    {field:'amount',title:'金额',width:'10%',halign:'center',align:'left'},
+                    {field:'submitStatus',title:'状态',width:'10%',halign:'center',align:'left',formatter:function(value,row,index){
+                        if (row.submitStatus==1 || row.submitStatus==2) {
+                            return '<span>已提交</span>'
+                        }else{
+                            return '<span>未提交</span>'
+                        }
+                    }},
+                    {field:'submitDate',title:'提交时间',width:'12%',halign:'center',align:'left',formatter:function(value,row,index){
+                        if (row.submitStatus==1 || row.submitStatus==2) {
+                            return '<span>'+timeType(row.submitDate)+'</span>'
+                        }else{
+                            return ''
+                        }
+                    }},
+                ]]
+            })
+        }
+        function detailTableAjax(){
+            //奖金汇总-部门详情
+            $.ajax({
+                type:'get',
+                url:BASE_URL+'/rewardGatherMA/findByDeptCode',
+                data:{
+                    packageId:$('#mainTabs').tabs('options').id[0],
+                    deptCode:$('#mainTabs').tabs('options').id[1]
+                },
+                success:function(data){
+                    console.log(data,'奖金汇总-index-单号进')
+                    var deptdetail = data.resultValue.rewarEmpMAVOList
+                    detailTable(deptdetail)
+                    $('.code').text(data.resultValue.rewardId)
+                    $('.bonus-name').text(data.resultValue.rewardName)
+                    $('#start').text(timeType(data.resultValue.beginDate))
+                    $('#end').text(timeType(data.resultValue.endDate))
+                    $('.deptName').text(data.resultValue.deptName)
+                    $('.empName').text(data.resultValue.empName)
+                    $('.totalAmount').text(data.resultValue.totalAmount)
+                    $('.residueMoney').text(data.resultValue.residueMoney)
+                    $('.days').text(data.resultValue.residueDay)
+                }
+            })
+        }
+    </script>
+</body>

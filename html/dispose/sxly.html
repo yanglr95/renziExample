@@ -1,0 +1,285 @@
+<div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+    <div class="tab_card">
+        <div style="padding: 20px 0 0 0">
+            <!-- <p class="box-title">报名人员资格审核</p> -->
+        </div>
+        <div style="width:100%;height: 100%;padding: 0 20px;">
+            <div id="peoplelayout" class="easyui-layout" style="width:100%;height: 100%;">
+                <div class="people-right" data-options="region:'center',split:true">
+
+
+
+                    <div style="padding: 0 0 0 20px;width: 100%;height: 100%;">
+                        <div>
+                            <div class="box-title">筛选录用</div>
+                        </div>
+                        <div style="margin: 20px 0;overflow: hidden;">
+
+                            <div style="display: inline-block;line-height: 36px;">
+                                <label>配置单状态:&nbsp;</label>
+                                <input name="" id="staffingStatus" data-options="width:120 , height:34">
+                                <label for="">配置单号</label>
+                                <input name="" id="staffingId" style="border:1px solid #eee;line-height: 30px;">
+                                <label for="">配置单名称</label>
+                                <input name="" id="staffingName" style="border:1px solid #eee;line-height: 30px;">
+                                <label>申请时间：</label>
+                                <input id='beginDate'
+                                    style="border:1px solid #eee;line-height: 30px;width:140px;height: 30px;"
+                                    class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                                    data-options="formatter:myformatter,parser:myparser">
+                                至
+                                <input id="endDate" class="easyui-datebox cv_time_end_edit"
+                                    style="border:1px solid #eee;line-height: 30px;width:140px;height: 30px;" label=""
+                                    data-options="formatter:myformatter,parser:myparser">
+                                <button class="primary-btn " id='queryBtn' onclick="queryDataByBtn()">查询</button>
+                            </div>
+                        </div>
+                        <div style="margin: 20px 0;overflow: hidden;">
+                            <div class="lf"><button type="button" class="primary-btn" onclick="submitWorkFlow()">提交</button></div>
+
+                        </div>
+                        <div class="easyui-layout" fit="true" fitColumns="true">
+                            <!-- <div id="sxlyTable"></div> -->
+                            <div region="center">
+                                <table id="sxlyTable"></table>
+                    　  　</div>
+                        </div>
+                    </div>
+                    <div class="expand"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        // $('#sxlyTime1').datebox({
+        //     height: 36
+        // })
+
+        // $('#sxlyendTime').datebox({
+        //     height: 36
+        // })
+        //面板收缩
+        $(".collapse").click(function () {
+            $("#peoplelayout").layout("collapse", "west");
+            $(".expand").show();
+            $(this).hide();
+        });
+        //面板展开
+        $(".expand").click(function () {
+            $("#peoplelayout").layout("expand", "west");
+            $(".collapse").show();
+            $(this).hide();
+        });
+
+        $('#sxly_input').textbox({
+            width: 150,
+            height: 34,
+            placeholder: '请输入关键字'
+        })
+        $('#staffingStatus').combobox({
+            placeholder: '请输入关键字',
+            valueField: "id",
+            textField: "text",
+            editable: false,
+            data: [
+                { id: "", text: "全部" },
+                { id: 1, text: "审核中" }
+            ]
+        })
+        $('#bmrysh_nian').combobox({
+            valueField: "id",
+            textField: "text",
+            editable: false,
+            data: [
+                { id: "2019", text: "2019年" },
+                { id: "2018", text: "2018年" }
+            ]
+        })
+        $('#bmrysh_nian').combobox("setValue", "2019");
+
+    });
+
+    //根据用户输入查询列表内容
+    $("#queryBtn").click(function () {
+        // alert($('#beginDate').datebox('getValue'));
+        getTableData();
+    });
+    var tableData = [];
+    var queryData = {}
+
+    //获取表格需要展示的内容
+    getTableData()
+    function getTableData(queryData) {
+        if (!queryData) {
+            queryData = {};
+        }
+        $.ajax({
+            url: BASE_URL3 + '/competitionApply/likeUserCompetitionApply',
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify(queryData),
+            success: function (data) {
+                tableData = data.resultValue.items;
+                getDatagrid(tableData);
+            },
+            error: function (data) {
+                getDatagrid([]);
+            }
+        })
+    }
+    //加載表格
+    function getDatagrid(tableData) {
+        $('#sxlyTable').datagrid({
+            height: 500,
+            nowrap: true,
+            selectOnCheck: true,
+            checkOnSelect: true,
+            fitColumns: true,
+            singleSelect:true,
+            pagination: true,
+            striped: true,
+            data: tableData,
+            columns: [[
+                { field: 'checkbox', checkbox: "true", halign: 'center', align: 'center', width: '5%' },
+                {
+                    field: 'index', title: '序号', width: '5%', halign: 'center', align: 'center', formatter(value, row, index) {
+                        return `<span>${index + 1}</span>`
+                    }
+                },
+                { field: 'objText', title: '单位', width: '5%', halign: 'left', align: 'left' },
+                { field: 'staffingId', title: '配置单号', width: '10%', halign: 'center', align: 'center' },
+                {
+                    field: 'staffingName', title: '配置单名称', width: '10%', halign: 'center', align: 'center'
+                },
+                {
+                    field: 'applyDate', title: '申请日期', width: '10%', halign: 'center', align: 'center',
+                    formatter(value, row, index) {
+                        return timeType(value);
+                    }
+                },
+                {
+                    field: 'auditDate', title: '审批日期', width: '10%', halign: 'center', align: 'center',
+                    formatter(value, row, index) {
+                        return timeType(value);
+                    }
+                },
+                { field: 'validDate', title: '报名有效期', width: '10%', halign: 'center', align: 'center' },
+                {
+                    field: 'staffingStatus', title: '配置单状态', width: '10%', halign: 'center', align: 'center',
+                    formatter(value, row, index) {
+                        if (row.staffingStatus == "0401") {
+                            return '<span>待提交</span>';
+                        } else if (row.staffingStatus == "0402") {
+                            return '<span>待审批</span>';
+                        } else if (row.staffingStatus == "0403") {
+                            return '<span>已驳回</span>';
+                        } else if (row.staffingStatus == "0404") {
+                            return '<span>已发布</span>';
+                        } else if (row.staffingStatus == "0405") {
+                            return '<span>筛选录用</span>';
+                        } else if (row.staffingStatus == "0408") {
+                            return '<span>已作废</span>';
+                        } else if (row.staffingStatus == "0409") {
+                            return '<span>资格审查</span>';
+                        }
+                    }
+                },
+                { field: 'needCount', title: '需求人数', width: '5%', halign: 'center', align: 'center' },
+                { field: 'applyCount', title: '报名人数', width: '5%', halign: 'center', align: 'center' },
+                {
+                    field: 'id', title: '操作', width: '10%', halign: 'center', align: 'center', formatter(value, row, index) {
+                        return '<span class="edit col_00A09F" onclick="addRow(\'' + row.staffingId + '\')" style="cursor:pointer;">筛选录用</span>'
+                    }
+                }
+            ]],
+            onLoadSuccess: function (data) {
+                //单元格超出部分隐藏并鼠标移动到单元格时弹框显示
+                $(".datagrid-row td div").each(function () {
+                    $(this).attr("title", $(this).text());
+                });
+                var id = 0
+                $(".view").on("click", function () {
+                    opentab("/dispose/sxlyspfile/sxlysp_detail", "筛选录用审批详情", false, id)
+                })
+                // $(".edit").on("click", function () {
+                //    console.log($(this).index())
+                //     opentab("/dispose/sxlyfile/sxly_xzsxry", "筛选录用列表", false, id)
+                // })
+            }
+        });
+    }
+
+    Date.prototype.format = function (format) {
+        var o = {
+            "M+": this.getMonth() + 1, // month  
+            "d+": this.getDate(), // day  
+            "h+": this.getHours(), // hour  
+            "m+": this.getMinutes(), // minute  
+            "s+": this.getSeconds(), // second  
+            "q+": Math.floor((this.getMonth() + 3) / 3), // quarter  
+            "S": this.getMilliseconds()
+            // millisecond  
+        }
+        if (/(y+)/.test(format))
+            format = format.replace(RegExp.$1, (this.getFullYear() + "")
+                .substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(format))
+                format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+        return format;
+    }
+
+    function formatDatebox(value) {
+
+        if (value == null || value == '') {
+            return '';
+        }
+        var dt;
+        if (value instanceof Date) {
+            dt = value;
+        } else {
+            dt = new Date(value);
+        }
+
+        return dt.format("yyyy-MM-dd");
+    }
+    //点击筛选录用
+    function addRow(id) {
+        closetabTitle('筛选录用列表');
+        opentab("/dispose/sxlyfile/sxly_xzsxry", "筛选录用列表", false, id)
+    }
+
+    //点击配置单名称
+    function showInfo(id) {
+        closetabTitle("筛选录用审批详情");
+        opentab("/dispose/sxlyspfile/sxlysp_detail", "筛选录用审批详情", false, id)
+    }
+
+    //点击查询按钮根据查询条件查询数据
+    function queryDataByBtn() {
+        queryData.staffingName = $("#staffingName").val();
+        console.log(queryData)
+        getTableData(queryData);
+    }
+
+    //提交按钮事件
+    function submitWorkFlow(){
+        var  checkedRows = $('#sxlyTable').datagrid('getChecked');
+        if(checkedRows.length==0){
+            $.messager.alert("提示信息", "请勾选需要提交的数据");
+            return;
+        }
+        if(checkedRows.length>1){
+            $.messager.alert("提示信息", "每次只允许提交一条数据");
+            return;
+        }
+       
+        closetabTitle('筛选录用列表');
+        opentab("/dispose/sxlyfile/sxly_xzsxry", "筛选录用列表", false, checkedRows[0].staffingId)
+
+    }
+</script>

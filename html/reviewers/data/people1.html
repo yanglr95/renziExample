@@ -1,0 +1,56 @@
+<div>
+    <div id="dspccTable1"></div>
+</div>
+<script>
+$(function(){
+    var data = [
+        {
+            num: '20190382',
+            name: '月度',
+            date: '2019年11月',
+            total: '130,000,000',
+            endTime: '2019.06.03',
+            state: '无',
+            cfdate: '男',
+            fhdate: '本科',
+            ccdate: '2019.06.03',
+            reason: '无',
+            adress: '详情',
+            file: '无'
+        },
+    ]
+    $('#dspccTable1').datagrid({
+        height: 360,
+        width: '100%',
+        fitColumns: true,
+        //pagination: true,
+        striped: true,
+        data,
+        onClickRow() {
+            // opentab("people/peopleview", "申请详情", false);
+        },
+        onLoadSuccess(){
+            $(".view").on("click",function(){
+                closetabTitle("申请详情");
+                opentab("people/peopleview", "申请详情", false);
+            })
+            $(".edit").on("click",function(){
+                closetabTitle("申请详情");
+                opentab("people/peoplesDetail", "申请详情", false);
+            })
+        },
+        columns: [[
+            { field: 'checkbox', checkbox: "true", halign: 'center', align: 'center', width: '5%' },
+            {
+                field: 'index', title: '序号',  halign: 'center', align: 'center', formatter(value, row, index) {
+                    return `<span>${index + 1}</span>`
+                }
+            },
+            { field: 'name', title: '报表编号',  halign: 'center', align: 'center' },
+            { field: 'date', title: '报告期',  halign: 'center', align: 'center' },
+            { field: 'total', title: '报表纬度',  halign: 'center', align: 'center' },
+            { field: 'endTime', title: '报表状态',  halign: 'center', align: 'center' }
+        ]]
+    });
+})
+</script>

@@ -1,0 +1,73 @@
+<div id="pass">
+    <div class="pass-content">
+        <p class="title">
+            <img src="assets/home/pass.png" alt=""><span class="passtext">通过</span>
+        </p>
+    </div>
+    <div class="p-content">
+        <p class="range">本次操作范围:</p>
+        <p class="contents">
+            <span>2013021820130218 国网层级、2013021820130218 国网层级、2013021820130218 国网层级</span>
+        </p>
+        <p class="dec">备注<span class="red">*</span></p>
+        <input id="passRemark" class="easyui-textbox input-text" name="description" data-options="multiline:true,prompt:'请输入至少5个字符'" style="width:400px;height: 86px;"></input>
+    </div>
+    <div class="alert3-btn">
+        <button class="border-btn" id="pzdspAgree">提交</button>
+        <button class="primary-btn" onclick="cancel(this)">取消</button>
+    </div>
+    
+</div>
+<script>
+    function cancel(e){
+        hideAlert(e);
+    }
+    $(function(){      
+        var dataIds=mx.dataIds;
+        var objs=mx.objects;
+        var pageN=mx.pageN;
+        var dataId=mx.dataId;
+        $(".contents span").html(objs);
+        $("#pzdspAgree").on("click",function(){ 
+            remark = trim($("#passRemark").val());
+            if(remark==''){
+                $.messager.alert("提示信息", "请输入备注" ); 
+            }else if(remark.length<5){
+                $.messager.alert("提示信息", "至少输入5个字符串长度" ); 
+            }else {
+                agreeSave(dataIds); 
+            }
+        });
+        function agreeSave(ids){
+            $.ajax({
+                type:'post',
+                url:BASE_URL3+'/competitionApply/agreeApply',
+                contentType:'application/json',
+                data:JSON.stringify({
+                    remark:remark,
+                    staffingIds:ids
+                }),
+                success:function(data){
+                    console.log(data,'同意接口')
+                    if(data.resultCode =="200"){                          
+                        $.messager.alert("提示信息", "审批成功" );                        
+                        $("#passRemark").val("");
+                        hideAlert($(".primary-btn"));//关闭弹框                        
+                        if(pageN==1){
+                            StaffingInfo(dataId);//刷新配置单审批详情页面
+                        }else{
+                            //$('#alreadySubmittedTable').datagrid('reload');
+                            pzdCheckApply();//刷新配置单审批页面
+                        }
+                    }else{
+                        $.messager.alert("提示信息", "审批失败" ); 
+                    }
+                },
+                error: function(rel){
+                    console.log(rel);
+                }
+            });
+        }
+    });
+
+</script>

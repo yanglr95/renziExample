@@ -1,0 +1,24 @@
+{
+    "id": 4,
+    "menuText": "信息管理",
+    "secondary": true,
+    "list": [
+        {
+            "menuText": "信息核对",
+            "link": "people/peoples",
+            "secondary": false
+        }, 
+        {
+            "menuText": "申请记录",
+            "secondary": false,
+            "link": "people/recordlist"
+        },
+        {
+            "menuText": "信息审批",
+            "secondary": false,
+            "link": "people/approval"
+        }
+        
+       
+    ]
+}

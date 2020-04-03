@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="easyui-layout animated fadeInRight" data-options="fit:true">
+        <div class="tab_card">
+            <div class="title_line">
+                <div class="tab_title">申请记录</div>
+            </div>
+            <div class="easyui-layout" style="width:100%;height: 100%;">
+                <div class="scroll_record" data-options="region:'center',split:true" style="padding: 10px 20px;">
+                    <div class="easyui-tabs content-tabs" style="margin-bottom: 10px;">
+                        <div title="待提交">
+                            <div class="easyui-layout tableHeight" fit="true">
+                                <div id="dsp-center" data-options="region:'center',border:false,split:false,href:'html/people/recordlist/waitSubmitted.html'" style="height:400px;margin-top: 10px;" >
+                                </div>
+                            </div>
+                        </div>
+                        <div title="已提交">
+                            <div class="easyui-layout tableHeight" fit="true">
+                                <div id="dsp-center" data-options="region:'center',border:false,split:false,href:'html/people/recordlist/alreadySubmitted.html'" style="height:400px;margin-top: 10px;" >
+                                </div>
+                            </div>
+                        </div>
+                        <div title="已完成">
+                            <div class="easyui-layout tableHeight" fit="true">
+                                <div id="dsp-center" data-options="region:'center',border:false,split:false,href:'html/people/recordlist/finished.html'" style="height:400px;margin-top: 10px;" >
+                                </div>
+                            </div>
+                        </div>
+                        <div title="已驳回">
+                            <div class="easyui-layout tableHeight" fit="true">
+                                <div id="dsp-center" data-options="region:'center',border:false,split:false,href:'html/people/recordlist/refuseTable.html'" style="height:400px;margin-top: 10px;" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+    </script>
+</body>
+
+</html>

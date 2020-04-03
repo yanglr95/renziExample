@@ -1,0 +1,111 @@
+<div class="alert-content">
+        <div id="age-tabs" class="easyui-tabs content-tabs">
+            <div title="45岁及以下">
+                <div class="alert-table-box">
+                    <div id="age1"></div>
+                </div>
+            </div>
+            <div title="46-50岁">
+                <div class="alert-table-box">
+                    <div id="age2"></div>
+                </div>
+            </div>
+            <div title="51-55岁">
+                <div class="alert-table-box">
+                    <div id="age3"></div>
+                </div>
+            </div>
+            <div title="56岁及以上">
+                <div class="alert-table-box">
+                    <div id="age4"></div>
+                </div>
+            </div>
+        </div>
+        <div class="education-name-search">
+            <span>姓名：</span>
+            <div class="education-search-box">
+                <input type="text" class="education-inp" placeholder="请输入关键字">
+                <img src="/assets/icon/search.png">
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            var tabIndex = null;
+            $('#age-tabs').tabs({
+                onSelect:function(title,index){
+                    tabIndex = index;
+                    $('.education-inp').val('')
+                    if (tabIndex==0) {
+                        educationTable('age1','','45');
+                    }else if (tabIndex==1) {
+                        educationTable('age2','','46-50');
+                    }else if (tabIndex==2) {
+                        educationTable('age3','','51-55');
+                    }else if (tabIndex==3) {
+                        educationTable('age4','','56');
+                    }
+                }
+            })
+            $('.education-search-box img').click(function(){
+                if (tabIndex==0) {
+                    educationTable('age1',$('.education-inp').val().trim(),'45');
+                }else if (tabIndex==1) {
+                    educationTable('age2',$('.education-inp').val().trim(),'46-50');
+                }else if (tabIndex==2) {
+                    educationTable('age3',$('.education-inp').val().trim(),'51-55');
+                }else if (tabIndex==3) {
+                    educationTable('age4',$('.education-inp').val().trim(),'56');
+                }
+            })
+            $('.education-inp').keypress(function(e){
+                if (e.which == 13) {
+                    if (tabIndex==0) {
+                        educationTable('age1',$('.education-inp').val().trim(),'45');
+                    }else if (tabIndex==1) {
+                        educationTable('age2',$('.education-inp').val().trim(),'46-50');
+                    }else if (tabIndex==2) {
+                        educationTable('age3',$('.education-inp').val().trim(),'51-55');
+                    }else if (tabIndex==3) {
+                        educationTable('age4',$('.education-inp').val().trim(),'56');
+                    }
+                }
+            })
+        })
+        function educationTable(querySelector,searchName,searchVariableValue){
+            $('#'+querySelector).datagrid({
+                fitColumns:true,
+                // pagination: true,
+                height:450,
+                striped:true,
+                url:BASE_URL+'/index/detailsList',
+                method:'get',
+                queryParams:{
+                    token:'',
+                    param:JSON.stringify({
+                        "belongDeptId":"10554186",
+                        "searchName":searchName,
+                        "searchType":"age",
+                        "searchVariableValue":searchVariableValue
+                    })
+                },
+                columns:[[
+                    {field:'index',title:'序号',width:'6%',halign:'left',align:'left',formatter:function(value,row,index){
+                        return '<span>'+(index+1)+'</span>'
+                    }},
+                    {field:'belongDeptId',title:'人员编码',width:'10%',halign:'left',align:'left'},
+                    {field:'chnName',title:'姓名',width:'10%',halign:'left',align:'left'},
+                    {field:'belongUnit',title:'所在单位',width:'25%',halign:'left',align:'left',formatter:function(value,row,index){
+                        return '<span class="home-overflow">'+value+'</span>'
+                    }},
+                    {field:'belongDept',title:'部门',width:'25%',halign:'left',align:'left',formatter:function(value,row,index){
+                        return '<span class="home-overflow">'+value+'</span>'
+                    }},
+                    {field:'postName',title:'岗位',width:'14%',halign:'left',align:'left',formatter:function(value,row,index){
+                        return '<span class="home-overflow">'+value+'</span>'
+                    }},
+                    {field:'age',title:'年龄',width:'10%',halign:'left',align:'left'}
+                ]]
+            })
+        }
+    </script>

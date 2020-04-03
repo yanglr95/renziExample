@@ -1,0 +1,49 @@
+<div style="padding: 15px">
+    <p style="margin-bottom: 10px;">审批备注：</p>
+    <input id="dsptgalert" class="easyui-textbox">
+    <div style="margin-top: 20px;padding: 10px 0;width: 100%;border-top: 1px solid #ccc">
+        <div class="fr">
+            <button class="border-btn " onclick="hideAlert(this)">取消</button>
+            <button class="primary-btn" onclick="dsptgsave(this)">确认</button>
+        </div>       
+    </div>
+</div>
+
+<script>
+    $(function(){
+        $('#dsptgalert').textbox({
+            width: 350,
+            height: 150,
+            editable: true,
+            multiline: true
+        })
+    })
+
+    //保存
+    function dsptgsave(e){
+        var dspbzxx = $('#dsptgalert').textbox('getValue');
+        $.ajax({
+            type: 'post',
+            contentType:'application/json',
+            url: BASE_URL+'/sharingApprove/batchAgree',
+            // url: BASE_URL3+'/sharingApprove/batchAgree',
+            data: JSON.stringify({
+                'batchNos': [mx.dsptgId],
+                'remark': dspbzxx,
+            }),
+            success: function(data){
+                if(data.resultValue == true){
+                    if(mx.typeUrl == 'dspxq'){
+                        closetabTitle('审批详情')
+                    }
+                    $('#recordTable').datagrid('reload');
+                    hideAlert(e);
+                    
+                    // var tab = $('#mainTabs').tabs('getSelected');
+                    // var index = $('#mainTabs').tabs('getTabIndex',tab);
+                    // $('#mainTabs').tabs('close', index);
+                }
+            }
+        })
+    }
+</script>

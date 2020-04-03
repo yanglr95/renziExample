@@ -1,0 +1,278 @@
+<div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+    <div class="easyui-layout" style="width:100%;height: 100%">
+
+        <div data-options="region:'center'" style="padding: 20px;position: relative;">
+
+            <div class="shared_box" style="position: relative;">
+                <div class="shared_btn_box">
+                    <button class="main_btn" id="creat_deploy">创建配置</button>
+                    <button class="main_btn_col" id="submit_btn">提  交</button>
+                    <button class="main_btn_col" id="cancellation">作  废</button>
+                </div>
+            </div>
+
+            <div class="table_seach_right" style="line-height: 76px;">
+                <!-- 下拉选择 -->
+                <span>配置单状态:</span>
+                <input id="configureStatus" editable="false" style="float: left;margin-right: 10px;">
+                <!--输入框-->
+                <span>配置单号:</span>
+                <input id="configureNum" style="float: left;margin-right: 10px;">
+                <span>配置单名称:</span>
+                <input id="configureName" style="float: left;margin-right: 10px;">
+                <!-- 日期选择 -->
+                <div style="float: right">
+                    <span>申请日期:</span>
+                    <input class="easyui-datebox cv_time_start_edit" id="cv_time_start_edit" label="" placeholder="开始"
+                           data-options="formatter:myformatter,parser:myparser"
+                           style="width:140px;height: 25px;">
+                    至
+                    <input class="easyui-datebox cv_time_end_edit" id="cv_time_end_edit" label=""
+                           data-options="formatter:myformatter,parser:myparser"
+                           style="width:140px;height: 25px;">
+                    <button id="search_btn">查询</button>
+                </div>
+            </div>
+            <div id="companyApplyTable" style="width: 100%"></div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+$(function(){
+
+    getDatagridData();
+
+    // 搜索框
+    $('#configureStatus').combobox({
+        valueField:'id',
+        textField:'text',
+        height: 25,
+        data:[
+            {
+                'id':'',
+                'text' : '全部'
+            },
+            {
+                'id':'0401',
+                'text' : '待提交'
+            },
+            {
+                'id': '0402',
+                'text': '待审批'
+            },
+            {
+                'id': '0403',
+                'text': '已驳回'
+            },
+            {
+                'id': '0404',
+                'text': '发布'
+            },
+            {
+                'id': '0408',
+                'text': '作废'
+            },
+            {
+                'id': '0409',
+                'text': '资格审查'
+            }
+        ]
+    });
+
+    $('#configureNum').textbox({
+        prompt: '请输入',
+        height: 25,
+    });
+    $('#configureName').textbox({
+        prompt: '请输入',
+        height: 25,
+    });
+
+    //获取列表数据
+    function getDatagridData(a,b,c,d,e,){
+        console.log(a,b,c,d,e)
+        $.ajax({
+            type:'post',
+            url:BASE_URL3+'/competitionApply/likeUserCompetitionApply',
+            contentType:'application/json',
+            data:JSON.stringify({
+                "appEndlyDate":a?a:"",
+                "appBeginlyDate":b?b:"",
+                "staffingId":c?c:"",
+                "staffingStatus":d?d:"",
+                "staffingName":e?e:""
+            }),
+            success:function(data){
+                setDatagridList(data)
+            }
+        })
+    }
+    //列表展示
+    function setDatagridList(dataList){
+        $('#companyApplyTable').datagrid({
+            data:dataList,
+            height:650,
+            nowrap : true,
+            selectOnCheck: true,
+            checkOnSelect: true,
+           // fitColumns:true,
+            pagination: true,
+            striped:true,
+            columns:[[
+                {field: 'Id', checkbox: true,width: '3%'},
+                {field:'index',title:'序号',width: '3%',halign:'center',align:'center',formatter:function(value,row,index){
+                        return '<span>'+(index+1)+'</span>'
+                    }},
+                {field:'staffingStatus',title:'配置单状态',width: '8%',halign:'center',align:'center',formatter:formatDeployStatus},
+                {field:'objText',title:'单位',width: '10%',halign:'center',align:'center'},
+                {field:'staffingId',title:'配置单号',width: '10%',halign:'center',align:'left'},
+                {field:'staffingName',title:'配置单名称',width: '15%',halign:'center',align:'left',formatter:function (value,row,index) {
+                        return '<span style="color: #00A09F" onClick="linkToDetail(\''+row.staffingId+'\',\''+row.staffingStatus+'\')">' + value+ '</span>'
+                    }},
+                {field:'applyDate',title:'申请日期',width: '8%',halign:'center',align:'center',formatter:formatCourseTime},
+                {field:'auditDate',title:'审批日期',width: '8%',halign:'center',align:'center',formatter:formatCourseTime},
+                {field:'validDate',title:'报名有效期',width: '12%',halign:'center',align:'center',},
+                {field:'needCount',title:'需求人数',width: '5%',halign:'center',align:'center'},
+                {field:'applyCount',title:'报名人数',width: '5%',halign:'center',align:'center',formatter:function (value,row,index) {
+                        return '<span style="color: #00A09F" onClick="linkToApply(\''+row.staffingId+'\',\''+value+'\')">' + value+ '</span>'
+                    }},
+                {field:'confirmCount',title:'确认人数',width: '5%',halign:'center',align:'center'},
+                {field:'flowChart',title:'流程图',width: '5%',halign:'center',align:'center',formatter:function (value,row,index) {
+                        return '<span style="color: #00A09F" onClick="linkToFlowChart('+row.staffingId+')">查看</span>'
+                    }}
+            ]],
+            onLoadSuccess : function(data) {
+                $(".datagrid-row td div").each(function() {
+                    $(this).attr("title", $(this).text());
+                });
+            }        
+        });
+    }
+
+    //查询
+    $("#search_btn").on("click",function(){
+        var a1=$("#configureName").textbox("getValue");
+        var b1=$('#configureStatus').combobox("getValue");
+        var c1=$('#configureNum').textbox("getValue");
+        var d1=$("#cv_time_start_edit").datebox("getValue");
+        var e1=$("#cv_time_end_edit").datebox("getValue");
+        getDatagridData(e1,d1,c1,b1,a1,)
+    })
+
+    //创建配置
+    $("#creat_deploy").on("click",function(){
+        closetabTitle('创建配置单');
+        opentab("dispose/kdwgwfile/kdwgw_gwfl", "创建配置单", false,'creat');
+    })
+
+    //提交
+    $("#submit_btn").on("click",function(){
+        var rows = $("#companyApplyTable").datagrid( 'getSelections' );
+        if(rows.length==0){
+            $.messager.alert("提示信息", "请至少选择一条数据!" );
+            return
+        }else if(rows.length==1){
+            if(rows[0].staffingStatus!=="0401"){
+                $.messager.alert("提示消息","此数据已被提交,请勿重新操作!");
+                return;
+            }
+            closetabTitle('配置单详情');
+            opentab("dispose/kdwgwfile/kdwgw_bmhdll", "配置单详情信息", false,{id:rows[0].staffingId,status:rows[0].staffingStatus});
+        }else if(rows.length>1){
+            $.messager.alert("提示信息", "最多只能选择一条数据" );
+            return;
+        }
+    })
+
+    //作废
+    $("#cancellation").on("click",function(){
+        var rows = $("#companyApplyTable").datagrid( 'getSelections' );
+        var sId=[];
+        if(rows.length==0){
+            $.messager.alert("提示信息", "请至少选择一条数据!" );
+            return
+        }else{
+            for(var i=0;i<rows.length;i++){
+                sId.push(rows[i].staffingId)
+            }
+
+            $.ajax({
+                type:'POST',
+                url:BASE_URL3+'/competitionApply/cancel',
+                contentType:'application/json',
+                data:JSON.stringify(
+                    sId
+                ),
+                success:function(data){
+                    console.log(data)
+                    if(data.resultCode==='200'){
+                        $.messager.alert("提示信息", "操作成功!" );
+                        getDatagridData()
+                    }
+                }
+            })
+        }
+
+    })
+})
+
+
+//查看配置单名称
+function linkToDetail(sid,sta){
+    var seeObj={
+        id:sid,
+        status:sta
+    }
+    closetabTitle('配置单详情信息');
+    opentab("dispose/kdwgwfile/kdwgw_bmhdll", "配置单详情信息", false,seeObj);
+}
+//查看报名人数
+function linkToApply(sid,v){
+    console.log(v)
+    if(v<=0){
+        $.messager.alert("提示信息","暂无可查看人员");
+        return;
+    }
+    closetabTitle('查看报名人数');
+    opentab("dispose/kdwgwfile/kdwgw_dsp", "查看报名人数", false,sid);
+}
+//查看确认人数
+function linkToaAfirm(sid){
+    //opentab("dispose/kdwgwfile/kdwgw_gwfl", "查看确认人数", false,sid);
+}
+//查看流程图
+function linkToFlowChart(sid){
+    closetabTitle('查看流程图');
+    opentab("dispose/kdwgwfile/kdwgw_lct", "查看流程图", false,sid);
+}
+//格式化时间
+function formatCourseTime( val , row , index){
+    if(val==null){
+        return '--';
+    }
+    var newDate = new Date(val);
+    return newDate.Format("yyyy-MM-dd");
+}
+function formatDeployStatus(val , row , index){
+    if(val==="0401"){
+        return "待提交";
+    }else if(val==="0402"){
+        return "待审批";
+    }else if(val==="0403"){
+        return "已驳回";
+    }else if(val==="0404"){
+        return "发布";
+    }else if(val==="0408"){
+        return "作废";
+    }else if(val==="0409"){
+        return "资格审查";
+    }else if(val==="0405"){
+        return "筛选录用";
+    }
+
+}
+</script>

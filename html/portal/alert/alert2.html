@@ -1,0 +1,118 @@
+<div class="alert-content">
+    <div id="education-tabs" class="easyui-tabs content-tabs">
+        <div title="研究生及以上">
+            <div class="alert-table-box">
+                <div id="education1"></div>
+            </div>
+        </div>
+        <div title="本科">
+            <div class="alert-table-box">
+                <div id="education2"></div>
+            </div>
+        </div>
+        <div title="专科">
+            <div class="alert-table-box">
+                <div id="education3"></div>
+            </div>
+        </div>
+        <div title="中专及以下">
+            <div class="alert-table-box">
+                <div id="education4"></div>
+            </div>
+        </div>
+    </div>
+    <div class="education-name-search">
+        <span>姓名：</span>
+        <div class="education-search-box">
+            <input type="text" class="education-inp" placeholder="请输入关键字">
+            <img src="/assets/icon/search.png">
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        var tabIndex = null;
+        $('#education-tabs').tabs({
+            onSelect:function(title,index){
+                tabIndex = index;
+                $('.education-inp').val('')
+                if (tabIndex==0) {
+                    educationTable('education1','','14');
+                }else if (tabIndex==1) {
+                    educationTable('education2','','21');
+                }else if (tabIndex==2) {
+                    educationTable('education3','','31');
+                }else if (tabIndex==3) {
+                    educationTable('education4','','41');
+                }
+            }
+        })
+        $('.education-search-box img').click(function(){
+            if (tabIndex==0) {
+                educationTable('education1',$('.education-inp').val().trim(),'14');
+            }else if (tabIndex==1) {
+                educationTable('education2',$('.education-inp').val().trim(),'21');
+            }else if (tabIndex==2) {
+                educationTable('education3',$('.education-inp').val().trim(),'31');
+            }else if (tabIndex==3) {
+                educationTable('education4',$('.education-inp').val().trim(),'41');
+            }
+        })
+        $('.education-inp').keypress(function(e){
+            if (e.which==13) {
+                if (tabIndex==0) {
+                    educationTable('education1',$('.education-inp').val().trim(),'14');
+                }else if (tabIndex==1) {
+                    educationTable('education2',$('.education-inp').val().trim(),'21');
+                }else if (tabIndex==2) {
+                    educationTable('education3',$('.education-inp').val().trim(),'31');
+                }else if (tabIndex==3) {
+                    educationTable('education4',$('.education-inp').val().trim(),'41');
+                }
+            }
+        })
+    })
+    //姓名弹窗
+    function zhopennew(){
+        showPanalAlert(1200,600,'#alertplane1','员工详情','html/portal/alert/alert8.html')
+    }
+
+    function educationTable(querySelector,searchName,searchVariableValue){
+        $('#'+querySelector).datagrid({
+            fitColumns:true,
+            height:450,
+            // pagination: true,
+            striped:true,
+            url:BASE_URL+'/index/detailsList',
+            method:'get',
+            queryParams:{
+                token:'',
+                param:JSON.stringify({
+                    "belongDeptId":"10554186",
+                    "searchName":searchName,
+                    "searchType":"education",
+                    "searchVariableValue":searchVariableValue
+                })
+            },
+            columns:[[
+                {field:'index',title:'序号',width:'6%',halign:'left',align:'left',formatter:function(value,row,index){
+                    return '<span>'+(index+1)+'</span>'
+                }},
+                {field:'belongDeptId',title:'人员编码',width:'10%',halign:'left',align:'left'},
+                {field:'chnName',title:'姓名',width:'10%',halign:'left',align:'left',formatter:function(value,row,index){
+                    return '<span style="color:rgb(24,98,223);cursor:pointer" onclick="zhopennew()" title="'+value+'">'+value+'</span>'
+                }},
+                {field:'belongUnit',title:'所在单位',width:'25%',halign:'left',align:'left',formatter:function(value,row,index){
+                    return '<span class="home-overflow" title="'+value+'">'+value+'</span>'
+                }},
+                {field:'belongDept',title:'部门',width:'25%',halign:'left',align:'left',formatter:function(value,row,index){
+                    return '<span class="home-overflow" title="'+value+'">'+value+'</span>'
+                }},
+                {field:'postName',title:'岗位',width:'14%',halign:'left',align:'left',formatter:function(value,row,index){
+                    return '<span class="home-overflow" title="'+value+'">'+value+'</span>'
+                }},
+                {field:'dictVal',title:'学历学位',width:'10%',halign:'left',align:'left'}
+            ]]
+        })
+    }
+</script>

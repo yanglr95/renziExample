@@ -1,0 +1,98 @@
+<div>
+    <div id="dspccTable1"></div>
+</div>
+<script>
+$(function(){
+    // queryPeopleTable('dspccTable1',0)
+    $.ajax({
+        type:'post',
+        url:BASE_URL + '/hrEmp/loadEmpList',
+        contentType:'application/json',
+        data:JSON.stringify({
+            filter:{
+                "empSubGroup":0,
+                "chnName":"",
+                "id":"69001242"
+            },
+            "pageIndex":1,
+            "pageSize":10
+        }),
+        success:function(data){
+            if (data.resultCode == 200) {
+                console.log(data.resultValue.items)
+                peopleTableFirst(data.resultValue.items)
+            }
+        }
+    })
+})
+function peopleTableFirst(data){
+    $('#dspccTable1').datagrid({
+        width: '100%',
+        height:490,
+        fitColumns: true,
+        striped: true,
+        data:data,
+        columns: [[
+            {
+                field: 'index', title: '序号', width: '5%', halign: 'center', align: 'center', formatter(value, row, index) {
+                    return `<span>${index + 1}</span>`
+                }
+            },
+            { field: 'empId', title: '人员编码', width: '8%', halign: 'center', align: 'center'},
+            { field: 'chnName', title: '姓名', width: '6%', halign: 'center', align: 'center',
+                formatter(value, row, index) {
+                    return `<span class="view" style="color:rgb(0,160,159);cursor:pointer" onclick='peopleDetail(${row.empId})'>${row.chnName}</span>`
+                }
+            },
+            { field: 'belongUnit', title: '所在单位', width: '15%', halign: 'center', align: 'center',formatter(value, row, index){
+                return `<div style="width:100%" class="overflow-ellipsis" title="${value}">${value}</div>`
+            } },
+            { field: 'belongDept', title: '部门', width: '12%', halign: 'center', align: 'center' ,formatter(value, row, index){
+                return `<div style="width:100%" class="overflow-ellipsis" title="${value}">${value}</div>`
+            }},
+            { field: 'belongTeam', title: '岗位', width: '10%', halign: 'center', align: 'center' },
+            { field: 'gender', title: '性别', width: '6%', halign: 'center', align: 'center', formatter(value, row, index) { 
+                if (value==0) {
+                    return '女'
+                }else{
+                    return '男'
+                }
+            } },
+            { field: 'birthDay', title: '年龄', width: '4%', halign: 'center', align: 'center' ,formatter:function(value, row, index){
+                return ageSwitch(value)
+            }},
+            { field: 'heightEduCodeName', title: '学历/学位', width: '10%', halign: 'center', align: 'center' },
+            { field: 'skillIdentGrade', title: '技能等级', width: '7%', halign: 'center', align: 'center' },
+            { field: 'qualifName', title: '职称', width: '5%', halign: 'center', align: 'center' },
+            { field: 'empSubGroup', title: '员工子组', width: '7%', halign: 'center', align: 'center', formatter:function(value, row, index){
+                switch (value) {
+                    case '1':
+                        return '职工'
+                        break;
+                    case '3':
+                        return '农电用工'
+                        break;
+                    case '4':
+                        return '劳务派遣'
+                        break;
+                    case '6':
+                        return '非全日制'
+                        break;
+                    case '5':
+                        return '业务委托'
+                        break;
+                    case '9':
+                        return '其他从业人员'
+                        break;
+                    default:
+                        break;
+                }
+            }},
+            { field: 'handle', title: '操作', width: '5%', halign: 'center', align: 'center', formatter(value, row, index) {
+                    return "<span class='edit' style='color:rgb(24,98,223);cursor:pointer' onclick='peopleChangePage("+row.empId+")'>变更</span> "
+                }
+            }
+        ]]
+    });
+}
+</script>

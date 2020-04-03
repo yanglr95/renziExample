@@ -1,0 +1,753 @@
+<div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;font-size: 14px;">
+        
+    <div class="easyui-layout" style="width:100%;height: 100%">
+
+        <div data-options="region:'center'" style="padding: 20px;position: relative;">
+                <div class="shared_btn_box" style="background: #fff; padding: 20px 20px 20px 0px;">
+                        <button class="border-btn" style="margin-right: 10px;">导出</button>
+                        <button class="primary-btn" style="margin-right: 10px;" onclick="sqjlxzsavejt()">保存并提交</button>
+                        <button class="border-btn" style="margin-right: 10px;" onclick="sqjlxzsave()">保存</button>
+                        <button class="border-btn ray_back">取消</button>
+
+                        <ul class="nav_progress rg">
+                            <li class="lf">
+                                <img style="height: 20px;" src="/assets/home/icon_quan_lg.png" alt="">
+                                <div>申请</div>
+                            </li>
+                            <li class="lf">
+                                <!-- icon_zhong -->
+                                <img style="height: 20px;" src="/assets/home/icon_zhong.png" alt="">
+                                <div>审核</div>
+                            </li>
+                            <li class="lf">
+                                    <img style="height: 20px;" src="/assets/home/icon_zhong.png" alt="">
+                                    <div>授权</div>
+                            </li>
+                            <li class="lf">
+                                    <img style="height: 20px;" src="/assets/home/icon_zhong.png" alt="">
+                                    <div>完成</div>
+                            </li>
+                            <li>
+                                <div class="tiao"></div>
+                            </li>
+                        </ul>
+                    </div>
+            <div style="position: relative;width: calc(100% - 400px);">
+                
+                <div class="shared_main_list" style="font-size: 14px;">
+                    <h3 class="box-title">基本信息</h3>
+                    <div class="shared_list">
+                        <div>
+                            <span><label class="redcolor">*</label>传播频率: </span>
+                            <input id="cspl">
+                        </div>
+                        <div>
+                            <span><label class="redcolor">*</label>申请系统名称: </span>
+                            <input id="sqxtmcxz" class="easyui-textbox" style="width: 150px ; height: 34px;">
+                        </div>
+                        <div>
+                            <span><label class="redcolor">*</label>授权时间: </span>
+                            <input id="sqsj" class="easyui-datebox cv_time_start_edit" data-options="formatter:myformatter,parser:myparser,editable: false" style="width:160px;height: 35px;">
+                            <!--<input id="sqsj" class="easyui-datebox" style="width:140px;height: 34px;">-->
+                        </div>
+                    </div>
+                </div>
+                <div class="shared_main_list" style="font-size: 14px;">
+                    <h3 class="box-title">人员范围</h3>
+                    <div class="shared_scope_list1"><span><label class="redcolor">*</label>组织机构：</span>
+                        <div class="box">
+                            <input id="zzjgtree">
+
+                            <!--<input id="language" name="language" style="width: 250px;height: 30px;"
+                                class="easyui-combobox">-->
+
+                        </div>
+                    </div>
+                    <div class="shared_scope_list1">
+                        <span><label class="redcolor">*</label>岗位分类：</span>
+                        <input id="geflser">
+                    </div>
+                </div>
+            </div>
+            <div style="width:100%;height: 100%;">
+                <div class="easyui-layout" style="width:100%;height: 100%;">
+                    <div data-options="region:'center'">
+                        <h3 class="box-title">数据字段</h3>
+                        <div class="shared_main_title_sm1" style="padding: 15px 0 10px 0;">基础信息</div>
+                        <div class="easyui-tabs content-tabs">
+                            <div title="人员信息">
+                                <div class="basis_group" style="font-size: 14px;">
+                                    <div class="basis_titlt"><label><input type="checkbox"
+                                                name="east_data1_all" />全选所有字段</label></div>
+                                    <div class="basis_lists basis_list1">
+                                        <label><input type="checkbox" value="所在单位" name="east_data1_checkbox" />所在单位</label>
+                                        <label><input type="checkbox" value="所在部门" name="east_data1_checkbox" />所在部门</label>
+                                        <label><input type="checkbox" value="岗位" name="east_data1_checkbox" />岗位</label>
+                                        <label><input type="checkbox" value="年龄" name="east_data1_checkbox" />年龄</label>
+                                        <label><input type="checkbox" value="姓名" name="east_data1_checkbox" />姓名</label>
+                                        <label><input type="checkbox" value="民族" name="east_data1_checkbox" />民族</label>
+                                        <label><input type="checkbox" value="人工编码" name="east_data1_checkbox" />人工编码</label>
+                                        <label><input type="checkbox" value="入职时间" name="east_data1_checkbox" />入职时间</label>
+                                        <label><input type="checkbox" value="政治面貌" name="east_data1_checkbox" />政治面貌</label>
+                                        <label><input type="checkbox" value="技能等级" name="east_data1_checkbox" />技能等级</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div title="教育信息">
+                                <div class="basis_group" style="font-size: 14px;">
+                                    <div class="basis_titlt"><label><input type="checkbox"
+                                                name="east_data2_all" />全选所有字段</label>
+                                    </div>
+                                    <div class="basis_lists basis_list2">
+                                            <label><input type="checkbox" value="开始时间" name="east_data2_checkbox" />开始时间</label>
+                                            <label><input type="checkbox" value="结束时间"name="east_data2_checkbox" />结束时间</label>
+                                            <label><input type="checkbox" value="教育机构类型"name="east_data2_checkbox" />教育机构类型</label>
+                                            <label><input type="checkbox" value="教育/培训类型"name="east_data2_checkbox" />教育/培训类型</label>
+                                            <label><input type="checkbox" value="院校/培训机构"name="east_data2_checkbox" />院校/培训机构</label>
+                                            <label><input type="checkbox" value="国家键值"name="east_data2_checkbox" />国家键值</label>
+                                            <label><input type="checkbox" value="证书"name="east_data2_checkbox" />证书</label>
+                                            <label><input type="checkbox" value="培训课程时间"name="east_data2_checkbox" />培训课程时间</label>
+                                            <label><input type="checkbox" value="时间/度量单位"name="east_data2_checkbox" />时间/度量单位</label>
+                                            <label><input type="checkbox" value="最后得分"name="east_data2_checkbox" />最后得分</label>
+                                            <label><input type="checkbox" value="从学单位类别"name="east_data2_checkbox" />从学单位类别</label>
+                                            <label><input type="checkbox" value="学院(系)"name="east_data2_checkbox" />学院(系)</label>
+                                            <label><input type="checkbox" value="专业代码"name="east_data2_checkbox" />专业代码</label>
+                                            <label><input type="checkbox" value="专业代码名称"name="east_data2_checkbox" />专业代码名称</label>
+                                            <label><input type="checkbox" value="专业名称"name="east_data2_checkbox" />专业名称</label>
+                                            <label><input type="checkbox" value="是否第二专业"name="east_data2_checkbox" />是否第二专业</label>
+                                            <label><input type="checkbox" value="学历证书号"name="east_data2_checkbox" />学历证书号</label>
+                                            <label><input type="checkbox" value="是否最高学历标识"name="east_data2_checkbox" />是否最高学历标识</label>
+                                            <label><input type="checkbox" value="是否就业学历标识"name="east_data2_checkbox" />是否就业学历标识</label>
+                                            <label><input type="checkbox" value="学位"name="east_data2_checkbox" />学位</label>
+                                            <label><input type="checkbox" value="学位名称"name="east_data2_checkbox" />学位名称</label>
+                                            <label><input type="checkbox" value="研究方向"name="east_data2_checkbox" />研究方向</label>
+                                            <label><input type="checkbox" value="学位证书号"name="east_data2_checkbox" />学位证书号</label>
+                                            <label><input type="checkbox" value="学位授予单位"name="east_data2_checkbox" />学位授予单位</label>
+                                        </div>
+                                </div>
+                            </div>
+                            <div title="绩效考核">
+                                <div class="basis_group" style="font-size: 14px;">
+                                    <div class="basis_titlt"><label><input type="checkbox"
+                                                name="east_data3_all" />全选所有字段</label>
+                                    </div>
+                                    <div class="basis_lists basis_list3">
+                                        <label><input type="checkbox" value="开始时间" name="east_data3_checkbox" />开始时间</label>
+                                        <label><input type="checkbox" value="结束时间" name="east_data3_checkbox" />结束时间</label>
+                                        <label><input type="checkbox" value="绩效考核类型" name="east_data3_checkbox" />绩效考核类型</label>
+                                        <label><input type="checkbox" value="绩效考核方式" name="east_data3_checkbox" />绩效考核方式</label>
+                                        <label><input type="checkbox" value="绩效考评得分" name="east_data3_checkbox" />绩效考评得分</label>
+                                        <label><input type="checkbox" value="绩效积分" name="east_data3_checkbox" />绩效积分</label>
+                                        <label><input type="checkbox" value="绩效考核等级" name="east_data3_checkbox" />绩效考核等级</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div title="工作履历">
+                                <div class="basis_group" style="font-size: 14px;">
+                                    <div class="basis_titlt"><label><input type="checkbox"
+                                                name="east_data4_all" />全选所有字段</label>
+                                    </div>
+                                    <div class="basis_lists basis_list4">
+                                        <label><input type="checkbox" value="开始时间"
+                                                name="east_data4_checkbox" />开始时间</label>
+                                        <label><input type="checkbox" value="结束时间"
+                                                name="east_data4_checkbox" />结束时间</label>
+                                        <label><input type="checkbox" value="部门/处室/班组"
+                                                name="east_data4_checkbox" />部门/处室/班组</label>
+                                        <label><input type="checkbox" value="职务"
+                                                name="east_data4_checkbox" />职务</label>
+                                        <label><input type="checkbox" value="证明人"
+                                                name="east_data4_checkbox" />证明人</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div title="专家人才信息">
+                                <div class="basis_group" style="font-size: 14px;">
+                                    <div class="basis_titlt"><label><input type="checkbox"
+                                                name="east_data5_all" />全选所有字段</label>
+                                    </div>
+                                    <div class="basis_lists basis_list5">
+                                        <label><input type="checkbox" value="开始时间"
+                                                name="east_data5_checkbox" />开始时间</label>
+                                        <label><input type="checkbox" value="结束时间"
+                                                name="east_data5_checkbox" />结束时间</label>
+                                        <label><input type="checkbox" value="申报专家等级"
+                                                name="east_data5_checkbox" />申报专家等级</label>
+                                        <label><input type="checkbox" value="人才称号"
+                                                name="east_data5_checkbox" />人才称号</label>
+                                        <label><input type="checkbox" value="专家类别"
+                                                name="east_data5_checkbox" />专家类别</label>
+                                        <label><input type="checkbox" value="申报日期"
+                                                name="east_data5_checkbox" />申报日期</label>
+                                        <label><input type="checkbox" value="批准单位"
+                                                name="east_data5_checkbox" />批准单位</label>
+                                        <label><input type="checkbox" value="证书编号"
+                                                name="east_data5_checkbox" />证书编号</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="shared_main_title_sm1" style="padding: 15px 0 10px 0;">需员工授权数据</div>
+                        <div class="easyui-tabs content-tabs">
+                            <div title="人员信息">
+                                <div class="basis_group" style="font-size: 14px;">
+                                    <div class="basis_titlt"><label><input type="checkbox" name="east_data6_all" />全选所有字段</label>
+                                    </div>
+                                    <div class="basis_lists basis_list6">
+                                        <label><input type="checkbox" value="身份证"
+                                                name="east_data6_checkbox" />身份证</label>
+                                        <label><input type="checkbox" value="手机号"
+                                                name="east_data6_checkbox" />手机号</label>
+                                        <label><input type="checkbox" value="银行卡"
+                                                name="east_data6_checkbox" />银行卡</label>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div title="(行政、党派)职务变更">
+                                <div class="basis_group" style="font-size: 14px;">
+                                    <div class="basis_titlt"><label><input type="checkbox"
+                                                name="east_data7_all" />全选所有字段</label>
+                                    </div>
+                                    <div class="basis_lists basis_list7">
+                                        <label><input type="checkbox" value="行政党派变动时间" name="east_data7_checkbox" />行政党派变动时间</label>
+                                        <label><input type="checkbox" value="职务变动类型" name="east_data7_checkbox" />职务变动类型</label>
+                                        <label><input type="checkbox" value="职务名称" name="east_data7_checkbox" />职务名称</label>
+                                        <label><input type="checkbox" value="职务级别" name="east_data7_checkbox" />职务级别</label>
+                                        <label><input type="checkbox" value="现任级别时间" name="east_data7_checkbox" />现任级别时间</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div title="家庭成员">
+                                <div class="basis_group" style="font-size: 14px;">
+                                    <div class="basis_titlt"><label><input type="checkbox"
+                                                name="east_data8_all" />全选所有字段</label>
+                                    </div>
+                                    <div class="basis_lists basis_list8">
+                                        <label><input type="checkbox" value="姓名" name="east_data8_checkbox" />姓名</label>
+                                        <label><input type="checkbox" value="成员关系" name="east_data8_checkbox" />成员关系</label>
+                                        <label><input type="checkbox" value="性别" name="east_data8_checkbox" />性别</label>
+                                        <label><input type="checkbox" value="出生日期" name="east_data8_checkbox" />出生日期</label>
+                                        <label><input type="checkbox" value="工作单位及职务" name="east_data8_checkbox" />工作单位及职务</label>
+                                        <label><input type="checkbox" value="参加工作、学习.." name="east_data8_checkbox" />参加工作、学习..</label>
+                                        <label><input type="checkbox" value="离开工作、学习.." name="east_data8_checkbox" />离开工作、学习..</label>
+                                        <label><input type="checkbox" value="工作状态" name="east_data8_checkbox" />工作状态</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="shared_main_title_sm1">其他字段</div>
+                        </div>
+                        <div class="shared_main_title_sm1" style="padding: 10px 0 10px 0;">其他字段   <button class="main_btn">上传</button></div>
+                        <div> <img style="width: 15px;font-size: 14px;" src="/assets/home/Shape_icon.png" alt="">  如有其他共享需求字段，请上传格式为.doc的字段说明文件。</div>
+                        <div style="padding: 10px 0;font-size: 14px;">备注内容：<input style="width: 400px;border: 1px solid #eee;height: 30px;padding:  0 5px;" type="text"></div>
+
+                    </div>
+                    <div data-options="region:'east'" style="width:400px;">
+                        <div class="east_basis_box" style="font-size: 14px;">
+                            <div class="east_basis_title">已选字段</div>
+                            <div>
+                                <div class="shared_main_title_sm1" style="padding: 0 0 10px 0;font-size: 16px;">基础信息</div>
+                                <div class="east_data1_s" style="color: #666;">人员信息<span></span></div>
+                                <ul class="east_ul1 east_data1"> </ul>
+                            </div>
+                            <div>
+                                <!--<div class="shared_main_title_sm1">教育信息</div>-->
+                                <div class="east_data2_s" style="color: #666;">教育信息<span></span></div>
+                                <ul class="east_ul1 east_data2"> </ul>
+                            </div>
+                            <div>
+                                <!--<div class="shared_main_title_sm1">绩效考核</div>-->
+                                <div class="east_data3_s" style="color: #666;">绩效考核<span></span></div>
+                                <ul class="east_ul1 east_data3"> </ul>
+                            </div>
+                            <div>
+                                <!--<div class="shared_main_title_sm1">工作履历</div>-->
+                                <div class="east_data4_s" style="color: #666;">工作履历<span></span></div>
+                                <ul class="east_ul1 east_data4"> </ul>
+                            </div>
+                            <div>
+                                <!--<div class="shared_main_title_sm1">专家人才信息</div>-->
+                                <div class="east_data5_s" style="color: #666;">专家人才信息<span></span></div>
+                                <ul class="east_ul1 east_data5"> </ul>
+                            </div>
+                            <div>
+                                <div class="shared_main_title_sm1" style="padding: 10px 0 10px 0;font-size: 16px;">需员工授权数据</div>
+                                <div class="east_data6_s" style="color: #666;">人员信息<span></span></div>
+                                <ul class="east_ul1 east_data6"> </ul>
+                            </div>
+                            <div>
+                                <!--<div class="shared_main_title_sm1">（行政、党派）职务变动</div>-->
+                                <div class="east_data7_s" style="color: #666;">（行政、党派）职务变动<span></span></div>
+                                <ul class="east_ul1 east_data7"> </ul>
+                            </div>
+                            <div>
+                                <!--<div class="shared_main_title_sm1">家庭成员</div>-->
+                                <div class="east_data8_s" style="color: #666;">家庭成员<span></span></div>
+                                <ul class="east_ul1 east_data8"> </ul>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    var treeTotalId = [];  //树id
+    var treeTotalText = [];  //树text
+    var gwflTotalId = [];  //岗位分类
+    $(function () {
+        //
+        $('#cspl').combobox({
+            valueField: 'id',
+            textField: 'text',
+            panelHeight: 'auto',
+            editable: false,
+            width:150,
+            height: 34,
+            data: [
+                {
+                    'id': '1',
+                    'text': '实时更新'
+                },                
+                {
+                    'id': '3',
+                    'text': '每日一次'
+                },{
+                    'id': '2',
+                    'text': '单一'
+                }
+            ]
+        })
+        //岗位分类
+        $('#geflser').combotree({
+            width: 500,
+            height: 34,           
+            multiple: true,
+            checkbox: true,
+            cascadeCheck: false,
+            // url:BASE_URL3+'/sharingApply/queryOrganizationInfo',
+            url:BASE_URL+'/sharingApply/queryCategory',
+            method: 'get',
+            animate: true,
+            queryParams: {
+                'parentKey': '',
+                'id': ''
+            },
+            formatter:function(node){
+                return node.text
+            },
+            onCheck: function(node,checked){    
+                console.log('node',node)
+                gwflTotalId.push(node.id);     
+                console.log('gwflTotalId',gwflTotalId)         
+                // gwflTotalId.push([node.id,node.text])         
+                
+            },
+            onLoadSuccess: function(node,data){
+                console.log('data123',data)
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].id.length == 7) {
+                        var test = []
+                        for (var j = 0; j < $('.tree-title').length; j++) {
+                            if ($('.tree-title').eq(j).text()==data[i].text) {
+                                test.push($('.tree-title').eq(j))
+                            }
+                        }
+                        test[test.length-1].siblings('.tree-hit').css({
+                            'visibility': 'hidden'
+                        });
+                    }
+                }
+            }
+        })
+        //树
+        $('#zzjgtree').combotree({
+            width: 500,
+            height: 34,            
+            multiple: true,
+            cascadeCheck: false,
+            checkbox: true,
+            // required: true,
+            // url:BASE_URL3+'/sharingApply/queryOrganizationInfo',
+            url:BASE_URL+'/sharingApply/queryOrganizationInfo',
+            method: 'get',
+            animate: true,
+            queryParams: {
+                'id': ''
+            },
+            formatter:function(node){
+                return node.text
+            },
+            onCheck: function(node,checked){    
+                console.log('node',node) 
+                // treeTotalId.push([node.id,node.text])         
+                treeTotalId.push(node.id);
+                treeTotalText.push(node.text);
+            },
+            onLoadSuccess: function(node,data){
+                console.log('data456',data)
+            }
+        })
+        //表头选择框
+        var east_data = [
+            { 
+                name: "east_data1",
+                box:"basis_list1", 
+                all: "east_data1_all", 
+                checkbox: "east_data1_checkbox", 
+                list: { "所在单位": false ,"所在部门": false ,"岗位": false ,"年龄": false,"姓名 ":false,"民族":false,"员工编码":false,"入职时间":false,"政治面貌":false,"技能等级":false} 
+            },
+            { 
+                name: "east_data2",
+                box:"basis_list2", 
+                all: "east_data2_all", 
+                checkbox: "east_data2_checkbox", 
+                list: { "开始时间": false ,"结束时间": false ,"教育机构类型": false ,"教育/培训类型": false,"院校/培训机构":false,"国家键值":false,"证书":false,"培训课程时间":false,"时间/度量单位":false,"最后得分":false,"从学单位类别":false,"学院(系)":false,"专业代码":false,"专业代码名称":false,"专业名称":false,"是否第二专业":false,"学历证书号":false,"是否最高学历标识":false,"是否就业学历标识":false,"学位":false,"学位名称":false,"研究方向":false,"学位证书号":false,"学位授予单位":false  } 
+            },
+            { 
+                name: "east_data3",
+                box:"basis_list3", 
+                all: "east_data3_all", 
+                checkbox: "east_data3_checkbox", 
+                list: { "开始时间 ": false ,"结束时间 ": false ,"绩效考核类型": false ,"绩效考核方式": false,"绩效考评得分":false,"绩效积分":false,"绩效考核等级":false} 
+            },
+            { 
+                name: "east_data4",
+                box:"basis_list4", 
+                all: "east_data4_all", 
+                checkbox: "east_data4_checkbox", 
+                list: { "开始时间  ": false ,"结束时间  ": false ,"部门/处室/班组": false ,"职务": false,"证明人":false} 
+            },
+            { 
+                name: "east_data5",
+                box:"basis_list5", 
+                all: "east_data5_all", 
+                checkbox: "east_data5_checkbox", 
+                list: { "开始时间   ": false ,"结束时间   ": false ,"申报专家等级": false ,"人才称号": false,"专家类别":false,"申报日期":false,"批准单位":false,"证书编号":false} 
+            },
+            { 
+                name: "east_data6",
+                box:"basis_list6", 
+                all: "east_data6_all", 
+                checkbox: "east_data6_checkbox", 
+                list: { "身份证": false ,"手机号": false ,"银行卡": false} 
+            },
+            { 
+                name: "east_data7",
+                box:"basis_list7", 
+                all: "east_data7_all", 
+                checkbox: "east_data7_checkbox", 
+                list: { "行政党派变动时间": false ,"职务变动类型": false ,"职务名称": false ,"职务级别": false,"现任级别时间":false} 
+            },
+            { 
+                name: "east_data8",
+                box:"basis_list8", 
+                all: "east_data8_all", 
+                checkbox: "east_data8_checkbox", 
+                list: { "姓名": false ,"成员关系": false ,"性别": false ,"出生日期": false,"工作单位及职务":false,"参加工作、学习..":false,"离开工作、学习..":false,"工作状态":false} 
+            },
+        ]
+        for (var i = 0; i < east_data.length; i++) {
+            checkaddfun(i)
+            boxInputfun(i);
+            checkallfun(east_data[i].all, east_data[i].checkbox, i)
+        }
+        //全选
+        function checkallfun(checkall, checkbox, index) {
+            $('input[name="' + checkall + '"]').on("click", function () {
+                if ($(this).is(':checked')) {
+                    $('input[name="' + checkbox + '"]').each(function () {
+                        east_data[index].list[$(this).val()] = true
+                        $(this).prop("checked", true);
+                    });
+                } else {
+                    $('input[name="' + checkbox + '"]').each(function () {
+                        $(this).prop("checked", false);
+                        east_data[index].list[$(this).val()] = false
+                    });
+                }
+                boxInputfun(index)
+            });
+        }
+        //添加
+        function checkaddfun(index){
+            var boxInput = ""
+            for (key in east_data[index].list) {
+                    boxInput += '<label><input data-index='+index+' type="checkbox" value="'+key+'" name="east_data'+(index+1)+'_checkbox" />'+key+'</label>'
+            }
+            $("."+east_data[index].box).html(boxInput)
+        }
+        //标记
+        function boxInputfun(index) {
+            var boxInput = ""
+            var ii=0
+            var iii=0
+            for (key in east_data[index].list) {
+                iii++
+                if (east_data[index].list[key] == true) {
+                    boxInput += "<li>" + key + "<span data-index="+index+" class='basis_x'></span></li>"
+                    $('.basis_lists input[value="' + key + '"]').prop("checked", true);
+                    ii++
+                }
+            }
+            var checkall = east_data[index].all
+            if(iii==ii){
+                $('input[name="' + checkall + '"]').prop("checked", true);
+            }else{
+                $('input[name="' + checkall + '"]').prop("checked", false);
+            }
+            $("." + east_data[index].name).html(boxInput)
+            $("." + east_data[index].name+"_s").find('span').html("(已选择 "+ii+" 个)")
+        }
+        $('.basis_lists input[type="checkbox"]').on("click", function () {
+            var index= $(this).data("index")
+            if ($(this).is(':checked')) {
+                east_data[index].list[$(this).val()] = true
+            } else {
+                east_data[index].list[$(this).val()] = false
+            }
+            boxInputfun(index)
+        })
+        $("body").on("click", ".east_ul1 li .basis_x", function () {
+            var index= $(this).data("index")
+            console.log(index)
+            var html = $(this).parent().text()
+            east_data[index].list[html] = false
+            $('.basis_lists input[value="' + html + '"]').prop("checked", false);
+            boxInputfun(index)
+        })//表头选择框 end
+
+
+        //initCombobox('language');
+    });
+
+    //参数：id  控件id
+    function initCombobox(id) {
+        var value = "";
+        //加载下拉框复选框
+        $('#' + id).combobox({
+            //data: json,
+            panelHeight: 200,//设置为固定高度，combobox出现竖直滚动条
+            valueField: 'id',
+            textField: 'text',
+            multiple: true,
+            //formatter方法就是实现了在每个下拉选项前面增加checkbox框的方法
+            formatter: function (row) {
+                var opts = $(this).combobox('options');
+                return '<input type="checkbox" class="combobox-checkbox">' + row[opts.textField]
+            },
+            onLoadSuccess: function () {  //下拉框数据加载成功调用
+                var opts = $(this).combobox('options');
+                var target = this;
+                var values = $(target).combobox('getValues');//获取选中的值的values
+                $.map(values, function (value) {
+                    var el = opts.finder.getEl(target, value);
+                    el.find('input.combobox-checkbox')._propAttr('checked', true);
+                })
+            },
+            onSelect: function (row) { //选中一个选项时调用
+                var opts = $(this).combobox('options');
+                //获取选中的值的values
+                $("#" + id).val($(this).combobox('getValues'));
+
+                //设置选中值所对应的复选框为选中状态
+                var el = opts.finder.getEl(this, row[opts.valueField]);
+                el.find('input.combobox-checkbox')._propAttr('checked', true);
+            },
+            onUnselect: function (row) {
+                //不选中一个选项时调用
+                var opts = $(this).combobox('options');
+                //获取选中的值的values
+                $("#" + id).val($(this).combobox('getValues'));
+
+                var el = opts.finder.getEl(this, row[opts.valueField]);
+                el.find('input.combobox-checkbox')._propAttr('checked', false);
+            }
+        });
+    }
+
+    //保存
+    function sqjlxzsave(){
+        var data = []
+        console.log($('.east_ul1').length)
+        for(var i = 0;i<$('.east_ul1').length;i++){
+            data.push([])
+            for(var j = 0;j<$('.east_ul1').eq(i).children('li').length;j++){
+                data[i].push($('.east_ul1').eq(i).children('li').eq(j).text())
+            }
+        }
+        console.log(data)
+        var cspl = $('#cspl').combobox('getValue');
+        var sqxtmcxz = $('#sqxtmcxz').textbox('getValue');
+        var sqsj = $('#sqsj').datebox('getValue');
+        //处理岗位分类树-数据
+        var gwfljson = {};
+        var gwflnewarr=[];
+        for(var i=0;i<gwflTotalId.length;i++){
+            if(!gwfljson[gwflTotalId[i]]){
+                gwfljson[gwflTotalId[i]] = 1;
+            }else{
+                gwfljson[gwflTotalId[i]]++;
+            }
+        }
+        for(var i in gwfljson){
+            if(gwfljson[i]%2 == 1){
+                gwflnewarr.push(i);
+            }
+        }        
+        gwflTotalId = gwflnewarr;
+        // 
+        //处理组织机构树-数据
+        var zzjgjson = {};
+        var zzjgnewarr=[];
+        for(var i=0;i<treeTotalId.length;i++){
+            if(!zzjgjson[treeTotalId[i]]){
+                zzjgjson[treeTotalId[i]] = 1;
+            }else{
+                zzjgjson[treeTotalId[i]]++;
+            }
+        }
+        for(var i in zzjgjson){
+            if(zzjgjson[i]%2 == 1){
+                zzjgnewarr.push(i);
+            }
+        }        
+        treeTotalId = zzjgnewarr;
+        //
+        if(gwflTotalId.length == 0){
+            messager_show(false,'岗位分类该字段为必选项');
+            return;
+        }
+        if(treeTotalText.length == 0){
+            messager_show(false,'组织机构该字段为必选项');
+            return;
+        }
+
+        $.ajax({
+            // url: BASE_URL3+'/sharingApply/addApply',
+            url: BASE_URL+'/sharingApply/addApply',
+            type: 'post',
+            contentType:'application/json',
+            data: JSON.stringify({
+                'transFrequency': cspl,
+                'beginDate': '',
+                'applySystemName': sqxtmcxz,
+                'warrantObj': treeTotalId,
+                // 'warrantObj': treeTotalText,
+                'warrantSort': gwflTotalId,
+                'warrantContent': JSON.stringify(data),
+                'applyStatus': '3',
+                'applyType': '2',
+                'userId': '2222',
+                'userName': '李四',
+                'endDate': sqsj,
+                'applyReason': '55',
+                'organName': '市场部'
+            }),
+            success: function(data){
+                if(data.resultValue == true){
+                    var tab = $('#mainTabs').tabs('getSelected');
+                    var index = $('#mainTabs').tabs('getTabIndex',tab);
+                    $('#mainTabs').tabs('close', index);
+                    $('#recordTableList').datagrid('reload');
+                }
+            }
+        })
+    }
+    //保存并提交
+    function sqjlxzsavejt(){
+        var data = []
+        for(var i = 0;i<$('.east_ul1').length;i++){
+            data.push([])
+            for(var j = 0;j<$('.east_ul1').eq(i).children('li').length;j++){
+                data[i].push($('.east_ul1').eq(i).children('li').eq(j).text())
+            }
+        }
+        console.log(data)
+        var cspl = $('#cspl').combobox('getValue');
+        var sqxtmcxz = $('#sqxtmcxz').textbox('getValue');
+        var sqsj = $('#sqsj').datebox('getValue');
+        //处理岗位分类树-数据
+        var gwfljson = {};
+        var gwflnewarr=[];
+        for(var i=0;i<gwflTotalId.length;i++){
+            if(!gwfljson[gwflTotalId[i]]){
+                gwfljson[gwflTotalId[i]] = 1;
+            }else{
+                gwfljson[gwflTotalId[i]]++;
+            }
+        }
+        for(var i in gwfljson){
+            if(gwfljson[i]%2 == 1){
+                gwflnewarr.push(i);
+            }
+        }        
+        gwflTotalId = gwflnewarr;
+        // 
+        //处理组织机构树-数据
+        var zzjgjson = {};
+        var zzjgnewarr=[];
+        for(var i=0;i<treeTotalId.length;i++){
+            if(!zzjgjson[treeTotalId[i]]){
+                zzjgjson[treeTotalId[i]] = 1;
+            }else{
+                zzjgjson[treeTotalId[i]]++;
+            }
+        }
+        for(var i in zzjgjson){
+            if(zzjgjson[i]%2 == 1){
+                zzjgnewarr.push(i);
+            }
+        }        
+        treeTotalId = zzjgnewarr;
+        //
+        if(gwflTotalId.length == 0){
+            messager_show(false,'岗位分类该字段为必选项');
+            return;
+        }
+        if(treeTotalText.length == 0){
+            messager_show(false,'组织机构该字段为必选项');
+            return;
+        }
+
+        $.ajax({
+            url: BASE_URL+'/sharingApply/addApply',
+            // url: BASE_URL3+'/sharingApply/addApply',
+            type: 'post',
+            contentType:'application/json',
+            data: JSON.stringify({
+                'batchNo': '',
+                'transFrequency': cspl,
+                'beginDate': '',
+                'applySystemName': sqxtmcxz,
+                'warrantObj': treeTotalId,
+                // 'warrantObj': treeTotalText,
+                'warrantSort': gwflTotalId,
+                'warrantContent': JSON.stringify(data),
+                'applyStatus': '4',
+                'applyType': '2',
+                'userId': '2222',
+                'userName': '李四',
+                'endDate': sqsj,
+                'applyReason': '55',
+                'organName': '市场部'
+            }),
+            success: function(data){
+                if(data.resultValue == true){
+                    var tab = $('#mainTabs').tabs('getSelected');
+                    var index = $('#mainTabs').tabs('getTabIndex',tab);
+                    $('#mainTabs').tabs('close', index);
+                    $('#recordTableList').datagrid('reload');
+                }
+            }
+        })
+    }
+</script>

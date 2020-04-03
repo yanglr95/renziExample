@@ -1,0 +1,101 @@
+<body>
+    <div class="bonus-detail" style="padding: 20px;">
+        <div class="back">
+            <div onclick="closeTab()">
+                <span></span>
+                <span>返回</span>
+            </div>
+        </div>
+        <button class="border-btn export-btn">导出</button>
+        <ul class="total-money">
+            <li>
+                <span>总金额：</span>
+                <span class="sum">1,000,000</span>
+            </li>
+            <li>
+                <span>待分配：</span>
+                <span class="waitMoney">0</span>
+            </li>
+        </ul>
+        <div class="base-info">
+            <h3 class="box-title">基本信息</h3>
+            <ul>
+                <li>
+                    <span>奖金名称：</span>
+                    <span class="rewardType">月度</span>
+                </li>
+                <li>
+                    <span>创建时间：</span>
+                    <span class="rewardTime">2019年1月</span>
+                </li>
+                <li>
+                    <span>分配单号：</span>
+                    <span class="codes">20190931</span>
+                </li>
+                <li>
+                    <span>部门：</span>
+                    <span class="dept">办公厅</span>
+                </li>
+                <li>
+                    <span>截止时间：</span>
+                    <span class="endTime">2019.09.11</span>
+                </li>
+            </ul>
+        </div>
+        <div class="distribut-info">
+            <h3 class="box-title">分配信息</h3>
+            <div class="table-box">
+                <div id="distribut-table"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var tableData1 = [];
+        $(function(){
+            deptDetail()
+        
+        })
+        function disTable(datas){
+            $('#distribut-table').datagrid({
+                fitColumns:true,
+                striped:true,
+                data:datas,
+                columns:[[
+                    {field:'index',title:'序号',width:'8%',halign:'left',align:'left',formatter:function(value,row,index){
+                        return '<span style="font-weight: normal;">'+(index+1)+'</span>'
+                    }},
+                    {field:'empName',title:'姓名',width:'14%',halign:'left',align:'left'},
+                    {field:'empId',title:'人员编码',width:'14%',halign:'left',align:'left'},
+                    {field:'postName',title:'岗位',width:'21%',halign:'left',align:'left'},
+                    {field:'dutyGrade',title:'职级',width:'14%',halign:'left',align:'left'},
+                    {field:'sericeYears',title:'服务年限',width:'14%',halign:'left',align:'left'},
+                    {field:'amount',title:'金额',width:'15%',halign:'left',align:'left'},
+                ]]
+            })
+        }
+        function deptDetail(){
+            console.log($('#mainTabs').tabs('options').id)
+            $.ajax({
+                type:'get',
+                url:BASE_URL+'/rewardIssueMA/findEmp',
+                data:{
+                    packageId:$('#mainTabs').tabs('options').id[0],
+                    deptCode:$('#mainTabs').tabs('options').id[1]
+                },
+                success:function(data){
+                    console.log(data,'奖金下发-index-已下发部门详情')
+                    tableData1=data.resultValue.rewarEmpMAVOList;
+                    disTable(tableData1)
+                    $('.sum').text(data.resultValue.totalAmount)
+                    $('.waitMoney').text(data.resultValue.residueMoney)
+                    $('.rewardType').text(data.resultValue.rewardName)
+                    $('.rewardTime').text(timeType(data.resultValue.beginDate))
+                    $('.endTime').text(timeType(data.resultValue.endDate))
+                    $('.deptName').text(data.resultValue.deptName)
+                    $('.codes').text(data.resultValue.rewardId)
+                    $('.dept').text(data.resultValue.deptName)
+                }
+            }) 
+        }
+    </script>
+</body>

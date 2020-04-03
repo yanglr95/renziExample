@@ -1,0 +1,65 @@
+<div class="easyui-layout animated fadeInRight" data-options="fit:true">
+	<div class="easyui-layout" style="width:100%;height: 100%;">
+	    <div class="tab_card">
+	        <div class="title_line">
+	            <div class="tab_title">执行岗位变动</div>
+	        </div>
+        
+            <div class="scroll_record" data-options="region:'center',split:true" style="padding: 10px 20px;">
+                <div class="easyui-tabs content-tabs" id="zxgwbdTab" style="margin-bottom: 10px;">
+                    <div title="未执行" class="tableHeight" data-url="html/dispose/zxgwbdfile/needzxbd.html">
+                        <!-- <div class="easyui-layout tableHeight" fit="true">
+                            <div id="needzxbd-center" class="table_seach" style="margin: 20px 0 10px;"
+                                data-options="region:'center',border:false,split:false,href:'html/dispose/zxgwbdfile/needzxbd.html'">                     
+                        </div> -->
+                    </div>
+                    <div title="执行成功" data-url="html/dispose/zxgwbdfile/success.html">
+                        <!-- <div class="easyui-layout tableHeight" fit="true">
+                            <div id="success-center" style="height:400px;margin-top: 20px;"
+                                data-options="region:'center',border:false,split:false,href:'html/dispose/zxgwbdfile/success.html'">
+                            </div>
+                        </div> -->
+                    </div>
+                    <div title="执行失败" data-url="html/dispose/zxgwbdfile/failure.html">
+                        <!-- <div class="easyui-layout tableHeight" fit="true">
+                            <div id="failure-center" style="height:400px;margin-top: 20px;"
+                                data-options="region:'center',border:false,split:false,href:'html/dispose/zxgwbdfile/failure.html'">
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {  
+        var $slsb_tabs = $('#zxgwbdTab'); 
+        $slsb_tabs.tabs({ 
+            onSelect : function(){ 
+                var $tab = $slsb_tabs.tabs('getSelected'); 
+                $slsb_tabs.tabs('update', { 
+                    tab : $tab, 
+                    options : { href : $tab.data('url'), } 
+                }); 
+            } 
+        }); 
+        // $('#zxgwbdTab').tabs({ 
+        //     onSelect: function(title,index){ 
+        //         switch(index){ 
+        //             case 0: 
+        //                 $("#needzxbd-center").panel("refresh","html/dispose/sxlyspfile/needzxbd.html"); 
+        //                 break; 
+        //             case 1: 
+        //                 $("#success-center").panel("refresh","html/dispose/sxlyspfile/success.html"); 
+        //                 break; 
+        //             case 2: 
+        //                 $("#failure-center").panel("refresh","html/dispose/sxlyspfile/failure.html"); 
+        //                 break; 
+        //         } 
+        //     } 
+        // });
+        
+    });
+</script>

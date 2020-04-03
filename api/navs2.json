@@ -1,0 +1,20 @@
+[
+    {
+        "id": 0,
+        "menuText": "协同首页",
+        "secondary":false,
+        "link": "/portal/layout"
+    },{
+        "id": 1,
+        "menuText": "信息管理",
+        "secondary":false
+    },{
+        "id": 2,
+        "menuText": "数据共享",
+        "secondary":false
+    },{
+        "id": 3,
+        "menuText": "业务协同",
+        "secondary":false
+    }
+]

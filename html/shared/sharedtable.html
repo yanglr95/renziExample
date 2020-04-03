@@ -1,0 +1,178 @@
+<div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+    <div class="easyui-layout" style="width:100%;height: 100%">
+
+        <div data-options="region:'center'" style="padding: 20px;position: relative;">
+
+            <div class="shared_box" style="position: relative;">
+                <div class="shared_btn_box">
+                    <button class="main_btn">导出</button>
+                    <button class="main_btn" onclick="cjsqfun()">创建申请</button>
+                    <div class="title_record">申请记录</div>
+                </div>
+                <p style="font-size: 16px;font-weight:bold;color:#333333;margin: 10px 0 0 10px;">基础信息</p>
+                <div class="shared_main_list">
+                    <div class="shared_main_title" style="padding-bottom: 10px;">
+                        <h3 class="box-title">人员信息</h3>
+                        <input class="rg" type="text" placeholder="请输入关键字"><img class="search2" src="easyui/themes/icons/search2.png" alt="">
+                    </div>
+                    <div class="shared_main_con_table">
+                        <span>所在单位</span>
+                        <span>所在部门</span>
+                        <span>岗位</span>
+                        <span>年龄</span>
+                        <span>姓名</span>
+                        <span>民族</span>
+                        <span>员工编码</span>
+                        <span>入职时间</span>
+                        <span>政治面貌</span>
+                        <span>技能等级</span>
+                    </div>
+                </div>
+                <div class="shared_main_list">
+                    <h3 class="box-title">教育信息</h3>
+                    <div class="shared_main_con_table">
+                        <span>开始时间</span>
+                        <span>结束时间</span>
+                        <span>教育机构类型</span>
+                        <span>教育/培训类型</span>
+                        <span>国家键值</span>
+                        <span>证书</span>
+                        <span>培训课程时间</span>
+                        <span>时间/度量单位</span>
+                        <span>最后得分</span>
+                        <span>从学单位类别</span>
+                        <span>学院（系）</span>
+                        <span>专业代码</span>
+                        <span>专业代码名称</span>
+                        <span>专业名称</span>
+                        <span>是否第二专业</span>
+                        <span>学历证书号</span>
+                        <span>是否最高学历标识</span>
+                        <span>是否就业学历标识</span>
+                        <span>学位</span>
+                        <span>学位名称</span>
+                        <span>研究方向</span>
+                        <span>学位证书号</span>
+                        <span>学位授予单位</span>
+                        <span>学位授予单位所...</span>
+                        <span>是否第二学位</span>
+                        <span>是否最高学位标识</span>
+                        <span>是否就业学位标识</span>
+                        <span>是否单位送培标识</span>
+                        <span>院校类型</span>
+                    </div>
+                </div>
+                <div class="shared_main_list">
+                    <h3 class="box-title">绩效考核</h3>
+                    <div class="shared_main_con_table">
+                        <span>开始时间</span>
+                        <span>结束时间</span>
+                        <span>绩效考核类型</span>
+                        <span>绩效考核方式</span>
+                        <span>绩效考核系数</span>
+                        <span>绩效考评得分</span>
+                        <span>绩效积分</span>
+                        <span>绩效分值</span>
+                        <span>绩效考评金额</span>
+                        <span>绩效考核等级</span>
+                        <span>绩效考核分数</span>
+                        <span>调整依据</span>
+                    </div>
+                </div>
+                <div class="shared_main_list">
+                    <h3 class="box-title">工作履历</h3>
+                    <div class="shared_main_con_table">
+                        <span>开始时间</span>
+                        <span>结束时间</span>
+                        <span>雇主</span>
+                        <span>城市</span>
+                        <span>国家键值</span>
+                        <span>行业</span>
+                        <span>部门/处室/班组</span>
+                        <span>职务</span>
+                        <span>证明人</span>
+                        <span>备注</span>
+                        <span>受聘上报标识</span>
+                        <span>是否主岗标识</span>
+                        <span>去向单位</span>
+                    </div>
+                </div>
+                <div class="shared_main_list">
+                    <h3 class="box-title">专家人才信息</h3>
+                    <div class="shared_main_con_table">
+                        <span>开始时间</span>
+                        <span>结束时间</span>
+                        <span>申报专家等级</span>
+                        <span>人才称号</span>
+                        <span>专家类别</span>
+                        <span>专业工种类别</span>
+                        <span>申报工种</span>
+                        <span>申报日期</span>
+                        <span>获得方式</span>
+                        <span>批准单位</span>
+                        <span>批准文件</span>
+                        <span>发文时间</span>
+                        <span>聘期</span>
+                        <span>身体状况</span>
+                        <span>备注</span>
+                        <span>证书编号</span>
+                        <span>旧专家人才称号</span>
+                        <span>专家名称</span>
+                    </div>
+                </div>
+                <p style="font-size: 16px;font-weight:bold;color:#333333;margin-left: 10px;">需员工授权数据</p>
+                <div class="shared_main_list">
+                    <h3 class="box-title">人员信息</h3>
+                    <div class="shared_main_con_table_te">
+                        <span>身份证号</span>
+                        <span>银行卡号</span>
+                        <span>手机号</span>
+                    </div>
+                </div>
+                <div class="shared_main_list">
+                    <h3 class="box-title">(行政、党派)职务变动</h3>
+                    <div class="shared_main_con_table_te">
+                        <span>行政党派变动时间</span>
+                        <span>职务变动类型</span>
+                        <span>职务名称</span>
+                        <span>职务级别</span>
+                        <span>现任级别时间</span>
+                    </div>
+                </div>
+                <div class="shared_main_list">
+                    <h3 class="box-title">家庭成员</h3>
+                    <div class="shared_main_con_table">
+                        <span>姓名</span>
+                        <span>成员关系</span>
+                        <span>性别</span>
+                        <span>出生日期</span>
+                        <span>工作单位及职务</span>
+                        <span>参加工作、学习…</span>
+                        <span>离开工作、学习…</span>
+                        <span>工作状态</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        //申请记录
+        $(".title_record").on("click", function () {
+            closetabTitle("申请记录");//删除已有的数据
+            opentab("/reviewers/peoples", "申请记录", false);
+        })
+               
+    })
+
+    //创建审批
+    function cjsqfun(){
+        closetabTitle("数据共享新增");
+        opentab("/reviewers/peoplesedit", "数据共享新增", false);
+    }
+</script>

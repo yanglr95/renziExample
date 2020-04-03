@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+</head>
+<body>
+    <!-- <h3 class="box-title"></h3> -->
+    <div class="bonus-grant" style="padding: 20px;">
+        <div class="titles">
+            <h3 class="box-title">报表申请</h3>
+            <span class="record" onclick="toApplys()" style="cursor: pointer;color:blue">申请记录</span>
+        </div>
+        <!-- 新增、删除等按钮 -->
+        <div class="bs-search">
+            <div>
+              <button class="del primary-btn" id="Model">批量申请</button>
+              <div class="selected">
+                    <p class="ai-tip">i</p>
+                    <span>已选择<i>2</i>项</span>
+                </div>
+            </div>
+            <span>所属单位：</span>
+            <input id="belong" editable="false">
+            <span style="margin-left: 20px;">报表名称：</span>
+            <input id="bg-keyword" data-options="prompt:'请输入关键字'">
+            <button class="search-btn primary-btn">查 询</button>
+        </div>
+        <!-- 表格 -->
+        <div id="granted-table"></div>
+        <!-- <div id="tc"></div> -->
+        <!-- 模态框 -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="main">
+                    <div class="modal-header">
+                        <p class="m_title">报表申请</p>
+                        <span id="closeBtn" class="close">×</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="applyer">
+                            <div class="a-left">
+                                <span>*</span>
+                                <span>申请人 : </span>
+                            </div>
+                            <span class="a-right">付小小</span>
+                        </div>
+                        <div class="applyer">
+                            <div class="a-left">
+                                <span>*</span>
+                                <span>申请人岗位 : </span>
+                            </div>
+                            <span class="a-right">办公室</span>
+                        </div>
+                        <div class="a-selected">
+                            <div class="a-left">
+                                <span>*</span>
+                                <span>所选报表 : </span>
+                            </div>
+                            <div class="report-list">
+                                <p>
+                                    <span>财务报表</span>
+                                    <span>x</span>
+                                </p>
+                                <p>
+                                    <span>绩效统筹报表</span>
+                                    <span>x</span>
+                                </p>
+                                <p>
+                                    <span>考勤统计通用报表</span>
+                                    <span>x</span>
+                                </p>
+                                <p>
+                                    <span>员工管理协同分配报表</span>
+                                    <span>x</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="a-textarea">
+                            <div class="a-left">
+                                <span></span>
+                                <span>申请备注 : </span>
+                            </div>
+                            <!-- <input id="area" type="text" style="width:350px;height: 178px;" data-options="prompt:'请输入'"> -->
+                            <input class="easyui-textbox" name="description" data-options="multiline:true,prompt:'请输入'" style="width:350px;height: 178px;"></input>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="primary-btn">保存并提交</button>
+                    <button class="border-btn">保 存</button>
+                    <button class="border-btn">取 消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    function myformatter(date){
+        var y = date.getFullYear();
+        var m = date.getMonth()+1;
+        // var d = date.getDate();
+        return y+'-'+(m<10?('0'+m):m);
+    }
+    function myparser(s){
+            if (!s) return new Date();
+            var ss = (s.split('-'));
+            var y = parseInt(ss[0],10);
+            var m = parseInt(ss[1],10);
+            // var d = parseInt(ss[2],10);
+            if (!isNaN(y) && !isNaN(m)){
+                return new Date(y,m-1);
+            } else {
+                return new Date();
+            }
+        }
+    // 表格数据
+    $(function(){
+        
+        $('#belong').combobox({
+            valueField:'id',
+            textField:'text',
+            height:34,
+            data:[
+                {
+                    'id':'',//默认显示第一项
+                    'text' : '全部'
+                },
+                {
+                    'id': '1',
+                    'text': '办公厅'
+                }
+            ]
+        });
+        var grantData = [
+            {
+                check:'',
+                id:'1',
+                name:'用工情况统计表',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:0
+            },{
+                
+                id:'2',
+                name:'职工结构情况表',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:1
+            },{
+                
+                id:'3',
+                name:'职工劳动合同情况表',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:1
+            },{
+                
+                id:'4',
+                name:'企业职工情况表',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:1
+            },{
+                
+                id:'5',
+                name:'职工人数增加情况表',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:0
+            },{
+                
+                id:'6',
+                name:'企业不在岗职工基本情况表',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:1
+            },{
+                
+                id:'7',
+                name:'企业用工总量情况表（一）',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:1
+            },{
+                
+                id:'8',
+                name:'企业用工总量情况表（二）',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:0
+            },{
+                
+                id:'9',
+                name:'全资控股与代管单位用工总量计划情况表',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:1
+            },{
+                
+                id:'10',
+                name:'企业不在岗职工结构情况表',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:1
+            },
+            
+        ];
+        $('#granted-table').datagrid({ //name period unit builder build_time
+            fitColumns:true,
+            data:grantData,
+            pagination: true,
+            striped:true,
+            columns:[[
+            {field:'check',title:'',width:'10%',checkbox:true},
+                {field:'index',title:'序号',width:'5%',halign:'left',align:'left',formatter:function(value,row,index){
+                    return '<span>'+(index+1)+'</span>'
+                }},
+                {field:'name',title:'报表名称',width:'15%',halign:'left',align:'left',formatter:function(value,row,index){
+                        return '<span onclick="numClick('+row.id+')" class="primary-color" style="cursor:pointer">'+row.name+'</span>'
+                }},
+                {field:'period',title:'报告期',width:'15%',halign:'left',align:'left'},
+                {field:'unit',title:'所属单位',width:'15%',halign:'left',align:'left'},
+                {field:'builder',title:'创建者',width:'15%',halign:'left',align:'left'},
+                {field:'build_time',title:'创建时间',width:'15%',halign:'left',align:'left',formatter:function(value,row,index){
+                    // if (row.status==1) {
+                    //     return '<span></span>'
+                    // }else{
+                    //     return '<span>'+value+'</span>'
+                    // }
+                    return '<span>'+value+'</span>'
+                }},
+                {field:'handle',title:'操作',width:'10%',halign:'left',align:'left',formatter:function(value,row,index){
+                        return '<span class="primary-color applyed" style="cursor:pointer" onclick="applyClick()"> 申请 </span>'
+                }},
+            ]]
+        });
+        // $('#belong').datebox({
+        //     editable:false,
+        //     height:34,
+        // });
+        // $('#bg-dateend').datebox({
+        //     editable:false,
+        //     height:34,
+        // });
+        $('#bg-keyword').textbox({
+            height:34,
+        });
+        $('#area').textbox({    
+            multiline:'true',
+            marginLeft: '10px',
+            borderRadius: '4px'       
+        })
+    });
+    $('.applyed').click(function(){
+        showPanalAlert(480,350,'#tc','报表详情','html/DataSharing/ReportPush/ReportManage/alert/Submitted.html')
+    });
+    function routerTo(id,type){
+        console.log(id,type)
+        // if (type=='issued') {
+        //     $(location).attr('href', './alreadyIssued.html');
+        // }else{
+            $(location).attr('href', './reportApply.html');
+        // }
+        // console.log(id);
+        
+    };
+    
+    // function numClick(){
+    //     showPanalAlert(1200,600,'#reportalert','报表详情','html/DataSharing/ReportPush/ReportManage/alert/reportDetails.html')
+    // };
+    function applyClick(){
+        // opentab("DataSharing/ReportPush/ReportManage/applyList", "22", false);
+        // $(location).attr('href', './applyList.html');
+    };
+    function toApplys(){
+        closetabTitle("报表申请");
+        closeTab(this)
+        opentab("DataSharing/ReportPush/ReportManage/applyRecord", "申请记录", false);
+    }
+    (function model(){
+        /*建立模态框对象*/
+        var modalBox = {};
+        /*获取模态框*/
+        modalBox.modal = document.getElementById("myModal");
+        /*获得trigger按钮*/
+        modalBox.triggerBtn = document.getElementById("Model");
+        /*获得关闭按钮*/
+        modalBox.closeBtn = document.getElementById("closeBtn");
+        /*模态框显示*/
+        modalBox.show = function() {
+            console.log(this.modal);
+            this.modal.style.display = "block";
+        }
+        /*模态框关闭*/
+        modalBox.close = function() {
+            this.modal.style.display = "none";
+        }
+        /*当用户点击模态框内容之外的区域，模态框也会关闭*/
+        modalBox.outsideClick = function() {
+            var modal = this.modal;
+            window.onclick = function(event) {
+                if(event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+        /*模态框初始化*/
+        modalBox.init = function() {
+            var that = this;
+            this.triggerBtn.onclick = function() {
+                that.show();
+            }
+            this.closeBtn.onclick = function() {
+                that.close();
+            }
+            this.outsideClick();
+        }
+        modalBox.init();
+    })()
+</script>
+<style>
+    /*模态框*/
+.modal {
+    display: none; /* 默认隐藏 */
+    position: fixed; /* 根据浏览器定位 */
+    z-index: 999; /* 放在顶部 */
+    left: 0;
+    top: 0;
+    width: 100%; /* 全宽 */
+    height: 100%; /* 全高 */
+    overflow: auto; /* 允许滚动 */
+    background-color: rgba(0,0,0,0.4); /* 背景色 */
+}
+/*模态框内容*/
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 14% auto;
+    padding:0;
+    border: 1px solid #888;
+    width: 492px;
+    animation: topDown 0.4s; /*自定义动画，从模态框内容上到下出现*/
+}
+@keyframes topDown {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+.main{
+    width: 452px;
+    margin: 0 auto;
+    /* border: 1px solid red; */
+}
+/*模态框头部*/
+.modal-header {
+    height: 45px;
+    width: 452px;
+    line-height: 45px;
+    margin: 0 auto;
+    border-bottom:1px solid rgba(233, 231, 231, 1);  
+}
+.m_title{
+    float: left;
+    height: 45px;
+    font-size: 16px;
+    color: #333333;
+    font-weight: bold;
+}
+/*关闭X 样式*/
+.close {
+    color: #aaa;
+    float: right;
+    height: 45px;
+    font-size: 26px;
+    font-weight: bold;
+}
+.close:hover {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.modal-body{
+    width: 100%;
+    /* border: 1px solid #ff0; */
+    padding:10px 0; 
+    font-size: 14px;
+}
+.applyer{
+    width: 100%;
+    height:30px;
+    line-height: 30px;
+    font-size: 14px;
+}
+.a-left{
+    width: 90px;
+    height:30px;
+    line-height: 30px;
+    float: left;
+    text-align: right;
+    margin-right: 5px;
+}
+.a-left span:first-child{
+    color: red;
+}
+.a-left span + span{
+    color: #666666;
+}
+
+.a-right{
+    display: inline-block;
+    width: 330px;
+    /* margin-left: 5px; */
+    height:30px;
+    line-height: 30px;
+    color: #333333;
+    /* float: right; */
+}
+.a-selected{
+    width: 100%;
+    /* padding-bottom:10px; */
+    font-size: 14px;
+    overflow: hidden;
+}
+.report-list{
+    width: 357px;
+    padding: 5px 0;
+    float: right;
+    background: #fff;
+    /* border: 1px solid #000000; */
+}
+.report-list p{
+    width:220px;
+    height:24px;
+    line-height: 24px;
+    background:rgba(230,241,241,1);
+    border-radius:4px; 
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #00A09F;
+    behavior: url(../../../Employee/personDevelop/css/ie-css3.htc);
+}
+.report-list p span:first-child{
+    margin-left: 10px;
+}
+.report-list p span+span{
+    float: right;
+    margin-right: 10px;
+}
+.a-textarea{
+    margin-bottom: 65px;
+}
+.modal-footer{
+    width: 490px;
+    height: 60px;
+    position: absolute;bottom: 0;left: 0;
+    background:rgba(255,255,255,1);
+    border:1px solid rgba(241,242,248,1);
+    box-shadow:0px 0px 11px 0px rgba(136,136,136,0.22);
+    border-radius:0px 0px 4px 4px;
+}
+.modal-footer button{
+    margin-top: 12px;
+    float: right;
+}
+.modal-footer button+button{
+    margin-right:10px; 
+}
+.modal-footer button:first-child{
+    margin-right:20px; 
+}
+</style>
+</body>
+</html>

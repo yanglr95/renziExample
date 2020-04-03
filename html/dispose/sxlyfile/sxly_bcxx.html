@@ -1,0 +1,691 @@
+<style>
+    .textbox .textbox-text {
+        font-size: 12px !important;
+    }
+</style>
+<div class="easyui-layout animated fadeInRight" data-options="fit:true">
+    <div class="easyui-layout" style="width:100%;height: 100%">
+
+        <div data-options="region:'west',split:true" style="padding: 20px;position: relative;" data-spy="scroll"
+            data-target="#navbar-example">
+
+            <div class="per_west_box" style="position: relative;">
+                <div class="shared_btn_box" style="border-bottom:1px solid #eee;">
+                    <button class="main_btn" onclick="submitFormData()" style="cursor: pointer;">保 存</button>
+                    <!-- <button class="main_btn_col">提 交</button> -->
+                    <button class="main_btn_col" style="cursor: pointer;" onclick="closeBlTabs()">返 回</button>
+                </div>
+                <div>
+                    <form id="dataForm">
+                        <div style="width:100px;float: left ;height: 100%;">
+                            <div>
+                                <ul class="left_nav empNames">
+
+                                </ul>
+                                <input type="hidden" name="applyName" />
+                            </div>
+                        </div>
+                        <div class="rg" style="width: calc(100% - 100px);">
+                            <div class="per_main_list" style="margin:0;">
+                                <div class="per_main_title">基本信息</div>
+                                <div class="per_main_con">
+                                    <div class="base_info"><span>
+                                            <i style="color: #FF0000; ">*</i>
+                                            变动原因：
+                                            ：</span> <input name="changeReason" id="changeReason" style="height: 25px;">
+                                    </div>
+                                    <input name="applyMethod" type='hidden' value="1" id="applyMethod"
+                                        style="height: 25px;">
+                                    <!-- <div class="base_info"><span>
+                                            申请方式
+                                            ：</span> <input name="applyMethod" id="applyMethod" style="height: 25px;">
+                                    </div> -->
+                                    <div class="base_info"><span><i style="color: #FF0000; ">*</i>
+                                            开始时间
+                                            ：</span> <input style="height: 25px;" name="beginDate"" class="
+                                            easyui-datebox cv_time_start_edit" label=""
+                                            data-options="formatter:myformatter,parser:myparser">
+                                    </div>
+                                    <div class="base_info"><span><i style="color: #FF0000; ">*</i>
+                                            业务变动日期
+                                            ：</span>
+                                        <input style="height: 25px;" name="busiChangeDate"" class=" easyui-datebox
+                                            cv_time_start_edit" label=""
+                                            data-options="formatter:myformatter,parser:myparser">
+                                    </div>
+                                    <div class="base_info" style="width: 66%;"><span>
+                                            批准文件
+                                            ：</span> <button class="file_box main_btn">上传 <input name="uploadImage"
+                                                id="uploadImage" type="file" /></button> <b id="prevPic">上传材料.jpg
+                                            <!-- <span class='basis_x'></span> -->
+                                        </b><input type="hidden" name="attachId"></div>
+
+                                </div>
+                            </div>
+                            <div class="per_main_list" style="margin:0;">
+                                <div class="per_main_title">调入单位信息</div>
+                                <div class="per_main_con">
+                                    <div class='dept_info'><span><i style="color: #FF0000; ">*</i>
+                                            岗位
+                                            ：</span> <input data-options="width:120 , height:34" id="postName"
+                                            name="postName" class="postName" autocomplete="off">
+                                        <input type="hidden" name="postId" id="postId">
+                                    </div>
+                                    <div class='dept_info outDept_info'><span>
+                                            处室/班组
+                                            ：</span><input name="teamName" readonly /><input type="hidden"
+                                            name="teamId" /></div>
+                                    <div class='dept_info outDept_info'><span>
+                                            部门
+                                            ：</span><input name="deptName" readonly value="党委党建部"/><input type="hidden"
+                                            name="deptId" /></div>
+                                    <div class='dept_info outDept_info'><span>
+                                            单位
+                                            ：</span><input name="unitName" readonly value="国网济南供电公司本部"/><input type="hidden"
+                                            name="unitId" /></div>
+
+                                    <!-- <div class='dept_info'><span><i style="color: #FF0000; ">*</i>
+                                            人事范围
+                                            ：</span> <input data-options="width:120 , height:34" name="personnelRange"
+                                            maxlength="4">
+                                    </div>
+                                    <div class='dept_info'><span><i style="color: #FF0000; ">*</i>
+                                            人事子范围
+                                            ：</span><input data-options="width:120 , height:34" maxlength="4"
+                                            name="personnelSubRange"></div> -->
+                                    <div class='dept_info'><span><i style="color: #FF0000; ">*</i>
+                                            员工组
+                                            ：</span>
+                                        <input name="empGroup" id="empGroup" style="height: 25px;">
+                                        <span style="text-align: left;margin-left: 11px;" class="empGroup"></span></div>
+                                    <div class='dept_info'><span><i style="color: #FF0000; ">*</i>
+                                            员工子组
+                                            ：</span><input id="empSubGroup" style="height: 25px;" maxlength="2"
+                                            name="empSubGroup">
+                                        <!-- <span style="text-align: left;margin-left: 11px;"
+                                            class="empSubGroup"></span> -->
+                                    </div>
+                                    <input data-options="width:120 , height:34" type="hidden" name="busiRange">
+
+                                    <input data-options="width:120 , height:34" name="majorDataAdmin" type="hidden">
+                                    <!-- <div class='dept_info'><span>
+                                            业务范围
+                                            ：</span><input data-options="width:120 , height:34" name="busiRange">
+                                    </div>
+                                    <div class='dept_info'><span>
+                                            人资主数据处理员
+                                            ：</span><input data-options="width:120 , height:34" name="majorDataAdmin">
+                                    </div> -->
+                                    <div class='dept_info'><span><i style="color: #FF0000; ">*</i>
+                                            工资范围
+                                            ：</span> <input style="height: 25px;" name="payrollRange" id="payrollRange"
+                                            maxlength="2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="per_main_list" style="margin:0;">
+                                <div class="per_main_title">其他信息</div>
+                                <div class="per_main_con">
+                                    <div class='base_info others_info'><span><i style="color: #FF0000; ">*</i>
+                                            用工形式
+                                            ：</span> <input id="employForm" name='employForm' maxlength="1"
+                                            style="height: 25px;">
+                                    </div>
+                                    <div class='base_info others_info'><span><i style="color: #FF0000; ">*</i>
+                                            人员状态
+                                            ：</span> <input id="empStatus" style="height: 25px;" name="empStatus"
+                                            maxlength="2">
+                                    </div>
+                                    <div class='base_info others_info'><span>
+                                            职员级别
+                                            ：</span> <input style="height: 25px;" name="staffLevel" id="staffLevel"
+                                            maxlength="2">
+                                    </div>
+                                    <div class='base_info others_info'><span>
+                                            员工性质
+                                            ：</span> <input id="employNature" style="height: 25px;" name='employNature'
+                                            maxlength="1">
+                                    </div>
+                                    <div class='base_info others_info'><span>
+                                            岗位状态
+                                            ：</span> <input name="positionStatus" id="positionStatus" /></div>
+                                    <div class='base_info others_info'><span style="margin-right:10px;"> <input
+                                                type="checkbox" name="supportGroupFlag" maxlength="1"
+                                                value="1"></span>支援集体标识</div>
+                                </div>
+                            </div>
+                            <div class="per_main_list" style="margin:0;">
+                                <div class="per_main_title">调出单位信息</div>
+                                <div class="per_main_con" onselectstart="return false">
+                                    <div class='base_info others_info outDept_info'><span>
+                                            岗位
+                                            ：</span> <input name="oldPostName" id="oldPost" readonly
+                                            value="绩效管理" /><input type="hidden" name="oldPostId"></div>
+                                    <div class='base_info others_info outDept_info'><span>
+                                            处室/班组
+                                            ：</span> <input name="oldTeamName" readonly value="薪酬处"><input type="hidden"
+                                            name="oldTeamId" value="10554194"></div>
+                                    <div class='base_info others_info outDept_info'><span>
+                                            部门
+                                            ：</span> <input name="oldDeptName" readonly value="人力资源部"><input
+                                            type="hidden" name="oldDeptId" value="10554186"></div>
+                                    <div class='base_info others_info outDept_info'><span>
+                                            单位
+                                            ：</span><input name="oldUnitName" readonly value="国网天津电力"><input
+                                            type="hidden" name="oldUnitId"></div>
+                                    <div class='base_info others_info outDept_info'><span>
+                                            人事范围
+                                            ：</span> <input name="oldPersonRange" value="国网天津电力" readonly><input
+                                            type="hidden" name="oldPersonId"></div>
+                                    <div class='base_info others_info outDept_info'><span style="vertical-align: top;">
+                                            人事子范围
+                                            ：</span><input name="oldPersonSubRange" readonly value="国网天津电力"></div>
+                                    <div class='base_info others_info outDept_info'><span>
+                                            员工组
+                                            ：</span><input name="oldEmpGroup" readonly value="全资控股单位用工"></div>
+                                    <div class='base_info others_info outDept_info'><span>
+                                            员工子组
+                                            ：</span><input name="oldEmpSubGroup" readonly value="职工"></div>
+                                    <div class='base_info others_info outDept_info'><span>
+                                            工资范围
+                                            ：</span><input name="oldPayrollRange" readonly></div>
+                                    <input type='hidden' name="oldMajorDataAdmin" readonly value="每月的"><input
+                                        type="hidden" name="oldMajorDataAdmin">
+                                    <!-- <div class='base_info others_info outDept_info'><span>
+                                            人资处理人员
+                                            ：</span><input name="oldMajorDataAdmin" readonly><input type="hidden"
+                                            name="oldMajorDataAdmin"></div> -->
+                                </div>
+                            </div>
+                            <div id="orgJobTree" class='testDialog' style="position: relative;"></div>
+                            <input type="hidden" name="empId" />
+                            <input type="hidden" name="staffingId" />
+                            <input type="hidden" name="postCategory" />
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .dept_info>.textbox.combo>input {
+        border: none;
+    }
+</style>
+<script type="text/javascript">
+    var obj = $("#mainTabs").tabs("options").id;
+    var empId = obj.empId;
+    var staffingId = obj.staffingId;
+    var postCategory = obj.postCategory;
+    var empDatas = [];
+    mx.nodes = null;
+    $.ajax({
+        url: BASE_URL3 + '/empApply/empsHire',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify({ staffingId: staffingId, postCategory: postCategory }),
+        success: function (data) {
+            empDatas = data.resultValue;
+            var str = '';
+            for (var i = 0; i < empDatas.length; i++) {
+                if (empDatas[i].confirmStatus == '1') {
+                    str += '<li class="userName"  onclick="getBaseInfo(' + empDatas[i].responseEmpId + ',\'' + empDatas[i].staffingId + '\',\'' + empDatas[i].postCategory + '\')">' + empDatas[i].chnName + '<input type="hidden" value="' + empDatas[i].responseEmpId + '"></li>'
+                }
+            }
+            $(".empNames").html(str);
+            $($(".userName").eq(0)).addClass('act');
+        }
+    })
+    //改变原因下拉框
+    $('#changeReason').combobox({
+        placeholder: '',
+        valueField: "id",
+        textField: "text",
+        editable: false,
+        data: [
+            { id: "B122", text: "1.岗位竞聘-转正" },
+            { id: "B132", text: "2.岗位竞聘-试用（工资、人事关系保留原单位）" },
+            { id: "B134", text: "3.岗位竞聘-试用（工资、人事关系调入原单位）" }
+        ]
+    })
+    //申请方式下拉框
+    // $('#applyMethod').combobox({
+    //     placeholder: '',
+    //     valueField: "id",
+    //     textField: "text",
+    //     editable: false,
+    //     data: [
+    //         { id: "1", text: "个人申请" },
+    //         { id: "2", text: "组织安排" }
+    //     ]
+    // })
+    //员工组下拉框
+    $('#empGroup').combobox({
+        placeholder: '',
+        valueField: "id",
+        textField: "text",
+        editable: false,
+        data: [
+            { id: "1", text: "1.全资控股单位用工" },
+            { id: "2", text: "2.集体企业用工" },
+            { id: "3", text: "3.代管单位用工" },
+            { id: "4", text: "4.外部单位用工" }
+        ],
+        onChange: function () {
+            // var empGroupData = $('#empGroup').combobox('getText')
+            // $(".empGroup").text(empGroupData)
+        }
+    })
+    //职员级别下拉框
+    $('#staffLevel').combobox({
+        placeholder: '',
+        valueField: "id",
+        textField: "text",
+        editable: false,
+        data: [
+            { id: "10", text: "1.领导班子" },
+            { id: "11", text: "2.副总师（助理）" },
+            { id: "12", text: "3.部门负责人（正职）" },
+            { id: "13", text: "4.部门负责人（副职）" },
+            { id: "14", text: "5.部门内设机构负责人（正职）" },
+            { id: "15", text: "6.部门内设机构负责人（副职）" },
+            { id: "16", text: "7.一级职员" },
+            { id: "17", text: "8.二级职员" },
+            { id: "18", text: "9.三级职员" },
+            { id: "19", text: "10.四级职员" },
+            { id: "20", text: "11.五级职员" },
+            { id: "21", text: "12.六级职员" },
+            { id: "22", text: "13.七级职员" },
+            { id: "23", text: "14.八级职员" },
+            { id: "24", text: "15.其他" }
+        ],
+        onChange: function () {
+        }
+    })
+    //岗位状态下拉框
+    $('#positionStatus').combobox({
+        placeholder: '',
+        valueField: "id",
+        textField: "text",
+        editable: false,
+        data: [
+            { id: "1", text: "1.在岗" },
+            { id: "2", text: "2.不在岗" }
+        ],
+        onChange: function () {
+        }
+    })
+    //工资范围下拉框
+    $('#payrollRange').combobox({
+        placeholder: '',
+        valueField: "id",
+        textField: "text",
+        editable: false,
+        data: [
+            { id: "01", text: "1.不核算工资" },
+            { id: "02", text: "2.每半月" },
+            { id: "03", text: "3.每周的" },
+            { id: "04", text: "4.每两周" },
+            { id: "99", text: "5.非工资发放相关" },
+        ],
+        onChange: function () {
+        }
+    })
+
+    // $('.postName').click(function () {
+    //     //showPanalAlert(300, 400, '#orgTree', '岗位', 'html/dispose/sxlyfile/sxly_bcxx1.html')
+    //     var detail = $('#orgJobTree').dialog({
+    //         title: '岗位',
+    //         width: 300,
+    //         height: 400,
+    //         closed: false,
+    //         cache: true,
+    //         collapsible: true,
+    //         href: 'html/dispose/sxlyfile/job_select.html',
+    //         modal: true,
+    //         onClose: function () {
+
+    //         }
+    //     });
+    // })
+
+    function setData(data) {
+        $("input[name=postName]").val(data.text)
+        $("input[name=postId]").val(data.id)
+        $("input[name=deptName]").val(data.parentName)
+        $("input[name=unitName]").val(data.topName)
+    }
+    //员工子组下拉框
+    $('#empSubGroup').combobox({
+        placeholder: '',
+        valueField: "id",
+        textField: "text",
+        editable: false,
+        data: [
+            { id: "10", text: "1.职工" },
+            { id: "11", text: "2.集体职工" },
+            { id: "12", text: "3.集体企业聘用职工" },
+            { id: "20", text: "4.农电用工（直签合同）" },
+            { id: "30", text: "5.劳务派遣" },
+            { id: "40", text: "6.非全日制" },
+            { id: "50", text: "7.外部单位业务委托" },
+            { id: "60", text: "8.业务委托" },
+            { id: "90", text: "9.其他从业人员" }
+        ],
+        onChange: function () {
+            var empSubGroupData = $('#empSubGroup').combobox('getText')
+            $(".empSubGroup").text(empSubGroupData)
+        },
+        onLoadSuccess: function () {
+        }
+    })
+    //员工组
+    var empGroupInfo = $('#empGroup').combobox('getData');
+    if (empGroupInfo.length > 0) {
+        $('#empGroup').combobox('select', empGroupInfo[0].id);
+    }
+    var empSubGroupInfo = $('#empSubGroup').combobox('getData');
+    if (empSubGroupInfo.length > 0) {
+        $('#empSubGroup').combobox('select', empSubGroupInfo[0].id);
+    }
+    //工资范围
+    var payrollRangeInfo = $('#payrollRange').combobox('getData');
+    if (payrollRangeInfo.length > 0) {
+        $('#payrollRange').combobox('select', payrollRangeInfo[0].id);
+    }
+
+    // //用功形式下拉框
+    // $('#employForm').combobox({
+    //     placeholder: '',
+    //     valueField: "id",
+    //     textField: "text",
+    //     editable: false,
+    //     data: [
+    //         { id: "10", text: "1.职工" },
+    //         { id: "11", text: "2.集体职工" },
+    //         { id: "12", text: "3.集体企业聘用职工" },
+    //         { id: "20", text: "4.农电用工（直签合同）" },
+    //         { id: "30", text: "5.劳务派遣" },
+    //         { id: "40", text: "6.非全日制" },
+    //         { id: "50", text: "7.外部单位业务委托" },
+    //         { id: "60", text: "8.业务委托" },
+    //         { id: "90", text: "9.其他从业人员" }
+    //     ],
+    //     onChange: function () {
+    //     }
+    // })
+    //用功形式下拉框
+    $('#employForm').combobox({
+        placeholder: '',
+        valueField: "id",
+        textField: "text",
+        editable: false,
+        data: [
+            { id: "1", text: "1.长期职工" },
+            { id: "2", text: "2.短期职工" },
+            { id: "3", text: "3.农电用工（直签合同）" },
+            { id: "4", text: "4.劳务派遣用工" },
+            { id: "5", text: "5.业务委托用工" },
+            { id: "6", text: "6.非全日制用工" },
+            { id: "9", text: "7.其他从业人员" }
+        ]
+    })
+    //员工性质下拉框
+    $('#employNature').combobox({
+        placeholder: '',
+        valueField: "id",
+        textField: "text",
+        editable: false,
+        data: [
+            { id: "1", text: "1.原中央全民" },
+            { id: "2", text: "2.原地方全民" },
+            { id: "3", text: "3.原集体工" },
+            { id: "4", text: "4.原农电工" },
+            { id: "5", text: "5.非员工" },
+            { id: "6", text: "6.市场化聘用" },
+            { id: "8", text: "7.外部派驻" },
+            { id: "9", text: "8.其他" }
+        ],
+        onChange: function () {
+            var employNatureData = $('#employNature').combobox('getText')
+            $(".employNature").text(employNatureData)
+        }
+    })
+    //人员状态下拉框
+    $('#empStatus').combobox({
+        placeholder: '',
+        valueField: "id",
+        textField: "text",
+        editable: false,
+        data: [
+            { id: "10", text: "1.在职" },
+            { id: "11", text: "2.在岗工作" },
+            { id: "12", text: "3.入职培养期" },
+            { id: "13", text: "4.待岗" },
+            { id: "14", text: "5.内部退养" },
+            { id: "15", text: "6.长期病休假" },
+            { id: "16", text: "7.长学" },
+            { id: "17", text: "8.外借" },
+            { id: "18", text: "9.派外工作" },
+            { id: "19", text: "10.其他在职" },
+            { id: "20", text: "11.离职" },
+            { id: "21", text: "12.调出" },
+            { id: "22", text: "13.退休" },
+            { id: "23", text: "14.离休" },
+            { id: "24", text: "15.协商解除劳动合同" },
+            { id: "25", text: "16.终止劳动合同" },
+            { id: "26", text: "17.劳动者主张解除劳动合同" },
+            { id: "27", text: "18.用人单位主张解除劳动合同" },
+            { id: "29", text: "19.其他离职" },
+            { id: "30", text: "20.死亡" }
+        ],
+        onChange: function () {
+        }
+    })
+
+    //根据ID查询基本信息
+    //$(".userName").click();
+    getBaseInfo(empId, staffingId, postCategory);
+    function getBaseInfo(empId, staffingId, postCategory) {
+        var doms = $('.userName');
+        doms.each(function (index, item) {
+            if ($(this).find('input').val() == empId) {
+                console.log($(this).find('input').val())
+                $(this).addClass('act').siblings().removeClass('act');
+            }
+
+        });
+        $.ajax({
+            url: BASE_URL3 + '/empApply/queryFilter?empId=' + empId + '&&staffingId=' + staffingId + '&&postCategory=' + postCategory,
+            success: function (data) {
+                $('#dataForm').form('load', {
+                    changeReason: data.resultValue.changeReason,
+                    //   applyMethod: data.resultValue.applyMethod,
+                    beginDate: timeType(data.resultValue.beginDate),
+                    busiChangeDate: timeType(data.resultValue.busiChangeDate),
+                    postName: data.resultValue.postName,
+                    postId: data.resultValue.postId,
+                    teamName: data.resultValue.teamName,
+                    teamId: data.resultValue.teamId,
+                //    deptName: data.resultValue.deptName,
+                    deptId: data.resultValue.deptId,
+                 //   unitName: data.resultValue.unitName,
+                    unitId: data.resultValue.unitId,
+                    // personnelRange: data.resultValue.personnelRange,
+                    // personnelSubRange: data.resultValue.personnelSubRange,
+                    empGroup: data.resultValue.empGroup,
+                    empSubGroup: data.resultValue.empSubGroup,
+                    busiRange: data.resultValue.busiRange,
+                    majorDataAdmin: data.resultValue.majorDataAdmin,
+                    payrollRange: data.resultValue.payrollRange,
+                    employForm: data.resultValue.employForm,
+                    empStatus: data.resultValue.empStatus,
+                    staffLevel: data.resultValue.staffLevel,
+                    employNature: data.resultValue.employNature,
+                    positionStatus: data.resultValue.positionStatus,
+                    supportGroupFlag: data.resultValue.supportGroupFlag,
+                    // oldPostName: data.resultValue.oldPostName,
+                    // oldPostId: data.resultValue.oldPostId,
+                    // oldTeamName: data.resultValue.oldTeamName,
+                    // oldTeamId: data.resultValue.oldTeamId,
+                    // oldDeptName: data.resultValue.oldDeptName,
+                    // oldDeptId: data.resultValue.oldDeptId,
+                    // oldUnitName: data.resultValue.oldUnitName,
+                    // oldUnitId: data.resultValue.oldUnitId,
+                    // oldPersonRange: data.resultValue.oldPersonRange,
+                    oldPersonRange: '国网天津电力',
+                    oldPersonId: data.resultValue.oldPersonId,
+                    oldPersonSubRange: '国网天津电力',
+                    oldEmpGroup: '全资控股单位用工',
+                    oldEmpSubGroup: '职工',
+                    oldPayrollRange: '不核算工资',
+                    oldMajorDataAdmin: data.resultValue.oldMajorDataAdmin,
+                    empId: data.resultValue.empId,
+                    staffingId: data.resultValue.staffingId,
+                    postCategory: data.resultValue.postCategory,
+                    applyName: data.resultValue.applyName
+                });
+                // $("#userName").text(data.resultValue.applyName);
+                // console.log(data.resultValue.applyName)
+            },
+            error: function (data) {
+            }
+        })
+    }
+    $(function () {
+        $('#uploadImage').change(function (e) {
+            var e = event || widow.event;
+            if (navigator.userAgent.indexOf('MSIE 8') >= 0 || navigator.userAgent.indexOf('MSIE 9') >= 0) {
+                $(this).select();
+                window.parent.document.body.focus();
+                var realpath = document.selection.createRange().text;
+                $(this).parent().css("filter", "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true',src=\"" + realpath + "\",sizingMethod=scale)");
+            }
+            else {
+                var file = e.target.files[0];
+                var reader = new FileReader();
+                var targetId = e.target.id;
+                reader.readAsDataURL(file);
+                reader.onload = function () {
+                    var picString = reader.result;
+                    console.log(file.name)
+                    $("#prevPic").html(file.name).show().attr("data-bas", picString);
+                };
+            }
+        });
+        var data = [
+            {
+                num: '20190382',
+                name: '月度',
+                date: '2019年11月',
+                total: '130,000,000',
+                endTime: '2019.06.03',
+                state: '无',
+                cfdate: '2019.06.03',
+                fhdate: '2019.06.03',
+                ccdate: '2019.06.03',
+                reason: '无',
+                adress: '详情',
+                file: '无'
+            },
+        ]
+        $('#peoplesDetail').datagrid({
+            height: 360,
+            width: '100%',
+            fitColumns: true,
+            //pagination: true,
+            striped: true,
+            data,
+            columns: [[{ field: 'cfdate', title: '称谓', halign: 'center', align: 'left' },
+            { field: 'fhdate', title: '姓名', halign: 'center', align: 'left' },
+            { field: 'ccdate', title: '年龄', halign: 'center', align: 'left' },
+            { field: 'reason', title: '政治面貌', halign: 'center', align: 'left' },
+            {
+                field: 'adress', title: '工作单位及主要职务', halign: 'center', align: 'left', formatter(value, row, index) {
+                    return "90"
+                }
+            }
+            ]]
+        });
+        $(".cv_data").on("click", function () {
+            $(".imageGallery_box").show()
+        })
+    });
+
+
+    function form_json($form) {
+        var params = $form.serializeArray();
+        var params_obj = {};
+        for (var i = 0; i < params.length; i++) {
+            params_obj[params[i].name] = params[i].value;
+        }
+        return params_obj;
+    }
+
+    function submitFormData() {
+        var formData = form_json($('#dataForm'));
+        if (!formData.changeReason) {
+            $.messager.alert("提示信息", "变动原因不能为空");
+            return
+        }
+        if (!formData.beginDate) {
+            $.messager.alert("提示信息", "开始时间不能为空");
+            return
+        }
+        if (!formData.busiChangeDate) {
+            $.messager.alert("提示信息", "业务变动日期不能为空");
+            return
+        }
+        if (!formData.postName) {
+            $.messager.alert("提示信息", "岗位不能为空");
+            return
+        }
+        // if (!formData.personnelRange) {
+        //     $.messager.alert("提示信息", "人事范围不能为空");
+        //     return
+        // }
+        // if (!formData.personnelSubRange) {
+        //     $.messager.alert("提示信息", "人事子范围不能为空");
+        //     return
+        // }
+        if (!formData.empGroup) {
+            $.messager.alert("提示信息", "员工组不能为空");
+            return
+        }
+        if (!formData.empSubGroup) {
+            $.messager.alert("提示信息", "员工子组不能为空");
+            return
+        }
+        if (!formData.payrollRange) {
+            $.messager.alert("提示信息", "工资范围不能为空");
+            return
+        }
+        if (!formData.employForm) {
+            $.messager.alert("提示信息", "用工形式不能为空");
+            return
+        }
+
+        $.ajax({
+            url: BASE_URL3 + '/empApply/addFilter',
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+            success: function (data) {
+                if (data.resultCode == "200") {
+                    $.messager.alert("提示信息", "保存成功");
+                } else {
+                    $.messager.alert("提示信息", "保存失败");
+                }
+            }
+        })
+    }
+
+    function closeBlTabs() {
+        closetabTitle('筛选录用列表');
+        closetabTitle('补充人员信息');
+        opentab("/dispose/sxlyfile/sxly_xzsxry", "筛选录用列表", false, staffingId)
+    }  
+</script>

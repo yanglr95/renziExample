@@ -1,0 +1,30 @@
+<div id="delete" class="delete">
+    <p class="tips">确认要删除该条记录吗？</p>
+    <button class="border-btn" onclick="sure(this)">确认</button>
+    <button class="border-btn" onclick="cancel(this)">取消</button>
+</div>
+<script>
+$(function(){
+})
+    function sure(e){
+        //奖金下发-index-删除               
+            $.ajax({
+                type:'get',
+                url:BASE_URL+'/rewardIssueMA/delete',
+                data:{
+                    pacakgeId:jjxfdelId
+                },
+                success:function(data){
+                    console.log(data,'奖金下发-index-删除')
+                    if(data.resultCode == '200'){
+                        tablelist();
+                        hideAlert(e);
+                    }
+                    
+                }
+            });
+    }
+    function cancel(e){
+        hideAlert(e);
+    }
+</script>

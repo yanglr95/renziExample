@@ -1,0 +1,228 @@
+<div class="table_seach" style="height: 36px;margin: 10px 0;">
+        <!-- <div class="table_seach_left">
+            <div class="save_group_seach">
+                <button class="save_group_add">批量通过</button>
+                <button class="save_group_col">批量驳回</button>
+                <span class="index_ok">已选择 0 项</span>
+            </div>
+        </div> -->
+        <div class="table_seach_right" style="line-height: 30px;">
+            <!-- 下拉选择 -->
+            <span>申请部门:</span>
+            <input id="department" editable="false" style="float: left;margin-right: 10px;">
+            <!-- 日期选择 -->
+            <div style="float: right">
+                <span>申请日期:</span>
+                <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                    data-options="editable:false,formatter:myformatter,parser:myparser"
+                    style="width:140px;height: 34px;">
+                至
+                <input class="easyui-datebox cv_time_end_edit" label=""
+                    data-options="editable:false,formatter:myformatter,parser:myparser"
+                    style="width:140px;height: 34px;">
+                <button>查询</button>
+                <!-- <button class="search-btn primary-btn">查询</button> -->
+            </div>
+        </div>
+    </div>
+    <table id="recordTable2" class="easyui-datagrid" data-options="singleSelect:true,collapsible:true,"
+        style="border: 1px solid #eee;"></table>
+    
+    <script type="text/javascript">
+        $(function () {
+            $('#department').combobox({
+                    valueField:'id',
+                    textField:'text',
+                    height: 34,
+                    data: [
+                    {
+                        'id': '',//默认显示第一项
+                        'text': '全部'
+                    },
+                    {
+                        'id': '03000771',
+                        'text': '营销部'
+                    },
+                    {
+                        'id': '03000768',
+                        'text': '财务部'
+                    },
+                    {
+                        'id': '03000116',
+                        'text': '技术管理部'
+                    },
+                    {
+                        'id': '03001176',
+                        'text': '客户服务中心'
+                    },
+                    {
+                        'id': '03000694',
+                        'text': '人力资源部'
+                    }
+                ]
+            });
+            
+            
+            $('#recordTable2').datagrid({
+                method: 'get',
+                height: $(window).height()-300,
+                width: '100%',
+                fitColumns: true,
+                pagination: true,
+                striped: true,
+                url: BASE_URL+'/sharingApprove/queryApproveList',
+                // url: BASE_URL3+'/sharingApprove/queryApproveList',
+                queryParams: {
+                    'status': 5,
+                    'organId': '',
+                    'startTime': '',
+                    'endTime': ''
+                },
+                selectOnCheck: false,
+                checkOnSelect: false,
+                onLoadSuccess: function (data) {
+                    var scrolly = 0
+                    $(".scroll_record").scroll(function (x) {
+                        scrolly = $(this).scrollTop()
+                    });
+                    $(".easyui-tooltipa").hover(function (e) {
+    
+                        $(".more_and_more").show()
+                        var hoverDomObj = e.target;
+    
+                        var top = $(hoverDomObj).position().top
+                        var left = $(hoverDomObj).position().left
+                        console.log(top)
+                        if (scrolly > top - 50) {
+                            $(".more_and_more").css({
+                                top: top + 85 + 40,
+                                left: left - 150,
+                            })
+                        } else {
+                            $(".more_and_more").css({
+                                top: top + 85 - 140,
+                                left: left - 150,
+                            })
+                        }
+    
+                    }, function () {
+                        $(".more_and_more").hide()
+                    })               
+                },
+                
+                onCheckAll: function () {
+                    InsexFun()
+                },
+                onUncheckAll: function () {
+                    InsexFun()
+                },
+                onCheck: function (index, row) {
+                    InsexFun()
+                },
+                onUncheck: function () {
+                    InsexFun()
+                },
+                columns: [
+                    [
+                    {
+                        field: 'index', title: '序号', width: '5%', halign: 'left', align: 'left', formatter(value, row, index) {
+                            return `<span>${index + 1}</span>`
+                        }
+                    },
+                    { field: 'batchNo', title: '申请单号', width: '7%', halign: 'left', align: 'left',formatter(value, row, index) {
+                             return "<span class='view' onclick='yspxqalert("+row.batchNo+")' style='color:rgb(24,98,223);cursor:pointer'>"+value+"</span> "
+                        }},
+                    { field: 'userName', title: '申请人', width: '5%', halign: 'left', align: 'left' },
+                    { field: 'organName', title: '申请部门', width: '10%', halign: 'left', align: 'left' },
+                    { field: 'applySystemName', title: '系统名称', width: '10%', halign: 'left', align: 'left' },
+                    { field: 'beginDate', title: '申请日期', width: '7%', halign: 'left', align: 'left',
+                        formatter(value, row, index) { 
+                            if(value){
+                                return '<span>'+timeType(value)+'</span>'
+                            }else{
+                                return ''
+                            }
+                        } 
+                     },
+                    { field: 'authDate', title: '授权时间', width: '7%', halign: 'left', align: 'left', 
+                        formatter(value, row, index) { 
+                            if(value){
+                                return '<span>'+timeType(value)+'</span>'
+                            }else{
+                                return ''
+                            }
+                        } 
+                    },
+                    { field: 'transFrequency', title: '传输频率', width: '5%', halign: 'left', align: 'left',
+                        formatter: function(value, row, index){
+                            if(value == '1'){
+                                return '实时更新'
+                            }else if(value == '2'){
+                                return '单一'
+                            }else if(value == '3'){
+                                return '每日一次'
+                            }
+                        }
+                     },
+                    {
+                        field: 'file', title: '附件', width: '6%', halign: 'left', align: 'left',
+                        formatter(value, row, index) { return ' <a href="#" title="This is the tooltip message." class="easyui-tooltipa"><img style="width:12px" src="/assets/home/icon_edit.png"/></a>'; }
+                    },
+                    { field: 'remark', title: '备注内容', width: '7%', halign: 'left', align: 'left' },
+                    { field: 'approveDate', title: '审批日期', width: '6%', halign: 'left', align: 'left',
+                        formatter(value, row, index) { 
+                            if(value){
+                                return '<span>'+timeType(value)+'</span>'
+                            }else{
+                                return ''
+                            }
+                        } 
+                     },
+                    { field: 'applyStatus', title: '状态', width: '5%', halign: 'left', align: 'left' ,
+                        formatter: function(value, row, index){
+                                if(value == '3'){
+                                    return '已保存'
+                                }else if(value == '4'){
+                                    return '已提交'
+                                }else if(value == '5'){
+                                    return '已通过'
+                                }else if(value == '7'){
+                                    return '已驳回'
+                                }else if(value == '6'){
+                                    return '已作废'
+                                }
+                            }
+                    },
+                    { field: 'interfaceAddress', title: '接口地址', width: '11%', halign: 'left', align: 'left',
+                        formatter: function(value, row, index){
+                            if(row.applyStatus == '5'){
+                                    return '163.168.192:8899'
+                                }else{
+                                    return ''
+                                }
+                        }
+                     },
+                    {
+                        field: 'handle', title: '操作', width: '3%', halign: 'left', align: 'left', formatter(value, row, index) {
+                            return "<span onclick='' style='color:rgb(24,98,223);cursor:pointer'>作废</span> "
+                        }
+                    }
+                ]]
+            });
+    
+        });
+
+
+        //点击-单号-跳转详情页
+        function yspxqalert(id){
+            closetabTitle("审批详情");//删除已有的数据
+            opentab("sharedaudit/alert/yspxq", "审批详情", false, id);
+        }
+
+        //获取已选个数
+        function InsexFun() {
+            var len = $('#recordTable').datagrid('getChecked').length
+            $(".index_ok").html("已选择 " + len + " 项")
+        }
+    
+    </script>

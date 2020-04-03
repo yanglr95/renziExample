@@ -1,0 +1,23 @@
+{
+    "id": 4,
+    "menuText": "专业协同",
+    "secondary": true,
+    "list": [
+        {
+            "menuText": "奖金分配",
+            "secondary": true,
+            "list":[
+                {
+                    "menuText": "奖金下发",
+                    "link": "BusinessManagement/bonusShares/BonusGrant/index",
+                    "secondary": false
+                },
+                {
+                    "menuText": "奖金分配",
+                    "link": "BusinessManagement/bonusShares/BusinessManagement/index",
+                    "secondary": false
+                }
+            ]
+        }
+    ]
+}

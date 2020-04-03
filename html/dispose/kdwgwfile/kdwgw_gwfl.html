@@ -1,0 +1,782 @@
+<div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+    <div class="easyui-layout" style="width:100%;height: 100%">
+
+        <div data-options="region:'center'" style="padding: 20px 20px 0 20px;position: relative;background: #fff;">
+
+            <div class="shared_box" style="position: relative;">
+                <div class="shared_btn_box">
+                    <button class="main_btn" id="sub_btn">提  交</button>
+                    <button class="main_btn_col" id="creat_btn">保  存</button>
+                    <button class="main_btn_col" onclick="closetabTitle('创建配置单')">关  闭</button>
+                    <div class="order_status">
+                        <span class="s-step s-step0 active">
+                            <b>
+                                <b>1</b>
+                            </b>
+                            <p></p>
+                            <em>岗位分类</em>
+                        </span>
+                        <span class="s-step s-step1">
+                            <b>
+                                <b></b>
+                            </b>
+                            <p></p>
+                            <em>任职要求</em>
+                        </span>
+                        <span class="s-step s-step2 ">
+                            <b>
+                                <b></b>
+                            </b>
+                            <em>提交</em>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+            <!-- <p style="margin: 20px 15px 0;">申请单位：<span>红山县公司本部</span></p> -->
+            <div style="line-height: 60px;">
+                <span><span style="color: #FF0000;margin: 0 5px">*</span>配置单名称:</span>
+                <input id="d_name" class="easyui-textbox" style="width:140px;height: 25px;">
+                <div style="display: inline-block;margin-right: 10px;margin-left: 10px;">
+                    <span><span style="color: #FF0000;margin: 0 5px">*</span>报名有效期:</span>
+                    <input class="easyui-datebox cv_time_start_edit" id="k_date" label="" placeholder="开始"
+                           data-options="formatter:myformatter,parser:myparser"
+                           style="width:140px;height: 25px;">
+                    至
+                    <input class="easyui-datebox cv_time_end_edit" id="j_date" label=""
+                           data-options="formatter:myformatter,parser:myparser"
+                           style="width:140px;height: 25px;">
+                </div>
+                <span style="margin-right: 10px;"><span style="color: #FF0000;margin: 0 5px">*</span>发布层级:</span>
+                <input id="configureLevel" editable="false">
+            </div>
+            <div>
+                <div style="width:300px;float: left">
+                    <div class="peoples_west onListTree" id="onListTree" >
+                        <div style="margin-bottom: 10px;width: 100%;font-size: 16px;font-weight: bold;height: 36px;display: flex;align-items: center;justify-content: space-between;">岗位分类
+                            <input style="float: right;width: 200px;" class="input_seach" placeholder="请输入关键字">
+                        </div>
+                        <div id="orgTree"></div>
+                        <ul class="easyui-tree listTree">
+                            <!-- <li>
+                                <span>上海电力</span>
+                                <ul>
+                                    <li data-options="state:'closed'">
+                                        <span>B层级菜单</span>
+                                        <ul>
+                                            <li>
+                                                <span>c层级菜单</span>
+                                            </li>
+                                            <li>
+                                                <span>Wife</span>
+                                            </li>
+                                            <li>
+                                                <span>Company</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <span>Program Files</span>
+                                        <ul>
+                                            <li>Intel</li>
+                                            <li>Java</li>
+                                            <li>Microsoft Office</li>
+                                            <li>Games</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li> -->
+                        </ul>
+                    </div>
+
+                </div>
+                <div style="width:calc(100% - 300px);float: left;padding-top: 20px">
+                    <div style="display: flex;justify-content: space-between;font-size:16px;font-weight: bold;padding-left: 20px">
+                        <span>已选择</span>
+                        <span style="color:#00A09F" id="batch_delete">批量删除</span>
+                        <span style="color:#00A09F" id="seleteAll">全选</span>
+                    </div>
+
+                    <div class="content_box">
+                        
+                        <!-- <div style="display: inline-block;width: calc(50% - 22px);background: #F4F9F8;height: 90px;border-radius:4px;padding:20px;margin: 20px 0 0 20px;">
+                            <div style="display: flex;justify-content: space-between;">
+                                <span style="font-size:14px;font-weight: bold">档案管理</span>
+                                <img src="../../assets/home/shezhi@2x.png" class="g_delete">
+                            </div>
+                            <div style="display: flex;justify-content: space-between;line-height: 45px;">
+                                <span style="font-size:14px;font-weight: bold;margin-right: 5px;">
+                                    任职要求：<span style="color: #00A09F">已完善</span>
+                                </span>
+                                <div>
+                                    <span style="font-size:14px;font-weight: bold">需求人数：<span style="color: #00A09F">1</span></span>
+                                    <img src="../../assets/home/icon_quan_sm.png" class="selete_check">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: inline-block;width: calc(50% - 22px);background: #F4F9F8;height: 90px;border-radius:4px;padding:20px;margin: 20px 0 0 20px;">
+                                <div style="display: flex;justify-content: space-between;">
+                                    <span style="font-size:14px;font-weight: bold">档案管理</span>
+                                    <img src="../../assets/home/shezhi@2x.png" class="g_delete">
+                                </div>
+                                <div style="display: flex;justify-content: space-between;line-height: 45px;">
+                                    <span style="font-size:14px;font-weight: bold;margin-right: 5px;">
+                                        任职要求：<span style="color: #00A09F">已完善</span>
+                                    </span>
+                                    <div>
+                                        <span style="font-size:14px;font-weight: bold">需求人数：<span style="color: #00A09F">1</span></span>
+                                        <img src="../../assets/home/icon_quan_sm.png" class="selete_check">
+                                    </div>
+                                </div>
+                            </div> -->
+
+                        <!-- <div style="display: inline-block;width: calc(50% - 22px);background: #F4F9F8;height: 90px;border-radius:4px;padding:20px;margin: 20px 0 0 20px;">
+                            <div style="display: flex;justify-content: space-between;">
+                                <span style="font-size:14px;font-weight: bold">档案管理</span>
+                                <img src="../../assets/home/shezhi@2x.png" style="width: 20px;">
+                            </div>
+                            <div style="display: flex;justify-content: space-between;line-height: 45px;">
+                            <span style="font-size:14px;font-weight: bold">
+                                任职要求：<span style="color: #00A09F">已完善</span>
+                            </span>
+                                <div>
+                                <span style="font-size:14px;font-weight: bold">
+                                    需求人数：<span style="color: #00A09F">1</span>
+                                </span>
+                                    <img src="../../assets/home/icon_quan_ok.png" style="width: 20px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: inline-block;width: calc(50% - 22px);background: #F4F9F8;height: 90px;border-radius:4px;padding:20px;margin: 20px 0 0 20px;">
+                            <div style="display: flex;justify-content: space-between;">
+                                <span style="font-size:14px;font-weight: bold">档案管理</span>
+                                <img src="../../assets/home/shezhi@2x.png" style="width: 20px;">
+                            </div>
+                            <div style="display: flex;justify-content: space-between;line-height: 45px;">
+                            <span style="font-size:14px;font-weight: bold">
+                                任职要求：<span style="color: #00A09F">已完善</span>
+                            </span>
+                                <div>
+                                <span style="font-size:14px;font-weight: bold">
+                                    需求人数：<span style="color: #00A09F">1</span>
+                                </span>
+                                    <img src="../../assets/home/shezhi@2x.png" style="width: 20px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: inline-block;width: calc(50% - 22px);background: #F4F9F8;height: 90px;border-radius:4px;padding:20px;margin: 20px 0 0 20px;">
+                            <div style="display: flex;justify-content: space-between;">
+                                <span style="font-size:14px;font-weight: bold">档案管理</span>
+                                <img src="../../assets/home/shezhi@2x.png" style="width: 20px;">
+                            </div>
+                            <div style="display: flex;justify-content: space-between;line-height: 45px;">
+                            <span style="font-size:14px;font-weight: bold">
+                                任职要求：<span style="color: #00A09F">已完善</span>
+                            </span>
+                                <div>
+                                <span style="font-size:14px;font-weight: bold">
+                                    需求人数：<span style="color: #00A09F">1</span>
+                                </span>
+                                    <img src="../../assets/home/shezhi@2x.png" style="width: 20px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: inline-block;width: calc(50% - 22px);background: #F4F9F8;height: 90px;border-radius:4px;padding:20px;margin: 20px 0 0 20px;">
+                            <div style="display: flex;justify-content: space-between;">
+                                <span style="font-size:14px;font-weight: bold">档案管理</span>
+                                <img src="../../assets/home/shezhi@2x.png" style="width: 20px;">
+                            </div>
+                            <div style="display: flex;justify-content: space-between;line-height: 45px;">
+                            <span style="font-size:14px;font-weight: bold">
+                                任职要求：<span style="color: #00A09F">已完善</span>
+                            </span>
+                                <div>
+                                <span style="font-size:14px;font-weight: bold;margin-right: 5px;">
+                                    需求人数：<span style="color: #00A09F">1</span>
+                                </span>
+                                    <img src="../../assets/home/shezhi@2x.png" style="width: 20px;">
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div style="float: right;margin-top: 76px; display:none;" class="d_c">
+                        <button class="main_btn" id="s_c">删  除</button>
+                        <button class="main_btn" id="q_x">取  消</button>
+                    </div>
+                    <div style="float: right;margin-top: 76px;" class="d_o_s">
+                        <input type="hidden" id="next_step_id">
+                        <button class="main_btn" id="next_step" name="0">下一步</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</div>
+
+<style>
+    /*进度条start*/
+
+    .order_status {
+        /*height: 175px;*/
+        float: right;
+    }
+
+    .order_status .s-step {
+        float: left;
+        width: 115px;
+        height: 60px;
+        position: relative;
+    }
+
+    /*.order_status .s-step:nth-child(3n) {
+        width: 0px;
+    }*/
+
+    .order_status .s-step.active {
+        float: left;
+        width: 115px;
+        height: 60px;
+        position: relative;
+    }
+
+    .order_status .s-step>b>b.active {
+        background-color: #22AEA8;
+        text-align: center;
+        line-height: 26px;
+        color: #fff;
+    }
+
+    .order_status .s-step>b {
+        display: block;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        position: absolute;
+        margin-left: 47px;
+        top: -10px;
+    }
+
+    .order_status .s-step>b>b {
+        display: block;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #B5BBCE;
+    }
+
+    .order_status .s-step>p {
+        width: 100px;
+        border: 1px dashed #B5BBCE;
+        top: 3px;
+        position: absolute;
+        left: 73px;
+    }
+
+    .order_status .s-step>p.active {
+        width: 100px;
+        border: 1px dashed #22AEA8;
+        top: 0px;
+        position: absolute;   
+    }
+
+    .order_status .s-step em {
+        display: block;
+        padding-top: 20px;
+        font-style: normal;
+        text-align: center;
+        color: #B5BBCE;
+        font-size: 12px;
+        /*margin-left: -65px;*/
+        width: 130px
+    }
+    /*步骤条end*/
+
+    .g_delete{
+        width: 20px;
+    }
+    #seleteAll{
+        display: none;
+    }
+    .selete_check{
+        display: none;
+        width: 20px;
+    }
+    .addIcon{
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 20px;
+        text-align: center;
+    }
+
+</style>
+
+<script type="text/javascript">
+    $(function(){
+       
+        var resultValue = [{
+						"id": "A",
+						"parentKey": "",
+                        "text": "经营类",
+                        'state':'open'
+					},
+					{
+						"id": "B",
+						"parentKey": "",
+                        "text": "管理类",
+                        'state':'closed'
+					},
+					{
+						"id": "C",
+						"parentKey": "",
+                        "text": "技术类",
+                        'state':'closed'
+					},
+					{
+						"id": "D",
+						"parentKey": "",
+                        "text": "技能类",
+                        'state':'closed'
+					},
+					{
+						"id": "E",
+						"parentKey": "",
+                        "text": "服务类",
+                        'state':'closed'
+					},
+					{
+			            "id": "A-01",
+			            "parentKey": "A",
+			            "text": "单位负责人"
+			      	},
+			      	{
+			            "id": "B-01",
+			            "parentKey": "B",
+			            "text": "部门负责人"
+			        },
+			        {
+			            "id": "B-02",
+			            "parentKey": "B",
+			            "text": "人力资源管理"
+			        },
+			        {
+			            "id": "B-03",
+			            "parentKey": "B",
+			            "text": "财务资产管理"
+			        },,
+			        {
+			            "id": "B-24",
+			            "parentKey": "B",
+			            "text": "国际业务管理"
+			        },
+			        {
+			            "id": "B-25",
+			            "parentKey": "B",
+			            "text": "其他管理"
+			        },
+			        {
+			            "id": "C-01",
+			            "parentKey": "C",
+			            "text": "规划设计技术"
+			        },
+			        {
+			            "id": "C-02",
+			            "parentKey": "C",
+			            "text": "工程建设技术"
+			        },
+			        {
+			            "id": "C-03",
+			            "parentKey": "C",
+			            "text": "电网调控运行技术"
+			        },
+			        {
+			            "id": "C-04",
+			            "parentKey": "C",
+			            "text": "电网运维检修技术"
+			        },,
+			        {
+			            "id": "D-02",
+			            "parentKey": "D",
+			            "text": "输电运检"
+			        },
+			        {
+			            "id": "D-03",
+			            "parentKey": "D",
+			            "text": "变电运检"
+			        },
+			        {
+			            "id": "D-04",
+			            "parentKey": "D",
+			            "text": "城区配电"
+			        },
+			        {
+			            "id": "D-05",
+			            "parentKey": "D",
+			            "text": "城区营销"
+			        },
+		         	{
+			            "id": "E-01",
+			            "parentKey": "E",
+			            "text": "通用服务"
+			        },
+			        {
+			            "id": "A-01-01",
+			            "parentKey": "A-01",
+			            "text": "行政领导"
+			        },
+			        {
+			            "id": "A-01-02",
+			            "parentKey": "A-01",
+			            "text": "党群领导"
+			        },
+			        {
+			            "id": "B-01-01",
+			            "parentKey": "B-01",
+			            "text": "助理、副总师"
+			        },
+			        {
+			            "id": "B-01-02",
+			            "parentKey": "B-01",
+			            "text": "行政中层"
+			        },
+			        {
+			            "id": "B-01-03",
+			            "parentKey": "B-01",
+			            "text": "党群中层"
+                    },
+                    {
+			            "id": "B-02-06",
+			            "parentKey": "B-02",
+			            "text": "绩效管理"
+			        },
+			        {
+			            "id": "C-03-03",
+			            "parentKey": "C-03",
+			            "text": "继电保护技术"
+			        },
+			        {
+			            "id": "C-03-04",
+			            "parentKey": "C-03",
+			            "text": "自动化技术"
+			        },
+			        {
+			            "id": "C-03-05",
+			            "parentKey": "C-03",
+			            "text": "水电及新能源运行技术"
+			        },{
+                        "id": "D-03-02",
+                        "parentKey": "D-03",
+                        "text": "换流站运维"
+                    },
+                    {
+                        "id": "D-05-04",
+                        "parentKey": "D-05",
+                        "text": "智能用电运营"
+                    },
+                    {
+                        "id": "D-05-05",
+                        "parentKey": "D-05",
+                        "text": "用电检查"
+                    },{
+                        "id": "E-01-01",
+                        "parentKey": "E-01",
+                        "text": "通用服务综合"
+                    }]
+       
+        function toTree(data) {
+            data.forEach(function(item) {
+                delete item.children;
+            });
+
+            var map = {};
+            data.forEach(function(item) {
+                map[item.id] = item;
+            });
+            var val = [];
+            data.forEach(function(item) {
+                var parent = map[item.parentKey];
+                if(parent) {
+                    (parent.children || (parent.children = [])).push(item);
+                } else {
+                    val.push(item);
+                }
+            });
+            return val;
+        }
+        
+        var nodes=null;
+        var nodeText=null;
+        $(".listTree").tree({
+            data:toTree(resultValue),
+            onLoadSuccess:function(){
+                $(this).find("ul>li>ul>li:not(:has(ul))").find('.tree-node').append("<em class='addIcon'>+</em>");
+            },
+            onClick:function(rows){
+               console.log(rows)
+               nodes=rows.id;
+               nodeText=rows.text
+               preventDefault();
+            }
+        })
+
+        //添加
+        var arrPush=[];
+        $('.onListTree').on("click",".addIcon",function(){
+            if(arrPush.indexOf(nodes)!=-1){
+                $.messager.alert("提示信息","请不要重复添加岗位!");
+                return;
+            }
+            var content="";
+            content+='<div class="haodajie" name='+nodes+' style="display: inline-block;width: calc(50% - 22px);background: #F4F9F8;height: 90px;border-radius:4px;padding:20px;margin: 20px 0 0 20px;">';
+            content+='<div style="display: flex;justify-content: space-between;">';
+            content+='<span style="font-size:14px;font-weight: bold">'+nodeText+'</span>';
+            content+='<img src="../../assets/home/icon_delete.png" class="g_delete">';
+            content+='</div>';
+            content+='<div style="display: flex;justify-content: space-between;line-height: 45px;">';
+            content+='<span style="font-size:14px;font-weight: bold;margin-right: 5px;">';
+            content+='任职要求：<span style="color: #FF0000">未完善</span>';
+            content+='</span>';
+            content+='<div>';
+            content+='<span style="font-size:14px;font-weight: bold">需求人数：<span style="color: #00A09F">0</span></span>';
+            content+='<img src="../../assets/home/icon_quan_sm.png" class="selete_check">';
+            content+='</div>';
+            content+='</div>';
+            content+='</div>';
+            $(content).appendTo($(".content_box"));
+            arrPush.push(nodes);
+            console.log(arrPush)
+            $(".selete_check").hide();
+            $("#seleteAll").hide();
+            $(".d_c").hide();
+            $(".d_o_s").show();
+            $("#batch_delete").show();
+            $(".g_delete").show();
+
+        })
+
+        //提交
+        $("#sub_btn").on("click",function(){
+            alert('提交')
+        })
+        //批量删除
+        $("#batch_delete").on("click",function(){
+            $(".d_c").show();
+            $(".d_o_s").hide();
+            $(".g_delete").hide();
+            $(this).hide();
+            $(".selete_check").show();
+            $("#seleteAll").show();
+        })
+        //多个删除
+        var d_arr=[];
+        $("#s_c").on("click",function(){
+            var regImg=/(icon_quan_ok.png)$/;
+            for(var i=$(".selete_check").length-1;i>=0;i--){
+                if(regImg.test($(".selete_check").eq(i).attr("src"))){
+                    d_arr.push( $(".haodajie").eq(i).attr("name"));
+                    $(".haodajie").eq(i).remove();
+                }
+                
+            }
+            arrPush=arrPush.concat(d_arr).filter(function(v, i, arr) {
+				return arr.indexOf(v) === arr.lastIndexOf(v);
+            })
+            
+        })
+        //取消批量删除
+        $("#q_x").on("click",function(){
+            $(".d_c").hide();
+            $(".d_o_s").show();
+            $(".selete_check").hide();
+            $("#batch_delete").show();
+            $(".g_delete").show();
+            $("#seleteAll").hide();
+            $(".selete_check").attr("src",'../../assets/home/icon_quan_sm.png');
+        })
+
+        //点击复选框
+        $(".content_box").on("click",".selete_check",function(){
+            var regImg=/(icon_quan_sm.png)$/;
+            var imgSrc=$(this).attr('src');
+            if(regImg.test(imgSrc)){
+                $(this).attr("src","../../assets/home/icon_quan_ok.png")
+            }else{
+                $(this).attr("src","../../assets/home/icon_quan_sm.png")
+            }
+        })
+
+        //全选
+        $("#seleteAll").on("click",function(){
+            $(".selete_check").attr("src",'../../assets/home/icon_quan_ok.png');
+        })
+
+        //单个删除
+        $(".content_box").on("click",".g_delete",function(){
+            var _this=$(this);
+            $.messager.confirm('确认提示信息', '确定要删除吗？',function(ok){
+                if(ok){
+                    console.log(_this)
+                    _this.parents('.haodajie').remove();
+                    arrPush.splice(_this.index,1);
+                    console.log(arrPush)
+                }
+            })
+        })
+        //下一步
+        $("#next_step").on("click",function(){
+            var s_status=$(this).attr("name");
+            console.log(s_status)
+            if(s_status==="1"){
+                closetabTitle('配置单详情编辑');
+                opentab("dispose/kdwgwfile/kdwgw_rzyq", '配置单详情编辑', false,{'id':$("#next_step_id").val(),'index':0});
+            }else if(s_status==="0"){
+                $.messager.confirm('确认提示信息', '你还未保存,是否保存进行下一步?',function(ok){
+                    if(ok){
+                        saveDeployInfo()
+                    }else{
+                        return;
+                    }
+                })
+            }
+        })
+        //创建保存
+        $("#creat_btn").on("click",function(){
+            saveDeployInfo(1)
+        })
+
+
+        function saveDeployInfo(sta){
+            var categorysArr=[];
+            var catrDom=$(".haodajie");
+            if(catrDom.length<=0){
+                $.messager.alert("提示信息",'请选择添加岗位信息');
+                return;
+            }
+            var checkResult=checkDeploy();
+            if(!checkResult.isTrue){
+                $.messager.alert("提示信息",checkResult.objTxt)
+                    return;
+            }
+            for (var i=0;i<catrDom.length;i++) {
+                categorysArr.push(catrDom.eq(i).attr("name"))
+            }
+            $.ajax({
+                type:'POST',
+                url:BASE_URL3+'/competitionApply/apply',
+                contentType:'application/json',
+                data:JSON.stringify({
+                    "beginDate":$("#k_date").datebox("getValue"),
+                    "endDate":$("#j_date").datebox("getValue"),
+                    "staffingName":$("#d_name").textbox("getValue"),
+                    "publishLevel":$("#configureLevel").combobox("getValue"),
+                    "categorys":categorysArr
+                }),
+                success:function(data){
+                    if(data.resultCode==="200"){
+                        $.messager.alert("提示信息",'保存成功!');
+                        $("#next_step").attr("name","1");
+                        $("#next_step_id").val(data.resultValue)
+                        if(sta!==1){
+                            closetabTitle('配置单详情编辑');
+                            opentab("dispose/kdwgwfile/kdwgw_rzyq", '配置单详情编辑', false,{'id':data.resultValue,'index':0});
+                        }
+                    }
+                }
+            })
+        }
+
+
+        $('#configureLevel').combobox({
+            valueField:'id',
+            textField:'text',
+            height: 25,
+            data:[
+//              {
+//                  'id':'01',//默认显示第一项
+//                  'text' : '本单位'
+//              },
+                {
+                    'id': '02',
+                    'text': '地市公司级'
+                },
+                {
+                    'id': '03',
+                    'text': '省公司级'
+                },
+                {
+                    'id': '04',
+                    'text': '国网级'
+                }
+            ]
+        });
+
+        if ($(".s-step0").hasClass("active")) {
+            $(".s-step0>b>b,.s-step0>div").addClass("active");
+        }
+        else if ($(".s-step1").hasClass("active")) {
+            $(".s-step1>b>b,.s-step1>div,.s-step0>b>b,.s-step0>p,.s-step0>div").addClass("active");
+        }
+        else if ($(".s-step2").hasClass("active")) {
+            $(".s-step2>b>b,.s-step2>div,.s-step1>p,.s-step1>b>b,.s-step1>div,.s-step0>b>b,.s-step0>p,.s-step0>div").addClass("active");
+        }
+    })
+
+
+    //校验配置单
+    function checkDeploy(){
+        var rtnObj = {
+            isTrue : false,
+            objTxt:''
+        }
+
+        var pzdName=$("#d_name").textbox("getValue");
+        console.log(pzdName)
+        if(!CheckEmpty($.trim(pzdName))){
+            rtnObj.objTxt="配置单名称不能为空!"
+            return rtnObj;
+        }
+
+        var beginDate=$("#k_date").datebox("getValue");
+        var endDate=$("#j_date").datebox("getValue");
+
+        if(!CheckEmpty($.trim(beginDate))){
+            rtnObj.objTxt="报名有效期开始日期不能为空!"
+            return rtnObj;
+        }else if(beginDate>endDate){
+            rtnObj.objTxt="报名有效期结束日期不能晚于开始日期!"
+            return rtnObj;
+        }
+        if(!CheckEmpty($.trim(endDate))){
+            rtnObj.objTxt="报名有效期结束日期不能为空!"
+            return rtnObj;
+        }
+
+        rtnObj.isTrue = true;
+        return rtnObj;
+    }
+
+    //校验输入的值
+    function CheckEmpty( mixed_var ){
+        var key;  
+        
+        if (mixed_var === "" || mixed_var === null || mixed_var === false || typeof mixed_var === 'undefined') {  
+            return false;  
+        }  
+    
+        if (typeof mixed_var == 'object') {  
+            for (key in mixed_var) {  
+                return true;  
+            }  
+            return false;  
+        }  
+    
+        return true;  
+    }
+
+</script>

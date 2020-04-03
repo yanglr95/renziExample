@@ -1,0 +1,201 @@
+
+<div class="divtop">
+    <div class="divrg">
+        <form id="" class="formclass">
+            <label>申请人：</label>
+            <input id="yspQjSqr">
+            <label>申请时间：</label>
+            <input id="yspstartTime">
+            至
+            <input id="dspendTime">
+            <label>申请类型：</label>
+            <input id="ysqqjType">
+        </form>
+        <a class="primary-btn" >查询</a>
+    </div>
+</div>
+<div>
+    <div id="yspqjTable"></div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $('#yspQjSqr').textbox({
+        prompt: '请输入关键字',
+        height: 36
+    })
+    $('#yspstartTime').datebox({
+        editable: false,
+        height: 36
+    })
+    $('#dspendTime').datebox({
+        editable: false,
+        height: 36
+    })
+    $('#ysqqjType').combobox({
+        editable: false,
+        valueField: 'id',
+        textField: 'text',
+        data: [
+            {
+                'id': '0',
+                'text': '全部'
+            },
+            {
+                'id': '1',
+                'text': '年假'
+            },
+            {
+                'id': '2',
+                'text': '事假'
+            },
+            {
+                'id': '3',
+                'text': '病假'
+            },
+            {
+                'id': '4',
+                'text': '调休假'
+            },
+            {
+                'id': '5',
+                'text': '婚假'
+            },
+            {
+                'id': '6',
+                'text': '产假'
+            },
+            {
+                'id': '7',
+                'text': '其他'
+            }
+        ]
+    })
+
+    var data= [
+        {
+            num:'20190382',
+            name:'月度',
+            date:'2019年11月',
+            total:'130,000,000',
+            endTime:'2019.06.03',
+            state:'无',
+            cfdate: '2019.06.03',
+            fhdate: '2019.06.03',
+            ccdate: '2019.06.03',
+            type: '调休',
+            reason: '无',
+            adress: '无',
+            file: '无'
+        },
+        {
+            num:'20190382',
+            name:'月度',
+            date:'2019年11月',
+            total:'130,000,000',
+            endTime:'2019.06.03',
+            state:'无',
+            cfdate: '2019.06.03',
+            fhdate: '2019.06.03',
+            ccdate: '2019.06.03',
+            type: '调休',
+            reason: '无',
+            adress: '无',
+            file: '无'
+        },
+        {
+            num:'20190382',
+            name:'月度',
+            date:'2019年11月',
+            total:'130,000,000',
+            endTime:'2019.06.03',
+            state:'无',
+            cfdate: '2019.06.03',
+            fhdate: '2019.06.03',
+            ccdate: '2019.06.03',
+            type: '调休',
+            reason: '无',
+            adress: '无',
+            file: '无'
+        },
+        {
+            num:'20190382',
+            name:'月度',
+            date:'2019年11月',
+            total:'130,000,000',
+            endTime:'2019.06.03',
+            state:'无',
+            cfdate: '2019.06.03',
+            fhdate: '2019.06.03',
+            ccdate: '2019.06.03',
+            type: '调休',
+            reason: '无',
+            adress: '无',
+            file: '无'
+        },
+        {
+            num:'20190382',
+            name:'月度',
+            date:'2019年11月',
+            total:'130,000,000',
+            endTime:'2019.06.03',
+            state:'无',
+            cfdate: '2019.06.03',
+            fhdate: '2019.06.03',
+            ccdate: '2019.06.03',
+            type: '调休',
+            reason: '无',
+            adress: '无',
+            file: '无'
+        },
+        {
+            num:'20190382',
+            name:'月度',
+            date:'2019年11月',
+            total:'130,000,000',
+            endTime:'2019.06.03',
+            state:'无',
+            cfdate: '2019.06.03',
+            fhdate: '2019.06.03',
+            ccdate: '2019.06.03',
+            type: '调休',
+            reason: '无',
+            adress: '无',
+            file: '无'
+        }
+    ]
+    $('#yspqjTable').datagrid({
+        height: 360,
+        width: '100%',
+        fitColumns:true,
+        //pagination: true,
+        striped:true,
+        data,           
+        columns:[[
+            {field:'index',title:'序号',width:'5%',halign:'center',align:'center',formatter(value,row,index){
+                return `<span>${index+1}</span>`
+            }},
+            {field:'num',title:'申请单号',width:'10%',halign:'center',align:'center',formatter(value,row,index){
+                return `<span style="color:rgb(0,160,159);cursor:pointer">${row.num}</span>`
+            }},
+            {field:'name',title:'申请时间',width:'10%',halign:'center',align:'center'},
+            {field:'date',title:'人员编码',width:'10%',halign:'center',align:'center'},
+            {field:'total',title:'申请人',width:'5%',halign:'center',align:'center'},
+            {field:'endTime',title:'部门',width:'5%',halign:'center',align:'center'},
+            {field:'state',title:'岗位',width:'5%',halign:'center',align:'center',formatter(value,row,index){return value;}},
+            {field:'cfdate',title:'开始时间',width:'5%',halign:'center',align:'center'},
+            {field:'fhdate',title:'结束时间',width:'5%',halign:'center',align:'center'},
+            {field:'ccdate',title:'休假时长（天）',width:'5%',halign:'center',align:'center'},
+            {field:'type',title:'申请类型',width:'5%',halign:'center',align:'center'},
+            {field:'reason',title:'事由',width:'5%',halign:'center',align:'center'},
+            {field:'adress',title:'行程',width:'10%',halign:'center',align:'center'},
+            {field:'file',title:'附件',width:'5%',halign:'center',align:'center'},
+            {field:'handle',title:'操作',width:'10%',halign:'center',align:'center',formatter(value,row,index){
+                if (!row.state) {
+                    return `<span onclick='tableSubmit(${row.id})' style='color:rgb(24,98,223);cursor:pointer'>提交</span>`
+                }
+            }}
+        ]]
+    });
+    //grid_page('dspccTable',10)
+})
+</script>

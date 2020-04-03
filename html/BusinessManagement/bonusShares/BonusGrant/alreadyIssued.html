@@ -1,0 +1,188 @@
+<body>
+    <div class="already-issued" style="padding: 20px;">
+        <div class="back" style="margin-bottom: 16px;">
+            <div onclick="closeTab()">
+                <span></span>
+                <span>返回</span>
+            </div>
+        </div>
+        <div class="base-info">
+            <h3 class="box-title">基本信息</h3>
+            <ul>
+                <li>
+                    <span>申请单号：</span>
+                    <span class='apply-num'>12354678</span>
+                </li>
+                <li>
+                    <span>奖金名称：</span>
+                    <span class='bonus-name'>月度</span>
+                </li>
+                <li>
+                    <span>创建时间：</span>
+                    <span class='bonus-time'>2019.10.11</span>
+                </li>
+                <li>
+                    <span>截止时间：</span>
+                    <span class='stop-time'>2019.10.11</span>
+                    
+                    <!-- <a href="#" id="ba-tip" tooltip="{content:'部门最晚提交时间',position:'right'}" class="easyui-tooltip">i</a> -->
+                    <a href="#" id="ba-tip" title="部门最晚提交时间" class="easyui-tooltip">i</a>
+                    <!-- <a id="ba-tip" href="javascript:void(0)">i</a> -->
+                </li>
+                <li>
+                    <span>下发部门：</span>
+                    <span class='deptName'>组织部</span>
+                </li>
+                <li>
+                    <span class='zh-already-xf'>下发人：</span>
+                    <span class="empName">凉音</span>
+                </li>
+            </ul>
+        </div>
+        <div class="ai-allocinfo">
+            <h3 class="box-title">分配信息</h3>
+            <ul style="margin-bottom: 16px;">
+                <li>
+                    <span>总金额：</span>
+                    <span class="totalAmount">23,234,000</span>
+                </li>
+                <li>
+                    <span>已下发金额：</span>
+                    <span class="residueMoney">0</span>
+                </li>
+            </ul>
+            <div class="table-group">
+                <div class="table-left" >
+                    <div id="ai-table-left"></div>
+                </div>
+                <div class="table-right">
+                    <div id="ai-table-right"></div>
+                </div>
+            </div>
+            <div id="detail-page"></div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            // console.log($('#mainTabs').tabs('options').id,'------------------------------------------')
+            ajaxsTable()
+            
+            // $('#ba-tip').tooltip({
+            //     position: 'top',
+            //     content: '<span style="color:#000">部门最晚提交时间</span>',
+            //     onShow: function(){
+            //         $(this).tooltip('tip').css({
+            //             backgroundColor: '#666',
+            //             borderColor: '#666',
+            //         });
+            //     }
+            // });
+            
+            
+        })
+        function routerTo(){
+            // $(location).attr('href', './bonusDistriButionDetails.html');
+            // showPanalAlert('100%', '100%', "#detail-page","","./bonusDistriButionDetails.html");
+            opentab("BusinessManagement/bonusShares/BonusGrant/bonusDistriButionDetails", "详情2", false);
+        }
+        function tablesDate(id,tbData){
+            $('#'+id).datagrid({
+                fitColumns:true,
+                striped:true,
+                data:tbData,
+                columns:[[
+                // {field : 'checkbox',checkbox : "true",halign : 'left',align : 'left'},
+                {field:'index',title:'序号',halign:'left',align:'left',width:'10%',formatter:function(value,row,index){
+                        if(id == 'ai-table-left'){
+                            return '<span>'+((index+1)*2-1)+'</span>'
+                        }else{
+                            return '<span>'+((index+1)*2)+'</span>'
+                        }
+                    }},
+                    {field:'deptCode',title:'部门编码',halign:'left',align:'left',hidden:true},
+                    {field:'deptName',title:'部门',halign:'left',align:'left',width:'30%',formatter:function(value,row,index){
+                        if (row.submitStatus==2) {
+                            return '<div title="'+value+'" class="overflow-ellipsis" onclick="toDetail('+row.deptCode+')" style="color:rgb(24,98,223);cursor:pointer">'+value+'</div>'
+                        }else{
+                            return '<div title="'+value+'" class="overflow-ellipsis">'+value+'</div>'
+                        }
+                    }},
+                    {field:'sumMoney',title:'金额',halign:'left',align:'left'},
+                    {field:'taskStatus',title:'下发状态',halign:'left',align:'left',formatter:function(value,row,index){
+                        if (value==1) {
+                            return '<span>已下发</span>'
+                        }else{
+                            return '<span>未下发</span>'
+                        }
+                    }},
+                    {field:'submitStatus',title:'提交状态',halign:'left',align:'left',formatter:function(value,row,index){
+                        if(row.sumMoney == 0){
+                            return ''
+                        }else{
+                          if(row.taskStatus == 1){
+                            if (row.submitStatus==2 ) {
+                                return '<span>已提交</span>'
+                                }else {
+                                    return '<span>未提交</span>'
+                                }
+                            }
+                        }
+                        
+                       
+                    }},
+                    {field:'submitDate',title:'提交时间',halign:'left',align:'left',formatter:function(value,row,index){
+                        if (row.submitStatus==2) {
+                            return '<span>'+timeType(value)+'</span>'
+                        }else{
+                            return ''
+                        }
+                    }},
+                ]]
+            })
+        }
+        function ajaxsTable(){
+            console.log($('#mainTabs').tabs('options').id)
+            $.ajax({
+                type:'get',
+                url:BASE_URL+'/rewardIssueMA/find',
+                data:{
+                    pacakgeId:$('#mainTabs').tabs('options').id
+                },
+                success:function(data){
+                        var dataleft = []
+                        var dataright = []
+                        console.log(data,'奖金下发-index-已下发详情123123')
+                        var bbb = data.resultValue.rewardDeptList
+                        for(var i = 0;i<bbb.length;i++){
+                            bbb[i].index = i;
+                        }
+                        var dataleft = bbb.slice(0,Math.ceil(bbb.length/2))
+                        var dataright = bbb.slice(Math.ceil(bbb.length/2),bbb.length)
+                        tablesDate('ai-table-left',dataleft);
+                        tablesDate('ai-table-right',dataright);
+                        console.log(dataleft)
+                        console.log(dataright)
+                        console.log(bbb)
+                        $('.apply-num').text(data.resultValue.rewardId)
+                        $('.bonus-name').text(data.resultValue.rewardName)
+                        $('.bonus-time').text(timeType(data.resultValue.beginDate))
+                        $('.stop-time').text(timeType(data.resultValue.endDate))
+                        $('.deptName').text(data.resultValue.deptName)
+                        $('.empName').text(data.resultValue.empName)
+                        $('.totalAmount').text(data.resultValue.totalAmount)
+                        $('.residueMoney').text(data.resultValue.residueMoney)
+                }
+            })
+        }
+        function toDetail(value){
+            // console.log(value)
+            console.log($('.apply-num').text());
+            var deptId = Number($('.apply-num').text())
+            var result = []
+            result.push(deptId,value)
+            // console.log(result)
+            opentab("BusinessManagement/bonusShares/BonusGrant/bonusDistriButionDetails", "部门下发详情",false,result);
+        }
+    </script>
+</body>
+</html>

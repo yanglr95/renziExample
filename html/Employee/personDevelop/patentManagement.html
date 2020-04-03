@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+</head>
+<body>
+    <div style="padding: 20px;font-size: 14px;background: #fff;height: 100%;">
+        <div class="titlebtn">
+            <button class="primary-btn">提 交</button>
+            <button class="border-btn">保 存</button>
+            <button class="border-btn">取 消</button>
+        </div>
+        <div class="baseInfo">
+            <h3 class="box-title">基本信息</h3>
+            <ul class="baseList clearfix">
+                <li>
+                    <span>人员编码：</span>
+                    <span>20001413</span>
+                </li>
+                <li>
+                    <span>姓名：</span>
+                    <span>张华强</span>
+                </li>
+                <li>
+                    <span>
+                        <span style="color:#FF7150;">*</span>
+                        授权日期
+                    </span><input id="allow" type="text" editable="false" class="allow"></input>
+                </li>
+                <li>
+                    <span>
+                        <span style="color: #FF7150;">*</span>
+                        失效日期
+                    </span><input id="allow2" type="text" editable="false" class="allow"></input>
+                </li>
+            </ul>
+        </div>
+        <div class="patent">
+            <div class="p_title clearfix">
+              <h3 class="box-title tName" style="float: left;">专利成果</h3>
+              <div class="search" style="float: right;">
+                  <input id="bg-bonusname" data-options="prompt:'输入专利号，自动获取相关',iconCls:'icon-search2'">
+              </div>
+            </div>
+            <ul class="patentList clearfix">
+                <!-- 1 -->
+                <li>
+                    <span>
+                        <i style="color: #FF7150;">*</i>
+                        专利名称
+                    </span>
+                    <input id="text" type="text"></input>
+                </li>
+                <li>
+                    <span>
+                        <i style="color: #FF7150;">*</i>
+                        专利号
+                    </span>
+                    <input id="text2" type="text"></input>
+                </li>
+                <li>
+                    <span>专利批准国</span>
+                    <input id="unit" editable="false">
+                </li>
+            </ul>
+            <!-- 2 -->
+            <ul class="patentList clearfix">
+                <li>
+                    <span>
+                        <i style="color: #FF7150;">*</i>
+                        专利类型
+                    </span>
+                    <input id="zltype" editable="false">
+                </li>
+                <li>
+                    <span>
+                        <i style="color: #FF7150;">*</i>
+                        专业权人
+                    </span>
+                    <input id="text3" type="text"></input>
+                </li>
+                <li>
+                    <span>
+                        <i style="color: #FF7150;">*</i>
+                        专利类型
+                    </span>
+                    <input id="zltype2" editable="false">
+                </li>
+            </ul>
+            <!-- 3 -->
+            <ul class="patentList clearfix">
+                <li>
+                    <span>
+                        <i style="color: #FF7150;">*</i>
+                        专利获批准日期
+                    </span>
+                    <input id="allow3" type="text" editable="false" class="allow" data-options="prompt:'2012-12-01'"></input>
+                </li>
+                <li>
+                    <span>
+                        <i style="color: #FF7150;">*</i>
+                        总完成人数
+                    </span>
+                    <input id="text4" type="text"></input>
+                </li>
+                <li>
+                    <span>
+                        <i style="color: #FF7150;">*</i>
+                        本人排序
+                    </span>
+                    <input id="text5" editable="false">
+                </li>
+            </ul>
+            <!-- 4 -->
+            <ul class="patentList clearfix">
+                <li>
+                    <span>专业排名</span>
+                    <input id="text6" type="text"></input>
+                </li>
+                <li>
+                    <span>
+                        <i style="color: #FF7150;">*</i>
+                        是否获奖
+                    </span>
+                    <input id="honer">
+                </li>
+                <li>
+                    <span>备注</span>
+                    <input id="text7">
+                </li>
+            </ul>
+            <div class="selectSource">
+                <span class="s1">选择材料</span>
+                <label for="upload" class="primary-btn">上传</label>
+                <input type="file" onchange="uploadFunction()" name="upload" id="upload" style="display: none;">
+                <span class="selectSource-tips">支持.jpg、png、pdf、ceb, 其中pdf、ceb大小在3M以内</span>
+                <div class="img-tool">
+                    <img src="assets/yf/lianjie.png">
+                    图片压缩工具
+                </div>
+            </div>
+            <ul id="sdetail-files" style="margin: 15px 0 0 120px;"></ul>
+        </div>
+    </div>
+    <script>
+        var uploadFiles = [];
+        function uploadFunction(){
+            // console.log($('#upload')[0].files)
+            uploadFiles = uploadFiles.concat($('#upload')[0].files[0]);
+            uploadDisplay($('#upload')[0].files[0]);
+        }
+        function uploadDisplay(file){
+            var fileItem = $('<li><span class="file-name">'+file.name+'</span><span class="file-del" onclick="">×</span></li>').css({
+                'width':'150px',
+                'line-height':'30px',
+                'padding':'0 10px',
+                'position':'relative',
+                'background':'#E6F1F1',
+                'color':'#00A09F',
+                'font-size':'14px',
+                'display':'inline-block',
+                'margin-right':'10px',
+                'border-radius':'4px'
+            });
+            $('#sdetail-files').append(fileItem);
+            $('.file-name').css({
+                'display':'inline-block',
+                'width':'100px',
+                'overflow': 'hidden',
+                'white-space': 'nowrap',
+                'text-overflow': 'ellipsis',
+                'vertical-align':'middle'
+            })
+            $('.file-del').css({
+                'vertical-align':'middle',
+                'margin-left':'18px',
+                'font-size':'14px'
+            })
+        }
+        $("body").on('click','.file-del',function(){
+            var index = $('.file-del').index(this);
+            uploadFiles.splice(index,1);
+            $(this).parent().remove();
+        });
+        $(function () {
+            // 下拉选中
+            $('#unit').combobox({
+                valueField:'id',
+                textField:'text',
+                data:[
+                    {
+                        'id':'',//默认显示第一项
+                        'text' : '中国'
+                    },
+                    {
+                        'id': '1',
+                        'text': '美国'
+                    },
+                    {
+                        'id': '2',
+                        'text': '韩国'
+                    }
+                ]
+            });
+            $('#unit').textbox({
+                height:'36px',
+                width:'280px',
+            });
+            // 专利类型
+            $('#zltype').combobox({
+                valueField:'id',
+                textField:'text',
+                data:[
+                    {
+                        'id':'',//默认显示第一项
+                        'text' : ' '
+                    },
+                    {
+                        'id': '1',
+                        'text': '美国'
+                    },
+                    {
+                        'id': '2',
+                        'text': '韩国'
+                    }
+                ]
+            });
+            $('#zltype').textbox({
+                height:'36px',
+                width:'280px',
+            });
+            $('#zltype2').combobox({
+                valueField:'id',
+                textField:'text',
+                data:[
+                    {
+                        'id':'',//默认显示第一项
+                        'text' : ' '
+                    },
+                    {
+                        'id': '1',
+                        'text': '美国'
+                    },
+                    {
+                        'id': '2',
+                        'text': '韩国'
+                    }
+                ]
+            });
+            $('#zltype2').textbox({
+                height:'36px',
+                width:'280px',
+            });
+            $('#honer').combobox({
+                valueField:'id',
+                textField:'text',
+                data:[
+                    {
+                        'id':'',//默认显示第一项
+                        'text' : ' '
+                    },
+                    {
+                        'id': '1',
+                        'text': '美国'
+                    },
+                    {
+                        'id': '2',
+                        'text': '韩国'
+                    }
+                ]
+            });
+            $('#honer').textbox({
+                height:'36px',
+                width:'280px',
+            });
+            // 授权日期框
+            $('#allow').datebox({    
+                required:false   
+            });
+            $('#allow').textbox({
+                height:'36px',
+                width:'280px'
+            });
+            $('#allow2').datebox({    
+                required:false   
+            });
+            $('#allow2').textbox({
+                height:'36px',
+                width:'280px'
+            });
+            $('#allow3').datebox({    
+                required:false   
+            });
+            $('#allow3').textbox({
+                height:'36px',
+                width:'280px'
+            });
+            // 搜索框 
+            $('#bg-bonusname').textbox({
+                height:'36px',
+                width:'280px',
+            });
+            // 输入框 
+            $('#text').textbox({
+                height:'36px',
+                width:'280px',
+            });
+            $('#text2').textbox({
+                height:'36px',
+                width:'280px',
+            });
+            $('#text3').textbox({
+                height:'36px',
+                width:'280px',
+            });
+            $('#text4').textbox({
+                height:'36px',
+                width:'280px',
+            });
+            $('#text5').textbox({
+                height:'36px',
+                width:'280px',
+            });
+            $('#text6').textbox({
+                height:'36px',
+                width:'280px',
+            });
+            $('#text7').textbox({
+                height:'36px',
+                width:'280px',
+            });
+        })
+        //得到当前日期
+        formatterDate = function(date) {
+            var day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
+            var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"
+            + (date.getMonth() + 1);
+            return date.getFullYear() + '-' + month + '-' + day;
+        };
+    
+        window.onload = function () { 
+            $('#allow').datebox('setValue', formatterDate(new Date()));
+        }
+        window.onload = function () { 
+            $('#allow2').datebox('setValue', formatterDate(new Date()));
+        }
+    </script>
+</body>
+</html>

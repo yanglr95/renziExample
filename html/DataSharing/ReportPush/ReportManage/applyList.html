@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+</head>
+<body>
+    <!-- <h3 class="box-title"></h3> -->
+    <div class="bonus-grant" style="padding: 20px;">
+            <h3 class="box-title">申请列表</h3>
+            <!-- tab切换 -->
+            <div id="atteasyui" class="easyui-tabs content-tabs noapply">
+                <div title="待审批">
+                    <!-- 新增、删除等按钮 -->
+                    <div class="bs-search">
+                        <div>
+                            <button class="del primary-btn" onclick="applyPass()">批量通过</button>
+                            <button class="del primary-btn">批量驳回</button>
+                            <div class="selected">
+                                <p class="ai-tip">i</p>
+                                <span>已选择<i>2</i>项</span>
+                            </div>
+                        </div>
+                        <span>申请部门:</span>
+                        <input id="apply-unit" editable="false">
+                        <span style="margin-left: 10px;">申请时间:</span>
+                        <input id="bg-datesstart">
+                        <span style="margin: 0 8px;">至</span>
+                        <input id="bg-datesend">
+                        <button class="search-btn primary-btn">查 询</button>
+                    </div>
+                    <!-- 表格 -->
+                    <div id="grantd-table"></div>
+                </div>
+                <div title="已审批">
+                    <!-- 新增、删除等按钮 -->
+                    <div class="bs-search">
+                            <!-- <div>
+                                <button class="del primary-btn">批量通过</button>
+                                <button class="del primary-btn">批量驳回</button>
+                                <div class="selected">
+                                    <p class="ai-tip">i</p>
+                                    <span>已选择<i>2</i>项</span>
+                                </div>
+                            </div> -->
+                            <span>申请部门:</span>
+                            <input id="applys-unit" editable="false">
+                            <span style="margin-left: 10px;">申请时间:</span>
+                            <input id="bg-datesstart2">
+                            <span style="margin: 0 8px;">至</span>
+                            <input id="bg-datesend2">
+                            <button class="search-btn primary-btn">查 询</button>
+                        </div>
+                        <!-- 表格 -->
+                        <div id="grantd-table2"></div>
+                </div>
+            </div>
+       
+    </div>
+    <script>
+            function myformatter(date){
+                var y = date.getFullYear();
+                var m = date.getMonth()+1;
+                // var d = date.getDate();
+                return y+'-'+(m<10?('0'+m):m);
+            }
+            function myparser(s){
+                    if (!s) return new Date();
+                    var ss = (s.split('-'));
+                    var y = parseInt(ss[0],10);
+                    var m = parseInt(ss[1],10);
+                    // var d = parseInt(ss[2],10);
+                    if (!isNaN(y) && !isNaN(m)){
+                        return new Date(y,m-1);
+                    } else {
+                        return new Date();
+                    }
+                }
+            // 表格数据
+            $(function(){
+               
+                $('#apply-unit').combobox({
+                    valueField:'id',
+                    textField:'text',
+                    height: 34,
+                    data:[
+                        {
+                            'id':'',//默认显示第一项
+                            'text' : '全部'
+                        },
+                        {
+                            'id': '1',
+                            'text': '办公厅'
+                        }
+                    ]
+                });
+                $('#applys-unit').combobox({
+                    valueField:'id',
+                    textField:'text',
+                    height: 34,
+                    data:[
+                        {
+                            'id':'',//默认显示第一项
+                            'text' : '全部'
+                        },
+                        {
+                            'id': '1',
+                            'text': '办公厅'
+                        }
+                    ]
+                });
+                var grantData = [
+                    {
+                        id:'1',
+                        code:'1911121757',
+                        name:'用工情况统计表',
+                        period:'2019.06',
+                        unit:'办公厅',
+                        depart:'办公厅',
+                        member:'胡赫伊',
+                        menPost:'处长',
+                        applyTime:'2019.06.03',
+                        dec:'部门更新需要',
+                        status:0
+                    },{
+                        id:'2',
+                        code:'1911121757',
+                        name:'职工结构情况表',
+                        period:'2019.06',
+                        unit:'办公厅',
+                        depart:'办公厅',
+                        member:'胡赫伊',
+                        menPost:'处长',
+                        applyTime:'2019.06.03',
+                        dec:'部门更新需要',
+                        status:0
+                    },{
+                        id:'3',
+                        code:'1911121757',
+                        name:'职工劳动合同情况表',
+                        period:'2019.06',
+                        unit:'办公厅',
+                        depart:'办公厅',
+                        member:'胡赫伊',
+                        menPost:'处长',
+                        applyTime:'2019.06.03',
+                        dec:'部门更新需要',
+                        status:1
+                    },{
+                        id:'4',
+                        code:'1911121757',
+                        name:'企业职工情况表',
+                        period:'2019.06',
+                        unit:'办公厅',
+                        depart:'办公厅',
+                        member:'胡赫伊',
+                        menPost:'处长',
+                        applyTime:'2019.06.03',
+                        dec:'部门更新需要',
+                        status:0
+                    },{
+                        id:'5',
+                        code:'1911121757',
+                        name:'职工人数增加情况表',
+                        period:'2019.06',
+                        unit:'办公厅',
+                        depart:'办公厅',
+                        member:'胡赫伊',
+                        menPost:'处长',
+                        applyTime:'2019.06.03',
+                        dec:'部门更新需要',
+                        status:0
+                    },{
+                        id:'6',
+                        code:'1911121757',
+                        name:'企业不在岗职工基本情况表',
+                        period:'2019.06',
+                        unit:'办公厅',
+                        depart:'办公厅',
+                        member:'胡赫伊',
+                        menPost:'处长',
+                        applyTime:'2019.06.03',
+                        dec:'部门更新需要',
+                        status:0
+                    },{
+                        id:'7',
+                        code:'1911121757',
+                        name:'企业用工总量情况表（一）',
+                        period:'2019.06',
+                        unit:'办公厅',
+                        depart:'办公厅',
+                        member:'胡赫伊',
+                        menPost:'处长',
+                        applyTime:'2019.06.03',
+                        dec:'部门更新需要',
+                        status:1
+                    },{
+                        id:'8',
+                        code:'1911121757',
+                        name:'企业用工总量情况表（二）',
+                        period:'2019.06',
+                        unit:'办公厅',
+                        depart:'办公厅',
+                        member:'胡赫伊',
+                        menPost:'处长',
+                        applyTime:'2019.06.03',
+                        dec:'部门更新需要',
+                        status:1
+                    },{
+                        id:'9',
+                        code:'1911121757',
+                        name:'全资控股与代管单位用工总量计划情况表',
+                        period:'2019.06',
+                        unit:'办公厅',
+                        depart:'办公厅',
+                        member:'胡赫伊',
+                        menPost:'处长',
+                        applyTime:'2019.06.03',
+                        dec:'部门更新需要',
+                        status:0
+                    },{
+                        id:'10',
+                        code:'1911121757',
+                        name:'企业不在岗职工结构情况表',
+                        period:'2019.06',
+                        unit:'办公厅',
+                        depart:'办公厅',
+                        member:'胡赫伊',
+                        menPost:'处长',
+                        applyTime:'2019.06.03',
+                        dec:'部门更新需要',
+                        status:1
+                    },
+                ];
+                $('#grantd-table').datagrid({ //name period unit builder build_time
+                    fitColumns:true,
+                    data:grantData,
+                    pagination: true,
+                    striped:true,
+                    columns:[[
+                        {field:'check',title:'',width:'10%',checkbox:true},
+                        {field:'index',title:'序号',width:'3%',halign:'left',align:'left',formatter:function(value,row,index){
+                            return '<span>'+(index+1)+'</span>'
+                        }},
+                        { field: 'code', title: '申请单号', width: '8%', halign: 'left', align: 'left',formatter(value, row, index) {
+                            return "<span class='view waitApproval' id='' data-id='' style='color:rgb(24,98,223);cursor:pointer'>"+row.code+"</span> "
+                        }},
+                        {field:'name',title:'报表名称',width:'15%',halign:'left',align:'left'},
+                        {field:'period',title:'报告期',width:'9%',halign:'left',align:'left'},
+                        {field:'unit',title:'所属单位',width:'9%',halign:'left',align:'left'},
+                        {field:'depart',title:'申请部门',width:'8%',halign:'left',align:'left'},
+                        {field:'member',title:'申请人',width:'8%',halign:'left',align:'left'},
+                        {field:'menPost',title:'申请人岗位',width:'8%',halign:'left',align:'left'},
+                        {field:'applyTime',title:'申请时间',width:'8%',halign:'left',align:'left'},
+                        {field:'dec',title:'申请备注',width:'8%',halign:'left',align:'left',formatter:function(value,row,index){
+                            if (row.status==1) {
+                                return ''
+                            }else{
+                                return '<span>'+value+'</span>'
+                            }
+                        }},
+                        {field:'handle',title:'操作',width:'5%',halign:'left',align:'left',formatter:function(value,row,index){
+                            if (row.status==1) {
+                                return ''
+                            }else{
+                                return '<span class="primary-color passing" style="cursor:pointer" > 通过 </span><span class="primary-color" style="cursor:pointer"> 驳回 </span>'
+                            }
+                        }},
+                    ]]
+                });
+                $('#grantd-table2').datagrid({ //name period unit builder build_time
+                    fitColumns:true,
+                    data:grantData,
+                    pagination: true,
+                    striped:true,
+                    columns:[[
+                        {field:'index',title:'序号',width:'3%',halign:'left',align:'left',formatter:function(value,row,index){
+                            return '<span>'+(index+1)+'</span>'
+                        }},
+                        { field: 'code', title: '申请单号', width: '10%', halign: 'left', align: 'left',formatter(value, row, index) {
+                            return "<span class='view alreadyApproval' id='' data-id='' style='color:rgb(24,98,223);cursor:pointer'>"+row.code+"</span> "
+                        }},
+                        {field:'name',title:'报表名称',width:'12%',halign:'left',align:'left'},
+                        {field:'period',title:'报告期',width:'8%',halign:'left',align:'left'},
+                        {field:'unit',title:'所属单位',width:'8%',halign:'left',align:'left'},
+                        {field:'depart',title:'申请部门',width:'8%',halign:'left',align:'left'},
+                        {field:'member',title:'申请人',width:'8%',halign:'left',align:'left'},
+                        {field:'menPost',title:'申请人岗位',width:'8%',halign:'left',align:'left'},
+                        {field:'applyTime',title:'申请时间',width:'8%',halign:'left',align:'left'},
+                        {field:'dec',title:'申请备注',width:'8%',halign:'left',align:'left',formatter:function(value,row,index){
+                            if (row.status==1) {
+                                return ''
+                            }else{
+                                return '<span>'+value+'</span>'
+                            }
+                        }},
+                        {field:'handle',title:'操作',width:'5%',halign:'left',align:'left',formatter:function(value,row,index){
+                            if (row.status==1) {
+                                return ''
+                            }else{
+                                return '<span class="primary-color passing" style="cursor:pointer"> 通过 </span><span class="primary-color" style="cursor:pointer"> 驳回 </span>'
+                            }
+                        }},
+                    ]]
+                });
+                $('#bg-datesstart').datebox({
+                    editable:false,
+                    height:34,
+                });
+                $('#bg-datesend').datebox({
+                    editable:false,
+                    height:34,
+                });
+                $('#bg-datesstart2').datebox({
+                    editable:false,
+                    height:34,
+                });
+                $('#bg-datesend2').datebox({
+                    editable:false,
+                    height:34,
+                });
+                $('#bg-bonusname').textbox({
+                    height:34,
+                });
+        
+                 //待审核
+                 $('.waitApproval').click(function(){
+                    showPanalAlert(480,310,'#reportalert','申请详情','html/DataSharing/ReportPush/ReportManage/alert/waitApproval.html')
+                 });
+                 //已审核
+                 $('.alreadyApproval').click(function(){
+                    showPanalAlert(480,310,'#reportalert','申请详情','html/DataSharing/ReportPush/ReportManage/alert/alreadyApproval.html')
+                 })
+            })
+            function routerTo(id,type){
+                console.log(id,type)
+                // if (type=='issued') {
+                //     $(location).attr('href', './alreadyIssued.html');
+                // }else{
+                    $(location).attr('href', './reportApply.html');
+                // }
+                // console.log(id);
+                
+            };
+            function numClick(){
+                // $(location).attr('href', './alreadyIssued.html');
+            };
+            function applyPass(){
+                // $(location).attr('href', './applyRecord.html');
+            };
+            // 通过
+            $('.passing').click(function(){
+                showPanalAlert(400,350,'#agree','通过','html/DataSharing/ReportPush/ReportManage/alert/passing.html');
+            });
+        </script>
+</body>
+
+</html>

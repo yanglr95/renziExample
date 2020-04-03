@@ -1,0 +1,23 @@
+[
+    {
+        "menuText": "领导驾驶舱",
+        "id":301,
+        "secondary": true,
+        "link": "http://192.168.100.66/analysis/index.html"
+    }, {
+        "menuText": "主题分析",
+        "id":302,
+        "secondary": true,
+        "link": "http://192.168.100.66/analysis/index.html"
+    } ,{
+        "menuText": "自定义报表",
+        "id":303,
+        "secondary": true,
+        "link": "http://192.168.100.66/analysis/index.html"
+    },{
+        "menuText": "智能搜索",
+        "id":304,
+        "secondary": true,
+        "link": "elecSearch/index"
+    }
+]

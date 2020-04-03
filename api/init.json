@@ -1,0 +1,20 @@
+[{
+    "config": {
+        "system.appname": "国家电网人力资源管理信息系统",
+        "system.pagesize": "20",
+        "user.defaultrole": "User"
+    },
+    "user": {
+        "UserName": "优一",
+        "Email": "84383822@qq.com",
+        "Mobile": "18386630369",
+        "Count": 17
+    },
+    "dictionarys": {
+        "OrderStatus": {
+            "0": "处理中",
+            "1": "已发货",
+            "2": "取消"
+        }
+    }
+}]

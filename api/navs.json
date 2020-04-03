@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "menuText": "首页",
+        "icon": "icon_nav_1.png",
+        "iconact": "icon_nav_1_active.png",
+        "link": "portal/layout",
+        "secondary":false
+    },{
+        "id": 300,
+        "menuText": "决策分析",
+        "icon": "icon_nav_1001.png",
+        "iconact": "icon_nav_1001_active.png",
+        "secondary":true 
+       
+    },{
+        "id": 3,
+        "menuText": "员工管理",
+        "icon": "icon_nav_3.png",
+        "iconact": "icon_nav_3_active.png",
+        "secondary":true
+    },
+    {
+        "id": 400,
+        "menuText": "组织管理",
+        "icon": "icon_nav_2.png",
+        "iconact": "icon_nav_2_active.png",
+        "secondary":true
+    },
+    {
+        "id": 20,
+        "menuText": "教育培训",
+        "icon": "icon_nav_4.png",
+        "iconact": "icon_nav_4_active.png",
+        "secondary":true 
+    },
+    {
+        "id": 2,
+        "menuText": "专业协同",
+        "icon": "icon_nav_2.png",
+        "iconact": "icon_nav_2_active.png",
+        "secondary":true
+    }
+]

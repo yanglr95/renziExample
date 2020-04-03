@@ -1,0 +1,801 @@
+/* ---------------------考勤-------------------------------- */
+.zlk-top ul{
+    width: 392px;
+    height:30px;
+    margin:12px auto;
+    border-bottom: 1px solid rgba(233, 233, 233, 1);
+    border-radius: 3px;
+    background:#fff;
+    box-sizing:border-box;
+}
+.zlk-top ul li{
+    width: 130px;
+    float:left;
+    color:#8b8b8b;
+    cursor: pointer;
+    line-height: 29px;
+    text-align: center;
+    box-sizing:border-box;
+}
+.zlk-top ul li:last-child{
+    border-right:none;
+}
+.zlk-top ul li.active{
+    border-bottom: 1px solid #067877;
+    color: #067877;
+}
+
+.divtop{
+    margin: 20px 0px;
+    height: 60px;
+}
+.divlf{
+    font-size: 0;
+    float: left;
+}
+.divlf a{
+    margin-right: 10px;
+}
+.divrg{
+    float: right;
+}
+.formclass{
+    display: inline-block;
+    margin-right: 15px;
+}
+.spbtn{
+    font-size: 14px;
+    display: inline-block;
+    padding: 8px 16px 8px 14px;
+    border: 1px solid rgba(145, 213, 255, 1);
+    border-radius: 5px;
+    position: relative;
+    background: rgba(230, 247, 255, 1);
+}
+.tableHeight{
+    height:600px;
+}
+.liposi{
+    position: relative;
+}
+.liposi::after{
+    content: '12';
+    color: #fff;
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: -7px;
+    left: 100px;
+    text-align: center;
+    line-height: 22px;
+    background: #067877;
+    border-radius: 50%;
+    font-size: 12px;
+}
+.formclass label{
+    margin-left: 20px;
+}
+.datagrid-view1{
+    width: 0 !important;
+}
+.tipdiv{
+    width: 360px;
+    /*height: 280px;*/
+    background: #333;
+    opacity: 0.7;
+    padding: 10px 20px;
+}
+.tiptitle{
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 15px;
+    line-height: 30px;
+}
+.tipcontent{
+    width: 100%;
+    height: 100px;
+    margin-bottom: 15px;
+    background: #ccc;
+}
+.inldiv{
+    padding: 5px 20px;
+}
+.inlinep{
+    width: 100%;
+    height: 20px;
+    margin-bottom: 5px;
+}
+.icon{
+    display: inline-block;
+    width: 9px;
+    height: 13px;
+    margin-right: 5px;
+    background: url('../image/u12631.png') no-repeat center center;
+}
+.iconcenter{
+    display: inline-block;
+    width: 67px;
+    height: 14px;
+    margin-left: 50px;
+    background: url('../image/u12636.png') no-repeat center center;
+}
+.iconcenterbottom{
+    display: inline-block;
+    width: 67px;
+    height: 14px;
+    margin-left: 50px;
+    background: url('../image/u12650.png') no-repeat center center;
+}
+/* ---------------------奖金分配------------------ */
+/* bonusSharesEdit */
+.btn-group{
+    font-size: 0;
+    margin: 20px 0;
+}
+.btn-group button{
+    margin-right: 10px;
+}
+.tab-department-left,.tab-department-right{
+    display: inline-block;
+    width: 49%;
+}
+.tab-department-left{
+    margin-right: 2%;
+}
+/* --------奖金汇总---------- */
+/* index */
+.bs-title{
+    padding: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+.bs-search{
+    text-align: right;
+    font-size: 14px;
+    margin: 16px 0;
+}
+.search-btn{
+    margin-left: 10px;
+}
+/* department */
+.personal-btn{
+    display: none;
+    font-size: 0;
+    margin-top: 16px;
+}
+.personal-btn button{
+    margin-right: 10px;
+}
+.db-baseinfo ul,.db-header ul{
+    margin-top: 10px;
+    font-size: 0;
+    padding-left: 15px;
+}
+.db-baseinfo li,.db-header li{
+    display: inline-block;
+    margin-right: 100px;
+    font-size: 0;
+}
+.db-baseinfo li span,.db-header li span{
+    color: #666;
+    font-size: 14px;
+}
+.db-baseinfo li span:last-child,.db-header li span:last-child{
+    color: #333;
+    font-weight: bold;
+}
+.db-header,.db-baseinfo{
+    margin: 20px 0 50px 0;
+}
+.db-header li.end-time{
+    float: right;
+    font-size: 14px;
+    margin-right: 0;
+}
+/* tabs */
+.tab-department-left,.tab-department-right{
+    display: inline-block;
+    width: 49%;
+    margin-top: 20px;
+}
+.tab-department-left{
+    margin-right: 2%;
+}
+.personal-search{
+    margin: 16px 0;
+    padding-right: 1px;
+    text-align: right;
+}
+.department-bonus .datagrid-view1{
+    width: 0 !important;
+}
+/* --------------------------奖金下发------------------------------ */
+.bs-search button.add{
+    float: left;
+}
+/* add */
+.ba-btn{
+    font-size: 0;
+    border-bottom: 1px solid #e9e7e7;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+}
+.ba-btn button,.btn-group button{
+    margin-right: 10px;
+}
+.ba-baseinfo{
+    margin-bottom: 50px;
+}
+.ba-baseinfo ul,.ba-allocinfo ul{
+    font-size: 0;
+    padding-left: 15px;
+    margin-top: 10px;
+}
+.ba-baseinfo li,.ba-allocinfo li{
+    display: inline-block;
+    margin-right: 50px;
+    font-size: 14px;
+    color: #666;
+}
+.shallow-color{
+    color: #333;
+    font-weight: bold;
+}
+.textbox-text{
+    color: #333;
+}
+.validatebox-invalid{
+    background: #fff;
+}
+.textbox-invalid{
+    background: #fff;
+}
+.required-icon{
+    color: #f00;
+}
+#ba-tip{
+    display: inline-block;
+    width: 16px;
+    line-height: 16px;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    background-color: #067877;
+    font-size: 12px;
+    margin-left: 5px;
+}
+.btn-group{
+    margin: 20px 0;
+}
+.table-group{
+    font-size: 0;
+}
+.table-left,.table-right{
+    display: inline-block;
+    width: 49%;
+}
+.table-left{
+    margin-right: 2%;
+}
+/*  */
+.base-info{
+    margin-bottom: 50px;
+}
+.base-info ul,.ai-allocinfo ul{
+    margin-top: 10px;
+    font-size: 0;
+    padding-left: 15px;
+}
+.base-info li,.ai-allocinfo li{
+    display: inline-block;
+    margin-right: 60px;
+    color: #666;
+    font-size: 0;
+}
+.base-info li span,.ai-allocinfo li span{
+    font-size: 14px;
+}
+.base-info li span:nth-of-type(2),.ai-allocinfo li span:nth-of-type(2){
+    color: #333;
+    font-weight: bold;
+}/* detail */
+.export-btn{
+    margin: 16px 0 0 5px;
+}
+.bonus-detail ul{
+    font-size: 0;
+    padding-left: 15px;
+    margin-top: 10px;
+}
+.bonus-detail li{
+    display: inline-block;
+    margin-right: 100px;
+    color: #666;
+    font-size: 0;
+}
+.bonus-detail li span{
+    font-size: 14px;
+}
+.bonus-detail ul span:last-child{
+    color: #333;
+    font-weight: bold;
+}
+.table-box{
+    margin-top: 16px;
+}
+.total-money{
+    margin: 20px 0 50px 0;
+}
+.base-info{
+    margin-bottom: 50px;
+}
+/* --------------------报表管理------------------------ */
+.bs-search button.add,.bs-search button.del{
+    float: left;
+    margin-right: 10px;
+}
+.selected{
+    width: 120px;
+    height: 36px;
+    padding: 0 10px 0 0;
+    float: left;
+    line-height: 36px;
+    border-radius: 4px;
+    border: 1px solid #e9e7e7;
+    /* behavior: url(iecss3.htc); */
+}
+.checks{
+    margin: 0 3px;
+}
+/* #_easyui_textbox_input4{
+    display: none;
+} */
+/*  */
+.titles{
+    width: 100%;
+    padding: 0 0 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+.ra-title{
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+}
+.record{
+    float: right;
+    font-size: 14px;
+}
+.search-btn{
+    margin-left: 10px;
+}
+/* 报表申请记录 */
+.noapply{
+    padding: 10px 0;
+}
+/* ...........接口监控........... */
+/* #_easyui_textbox_input4{
+    display: none;
+} */
+.base-info,.mem-info,.need-info{
+    margin-bottom: 10px;
+}
+.base-info ul{
+    width: 100%;
+    height: 90px;
+    margin-top: 10px;
+    /* border: 1px solid red; */
+}
+.base-info ul li{
+    width: 23%;
+    float: left;
+    font-size: 14px;
+    /* border: 1px solid #000; */
+    padding: 10px 0 10px 10px;
+}
+.base-info li span,.ai-allocinfo li span{
+    font-size: 14px;
+}
+.base-info li span:nth-of-type(2),.ai-allocinfo li span:nth-of-type(2){
+    color: #333;
+    font-weight: bold;
+}
+.mem-info p{
+    padding: 10px 0 10px 10px;
+    font-size: 14px;
+    /* border: 1px solid #000; */
+}
+.mem-info p span{
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 5px;
+    background: rgb(241, 241, 241);
+    /* border: 1px solid #f00; */
+}
+.need-info p{
+    padding: 10px 0 10px 10px;
+    font-size: 14px;
+    /* border: 1px solid #000; */
+}
+.need-info p span{
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 5px;
+    background: rgb(241, 241, 241);
+    /* border: 1px solid #f00; */
+}
+.need-info .title2{
+    width: 100px;
+    padding: 10px 0 10px 5px;
+    margin-left: 10px;
+}
+.file{
+    color: rgb(51, 51, 236);
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+/* ------------------------- */
+#datagrid-td-group1-0-0,#datagrid-td-group3-0-0,#datagrid-td-group5-0-0,#datagrid-td-group5-0-1,#datagrid-td-group7-0-0,#datagrid-td-group7-0-1{
+    border-right: #ccc 1px solid;
+}
+#datagrid-td-group1-0-0,#datagrid-td-group1-0-1,#datagrid-td-group3-0-0,#datagrid-td-group3-0-1,#datagrid-td-group5-0-0,#datagrid-td-group5-0-1,#datagrid-td-group5-0-2,#datagrid-td-group7-0-0,#datagrid-td-group7-0-1,#datagrid-td-group7-0-2{
+    border-bottom: #ccc 1px solid;
+}
+
+/* 报表弹窗 */
+.content{
+    margin: 12px 0;
+    padding: 19px 0;
+    border-bottom: 1px solid #ccc;
+}
+.content p{
+    width: 90%;
+    margin: 0 auto;
+    padding: 8px 0;
+}
+.content p span:first-child{
+    display: inline-block;
+    width: 150px;
+    text-align: right;
+}
+.alert-btn{
+    width: 46%;
+    float: right;
+}
+.alert-btn button:first-child{
+    float: left;
+    margin-right: 10px;
+} 
+.lefted{
+    float: left;
+}
+.alert2-btn{
+    width:73%;
+    float: right;
+}
+.alert2-btn .border-btn{
+    float: left;
+    margin-right: 10px;
+} 
+/* 用工配置弹窗 */
+.pass-content{
+    margin: 10px;
+}
+.p-content{
+    width: 408px;
+    margin-left: 50px;
+    padding-bottom: 50px;
+    /* border-bottom: 1px solid red; */
+}
+.alert3-btn{
+    width:48%;
+    float: right;
+}
+.alert3-btn .border-btn:first-child{
+    float: left;
+    margin-right: 10px;
+} 
+.range,.contents,.dec{
+    margin: 10px 0;
+}
+.pass-content .title{
+    width: 100%;
+    overflow: hidden;
+}
+.pass-content .title img{
+    width: 30px;
+    height: 30px;
+    float: left;
+}
+.passtext{
+    display: inline-block;
+    color: #333333FF;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 4px 0 0 10px;
+}
+.red{
+    color: red;
+}
+.range{
+    width: 100px;
+    font-size: 14px;
+    color: #666666FF;
+}
+.contents{
+    font-size: 14px;
+    color: #0084FFFF;
+}
+.dec{
+    width: 50px;
+    font-size: 14px;
+    color: #666666FF;
+}
+/* 智能搜索--员工详情 */
+.stuff-detail{
+    color: #121212FF;
+    font-size: 16px;
+    margin: 10px 0;
+}
+.searchbox-button{
+    width: 38px;
+    height: 38px;
+    background: url(/human_capital_project/easyui/themes/icons/search2.png) no-repeat center center;
+}
+/* 奖金汇总 */
+.searchbox,.textbox-text{
+    /* background: #F7F8FB; */
+    border: none;
+    border-radius:4px;
+}
+.textbox-icon{
+    width: 22px !important;
+    height: 38px;
+}
+/* -------------智能搜索----------------- */
+
+.zh-sah-home h2{
+    text-align: center;
+    margin-top: 60px;
+    line-height: 103px;
+    font-size: 24px;
+}
+.zh-sah-home .datagrid-header td {
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.zh-sah-home .datagrid-header{
+    background-color: #f4f9f8;
+}
+.zh-sah-sah{
+    width: 600px;
+    padding-left: 10px;
+    height: 40px;
+    background-color: #F7F8FB;
+    margin: 0 auto;
+    position: relative;
+    border-radius:4px;
+}
+.zh-sah-sah input{
+    width: 560px;
+    height: 40px;
+    background-color: #F7F8FB;
+}
+.zh-result-box{
+    width: 600px;
+    z-index: 99;
+    border-radius: 4px;
+    position: absolute;
+    background-color: rgb(247, 248, 251);
+    top: 44px;
+    left: 0px;
+    padding-top: 2px;
+}
+.zh-result-box li{
+    line-height: 35px;
+}
+.zh-export{
+    position: absolute;
+    right: 20px;
+    top: 25px;
+    display: none;
+    font-size: 14px;
+    color: #00A09F;
+}
+.zh-result-box li:hover{
+    background-color: rgb(229, 237, 250);
+    color: #1862DF;
+}
+.total-title{
+    line-height: 35px;
+    margin-left: 30px;
+    position: relative;
+}
+.total-title:before,.search-result-item:before{
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: 13px;
+    display:block;
+    width:0;
+    height:0;
+    border-width:5px 5px 0;
+    border-style:solid;
+    border-color:#000 transparent transparent;
+}
+.result-num{
+    color: #1862DF;
+    padding: 0 5px;
+}
+.search-result-item:before{
+    left: 30px;
+    top: 15px;
+}
+.search-result-item{
+    position: relative;
+}
+.search-result-item li{
+    padding-left: 50px;
+}
+.zh-sah-icon{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    background-image: url(../../assets/icon/search-icon.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.zh-sag-history>h3{
+    position: relative;
+    width: 120px;
+    display: block;
+    margin: 100px auto 0;
+    line-height: 25px;
+    font-size: 24px;
+    color: #888888;
+}
+.zh-sag-history {
+    position: relative;
+}
+.zh-sag-clear{
+    position: absolute;
+    display: inline;
+    font-size: 14px;
+    color: #009C9B;
+    bottom: -6px;
+    right: -15px;
+    cursor: pointer;
+}
+.zh-sah-list{
+    margin: 38px  auto 0;
+    width: 500px;
+}
+.zh-sah-list ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.zh-sah-list li{
+    padding: 0 29px;
+    margin:8px 0;
+    font-weight:400;
+    color:#1862DF;
+    font-size: 14px;
+    cursor: pointer;
+}
+/* -----------智能搜索详情-------------- */
+.zh-sds-top{
+    display: flex;
+    justify-content: space-between;
+    padding: 14px;
+}
+.zh-sds-search{
+    width: 390px;
+    height: 40px;
+    border-radius: 4px;
+    padding-left: 10px;
+    background:rgba(247,248,251,1);
+    position: relative;
+}
+.zh-sds-search input{
+    width: 360px;
+    height: 40px;
+    background:rgba(247,248,251,1);
+}
+.zh-sds-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    background:url(../../assets//icon/search-icon.png) no-repeat;
+    background-size: cover;
+}
+.zh-sds-dc {
+    position: relative;
+    font-size:16px;
+    font-weight:400;
+    color:rgba(0,160,159,1);
+    line-height:40px;
+
+}
+.zh-sds-dc span{
+    position: absolute;
+    width: 17px;
+    height: 14px;
+    background:url(../../assets/icon/dc.png) no-repeat;
+    background-size: cover;
+    left: -30px;
+    top: 13px;
+}
+/* ----------修改------------- */
+.zh-peoples-sah{
+    position: relative;
+}
+.zh-peoples-icon{
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background:url(../../assets/icon/search.png) no-repeat;
+    background-size: cover;
+}
+.wsqdiv{
+    padding: 0px 10px ;
+}
+.wsqdiv p{
+    margin-bottom: 0px;
+    line-height: 20px;
+}
+.already-issued .mem-info{
+    margin: 0px;
+    padding-top: 20px;
+}
+.alert-btn {
+    width: 50%;
+    float: right;
+}
+.table-left,.table-right{
+    vertical-align: top;
+}
+.zh-already-xf{
+    display: inline-block;
+    width: 70px;
+    text-align: right;
+}
+/* 报表弹窗--多级表头 */
+.reportList_table .datagrid-header-row .datagrid-cell span {
+    white-space: normal !important;
+    word-wrap: normal !important;
+}
+.reportList_table .datagrid-header{
+    background-color: #f4f9f8;
+}
+/* .reportList_table .datagrid-header td:first-child{
+    border-left: none;
+}
+.datagrid-cell-c2-dwmc{
+    border-left: 1px solid #cecece;
+} */
+.reportList_table .datagrid-header td:last-child{
+    border-bottom: 1px solid #cecece;
+}
+.reportList_table .datagrid-header td{
+    border-right: 1px solid #cecece;
+    border-bottom: 1px solid #cecece;
+}
+.reportList_table #datagrid-td-group2-1-0{
+    border-right:none;
+}
+/* bonus-add */
+.bonus-add .tooltip,.already-issued .tooltip{
+    background-color: #333;
+    color: #fff;
+}

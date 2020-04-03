@@ -1,0 +1,12 @@
+<div id="full_excess" class="full_excess">
+    <p class="m-tips moreMoney"></p>
+    <button class="border-btn" onclick="cancel(this)">确认</button>
+</div>
+<script>
+    $(function () {
+        $('.moreMoney').text('已超额分配 ' + moreMoey + ' 元,分配金额不能超过总金额！')
+    })
+    function cancel(e) {
+        hideAlert(e);
+    }
+</script>

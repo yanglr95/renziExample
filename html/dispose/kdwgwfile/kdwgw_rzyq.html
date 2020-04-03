@@ -1,0 +1,694 @@
+<div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+    <div class="easyui-layout" style="width:100%;height: 100%">
+
+        <div data-options="region:'center'" style="padding: 20px;position: relative;">
+
+            <div class="shared_box" style="position: relative;">
+                <div style="margin: 20px 0;overflow: hidden;width: 100%;">
+                    <button class="primary-btn" id="kdwgw_rzyq_ok">提交</button>
+                    <button class="border-btn" onclick="closeTabsToIndex()">关闭</button>
+                    <!--<ul class="nav_progress rg">
+                        <li class="lf">
+                            <img style="height: 30px;" src="/assets/home/icon_quan_ok.png" alt="">
+                            <div class="tiao"></div>
+                            <div>岗位分类</div>
+                        </li>
+                        <li class="lf">
+                            <div class="tiao" style="width: calc(100% - 13px)"></div>
+                            <img style="height: 30px;" src="/assets/home/icon_quan_lg.png" alt="">
+                            <div>职责要求</div>
+                        </li>
+                        <li class="lf">
+                            <img style="height: 10px;margin: 7px 0 19px 0;" src="/assets/home/icon_quan_sm.png" alt="">
+                            <div>提交</div>
+                        </li>
+                    </ul>-->
+                </div>
+                <div style="border-bottom: 1px solid #eee;">
+                    <div class="box-title xg_t">
+                        红山县公司挂职锻炼申请（国网层级）
+                    </div>
+                    <div style="padding: 10px 0;">
+                        <span >配置单号:<b class="xg_pzdh"></b></span>
+                        <span>报名有效期：<b class="xg_yxrq">2019-04-01-2019-06-01</b></span>
+                    </div>
+                </div>
+
+                <div style="overflow: hidden;width: calc(100%);">
+                    <div style="width:100px;float: left ;height: 100%;">
+                        <div>
+                            <ul class="left_nav xg_nav">
+                                <!-- <li class="act">干部管理</li>
+                                <li>环保管理</li> -->
+                            </ul>
+                        </div>
+                    </div>
+                        <style>
+                            .required::before{
+                                content:'*';
+                                color:#f00;
+                            }
+                            .per_main_con div{
+                                width: 36%;
+                            }
+                        </style>
+                    <form id="formInsert">
+                        <input type="hidden" id="xg_sid" name="staffingId">
+                        <input type="hidden" id="xg_type" name="postCategory">
+                        <div class="lf" style="width:calc(100% - 100px);">
+                            <div class="shared_main_list">
+                                <div class="shared_main_title">基本信息</div>
+                                <div class="per_main_con">
+                                    <div>
+                                        <span class="required">配置形式</span> 
+                                        <input name="staffingMethod" style="height: 25px;" id="xg_staffingMethod">
+                                    </div>
+                                    <div>
+                                        <span class="required">岗位名称</span> 
+                                        <input class="easyui-textbox" name="postName" style="height: 25px;" id="xg_postName">
+                                    </div>
+                                    <div style="display: flex;">
+                                        <!--<span class="required">试用期间</span class="required"> 
+                                        <input class="easyui-datebox cv_time_start_edit" name="beginDate" id="xg_beginDate" data-options="formatter:myformatter" style="width:120px;height: 25px;">至<input class="easyui-datebox cv_time_end_edit" label="" placeholder="开始"
+                                            data-options="formatter:myformatter" name="endDate" id="xg_endDate" style="height: 25px;width:120px;">-->
+                                        <div style="display: flex;flex:1">
+                                        	<span>填写岗位名称:</span><input type="radio" name="gwtype" id="" style="width: 15px;height: 15px;margin-left: 15px;"/>
+                                        </div>
+                                        <div style="display: flex;flex:1">
+                                        	<span>选择现有岗位:</span><input type="radio" name="gwtype" id="" style="width: 15px;height: 15px;margin-left: 15px;"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span class="required">部门/处室</span> 
+                                        <input class="easyui-textbox" name="recruitDeptName" id="xg_recruitDeptName" style="height: 25px;">
+                                    </div>
+                                    <div>
+                                        <span class="required">需求人数</span> 
+                                        <input class="easyui-textbox" name="recruitNumber" id="xg_recruitNumber" style="height: 25px;">
+                                    </div>
+
+                                    <div>
+                                    </div>
+
+                                    <div>
+                                        <span>所学专业</span> 
+                                        <input class="easyui-textbox" name="recruitProfession" id="xg_recruitProfession" style="height: 25px;">
+                                    </div>
+                                    <div>
+                                        <span>学历</span> 
+                                        <input name="education" id="xg_education" style="height: 25px;width:120px;">及以上
+                                      	<input type="checkbox" style="height: 15px;width:15px;position:relative;top: 5px;" id="eduaCahck">校验
+                                    </div>
+                                    <div>
+                                        <span>工作年限</span> 
+                                        <input class="easyui-textbox" name="experienceYear" id="xg_experienceYear" style="height: 25px;"> 及以上
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <div class="shared_main_title" style="margin-bottom: 10px;">专业技术资格<span class="rg col_00A09F addRows" name="13067">添加</span></div>
+                            <div class="shared_main_list parentBox ">
+                                <!-- <div class="per_main_con guan">
+                                    <div>
+                                        <span>资格等级</span>
+                                        <input class="easyui-textbox"  name="" id="" style="height: 25px;">
+                                    </div>
+
+                                    <div>
+                                        <span>资格要求</span>
+                                        <input class="easyui-textbox" name="" id="" style="height: 25px;">
+                                        <span>校验</span> <input type="checkbox">
+                                    </div>
+                                </div> -->
+                            </div>
+
+                            <div class="shared_main_title" style="margin-bottom: 10px;">职业（执业）资格 <span class="rg col_00A09F addRows" name="12580">添加</span></div>
+                            <div class="shared_main_list xg_zyzg1">
+                                <!-- <div class="per_main_con meng">
+                                    <div>
+                                        <span>资格等级</span>
+                                        <input class="easyui-textbox" name="qualificationName" id="xg_qualificationName" style="height: 25px;">
+                                    </div>
+                                    <div>
+                                        <span>资格要求</span>
+                                        <input class="easyui-textbox" name="qualificationLevel" id="xg_qualificationLevel" style="height: 25px;">
+                                    </div>
+                                    <div><span style="position: relative;top: -5px;">
+                                            校验
+                                            ：</span> <input type="checkbox" style="height: 25px;"></div>
+                                </div> -->
+
+                                <!-- <div class="per_main_con">
+                                    <div><span><i style="color: #FF0000;margin: 0 5px">*</i>
+                                            资格等级
+                                            ：</span> <input class="easyui-combobox" style="height: 25px;"></div>
+                                    <div><span><i style="color: #FF0000;margin: 0 5px">*</i>
+                                            资格要求
+                                            ：</span> <input class="easyui-combobox" style="height: 25px;"></div>
+                                    <div><span style="position: relative;top: -5px;">
+                                            校验
+                                            ：</span> <input type="checkbox" style="height: 25px;"></div>
+                                </div> -->
+
+                            </div>
+
+                            <div class="shared_main_list">
+                                <div class="shared_main_title required" style="margin-bottom: 10px;">岗位职责</div>
+                                <div class="shared_list">
+                                    <textarea style="width: 100%;height:120px;border:solid 1px #ccc;" name="jobDesc" id="xg_jobDesc"
+                                        cols="30" rows="10"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="shared_main_list">
+                                <div class="shared_main_title required" style="margin-bottom: 10px;">任职条件</div>
+                                <div class="shared_list">
+                                    <textarea style="width: 100%;height:120px;border:solid 1px #ccc;"  name="competenceDesc" id="xg_competenceDesc"
+                                        cols="" rows=""></textarea>
+                                        
+                                </div>
+                            </div>
+
+                            <div class="shared_main_list">
+                                <div class="shared_main_title" style="margin-bottom: 10px;">备注</div>
+                                <div class="shared_list">
+                                    <textarea style="width: 100%;height:120px;border:solid 1px #ccc;" name="remark" id="xg_remark"
+                                        cols="" rows=""></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div style="margin: 20px auto;width: 100px;">
+                        <button class="primary-btn" id="inser_btn">保存</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--<div class="kdwgw_rzyq_madal" style="display: block;">
+    <div>
+        <div style="padding:20px">
+        	<img src="../../../assets/home/1577436244.png" alt="">
+        </div>
+        <div class="kdwgw_rzyq_madal_btn" style="padding-top: 50px;">
+                <button  class="primary-btn rg" id="back_deploy_list">返回列表</button>
+        </div>
+    </div>
+
+</div>-->
+<div class="kdwgw_rzyq_madal">
+	<div style="width: 600px;height: 480px;padding: 0;">
+		<div style="background: url(assets/home/1577436244.png) center center; width: 100%;height: 90%;">
+		</div>
+		<div class="kdwgw_rzyq_madal_btn">
+                <button  class="primary-btn rg" id="back_deploy_list">返回列表</button>
+        </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        var stId=$("#mainTabs").tabs("options").id;
+        var dataCerter=null;
+
+        //配置形式
+        $("#xg_staffingMethod").combobox({
+            valueField: 'id',    
+            textField: 'value',
+            editable:false,
+            data:[
+                {id:'B122',value:'岗位竞聘-转正'},
+                {id:'B132',value:'岗位竞聘-试用（工资、人事关系保留原单位)'},
+                {id:'B134',value:'岗位竞聘-试用(工资、人事关系调入原单位)'}
+            ]
+        })
+        //学历
+        $("#xg_education").combobox({
+            valueField: 'id',    
+            textField: 'value',
+            editable:false,
+            data:[
+                {id:"11",value:"博士研究生毕业"},
+                {id:'14',value:'硕士研究生毕业'},
+                {id:'21',value:'大学本科毕业'},
+                {id:'31',value:'大学专科毕业'},
+                {id:'44',value:'职业高中毕业'},
+                {id:'61',value:'普通高中毕业'},
+                {id:'90',value:'其他'}
+            ]
+        })
+
+        getDeployDetail();
+        $("#xg_sid").val(stId.id);
+        function getDeployDetail(){
+            $.ajax({
+                type:'GET',
+                url:BASE_URL3+'/competitionApply/queryStaffingInfo',
+                contentType:'application/json',
+                data:{
+                    staffingId:stId.id
+                },
+                success:function(data){
+                   setDetaiTitle(data.resultValue.empStaffing);
+                   setDetaiContent(data.resultValue.compeListVOs);
+                   dataCerter=data.resultValue.compeListVOs;
+                   setDetaiContentCenter(stId.index);
+                }
+            })
+        }
+        //设置头部数据
+        function setDetaiTitle(rows){
+            $(".xg_t").text(rows.staffingName);
+            $(".xg_pzdh").text(rows.staffingId);
+            $(".xg_yxrq").text(timeType(rows.beginDate) +"~"+ timeType(rows.endDate));
+
+            //弹框头部-暂用
+            $(".sub_title").text(rows.staffingName);
+            $(".sub_pzdh").text("配置单号："+rows.staffingId);
+            $(".sub_yxq").text("报名有效期："+timeType(rows.beginDate) +"~"+ timeType(rows.endDate));
+
+        }
+        //左侧菜单
+        function setDetaiContent(rows){
+            var cLi="";
+            for(var i=0;i<rows.length;i++){
+                cLi+="<li>"+rows[i].postCategoryName+"</li>";
+            }
+            $(".xg_nav").html(cLi);
+            //$(cLi).appendTo($(".xg_nav"));
+            $(".xg_nav li").eq(stId.index).addClass('act');
+        }
+        // var zy_Data=[{id:'1',value:'高级技师'},{id:'2',value:'技师'},{id:'3',value:'高级工'},{id:'4',value:'中级工'},{id:'5',value:'初级工'}];
+        // var zy1_Data=[{id:'1',value:'正高级 '},{id:'2',value:'副高级 '},{id:'3',value:'中级'},{id:'4',value:'初级'}];
+        function setDetaiContentCenter(i){
+            var xg_zyjszg="";
+            var xg_zyzg="";
+            $("#xg_type").val(dataCerter[i].postCategory);
+            $("#xg_staffingMethod").combobox("setValue",dataCerter[i].staffingMethod);
+            $("#xg_postName").textbox("setValue",dataCerter[i].postName);
+            $("#xg_beginDate").datebox("setValue",timeType(dataCerter[i].beginDate));
+            $("#xg_endDate").datebox("setValue",timeType(dataCerter[i].endDate));
+            $("#xg_recruitDeptName").textbox("setValue",dataCerter[i].recruitDeptName);
+            $("#xg_recruitNumber").textbox("setValue",dataCerter[i].recruitNumber);
+            $("#xg_recruitProfession").textbox("setValue",dataCerter[i].recruitProfession);
+            $("#xg_education").combobox("setValue",dataCerter[i].education);
+            $("#xg_experienceYear").textbox("setValue",dataCerter[i].experienceYear);
+            for(var j =0;j<dataCerter[i].skill.length;j++){
+                if(dataCerter[i].skill){
+                    xg_zyjszg+='<div class="per_main_con zyzg_boxs">';
+                    xg_zyjszg+='<div><span>资格要求:</span>';
+                    xg_zyjszg+='<input class="skill_abilityName easyui-combobox" value='+dataCerter[i].skill[j].abilityName+' style="height: 25px;">';
+                    xg_zyjszg+='</div>';
+                    xg_zyjszg+='<div><span>资格等级:</span>';
+                    xg_zyjszg+='<input class="skill_abilityLevel easyui-combobox" value='+dataCerter[i].skill[j].abilityLevel+' style="height: 25px;">';
+                    xg_zyjszg+='<input type="checkbox" style="height: 15px;width:15px;margin-left:10px;position: relative;top:5px;">校验';
+                    xg_zyjszg+='<span style="margin-left: 15px;display:inline;cursor: pointer;"class="delect_ZG">删除</span>';
+                    xg_zyjszg+='</div>';
+                    xg_zyjszg+='</div>'
+                }
+            }
+
+            for(var j =0;j<dataCerter[i].qualification.length;j++){
+                if(dataCerter[i].qualification){
+                    xg_zyzg+='<div class="per_main_con zy_boxs">';
+                    xg_zyzg+='<div><span>资格要求: </span>';
+                    xg_zyzg+='<input class="qualification_abilityName easyui-combobox" value='+dataCerter[i].qualification[j].abilityName+' style="height: 25px;width:180px">';
+                    xg_zyzg+='</div>';
+                    xg_zyzg+='<div><span>资格等级: </span>';
+                    xg_zyzg+='<input class="qualification_abilityLevel easyui-combobox" value='+dataCerter[i].qualification[j].abilityLevel+' style="height: 25px;width:180px">';
+                    xg_zyzg+='<input type="checkbox" style="height: 15px;width:15px;margin-left:10px;position: relative;top:5px;">校验';
+                    xg_zyzg+='<span style="margin-left: 15px;display:inline;cursor: pointer;"class="delect_ZG">删除</span>';
+                    xg_zyzg+='</div>';
+                    xg_zyzg+='</div>';
+                }
+            }
+            $(".parentBox").html(xg_zyjszg);
+            $(".xg_zyzg1").html(xg_zyzg);
+            
+            $(".skill_abilityName").combobox({
+                    valueField: 'id',    
+                    textField: 'value',
+                    editable:false,
+                    data:[
+                        {id:'09-028',value:'油漆工'},
+                        {id:'09-029',value:'电工仪表修理工'},
+                        {id:'09-030',value:'电工'},
+                        {id:'09-031',value:'维修电工'},
+                        {id:'09-032',value:'机修钳工'},
+                        {id:'09-033',value:'电焊工'}
+                    ]
+                })
+                $(".skill_abilityLevel").combobox({
+                    valueField: 'id',    
+                    textField: 'value',
+                    editable:false,
+                    data:[
+                        {id:'1',value:'高级技师'},
+                        {id:'2',value:'技师'},
+                        {id:'3',value:'高级工'},
+                        {id:'4',value:'中级工'},
+                        {id:'5',value:'初级工'}
+                    ]
+                })
+                 $(".qualification_abilityName").combobox({
+                    valueField: 'id',    
+                    textField: 'value',
+                    editable:false,
+                    data:[
+                        {id:'135',value:'计员'},
+                        {id:'125',value:'经济员'},
+                        {id:'85',value:'技术员'},
+                        {id:'82',value:'高级工程师'},
+                        {id:'73',value:'实验师'},
+                        {id:'11',value:'教授'}
+                    ]
+                })
+                $(".qualification_abilityLevel").combobox({
+                    valueField: 'id',    
+                    textField: 'value',
+                    editable:false,
+                    data:[
+                        {id:'1',value:'正高级'},
+                        {id:'2',value:'副高级'},
+                        {id:'3',value:'中级'},
+                        {id:'4',value:'初级'}
+                    ]
+                })
+
+            // $("#xg_skillName").textbox("setValue",dataCerter[i].skillName);
+            // $("#xg_skillLevel").textbox("setValue",dataCerter[i].skillLevel);
+            $("#xg_qualificationName").textbox("setValue",dataCerter[i].qualificationName);
+            $("#xg_qualificationLevel").textbox("setValue",dataCerter[i].qualificationLevel);
+            $("#xg_jobDesc").val(dataCerter[i].jobDesc || '');
+            $("#xg_competenceDesc").val(dataCerter[i].competenceDesc || '');
+            $("#xg_remark").val(dataCerter[i].remark || "");
+        }
+
+        //点击导航
+        var index=stId.index;
+        $(".xg_nav").on("click","li",function(){
+            index=$(this).index();
+            $(this).addClass('act').siblings().removeClass('act');
+            setDetaiContentCenter(index);
+        })
+        //保存
+        $("#inser_btn").on("click",function(){
+        	var checkResult=checkDeployEditor();
+            if(!checkResult.isTrue){
+                $.messager.alert("提示信息",checkResult.objTxt)
+                    return;
+            }
+            var dataForm = $("#formInsert").serializeArray();
+            var inserObj={};
+            var skillArray=[];
+            var qualificationArray=[];
+
+
+            var major=$(".zyzg_boxs").length;
+            var profession=$(".zy_boxs").length;
+
+            for(var i=0;i<major;i++){
+                var skillObj={};
+                skillObj['abilityName']=$(".zyzg_boxs").eq(i).find('.skill_abilityName').combobox('getText');
+                skillObj['abilityLevel']=$(".zyzg_boxs").eq(i).find('.skill_abilityLevel').combobox('getValue');
+                skillObj['abilityFlag']="Y";
+                skillArray.push(skillObj);
+            }
+            for(var i=0;i<profession;i++){
+                var qualificationObj={};
+                qualificationObj['abilityName']=$(".zy_boxs").eq(i).find('.qualification_abilityName').combobox('getText');
+                qualificationObj['abilityLevel']=$(".zy_boxs").eq(i).find('.qualification_abilityLevel').combobox('getValue');
+                qualificationObj['abilityFlag']="Y";
+                qualificationArray.push(qualificationObj);
+            }
+            
+            for(var i in dataForm){
+                inserObj[dataForm[i].name]=dataForm[i].value;
+            }
+//          console.log(qualificationArray)
+            inserObj.skill=skillArray;//专业
+            inserObj.qualification=qualificationArray;//职业
+//          console.log(inserObj);
+            
+            $.ajax({
+                type:'POST',
+                url:BASE_URL3+'/competitionApply/updateApplyRequire',
+                contentType:'application/json',
+                data: JSON.stringify(inserObj),
+                success:function(data){
+                   console.log(data)
+                   if(data.resultCode==="200" && data.resultValue){
+                       $.messager.alert("提示信息","保存成功!");
+                       getDeployDetail();
+                       console.log(index)
+                       setDetaiContentCenter(index);
+                        $(".xg_nav li").eq(index).addClass('act');
+                   }
+                }
+            })
+        })
+
+        //添加
+        var addIndex=0;
+        $(".addRows").on("click",function(){
+            var iName=$(this).attr("name");
+            var c_l='';
+            addIndex++;
+            if(iName==="13067"){
+                c_l+='<div class="per_main_con zyzg_boxs">';
+                c_l+='<div><span>资格要求:</span>';
+                c_l+='<input type="text" class="skill_abilityName s_Name'+addIndex+'" style="height: 25px;">';
+                c_l+='</div>';
+                c_l+='<div><span>资格等级:</span>';
+                c_l+='<input type="text" class="skill_abilityLevel s_Level'+addIndex+'" style="height: 25px;">';
+                c_l+='<input type="checkbox" style="height: 15px;width:15px;margin-left:10px;position: relative;top:5px;">校验';
+                c_l+='<span style="margin-left: 15px;display:inline;cursor: pointer;"class="delect_ZG">删除</span>';
+                c_l+='</div>';
+                c_l+='</div>';
+                $(c_l).appendTo($(".parentBox"));
+
+                $(".s_Name"+addIndex).combobox({
+                    valueField: 'id',    
+                    textField: 'value',
+                    editable:false,
+                    data:[
+                        {id:'09-028',value:'油漆工'},
+                        {id:'09-029',value:'电工仪表修理工'},
+                        {id:'09-030',value:'电工'},
+                        {id:'09-031',value:'维修电工'},
+                        {id:'09-032',value:'机修钳工'},
+                        {id:'09-033',value:'电焊工'}
+                    ]
+                })
+                $(".s_Level"+addIndex).combobox({
+                    valueField: 'id',    
+                    textField: 'value',
+                    editable:false,
+                    data:[
+                        {id:'1',value:'高级技师'},
+                        {id:'2',value:'技师'},
+                        {id:'3',value:'高级工'},
+                        {id:'4',value:'中级工'},
+                        {id:'5',value:'初级工'}
+                    ]
+                })
+            }else if(iName==="12580") {
+                c_l+='<div class="per_main_con zy_boxs">';
+                c_l+='<div><span>资格要求:</span>';
+                c_l+='<input type="text" class="qualification_abilityName q_Name'+addIndex+'" style="height: 25px;">';
+                c_l+='</div>';
+                c_l+='<div><span>资格等级:</span>';
+                c_l+='<input type="text" class="qualification_abilityLevel q_Level'+addIndex+'" style="height: 25px;">';
+                c_l+='<input type="checkbox" style="height: 15px;width:15px;margin-left:10px;position: relative;top:5px;">校验';
+                c_l+='<span style="margin-left: 15px;display:inline;cursor: pointer;"class="delect_ZG">删除</span>';
+                c_l+='</div>';
+                c_l+='</div>'
+                $(c_l).appendTo($(".xg_zyzg1"));
+
+                $(".q_Name"+addIndex).combobox({
+                    valueField: 'id',    
+                    textField: 'value',
+                    editable:false,
+                    data:[
+                        {id:'135',value:'计员'},
+                        {id:'125',value:'经济员'},
+                        {id:'85',value:'技术员'},
+                        {id:'82',value:'高级工程师'},
+                        {id:'73',value:'实验师'},
+                        {id:'11',value:'教授'}
+                    ]
+                })
+                $(".q_Level"+addIndex).combobox({
+                    valueField: 'id',    
+                    textField: 'value',
+                    editable:false,
+                    data:[
+                        {id:'1',value:'正高级'},
+                        {id:'2',value:'副高级'},
+                        {id:'3',value:'中级'},
+                        {id:'4',value:'初级'}
+                    ]
+                })
+            }
+        })
+
+        $(".shared_main_list").on("click",".delect_ZG",function(){
+            $(this).parent().parent().remove();
+        })
+
+
+        $(".zhankai_act").on("click", function () {
+            var html = $(this).html()
+            var htmlact = html == "展开" ? "关闭" : "展开"
+            $(this).html(htmlact)
+            $(this).parent().next().toggle()
+        })
+        //提交
+        $("#kdwgw_rzyq_ok").on("click",function(){
+        	var tipArray=[];
+    		for (var i = 0; i < dataCerter.length; i++) {
+    			if(!dataCerter[i].staffingMethod&&!dataCerter[i].staffingMethodName){
+    				tipArray.push(dataCerter[i].postCategoryName)
+    			}
+    		}
+    		if(tipArray.length>0){
+	    		$.messager.alert("提示信息",tipArray.join(",")+"还未进行编辑保存!");
+	        	return;
+    		}
+            $.messager.confirm("确认信息","确定要提交吗?",function(ok){
+                if(ok){
+                    $.ajax({
+                        type:'get',
+                        url:BASE_URL3+'/competitionApply/submit',
+                        contentType:'application/json',
+                        data:{
+                            staffingId:stId.id
+                        },
+                        success:function(data){
+                            if(data.resultCode==="200"){
+                                $(".kdwgw_rzyq_madal").show();
+                            }
+                        }
+                    })
+                }
+            })
+        })
+        
+        $("#back_deploy_list").on("click",function(){
+            closetabTitle('跨单位岗位竞聘申请');
+            closetabTitle('配置单详情编辑');
+            opentab("dispose/kdwgw", "跨单位岗位竞聘申请", false);
+        })
+        $(".kdwgw_rzyq_madal_btn .primary-btn").on("click",function(){
+            $(".kdwgw_rzyq_madal").hide()
+        })
+    });
+    
+    //校验配置单
+    function checkDeployEditor(){
+        var rtnObj = {
+            isTrue : false,
+            objTxt:''
+        }
+
+        var update_shape=$("#xg_staffingMethod").combobox("getValue");
+        if(!CheckEmpty($.trim(update_shape))){
+            rtnObj.objTxt="请选择配置形式!";
+            return rtnObj;
+        }
+        
+        var update_gwmc=$("#xg_postName").textbox("getValue");
+        if(!CheckEmpty($.trim(update_gwmc))){
+            rtnObj.objTxt="岗位名称不能为空!";
+            return rtnObj;
+        }
+
+//      var update_beginDate=$("#xg_beginDate").datebox("getValue");
+//      var update_endDate=$("#xg_endDate").datebox("getValue");
+//
+//      if(!CheckEmpty($.trim(update_beginDate))){
+//          rtnObj.objTxt="试用开始日期不能为空!";
+//          return rtnObj;
+//      }else if(update_beginDate>update_endDate){
+//          rtnObj.objTxt="试用结束日期不能晚于开始日期!";
+//          return rtnObj;
+//      }
+//      if(!CheckEmpty($.trim(update_endDate))){
+//          rtnObj.objTxt="试用结束日期不能为空!";
+//          return rtnObj;
+//      }
+        
+        var update_bmch=$("#xg_recruitDeptName").textbox("getValue");
+        if(!CheckEmpty($.trim(update_bmch))){
+            rtnObj.objTxt="部门/处室不能为空!";
+            return rtnObj;
+        }
+        
+        var update_xqrs=$("#xg_recruitNumber").textbox("getValue");
+        if(!CheckEmpty($.trim(update_xqrs))){
+            rtnObj.objTxt="需求人数不能为空!";
+            return rtnObj;
+        }
+        
+        var checkEdu=$("#eduaCahck").is(":checked");
+        var update_xl=$("#xg_education").combobox("getValue");
+        console.log(checkEdu)
+        console.log(update_xl);
+        if(checkEdu){
+        	if(!CheckEmpty($.trim(update_xl))){
+	            rtnObj.objTxt="请选择学历!";
+	            return rtnObj;
+        	}
+        }
+        
+        var update_gwzz=$("#xg_jobDesc").val();
+        if(!CheckEmpty($.trim(update_gwzz))){
+            rtnObj.objTxt="岗位职责不能为空!";
+            return rtnObj;
+        }
+        
+        var update_zztj=$("#xg_competenceDesc").val();
+        if(!CheckEmpty($.trim(update_zztj))){
+            rtnObj.objTxt="任职条件不能为空!";
+            return rtnObj;
+        }
+        
+        rtnObj.isTrue = true;
+        return rtnObj;
+        
+    }
+
+    //校验输入的值
+    function CheckEmpty( mixed_var ){
+        var key;  
+        
+        if (mixed_var === "" || mixed_var === null || mixed_var === false || typeof mixed_var === 'undefined') {  
+            return false;  
+        }  
+    
+        if (typeof mixed_var == 'object') {  
+            for (key in mixed_var) {  
+                return true;  
+            }  
+            return false;  
+        }  
+    
+        return true;  
+    }
+    
+    function closeTabsToIndex(){
+    	closetabTitle('跨单位岗位竞聘申请');
+        closetabTitle('配置单详情编辑');
+        opentab("dispose/kdwgw", "跨单位岗位竞聘申请", false);
+    }
+    
+    
+    
+    
+</script>

@@ -1,0 +1,200 @@
+{
+    "id": 10,
+    "menuText": "用工配置管理",
+    "secondary": true,
+    "list": [
+        {
+            "menuText": "定员管理",
+            "secondary": true,
+            "list": [
+                {
+                    "menuText": "定员下达",
+                    "secondary": false
+                },
+                {
+                    "menuText": "定员分解",
+                    "secondary": false
+                }
+            ]
+        },
+        {
+            "menuText": "超缺员统计分析",
+            "secondary": true,
+            "list": [
+                {
+                    "menuText": "超缺员查询",
+                    "secondary": true,
+                    "list": [
+                        {
+                            "menuText": "组织维度",
+                            "link": "",
+                            "secondary": false
+                        },
+                        {
+                            "menuText": "岗位分类维度",
+                            "link": "",
+                            "secondary": false
+                        },
+                        {
+                            "menuText": "专业分类维度",
+                            "link": "",
+                            "secondary": false
+                        },
+                        {
+                            "menuText": "超缺员差异情况分析表",
+                            "link": "",
+                            "secondary": false
+                        },
+                        {
+                            "menuText": "内部市场-省公司各专业人数",
+                            "link": "",
+                            "secondary": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "menuText": "人力资源流动配置",
+            "secondary": true,
+            "list": [
+                {
+                    "menuText": "岗位配置/人才交流",
+                    "secondary": true,
+                    "list": [
+                        {
+                            "menuText": "单位内部配置申请",
+                            "link": "",
+                            "secondary": false
+                        },
+                        {
+                            "menuText": "跨单位配置申请",
+                            "link": "",
+                            "secondary": false
+                        },
+                        {
+                            "menuText": "跨单位配置审批",
+                            "link": "",
+                            "secondary": false
+                        },
+                        {
+                            "menuText": "跨单位需求应答",
+                            "link": "",
+                            "secondary": false
+                        },
+                        {
+                            "menuText": "跨单位应答审批",
+                            "link": "",
+                            "secondary": false
+                        },
+                        {
+                            "menuText": "跨单位配置筛选录用",
+                            "link": "",
+                            "secondary": false
+                        }
+                    ]
+                },
+                {
+                    "menuText": "岗位竞聘",
+                    "secondary": true,
+                    "list": [
+                        {
+                            "menuText": "跨单位岗位竞聘申请",
+                            "link": "dispose/kdwgw",
+                            "secondary": false
+                        },
+                        {
+                            "menuText": "配置单审批",
+                            "link": "dispose/pzdsp",
+                            "secondary": false
+                        },
+                        {
+                            "menuText": "报名人员资格审核",
+                            "link": "dispose/bmrysh",
+                            "secondary": false
+                        },
+                        {
+                            "menuText": "竞聘考评",
+                            "link": "dispose/jpkp",
+                            "secondary": false
+                        },
+                        {
+                            "menuText": "筛选录用",
+                            "link": "dispose/sxly",
+                            "secondary": false
+                        },
+                        {
+                            "menuText": "筛选录用审批",
+                            "link": "dispose/sxlysp",
+                            "secondary": false
+                        },
+                        {
+                            "menuText": "执行岗位变动",
+                            "link": "dispose/zxgwbd",
+                            "secondary": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "menuText": "统计分析查询",
+            "secondary": true,
+            "list": [
+                {
+                    "menuText": "配置单状态查询",
+                    "link": "",
+                    "secondary": false
+                },
+                {
+                    "menuText": "配置单统计",
+                    "link": "",
+                    "secondary": false
+                },
+                {
+                    "menuText": "人员信息查询",
+                    "link": "",
+                    "secondary": false
+                },
+                {
+                    "menuText": "降岗待岗统计查询",
+                    "link": "",
+                    "secondary": false
+                }
+            ]
+        },
+        {
+            "menuText": "流动积分",
+            "secondary": true,
+            "list": [
+                {
+                    "menuText": "流动积分计算",
+                    "link": "",
+                    "secondary": false
+                },
+                {
+                    "menuText": "积分调整审批",
+                    "link": "",
+                    "secondary": false
+                },
+                {
+                    "menuText": "流动积分查询",
+                    "link": "",
+                    "secondary": false
+                }
+            ]
+        },
+        {
+            "menuText": "提醒功能",
+            "secondary": true,
+            "list": [
+                {
+                    "menuText": "软流动到期提醒",
+                    "link": "",
+                    "secondary": false
+                }
+               
+            ]
+        }
+    ]
+}

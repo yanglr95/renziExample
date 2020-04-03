@@ -1,0 +1,89 @@
+<div class="reportList_table" style="width: 100%;height:100%;">
+    <div id="reportList_table"></div>
+    <div class="dcreport" style="cursor: pointer;position:absolute;top:60%;right:1%;z-index:999;color: #00A09F;">
+        <img src="../../../../../assets/icon/dc.png">
+        <span>导出</span>
+    </div>
+</div>
+
+<script>
+    // 表格数据
+    var date = [
+        {
+        dwmc:'甲单位',
+        ygzlhj:1,
+        xj:2,
+        zg:3,
+        zgzgs:4,
+        zysgcydw:5,
+        ndyg:6,
+        tgdfwgs:7,
+        wlpqyg:8,
+        wlpqndyg:9,
+        fqrzyg:10,
+        fqrzndyg:11,
+        zyzgzg:12,
+        qtcyry:13
+    },{
+        dwmc:'乙单位',
+        ygzlhj:1,
+        xj:2,
+        zg:3,
+        zgzgs:4,
+        zysgcydw:5,
+        ndyg:6,
+        tgdfwgs:7,
+        wlpqyg:8,
+        wlpqndyg:9,
+        fqrzyg:10,
+        fqrzndyg:11,
+        zyzgzg:12,
+        qtcyry:13
+    }]
+    $(function(){
+        $('#reportList_table').datagrid({ 
+        fit : true,
+        data:date,
+        fitColumns : false,
+        columns:
+            [
+                [
+                    {"title":"企业用工总量情况表（一）","colspan":14,halign:'center'},
+                    
+                ],
+                [
+                    {"title":"填报单位：   单位编号（）    报告日期","colspan":7,halign:'left',align:'left'},
+                    {"title":"","colspan":7,halign:'left',align:'left'}
+                ],
+                [
+                    {"field":"dwmc","title":"单位名称","rowspan":4,width:"10%"},
+                    {"field":"ygzlhj","title":"用工总量合计","rowspan":4,width:"10%"},
+                    {"title":"全资控股和代管单位用工总量期末人数（人）","colspan":12},
+                ],
+                [
+                    {"field":"xj","title":"小计","rowspan":3,width:"10%"},
+                    {"title":"职工","colspan":4},
+                    {"title":'农电用工（直签劳动合同）',"colspan":2},
+                    {"title":'劳务派遣用工',"colspan":2},
+                    {"title":'非全日制用工',"colspan":2},
+                    {"field":"qtcyry","title":'其他从业人员',"rowspan":3,width:"10%"},
+                ],
+                [
+                    {"field":"zg","title":"职工","rowspan":2,width:"10%"},
+                    {"field":"zgzg","title":"在岗职工","colspan":2,width:"10%"},
+                    {"field":"zysgcydw",'title':'支援省管产业单位职工',"rowspan":2,width:"10%"},
+                    {"field":"ndyg",'title':'农电用工（直签劳动合同）',"rowspan":2,width:"10%"},
+                    {"field":"tgdfwgs",'title':'与供电服务公司直签合同',"rowspan":2,width:"10%"},
+                    {"field":"wlpqyg",'title':'劳务派遣用工',"rowspan":2,width:"10%"},
+                    {"field":"wlpqndyg",'title':'劳务派遣制农电用工',"rowspan":2,width:"10%"},
+                    {"field":"fqrzyg",'title':'非全日制用工',"rowspan":2,width:"10%"},
+                    {"field":"fqrzndyg",'title':'非全日制农电用工',"rowspan":2,width:"10%"},
+                ],
+                [
+                    {"field":"zgzgs","title":"在岗职工","rowspan":1,width:"10%"},
+                    {"field":"zyzgzg","title":"主业在岗职工","rowspan":1,width:"10%"},
+                ],
+            ]
+    }); 
+});
+</script>

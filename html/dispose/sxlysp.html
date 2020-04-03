@@ -1,0 +1,65 @@
+<div class="easyui-layout animated fadeInRight" data-options="fit:true">
+	<div class="easyui-layout" style="width:100%;height: 100%;">
+	    <div class="tab_card">
+	        <div class="title_line">
+	            <div class="tab_title">筛选录用审批</div>
+	        </div>
+        
+            <div class="scroll_record" data-options="region:'center',split:true" style="padding: 10px 20px;">
+                <div class="easyui-tabs content-tabs" id="sxlyspTab" style="margin-bottom: 10px;">
+                    <div title="待审批" class="tableHeight" data-url="html/dispose/sxlyspfile/needpass.html">
+                        <!-- <div class="easyui-layout tableHeight" fit="true">
+                            <div id="needpass-center" 
+                                data-options="region:'center',border:false,split:false,href:'html/dispose/sxlyspfile/needpass.html'">
+                            </div>
+                        </div> -->
+                    </div>
+                    <div title="审批通过" class="tableHeight" data-url="html/dispose/sxlyspfile/pass.html">
+                        <!-- <div class="easyui-layout tableHeight" fit="true">
+                            <div id="pass-center" style="margin-top: 20px"
+                                data-options="region:'center',border:false,split:false,href:'html/dispose/sxlyspfile/pass.html'">
+                            </div>
+                        </div> -->
+                    </div>
+                    <div title="审批驳回" class="tableHeight" data-url="html/dispose/sxlyspfile/reject.html">
+                        <!-- <div class="easyui-layout tableHeight" fit="true">
+                            <div id="reject-center"  style="margin-top: 20px"
+                                data-options="region:'center',border:false,split:false,href:'html/dispose/sxlyspfile/reject.html'">
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        var $slsb_tabs = $('#sxlyspTab'); 
+        $slsb_tabs.tabs({ 
+            onSelect : function(){ 
+                var $tab = $slsb_tabs.tabs('getSelected'); 
+                $slsb_tabs.tabs('update', { 
+                    tab : $tab, 
+                    options : { href : $tab.data('url'), } 
+                }); 
+            } 
+        }); 
+    })
+    
+    // $('#sxlyspTab').tabs({ 
+    //     onSelect: function(title,index){ 
+    //         //alert(title) 
+    //         switch(title){ 
+    //             case '待审批': 
+    //             $("#needpass-center").panel("refresh","html/dispose/sxlyspfile/needpass.html"); 
+    //             case '审批通过': 
+    //             $("#pass-center").panel("refresh","html/dispose/sxlyspfile/pass.html"); 
+    //             break; 
+    //             case '审批驳回': 
+    //             $("#reject-center").panel("refresh","html/dispose/sxlyspfile/reject.html"); 
+    //             break; 
+    //         } 
+    //     } 
+    // }); 
+</script>

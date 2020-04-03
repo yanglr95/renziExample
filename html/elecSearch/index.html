@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+</head>
+
+
+<body>
+    <div class="zh-sah-home" style="padding: 15px;position: relative;">
+        <h2>智能搜索</h2>
+        <div class="zh-sah-sah">
+            <input type="text" id="zh-search" placeholder="请输入关键字">
+            <span class="zh-sah-icon"></span>
+            <div class="zh-result-box" style="display: none;font-size: 14px;">
+                <div class="zh-search-result">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="zh-export" style="cursor: pointer;">
+            <img src="assets/icon/dc.png">
+            <span>导出</span>
+        </div>
+        <div class="zh-sag-history">
+            <h3>搜索历史<span class="zh-sag-clear">清空</span></h3>
+            <div class="zh-sah-list">
+                <ul>
+                    <li>
+                        赵姗姗
+                    </li>
+                    <li>
+                        人力资源统计
+                    </li>
+                    <li>
+                        单位
+                    </li>
+                    <li>
+                        运维部30岁以下3年以上工作经验
+                    </li>
+                    <li>
+                        运检
+                    </li>
+                    <li>
+                        大数据
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="zh-table-box" style="margin-top: 15px;">
+            <div id="zh-table"></div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            //收起搜索结果
+            $('.zh-sah-home').click(function(){
+                $('.zh-result-box').slideUp(200)
+            })
+            $('#zh-search').on('input',function(){
+                $('.zh-result-box').slideUp(200)
+            }).click(function(e){
+                e.stopPropagation();
+            }).keypress(function(e){
+                if (e.which == 13 && $('#zh-search').val().trim()) {
+                    if (!isNaN($('#zh-search').val())) {
+                        closetabTitle("我的信息");
+                        opentab("/elecSearch/precisionSearch", "我的信息", false, $('#zh-search').val())
+                        return
+                    }
+                    searchResult($('#zh-search').val());
+                }
+            })
+            //清空搜索记录
+            $('.zh-sag-clear').click(function(){
+                console.log(132456)
+            })
+            //搜索
+            $('.zh-sah-icon').click(function (e) {
+                e.stopPropagation();
+                if (!isNaN($('#zh-search').val())) {
+                    closetabTitle("我的信息");
+                    opentab("/elecSearch/precisionSearch", "我的信息", false, $('#zh-search').val())
+                    return
+                }
+                if ($('#zh-search').val().trim()) {
+                    searchResult($('#zh-search').val());
+                }
+            })
+        })
+        function searchResult(key){ //搜索结果
+            //openLoading();
+            $.ajax({
+                type:'post',
+                url:'http://111.204.59.195:58000/SearchServer/apiservice/service',
+                contentType: 'application/json',
+                data:JSON.stringify({
+                    "key": key,
+                    "currentPage": 1,
+                    "pageSize": 10
+                }),
+                success:function(data){
+                    //closeLoading();
+                    var d = JSON.parse(data);
+                    console.log(d)
+                    if (!d.totalHits) {
+                        $('.zh-search-result').html('<div style="line-height: 35px;text-align: center;">无结果</div>')
+                        $('.zh-result-box').slideDown(200);
+                        return
+                    }
+                    if (d.type == 'count') {
+                        var title = '<div class="total-title">全局搜索结果共<span class="result-num">'+d.totalHits+'</span>人</div>'
+                        var degreeTags = forItem(d.degree_tags);
+                        var zyTags = forItem(d.zy_tags);
+                        var sexTags = '';
+                        var yearTags = '<ul class="search-result-item"><li>今年新进毕业生共<span class="result-num">'+d.thisYear+'</span>人</li><li>近三年毕业生共<span class="result-num">'+d.within3Year+'</span>人</li><li>近五年毕业生共<span class="result-num">'+d.within5Year+'</span>人</li></ul>';
+                        sexTags += '<ul class="search-result-item">';
+                        for (var i = 0; i < d.sex_tags.length; i++) {
+                            sexTags += '<li>' + d.sex_tags[i].key + '性共<span class="result-num">' + d.sex_tags[i].docCount + '</span>人</li>'
+                        }
+                        sexTags += '</ul>';
+                        $('.zh-search-result').html(title + degreeTags + yearTags + sexTags + zyTags);
+                        $('.zh-result-box').slideDown(200);
+                    }
+                    $('.zh-search-result li').click(function(e){
+                        var id = null;
+                        if ($(this).parent().index()==1) {
+                            id = d.degree_tags[$(this).index()].searchKey;
+                        }else if($(this).parent().index()==2){
+                            if ($(this).index()==0) {
+                                id = d.thisYear_search;
+                            }else if ($(this).index()==1) {
+                                id = d.within3Year_search;
+                            }else{
+                                id = d.within5Year_search;
+                            }
+                        }else if ($(this).parent().index()==3) {
+                            id = d.sex_tags[$(this).index()].searchKey;
+                        }else if ($(this).parent().index()==4) {
+                            id = d.zy_tags[$(this).index()].searchKey;
+                        }
+                        queryTableData(id)
+                        // e.stopPropagation()
+                        // console.log($(this).parent().index(),$(this).index())
+                    })
+                }
+            })
+        }
+        function forItem(arr){
+            var item = '<ul class="search-result-item">';
+            for (var i = 0; i < arr.length; i++) {
+                // if (!arr[i].key) {
+                //     continue;
+                // }
+                item += '<li>' + arr[i].key + '共<span class="result-num">' + arr[i].docCount + '</span>人</li>'
+            }
+            item += '</ul>'
+            return item;
+        }
+        function queryTableData(id){ //请求表格数据
+            //openLoading();
+            $.ajax({
+                type:'post',
+                url:'http://111.204.59.195:58000/SearchServer/apiservice/service',
+                contentType:'application/json',
+                data:JSON.stringify({
+                    "key": id,
+                    "currentPage": 1,
+                    "pageSize": 30
+                }),
+                success:function(data){
+                    var params = [];
+                    console.log(JSON.parse(data),'--------------------------------------')
+                    var d = JSON.parse(data);
+                    for(var i in d){
+                        params.push({
+                            unit : i,
+                            ...d[i],
+                            male:Math.round(Math.random()*1000+500),
+                            female:Math.round(Math.random()*1000+500),
+                            graduate:Math.round(Math.random()*1000+500),
+                            undergraduate:Math.round(Math.random()*1000+500),
+                            post1:Math.round(Math.random()*1000+500),
+                            post2:Math.round(Math.random()*1000+500),
+                            post3:Math.round(Math.random()*1000+500),
+                            post4:Math.round(Math.random()*1000+500),
+                            post5:Math.round(Math.random()*1000+500),
+                            post6:Math.round(Math.random()*1000+500),
+                            post7:Math.round(Math.random()*1000+500),
+                            post8:Math.round(Math.random()*1000+500),
+                            post9:Math.round(Math.random()*1000+500),
+                            post10:Math.round(Math.random()*1000+500),
+                            job1:Math.round(Math.random()*1000+500),
+                            job2:Math.round(Math.random()*1000+500),
+                            job3:Math.round(Math.random()*1000+500),
+                            job4:Math.round(Math.random()*1000+500),
+                            job5:Math.round(Math.random()*1000+500),
+                            job6:Math.round(Math.random()*1000+500),
+                            job7:Math.round(Math.random()*1000+500),
+                            major1:Math.round(Math.random()*1000+500),
+                            major2:Math.round(Math.random()*1000+500),
+                            major3:Math.round(Math.random()*1000+500),
+                            major4:Math.round(Math.random()*1000+500),
+                            major5:Math.round(Math.random()*1000+500),
+                            major6:Math.round(Math.random()*1000+500),
+                            major7:Math.round(Math.random()*1000+500)
+                        })
+                    }
+                    params.forEach((e,i)=>{
+                        if (e.unit == 'totalHits') {
+                            params.splice(i,1);
+                            params.unshift(e);
+                        }
+                    })
+                    renderTable(params);
+                    //closeLoading();
+                }
+            })
+        }
+        function renderTable(data){ //渲染表格
+            $('#zh-table').datagrid({
+                striped: true,
+                data:data,
+                columns: [
+                    [
+                        { field: 'unit', title: '单位',width:'30%', rowspan:2, halign: 'center', align: 'center',formatter(value, row, index) {
+                            if (value == 'totalHits') {
+                                return '合计'
+                            }else{
+                                return value
+                            }
+                        }},
+                        { field: 'totalHits',title: '合计',width:'10%',rowspan:2, halign: 'center', align: 'center'},
+                        { title:'毕业生',colspan:2},
+                        { title:'年龄',colspan:4},
+                        { title:'性别',colspan:2},
+                        { title:'学历',colspan:2},
+                        { title:'职务级别',colspan:10},
+                        { title:'岗位分类',colspan:7},
+                        { title:'专业',colspan:7},
+                    ],
+                    [
+                        { field: 'within5Year',width:'10%',title: '14年-19年',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'within3Year',width:'10%',title: '16年-19年',rowspan:1, halign: 'center', align: 'center'},
+                        { field: '0-29', width:'10%',title: '29岁及以下',rowspan:1, halign: 'center', align: 'center'},
+                        { field: '30-39', width:'10%',title: '30-39岁',rowspan:1, halign: 'center', align: 'center'},
+                        { field: '40-49', width:'10%',title: '40-49岁',rowspan:1, halign: 'center', align: 'center'},
+                        { field: '50-0', width:'10%',title: '50岁及以上',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'male', width:'10%',title: '男',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'female', width:'10%',title: '女',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'graduate', width:'10%',title: '研究生',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'undergraduate', width:'10%',title: '本科',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'post1', width:'10%',title: '司局级',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'post2', width:'10%',title: '副司局级',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'post3', width:'10%',title: '正处级',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'post4', width:'10%',title: '副处级',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'post5', width:'10%',title: '正科级',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'post6', width:'10%',title: '副科级',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'post7', width:'10%',title: '科员',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'post8', width:'10%',title: '股级',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'post9', width:'10%',title: '副股级',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'post10', width:'10%',title: '其他',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'job1', width:'10%',title: '经营类',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'job2', width:'10%',title: '管理类',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'job3', width:'10%',title: '技术类',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'job4', width:'10%',title: '技能类',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'job5', width:'10%',title: '服务类',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'job6', width:'10%',title: '不在岗',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'job7', width:'10%',title: '无岗位',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'major1', width:'10%',title: '电工类',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'major2', width:'10%',title: '电子信息类',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'major3', width:'10%',title: '管理类',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'major4', width:'10%',title: '金融财务类',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'major5', width:'10%',title: '其他工学类',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'major6', width:'10%',title: '其他专业',rowspan:1, halign: 'center', align: 'center'},
+                        { field: 'major7', width:'10%',title: '无专业',rowspan:1, halign: 'center', align: 'center'},
+                    ]
+            ]
+            })
+            $('.zh-sag-history').hide();
+            $('.zh-sah-home>h2').hide();
+            $('.zh-sah-sah').css({
+                width:'400px',
+                margin:0
+            })
+            $('#zh-search').width('360px');
+            $('.zh-result-box').width('400px');
+            $('.zh-export').show();
+        }
+    </script>
+</body>
+
+</html>

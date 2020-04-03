@@ -1,0 +1,103 @@
+<div style="margin-top: 20px">
+    <div id="sxlyspRejectTable"></div>
+</div>
+<script type="text/javascript">   
+    $(function () {        
+        sxlyspEmps2(2);
+    });
+    function sxlyspEmps2(status){           
+        $.ajax({
+            type:'get',
+            url:BASE_URL3+'/empApply/queryAllApplyEmps',
+            contentType:'application/json',          
+            data:{
+                status:status
+            },
+            success:function(data){
+                console.log(data,'表格数据')
+                var tableData1=data.resultValue;
+                sxlyspTable2(tableData1);
+            },
+            error: function(rel){
+                console.log(rel,'表格数据请求失败');
+            }
+        });
+    }
+    function sxlyspTable2(mainData){
+        $('#sxlyspRejectTable').datagrid({
+            width: '100%',
+            height: '80%',
+            selectOnCheck: true,
+            checkOnSelect: true,
+            fitColumns: true,
+            pagination: true,
+            striped: true,                
+            data: mainData,                      
+            columns: [[
+            { field: 'checkbox', checkbox: "true", halign: 'center', align: 'center', width: '3%' },
+                {
+                    field: 'index', title: '序号', width: '3%', halign: 'center', align: 'center', formatter(value, row, index) {
+                        return `<span>${index + 1}</span>`
+                    }
+                },
+                { field: 'empId', title: '人员编号', width: '10%', halign: 'center', align: 'center' },
+                { field: 'applyName', title: '人员姓名', width: '5%', halign: 'left', align: 'left' },
+                { field: 'changeReason', title: '流动类型', width: '10%', halign: 'center', align: 'center',
+                    formatter:function(value,row,index){
+                        if(row.changeReason=="D301"){
+                            return '<span>人才帮扶</span>';
+                        }else if(row.changeReason=="D302"){
+                            return '<span>劳务协作</span>';
+                        }else if(row.changeReason=="D303"){
+                            return '<span>临时借用</span>';
+                        }else if(row.changeReason=="D304"){
+                            return '<span>挂职锻炼</span>';
+                        }else if(row.changeReason=="D305"){
+                            return '<span>正式借用</span>';
+                        }else if(row.changeReason=="B122"){
+                            return '<span>岗位竞聘-转正</span>';
+                        }else if(row.changeReason=="B132"){
+                            return '<span>岗位竞聘-试用（工资、人事关系保留原单位）</span>';
+                        }else if(row.changeReason=="B133"){
+                            return '<span>岗位竞聘-驳回</span>';
+                        }else if(row.changeReason=="B134"){
+                            return '<span>岗位竞聘-试用（工资、人事关系调入原单位）</span>';
+                        }
+                    }
+                },
+                { field: 'unitName', title: '调配单位', width: '8%', halign: 'center', align: 'center' },
+                { field: 'deptName', title: '调配部门', width: '8%', halign: 'center', align: 'center' },
+                { field: 'postName', title: '调配岗位', width: '8%', halign: 'center', align: 'center' },
+                { field: 'oldUnitName', title: '原单位', width: '8%', halign: 'center', align: 'center' },
+                { field: 'oldDeptName', title: '原部门', width: '8%', halign: 'center', align: 'center' },
+                { field: 'oldPostName', title: '原岗位', width: '8%', halign: 'center', align: 'center' },
+                { field: 'auditStatus', title: '状态', width: '5%', halign: 'center', align: 'center',
+                    formatter:function(value,row,index){
+                        if(row.auditStatus=="0"){
+                            return '<span>待审批</span>';
+                        }else if(row.auditStatus=="1"){
+                            return '<span>审批通过</span>';
+                        }else if(row.auditStatus=="2"){
+                            return '<span>审批驳回</span>';
+                        }
+                    }
+                },
+                {
+                    field: 'details', title: '详情', width: '5%', halign: 'center', align: 'center',
+                    formatter:function(value, row, index) { return '<a onclick=topsxlyspRejectDetail(\''+row.staffingId+'\',\''+row.empId+'\',\''+row.postCategory+'\') style="cursor:pointer;color:#00a09f">查看</a>'; }
+                },
+            ]],
+            onLoadSuccess: function (data) {
+                //单元格超出部分隐藏并鼠标移动到单元格时弹框显示
+                $(".datagrid-row td div").each(function () {
+                    $(this).attr("title", $(this).text());
+                });
+            }
+        });
+    }
+    function topsxlyspRejectDetail(staffingId,empId,postCategory){
+        closetabTitle("筛选录用审批详情");
+        opentab("dispose/sxlyspfile/sxlysp_detail", "筛选录用审批详情",false,{"id":staffingId,"empId":empId,"postCategory":postCategory});
+    }
+
+</script>

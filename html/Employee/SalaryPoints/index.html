@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="salary-points" style="padding: 20px;">
+        <div class="header-drop" style="font-size: 0;">
+            <span>积分期间</span>
+            <input id="drop-box" editable="false">
+        </div>
+        <div class="pints-browse">
+            <h3 class="box-title">积分概览</h3>
+            <ul class="primary-color">
+                <li>
+                    <span>上期剩余积分：</span>
+                    <span>3</span>
+                </li>
+                <li>
+                    <span>当期获得积分：</span>
+                    <span>8.2</span>
+                </li>
+                <li>
+                    <span>当期使用积分：</span>
+                    <span>8</span>
+                </li>
+                <li>
+                    <span>当期剩余积分：</span>
+                    <span>3.2</span>
+                </li>
+            </ul>
+        </div>
+        <div class="current-pints">
+            <h3 class="box-title">当前获得积分详情</h3>
+            <div class="current-pints-list">
+                <div class="list-title">
+                    <span>年度绩效：</span><span class="primary-color">1.0</span><span><img style="position: relative;top: -1px;" src="assets/yf/points-icon.PNG" alt=""></span>
+                </div>
+            </div>
+            <div class="current-pints-list">
+                <div class="list-title">
+                    <span>绩效等级：</span><span class="primary-color">2.2</span>
+                </div>
+                <ul>
+                    <li>
+                        <span>学历：</span>
+                        <span class="primary-color">1</span>
+                        <img src="assets/yf/points-icon.PNG" alt="">
+                    </li>
+                    <li>
+                        <span>专业技术资格/注册类职业资格/技能等级：</span>
+                        <span class="primary-color">1</span>
+                        <img src="assets/yf/points-icon.PNG" alt="">
+                    </li>
+                    <li>
+                        <span>工龄：</span>
+                        <span class="primary-color">0.2</span>
+                        <img src="assets/yf/points-icon.PNG" alt="">
+                    </li>
+                </ul>
+            </div>
+            <div class="current-pints-list list-border">
+                <div class="list-title">
+                    <span>专家成果：</span><span class="primary-color">5.0</span>
+                </div>
+                <ul>
+                    <li>
+                        <span>人才称号：</span>
+                        <span class="primary-color">0</span>
+                        <img src="assets/yf/points-icon.PNG" alt="" onclick="rencaialert()">
+                    </li>
+                    <li>
+                        <span>专利奖励：</span>
+                        <span class="primary-color">0</span>
+                        <img src="assets/yf/points-icon.PNG" alt="">
+                    </li>
+                    <li>
+                        <span>科技创新：</span>
+                        <span class="primary-color">0</span>
+                        <img src="assets/yf/points-icon.PNG" alt="">
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <span>创新管理：</span>
+                        <span class="primary-color">0</span>
+                        <img src="assets/yf/points-icon.PNG" alt="">
+                    </li>
+                    <li>
+                        <span>管理创新成果推广应用：</span>
+                        <span class="primary-color">1</span>
+                        <img src="assets/yf/points-icon.PNG" alt="">
+                    </li>
+                    <li>
+                        <span>职工技术创新：</span>
+                        <span class="primary-color">1</span>
+                        <img src="assets/yf/points-icon.PNG" alt="">
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <span>质量管理小组活动成果：</span>
+                        <span class="primary-color">1</span>
+                        <img src="assets/yf/points-icon.PNG" alt="">
+                    </li>
+                    <li>
+                        <span>专业竞赛考试：</span>
+                        <span class="primary-color">1</span>
+                        <img src="assets/yf/points-icon.PNG" alt="">
+                    </li>
+                    <li>
+                        <span>个人荣誉：</span>
+                        <span class="primary-color">1</span>
+                        <img src="assets/yf/points-icon.PNG" alt="">
+                    </li>
+                </ul>
+            </div>
+            <div id="popup"></div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            $('#drop-box').combobox({
+                data:[
+                    {
+                        "id":1,
+                        "text":"2018",
+                        "selected":true
+                    },{
+                        "id":2,
+                        "text":"2019"
+                    }
+                ],
+                width:200,
+                height:36,
+                valueField:'id',
+                textField:'text'
+            });
+            $('.current-pints-list ul li img').click(function(){
+                // showPanalAlert('50%', '50%', "#popup","","SalaryPoints/salaryPointsAlert");
+            })
+            
+        })
+        function rencaialert(){
+            showPanalAlert(700, 400, "#socurs","人才称号","html/Employee/SalaryPoints/salaryPointsAlert");
+        }
+    </script>
+</body>
+</html>

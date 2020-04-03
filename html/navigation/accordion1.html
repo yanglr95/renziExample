@@ -1,0 +1,49 @@
+﻿
+    <div class="easyui-accordion" data-options="fit:true,border:false">
+        <ul id="nav-accordion">
+            <div class="yfexitdiv"><img src="assets/yf/yf_exit.png" class="exitimg" ><span class="exitspan">退出</span></div>
+        </ul>
+    </div>
+    
+    <script type="text/javascript">
+        $(function () {
+            var nav = $("#nav-accordion")
+            // 获取目录配置
+            $.getJSON('/api/navs1', function (data) {
+                for(var i = 0 ;i<data.length;i++){
+                    var $temp =$('<li class="nav_item" data-id='+data[i].id+' data-secondary='+data[i].secondary+' data-link='+data[i].link+' data-menutext='+data[i].menuText+'><img style="width: 50px;" src="assets/home/' + data[i].icon + '"><h3>' + data[i].menuText + '</h3></li>') ;
+                    nav.append($temp);
+                }
+                $("#nav-accordion li").hover(function(){
+                    var g= $("#nav-accordion li img[src*='_active']").attr("src")
+                    if(g){
+                        $("#nav-accordion li img[src*='_active']").attr("src",g.replace('_active', ''))
+                    }
+                    
+                    var url = $(this).children("img").attr('src');
+                    $(this).children("img").attr("src",url.replace('.png', '_active.png'))
+                    
+                    var id= $(this).data("id")
+                    var link= $(this).data("link")
+                    var secondary= $(this).data("secondary")
+                    var menuText= $(this).data("menutext")
+                    // opentab(link,menuText,secondary);
+                    if(!secondary){
+                        opentab(link,menuText,secondary,0,id);
+                    }
+                    
+                })
+                $("#nav-accordion li").click(function(){
+           
+                    var id= $(this).data("id")
+                    var link= $(this).data("link")
+                    var secondary= $(this).data("secondary")
+                    var menuText= $(this).data("menutext")
+                    if(secondary){
+                        opentab(link,menuText,secondary,0,id);
+                    }
+                    
+                })
+            });
+        });
+    </script>

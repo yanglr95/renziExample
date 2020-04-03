@@ -1,0 +1,59 @@
+{
+    "id": 4,
+    "menuText": "数据共享",
+    "secondary": true,
+    "list": [
+        {
+            "menuText": "信息共享",
+            "secondary": true,
+            "list":[
+                {
+                    "menuText": "共享字段",
+                    "link": "shared/sharedtable",
+                    "secondary": false
+                },
+                {
+                    "menuText": "数据共享审批",
+                    "link": "sharedaudit/sharedtable",
+                    "secondary": false
+                },
+                {
+                    "menuText": "申请记录",
+                    "link": "reviewers/peoples",
+                    "secondary": false
+                },
+                {
+                    "menuText": "接口监控",
+                    "link": "DataSharing/infoShare/InterfaceMonitoring/index",
+                    "secondary": false
+                }
+            ]
+        },
+        {
+            "menuText": "报表推送",
+            "secondary": true,
+            "list":[
+                {
+                    "menuText": "报表管理",
+                    "link": "DataSharing/ReportPush/ReportManage/index",
+                    "secondary": false
+                },
+                {
+                    "menuText": "报表申请",
+                    "link": "DataSharing/ReportPush/ReportManage/reportApply",
+                    "secondary": false
+                },
+                {
+                    "menuText": "报表审核",
+                    "link": "DataSharing/ReportPush/ReportManage/applyList",
+                    "secondary": false
+                },
+                {
+                    "menuText": "申请记录",
+                    "link": "DataSharing/ReportPush/ReportManage/applyRecord",
+                    "secondary": false
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,97 @@
+
+    <div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+        <div class="tab_card">
+            <div class="per_back" style="padding: 10px;">
+                <div class="ray_back">返回</div>
+            </div>
+            <div style="width:100%;height: 100%;padding: 0 20px;">
+                <div class="easyui-layout" style="width:100%;height: 100%;">
+                    <div data-options="region:'west',split:true" style="width:250px;">
+                        <div class="peoples_west">
+                            <div style="margin-bottom: 10px;"><span style="display: inline-block ;padding: 8px 10px">请选择单位</span>   <input style="width: 60%;float:right;" class="input_seach" placeholder="请输入关键字"></div>
+                            <ul class="easyui-tree" data-options="checkbox:true">
+                                <li>
+                                    <span>上海电力</span>
+                                    <ul>
+                                        <li data-options="state:'closed'">
+                                            <span>B层级菜单</span>
+                                            <ul>
+                                                <li>
+                                                    <span>c层级菜单</span>
+                                                </li>
+                                                <li>
+                                                    <span>Wife</span>
+                                                </li>
+                                                <li>
+                                                    <span>Company</span>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <span>Program Files</span>
+                                            <ul>
+                                                <li>Intel</li>
+                                                <li>Java</li>
+                                                <li>Microsoft Office</li>
+                                                <li>Games</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div data-options="region:'center',split:true">
+                        <div style="padding: 0 0 0 20px;width: 100%;height: 100%;">
+                            <div class="table_tab1">
+                                <ul style="border: none;">
+                                    <li>
+                                        报表类型
+                                        <select style="height: 30px;width: 100px;" name="" id="">
+                                            <option value="">全部</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <span>报告期:</span>
+                                        <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                                            data-options="formatter:myformatter,parser:myparser"
+                                            style="width:140px;height: 25px;">
+                                        至
+                                        <input class="easyui-datebox cv_time_end_edit" label=""
+                                            data-options="formatter:myformatter,parser:myparser"
+                                            style="width:140px;height: 25px;">
+                                    </li>
+                                    <li>报表名称&nbsp;&nbsp;<input class="input_seach" placeholder="请输入关键字"></li>
+                                    <li><button style="position: relative;top:4px" class="main_btn">查询</button></li>
+                                </ul>
+                            </div> 
+                            <div class="save_group_seach">
+                                <button class="save_group_add">创建</button>
+                                <span class="index_ok"><img style="width: 15px;" src="/assets/home/Shape_icon.png" alt=""> 已选 0 项</span>
+                            </div>
+                            <div class="title_ccc">
+                                国网河北省电力有限公司经济技术研究院
+                            </div>
+                            <div class="easyui-layout" fit="true">
+                                <div id="peopleTable" data-options="region:'center',border:false,split:false,href:'html/reviewers/data/people1.html'">
+                                </div>
+                            </div> 
+                        </div>                                        
+                    </div>
+                </div>
+            </div>         
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        $(function () {
+            //申请记录
+            $(".title_record").on("click",function(){
+                opentab("people/recordlist", "申请列表", !secondary);
+            })
+                      
+        });
+    </script>

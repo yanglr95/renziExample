@@ -1,0 +1,400 @@
+<body>
+    <div class="bonus-shares-edit" style="padding: 20px;">
+        <div class="back">
+            <div onclick="closeTab()">
+                <span></span>
+                <span>返回</span>
+            </div>
+        </div>
+        <div class="db-header">
+            <ul>
+                <li>
+                    <span>总金额：</span>
+                    <span class="totalAmount">1,000,000</span>
+                </li>
+                <li>
+                    <span>待分配：</span>
+                    <span class="residueMoney">2,000</span>
+                </li>
+                <li class="end-time primary-date">
+                    截止时间：还有<span class="days">24</span>天(<span id="endDate">2019-05-09</span>)
+                </li>
+            </ul>
+        </div>
+        <div class="db-baseinfo">
+            <h1 class="box-title">基本信息</h1>
+            <ul>
+                <li>
+                    <span>奖金名称：</span>
+                    <span class='bonus-name'>月度</span>
+                </li>
+                <li>
+                    <span>创建时间：</span>
+                    <span id='start-time'>2019年1月</span>
+                </li>
+                <li>
+                    <span>分配单号：</span>
+                    <span class="code">20190931</span>
+                </li>
+                <li>
+                    <span>下发人：</span>
+                    <span class="empName">凉音</span>
+                </li>
+                <li>
+                    <span>下发部门：</span>
+                    <span class='deptName'>组织部</span>
+                </li>
+            </ul>
+        </div>
+        <div class="db-sharesinfo">
+            <h1 class="box-title" style="margin-bottom: 30px;">分配信息</h1>
+            <div id="db-tabs" class="easyui-tabs content-tabs">
+                <div title="部门">
+                    <div class="btn-group peoaaa">
+                        <button class="primary-btn" style="display: none">保存</button>
+                        <button class="primary-btn" style="display: none" onclick="saveIssue()">保存并下发</button>
+                        <button class="disabled-btn">保存</button>
+                        <button class="disabled-btn">保存并下发</button>
+                    </div>
+                    <div style="font-size: 0;">
+                        <div class="tab-department-left" style="vertical-align: top;">
+                            <div id="edit-left"></div>
+                        </div>
+                        <div class="tab-department-right" style="vertical-align: top;">
+                            <div id="edit-right"></div>
+                        </div>
+                    </div>
+                </div>
+                <div title="个人">
+                    <div class="btn-group peobbb">
+                        <button class="primary-btn" style="display: none">保存</button>
+                        <button class="primary-btn" style="display: none" onclick="savetosubmit()">保存并提交</button>
+                        <button class="disabled-btn">保存</button>
+                        <button class="disabled-btn">保存并提交</button>
+                        <button class="border-btn">导入</button>
+                        <button class="border-btn">导出</button>
+                    </div>
+                    <div id="edit-personal-table"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 全局计算待分配金额
+        var unexpense = 0;
+        $(function(){
+            ajaxsTable()
+            peoajaxsTable()
+            
+        })
+        // 部门信息表格
+        var dateList = [];
+        var free = []
+        var total = 0;
+        
+        var waitMoney = null;//待分配金额
+        var moreMoey = null;//超额数
+        var abc = 0;
+        function tablesDate(id,tbData){
+            $('#'+id).datagrid({
+                // rownumbers:true,
+                pagination:'true',
+                singleSelect:false,
+                fitColumns:true,
+                striped:true,
+                // checkOnSelect: false,
+                data:tbData,
+                onLoadSuccess:function(){
+                    $('.inp-tab').on('input',function(){
+                        var testMoney = 0;
+                        index=$('.inp-tab').index(this)
+                        endParams[index].sumMoney = Number($(this).val())
+                        
+                        $('.peoaaa').find('.primary-btn').show()
+                        $('.peoaaa').find('.disabled-btn').hide()
+                        for(var i = 0;i<$('.inp-tab').length;i++){
+                            testMoney += $('.inp-tab').eq(i).val()*1
+                        }
+                        console.log(testMoney)
+                        if((waitMoney-testMoney) < 0){
+                            moreMoey = -(waitMoney-testMoney);
+                            $(this).val('')
+                            showPanalAlert(460, 220,'#full_excess','提示','html/BusinessManagement/bonusShares/BusinessManagement/alert/fp_deptexcess.html')
+                        }else{
+                            moreMoey = waitMoney-testMoney
+                            console.log(abc,'dishidfuhin')
+                            console.log(more,'99999999999999')
+                            if(more == null){
+                                $('.residueMoney').text(
+                                    abc - testMoney
+                                )
+                            }else{
+                                $('.residueMoney').text(
+                                    more - testMoney
+                                )
+                            }
+                        }
+                    })
+                    .click(function(e){
+                        e.stopPropagation()
+                    })
+                },
+                columns:[[
+                    {field : 'checkbox',checkbox : "true",halign : 'center',align : 'center'},
+                    {field:'index',title:'序号',width:'10%',halign:'center',align:'center',formatter:function(value,row,index){
+                        if(id == 'edit-left'){
+                            return '<span>'+((index+1)*2-1)+'</span>'
+                        }else{
+                            return '<span>'+((index+1)*2)+'</span>'
+                        }
+                    }},
+                    {field:'deptCode',title:'部门',halign:'center',align:'center',hidden:true},
+                    {field:'deptName',title:'部门',halign:'center',align:'center'},
+                    {field:'sumMoney',title:'金额',halign:'center',align:'center',formatter:function(value,row,index){
+                        // return '<input type="inp-table" oninput="onInput()">'
+                        if(row.taskStatus==1){
+                            return '<span>'+value+'</span><input class="inp-tab" style="display:none">'
+                        }else{   
+                          return '<input class="inp-tab" type="number">'
+                        }
+                    }},
+                    {field:'taskStatus',title:'状态',halign:'center',align:'center',formatter:function(value,row,index){
+                        if(row.taskStatus==1){
+                            return '<span>已下发</span>'
+                        }else{
+                            return '<span>未下发</span>'
+                        }
+                    }},
+                    {field:'issueDate',title:'下发时间',halign:'center',align:'center',formatter:function(value,row,index){
+                        if(row.taskStatus==1){
+                            return '<span>'+timeType(value)+'</span>'
+                        }else{
+                            return ''
+                        }
+                    }}
+                ]]
+            })
+        }
+        var endParams = []
+        function ajaxsTable(){
+            // console.log($('#mainTabs').tabs('options').id)
+            $.ajax({
+                type:'get',
+                url:BASE_URL+'/rewardAllotMA/findRewardAllotInfo',
+                data:{
+                    packageId:$('#mainTabs').tabs('options').id
+                },
+                success:function(data){
+                        var dataleft = []
+                        var dataright = []
+
+                        console.log(data,'奖金下发-index-已下发详情')
+                        var bbb = data.resultValue.rewardDeptList;
+                        for(var i = 0;i<bbb.length;i++){
+                            bbb[i].index = i;
+                        }
+                        endParams=bbb;
+                        var dataleft = bbb.slice(0,Math.ceil(bbb.length/2))
+                        var dataright = bbb.slice(Math.ceil(bbb.length/2),bbb.length)
+                        tablesDate('edit-left',dataleft);
+                        tablesDate('edit-right',dataright);
+                        $('.code').text(data.resultValue.rewardId)
+                        $('.bonus-name').text(data.resultValue.rewardName)
+                        $('#start-time').text(timeType(data.resultValue.beginDate))
+                        $('#endDate').text(timeType(data.resultValue.endDate))
+                        $('.deptName').text(data.resultValue.deptName)
+                        $('.empName').text(data.resultValue.empName)
+                        $('.totalAmount').text(data.resultValue.totalAmount)
+                        $('.residueMoney').text(data.resultValue.residueMoney)
+                        $('.days').text(data.resultValue.residueDay)
+                        // 获取待分配金额
+                        waitMoney = data.resultValue.residueMoney;
+                        abc = waitMoney
+                }
+            })
+            
+        }
+        // 个人表格
+        // var personTableList = [];
+        var peoParams = [];
+        // var wait = null;//待分配金额
+        var more = null;//超额数
+        function personTable(editPersonalData){
+            $('#edit-personal-table').datagrid({
+                fitColumns:true,
+                striped:true,
+                data:editPersonalData,
+                onLoadSuccess:function(){
+                    $('.peo-tab').on('input',function(){
+                        var test = 0
+                        indexed=$('.peo-tab').index(this)
+                        peoParams[indexed].amount = Number($(this).val())
+                        $('.peobbb').find('.primary-btn').show()
+                        $('.peobbb').find('.disabled-btn').hide()
+                        for(var i = 0;i<$('.peo-tab').length;i++){
+                            test += $('.peo-tab').eq(i).val()*1
+                        }
+                        // console.log(test)
+                        if((waitMoney-test) < 0){
+                            more = -(waitMoney-test);
+                            $(this).val('')
+                            showPanalAlert(460, 220,'#full_excess','提示','html/BusinessManagement/bonusShares/BusinessManagement/alert/fp_peoexcess.html')
+                        }else{
+                            more = waitMoney - test
+                            if(moreMoey == null){
+                                $('.residueMoney').text(
+                                    abc - test
+                                )
+                            }else{
+                                $('.residueMoney').text(
+                                    moreMoey - test
+                                )
+                            }
+                            
+                        }
+                    })
+                    .click(function(e){
+                        e.stopPropagation()
+                    })
+                },
+                columns:[[
+                    {field : 'checkbox',checkbox : "true",halign : 'center',align : 'center'},
+                    {field:'index',title:'序号',width:'5%',halign:'center',align:'center',formatter:function(value,row,index){
+                        return '<span>'+(index+1)+'</span>'
+                    }},
+                    {field:'empName',title:'姓名',halign:'center',align:'center',width:'10%'},
+                    {field:'empId',title:'人员编码',halign:'center',align:'center',width:'12%'},
+                    {field:'postName',title:'岗位',halign:'center',align:'center',width:'8%'},
+                    {field:'dutyGrade',title:'职级',halign:'center',align:'center',width:'10%'},
+                    {field:'sericeYears',title:'服务年限',halign:'center',align:'center',width:'10%'},
+                    {field:'amount',title:'金额',halign:'center',align:'center',formatter:function(value,row,index){
+                        // return '<input type="inp-table" oninput="onInput()">'
+                        if(row.submitStatus==1 || row.submitStatus==2){
+                            return '<span>'+value+'</span><input class="peo-tab" style="display:none">'
+                        }else{   
+                          return '<input class="peo-tab" type="number">'
+                        }
+                    }},
+                    {field:'submitStatus',title:'状态',halign:'center',align:'center',width:'10%',formatter:function(value,row,index){
+                        if(row.submitStatus==1 || row.submitStatus==2){
+                            return '<span>已提交</span>'
+                        }else{
+                            return '<span>未提交</span>'
+                        }
+                    }},
+                    {field:'submitDate',title:'提交时间',halign:'center',width:'10%',align:'center',formatter:function(value,row,index){
+                        if(row.submitStatus==1 || row.submitStatus==2){
+                            return '<span>'+timeType(value)+'</span>'
+                        }else{
+                            return ''
+                        }
+                    }}
+                ]]
+            })
+        }
+        function peoajaxsTable(){
+            console.log($('#mainTabs').tabs('options').id)
+            $.ajax({
+                type:'get',
+                url:BASE_URL+'/rewardAllotMA/findRewardAllotInfo',
+                data:{
+                    packageId:$('#mainTabs').tabs('options').id
+                },
+                success:function(data){
+                        console.log(data,'奖金下发-index-已下发详情')
+                        var ccc = data.resultValue.rewarEmpMAVOList
+                        for(var i = 0;i<ccc.length;i++){
+                            ccc[i].index = i;
+                        }
+                        peoParams=ccc;
+                        personTable(ccc)
+                        $('.code').text(data.resultValue.rewardId)
+                        $('.bonus-name').text(data.resultValue.rewardName)
+                        $('#start-time').text(timeType(data.resultValue.beginDate))
+                        $('#endDate').text(timeType(data.resultValue.endDate))
+                        $('.deptName').text(data.resultValue.deptName)
+                        $('.empName').text(data.resultValue.empName)
+                        $('.totalAmount').text(data.resultValue.totalAmount)
+                        $('.residueMoney').text(data.resultValue.residueMoney)
+                }
+            })
+        }
+        
+        
+        // 部门-保存并下发
+        function saveIssue() {
+            console.log(waitMoney)
+            var money = $('#edit-left').datagrid('getChecked').concat($('#edit-right').datagrid('getChecked'))
+            console.log(money)
+            if(money.length == 0){
+                alert('请选择需要下发的数据')
+            }else{
+            var getDate = {
+                "rewardName": $('.bonus-name').text(),
+                "beginDate": $('#start-time').text(),
+                "endDate":$('#endDate').text(),
+                "rewardId": $('.code').text(),
+                "empName":$('.empName').text(),
+                "deptName":$('.deptName').text(),
+                "totalAmount": $('.totalAmount').text(),
+                "residueMoney":waitMoney,
+                "rewardDeptList": money
+            }
+            $.ajax({
+                type: 'post',
+                contentType: 'application/json',
+                url: BASE_URL + '/rewardAllotMA/issueDept',
+                data: JSON.stringify(
+                    getDate
+                ),
+                success: function (data) {
+                    console.log(data, '奖金分配-部门保存并下发')
+                    if (data.resultCode == 200) {
+                           closetabTitle("分配详情");
+                           closeTab(this)
+                           opentab("BusinessManagement/bonusShares/bonusSharesEdit", "分配详情", false);
+                    }
+                }
+            })
+           }
+        }
+        // 个人-保存并提交
+        function savetosubmit(){
+            var peo_money = $('#edit-personal-table').datagrid('getChecked')
+            console.log(peo_money)
+            if(peo_money.length == 0){
+                alert('请选择需要下发的数据')
+            }else{
+            var getpersonDate = {
+                // "rewardName": $('.bonus-name').text(),
+                "beginDate": $('#start-time').text(),
+                "endDate":$('#endDate').text(),
+                "rewardId": $('.code').text(),
+                "empName":$('.empName').text(),
+                "deptName":$('.deptName').text(),
+                "totalAmount": $('.totalAmount').text(),
+                "residueMoney":waitMoney,
+                "rewarEmpMAVOList": peo_money
+            }
+            $.ajax({
+                type: 'post',
+                contentType: 'application/json',
+                url: BASE_URL + '/rewardAllotMA/commitEmp',
+                data: JSON.stringify(
+                    getpersonDate
+                ),
+                success: function (data) {
+                    console.log(data, '奖金分配-个人保存并提交')
+                    if (data.resultCode == 200) {
+                        closetabTitle("申请详情");
+                        closeTab(this)
+                        opentab("BusinessManagement/bonusShares/index", "奖金分配", false);
+                    }
+                }
+            })
+          }
+        }
+
+       
+    </script>
+</body>

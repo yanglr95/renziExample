@@ -1,0 +1,376 @@
+<div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+    <div class="easyui-layout" style="width:100%;height: 100%">
+
+        <div data-options="region:'center'" style="padding: 20px;position: relative;">
+            <div style="margin-bottom: 15px;">
+                <div class="box-title">配置单审批</div>
+            </div>
+            <div class="shared_box" style="position: relative;">
+                <div class="shared_btn_box">
+                    <button class="primary-btn" id="agree_pzdsp">同 意</button>
+                    <button class="border-btn" id="disagree_pzdsp">驳 回</button>
+                    <button class="border-btn" id="endApply_pzdsp">结束报名</button>
+                </div>
+            </div>
+            <div class="table_seach_right" style="line-height: 76px;">
+                <!-- 下拉选择 -->
+                <span>配置单状态:</span>
+                <input id="pzdspStatus" editable="false" style="float: left;margin-right: 10px;">
+                <!--输入框-->
+                <span style="margin-left:10px;">配置单号:</span>
+                <input id="pzdspId" style="float: left;margin-right: 10px;">
+                <span style="margin-left:10px;">配置单名称:</span>
+                <input id="pzdspName" style="float: left;margin-right: 10px;">
+                <!-- 日期选择 -->
+                <div style="float: right">
+                    <span style="margin-left:10px;">申请日期:</span>
+                    <input class="easyui-datebox cv_time_start_edit" id="pzdspStartTime" label="" placeholder="开始"
+                            data-options="formatter:myformatter,parser:myparser"
+                            style="width:140px;height: 25px;"><span style="margin:0 5px 0 10px;">至</span><input class="easyui-datebox cv_time_end_edit" id="pzdspEndTime" label=""
+                            data-options="formatter:myformatter,parser:myparser"
+                            style="width:140px;height: 25px;">
+                    <button id="search_btn">查询</button>
+                </div>
+            </div>
+
+            <div class="easyui-layout" fit="true">
+                <div id="pzdspTable"></div>
+            </div>
+        </div>            
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#pzdspStatus').combobox({
+            valueField:'id',
+            textField:'text',
+            height: 30,
+            data:[
+                { 
+                    id: "", 
+                    text: "全部" 
+                },
+                {
+                    id:'0401',//默认显示第一项
+                    text : '待提交'
+                },
+                {
+                    id: '0402',
+                    text: '待审批'
+                },
+                {
+                    id: '0403',
+                    text: '已驳回'
+                },
+                {
+                    id: '0404',
+                    text: '发布'
+                },
+                {
+                    id: '0405',
+                    text: '筛选录用'
+                },
+                {
+                    id: '0408',
+                    text: '作废'
+                },
+                {
+                    id: '0409',
+                    text: '资格审查'
+                }
+            ]
+        });
+
+        $('#pzdspId').textbox({
+            prompt: '请输入',
+            height: 30,
+        });
+        $('#pzdspName').textbox({
+            prompt: '请输入',
+            height: 30,
+        });
+
+        $('#pzdspStartTime').datebox({
+            editable: false,
+            height: 30
+        })
+        $('#pzdspEndTime').datebox({
+            editable: false,
+            height: 30
+        })
+        //面板收缩
+        $(".collapse").click(function () {
+            $("#peoplelayout").layout("collapse", "west");
+            $(".expand").show();
+            $(this).hide();
+        });
+        //面板展开
+        $(".expand").click(function () {
+            $("#peoplelayout").layout("expand", "west");
+            $(".collapse").show();
+            $(this).hide();
+        });
+        $('#pzdsp_type').combobox({
+            placeholder: '请输入关键字',
+            valueField: "id",
+            textField: "text",
+            editable: false,
+            data: [
+                { id: "", text: "全部" },
+                { id: 1, text: "审核中" }
+            ]
+        });
+        
+        pzdCheckApply();
+    });       
+    function pzdCheckApply(){           
+        $.ajax({
+            type:'post',
+            url:BASE_URL3+'/competitionApply/likeQueryCheckApply',
+            contentType:'application/json',          
+            data:JSON.stringify({}),
+            success:function(data){
+                console.log(data,'表格数据')
+                var tableData1=data.resultValue.items;
+                pzdspTable(tableData1);
+            },
+            error: function(rel){
+                console.log(rel,'表格数据请求失败');
+            }
+        });
+    }
+    function pzdspTable(mainData){
+        $('#pzdspTable').datagrid({
+            width:'100%',
+            //height: $(window).height-30,
+            height: 400,
+            selectOnCheck: true,
+            checkOnSelect: true,
+            collapsible:true,
+            fitColumns: true,
+            pagination: true,
+            striped: true,
+            data: mainData,
+            columns: [[
+                { field: 'checkbox', checkbox: "true", halign: 'center', align: 'center', width: '3%' },
+                {
+                    field: 'index', title: '序号', width: '3%', halign: 'center', align: 'center', formatter:function(value, row, index) {
+                        return `<span>${index + 1}</span>`
+                    }
+                },
+                { field: 'objText', title: '单位', width: '10%', halign: 'center', align: 'center' },
+                { field: 'staffingId', title: '配置单号', width: '10%', halign: 'center', align: 'center' },
+                { field: 'staffingName', title: '配置单名称', width: '8%', halign: 'center', align: 'center', formatter:function(value, row, index) {
+                        return '<span onclick=topzdDetail(\''+row.staffingId+'\') style="cursor:pointer;color:#00a09f">'+value+'</span>'
+                    }
+                },
+                { field: 'applyDate', title: '申请日期', width: '8%', halign: 'center', align: 'center',formatter:function(value,row,index){
+                        return '<span>'+timeType(value)+'</span>'
+                }},
+                { field: 'auditDate', title: '审批日期', width: '8%', halign: 'center', align: 'center', formatter:function(value, row, index) {               
+                    return '<span>'+formatString(timeType(value),"--")+'</span>';                   
+                }},
+                { field: 'validDate', title: '报名有效期', width: '15%', halign: 'center', align: 'center' },
+                { field: 'staffingStatus', title: '配置单状态', width: '8%', halign: 'center', align: 'center',formatter:function(value,row,index){
+                    if(row.staffingStatus=="0401"){
+                        return '<span>待提交</span>';
+                    }else if(row.staffingStatus=="0402"){
+                        return '<span>待审批</span>';
+                    }else if(row.staffingStatus=="0403"){
+                        return '<span>已作废</span>';
+                    }else if(row.staffingStatus=="0404"){
+                        return '<span>已发布</span>';
+                    }else if(row.staffingStatus=="0405"){
+                        return '<span>筛选录用</span>';
+                    }else if(row.staffingStatus=="0408"){
+                        return '<span>已驳回</span>';
+                    }else if(row.staffingStatus=="0409"){
+                        return '<span>资格审查</span>';
+                    }
+                }},
+                { field: 'needCount', title: '需求人数', width: '5%', halign: 'center', align: 'center' },
+                { field: 'applyCount', title: '报名人数', width: '5%', halign: 'center', align: 'center' },
+                { field: 'confirmCount', title: '确认人数', width: '5%', halign: 'center', align: 'center' },
+                {field: 'auditAdvise', title: '审批意见', width: '15%', halign: 'center', align: 'center'},
+            ]],
+            onLoadSuccess: function (data) {               
+                //单元格超出部分隐藏并鼠标移动到单元格时弹框显示
+                $(".datagrid-row td div").each(function () {
+                    $(this).attr("title", $(this).text());
+                });
+                
+            }
+        });
+    }
+    function topzdDetail(id){
+        closetabTitle("配置单审批详情");
+        opentab("dispose/pzdspfile/pzdsp_detail", "配置单审批详情",false,id);
+    }
+    // function topzdDetail(id,status){
+    //     console.log(status)
+    //     opentab("/dispose/pzdspfile/pzdsp_detail", "配置单审批详情",false,{"id":id,"status":status});
+    // }
+     
+    //同意
+    $("#agree_pzdsp").on("click",function(){ 
+        var rows = $("#pzdspTable").datagrid( 'getSelections' ); 
+        //console.log(rows[0].responseId)
+        if(rows.length==0){ 
+            $.messager.alert("提示信息", "请选择信息" ); 
+            return; 
+        }else if(rows.length>=1){ 
+            var dataIds = [];
+            var objects="";//选择对象
+            var enableFlag = true ;//
+            for( var i = 0 ; i < rows.length ; i ++ ){
+                if( rows[i].staffingStatus != "0402" ){//非待审批状态
+                    console.log(rows[i].staffingId);//配置单号
+                    console.log("选中为非待审批状态")
+                    enableFlag = false ;
+                    break ;
+                }else{//待审批状态
+                    console.log("选中为待审批状态")
+                    dataIds.push(rows[i].staffingId);//配置单号数组
+                    var level = rows[i].publishLevel;//发布层级
+                    var levelName;
+			        if(level == "01"){
+			        		levelName = "本单位";
+			        }else if(level == "02"){
+			        		levelName = "地市公司级";
+			        }else if(level == "03"){
+			        		levelName = "省公司级";
+			        }else if(level == "04"){
+			        		levelName = "国网级";
+			        }
+                    if(i == 0){ 
+                        objects += rows[i].staffingId + " " + levelName;    
+                    }else{
+                        objects += '、' + rows[i].staffingId + " " + levelName;
+                    }                                  
+                }                              
+            }
+            //校验是否存在启用数据
+            if( !enableFlag ){
+                $.messager.alert("提示信息","只有待审批状态才能同意通过！","warning" );
+                return ;
+            }
+            agreeAlert(dataIds,objects);
+            //console.log(objects);
+            function agreeAlert(ids,objs){
+                mx.dataIds=ids;
+                mx.objects=objs;
+                showPanalAlert(480,380,'#agree','配置单审批同意','html/dispose/pzdspfile/pass.html');                
+            }          
+        }
+    });
+
+    //驳回
+    $("#disagree_pzdsp").on("click",function(){ 
+        var rows = $("#pzdspTable").datagrid( 'getSelections' ); 
+        //console.log(rows[0].responseId)
+        if(rows.length==0){ 
+            $.messager.alert("提示信息", "请选择信息" ); 
+            return; 
+        }else if(rows.length>=1){ 
+            var dataIds = [];
+            var objects="";//选择对象
+            var enableFlag = true ;//
+            for( var i = 0 ; i < rows.length ; i ++ ){
+                if( rows[i].staffingStatus != "0402" ){//非待审批状态
+                    console.log(rows[i].staffingId);//配置单号
+                    console.log("选中为非待审批状态")
+                    enableFlag = false ;
+                    break ;
+                }else{//待审批状态
+                    console.log("选中为待审批状态")
+                    dataIds.push(rows[i].staffingId);//配置单号数组 
+                    var level = rows[i].publishLevel;//发布层级
+                    var levelName;
+			        if(level == "01"){
+			        		levelName = "本单位";
+			        }else if(level == "02"){
+			        		levelName = "地市公司级";
+			        }else if(level == "03"){
+			        		levelName = "省公司级";
+			        }else if(level == "04"){
+			        		levelName = "国网级";
+			        }
+                    if(i == 0){ 
+                        objects += rows[i].staffingId + " " + levelName;    
+                    }else{
+                        objects += '、' + rows[i].staffingId + " " + levelName;
+                    }                 
+                }                              
+            }
+            //校验是否存在启用数据
+            if( !enableFlag ){
+                $.messager.alert("提示信息","只有待审批状态才能驳回！","warning" );
+                return ;
+            }
+            disagreeSave(dataIds,objects);
+            //console.log(objects);        
+            function disagreeSave(ids,objs){
+                mx.dataIds=ids;
+                mx.objects=objs;
+                showPanalAlert(480,380,'#refuse','配置单审批驳回','html/dispose/pzdspfile/cancel.html');               
+            }           
+        }
+    });
+    //结束报名
+    $("#endApply_pzdsp").on("click",function(){ 
+        var rows = $("#pzdspTable").datagrid( 'getSelections' ); 
+        //console.log(rows[0].responseId)
+        if(rows.length==0){ 
+            $.messager.alert("提示信息", "请选择信息" ); 
+            return; 
+        }else if(rows.length>=1){ 
+            var dataIds = [];
+            var enableFlag = true ;//
+            for( var i = 0 ; i < rows.length ; i ++ ){
+                if( rows[i].staffingStatus != "0404" ){//非已发布状态
+                    console.log(rows[i].staffingStatus);//配置单号
+                    console.log("选中为非已发布状态");
+                    enableFlag = false ;
+                    break ;
+                }else{//待审批状态
+                    console.log("选中为已发布状态")
+                    dataIds.push(rows[i].staffingId);//配置单号数组                    
+                }                              
+            }
+            //校验是否存在启用数据
+            if( !enableFlag ){
+                $.messager.alert("提示信息","只有已发布状态才能结束报名！","warning" );
+                return ;
+            }
+            $.messager.confirm("操作确认", "确定要结束报名吗？", function(ok){
+                if(ok){
+                    console.log(dataIds);
+                    endApply(dataIds);                   
+                }
+            });    
+            function endApply(dataIds){
+                $.ajax({
+                    type:'post',
+                    url:BASE_URL3+'/competitionApply/endEmpApply',
+                    contentType:'application/json',
+                    data:JSON.stringify(dataIds),
+                    success:function(data){
+                        console.log(data,'结束报名接口')
+                        if(data.resultCode =="200"){
+                            $.messager.alert("提示信息", "结束报名成功" );
+                            //$('#alreadySubmittedTable').datagrid('reload');
+                            pzdCheckApply();//刷新页面
+                        }else{
+                            $.messager.alert("提示信息", "结束报名失败" ); 
+                        }
+                    },
+                    error: function(rel){
+                        console.log(rel);
+                    }
+                });
+            }           
+        }
+    });
+
+</script>

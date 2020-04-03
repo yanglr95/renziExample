@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1001,
+        "menuText": "资格审查",
+        "icon": "icon_nav11_1.png",
+        "iconact": "icon_nav11_1_active.png",
+        "secondary":true
+    },{
+        "id": 1002,
+        "menuText": "信息确认",
+        "icon": "icon_nav11_2.png",
+        "iconact": "icon_nav11_2_active.png",
+        "secondary":true 
+       
+    },{
+        "id": 1003,
+        "menuText": "智能搜索",
+        "icon": "icon_nav11_3.png",
+        "iconact": "icon_nav11_3_active.png",
+        "secondary":true
+    },
+    {
+        "id": 1004,
+        "menuText": "员工主体分析",
+        "icon": "icon_nav11_4.png",
+        "iconact": "icon_nav11_4_active.png",
+        "secondary":true 
+    }
+]

@@ -1,0 +1,217 @@
+<div class="table_seach" style="height: 36px;margin: 10px 0;padding: 0 0 55px 0;">
+        <div class="table_seach_right" style="line-height: 30px;float: left;width: 100%">
+            <!-- 日期选择 -->
+            <div>
+                <span style="margin: 0">申请部门：</span>
+                <input id="departed" class="easyui-combobox" editable="false">
+                <span>类型：</span>
+                <input id="typed" class="easyui-combobox" editable="false">
+                <span>审批时间：</span>
+                <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                    data-options="formatter:myformatter,parser:myparser"
+                    style="width:140px;">&nbsp;&nbsp;&nbsp;
+                至
+                <input class="easyui-datebox cv_time_end_edit" label=""
+                    data-options="formatter:myformatter,parser:myparser"
+                    style="width:140px">
+                <!-- 姓名输入 -->
+                <span style="margin-left: 20px;">姓名：</span>
+                <input id="setname">
+                <button>查询</button>
+                <button style="margin-left: 0;">重置</button>
+                <!-- <button class="search-btn primary-btn">查询</button> -->
+            </div>
+        </div>
+        <!-- <div class="table_seach_left">
+            <div class="save_group_seach" style="margin: 15px 0;">
+                <button class="save_group_add">批量通过</button>
+                <button class="save_group_col">批量驳回</button>
+                <span class="index_ok">已选择 0 项</span>
+            </div>
+        </div> -->
+    </div>
+    <table id="alreadyApprovalTable" class="easyui-datagrid" data-options="singleSelect:true,collapsible:true,"
+        style="border: 1px solid #eee;"></table>
+    
+    <script type="text/javascript">
+    
+        $(function () {
+            $.ajax({
+                type:'post',
+                url:BASE_URL+'/hrEmp/queryEmpAuditList',
+                contentType:'application/json',
+                data:JSON.stringify({
+                    "filter":{
+                        "operationType":"2,3",
+                        "beginDate":"",
+                        "endDate":"",
+                        "chnName":""
+                    },
+                    "pageIndex":1,
+                    "pageSize":10
+                }),
+                success:function(data){
+                    if (data.resultCode==200) {
+                        alreadyApprovalTable(data.resultValue.items)
+                    }
+                    console.log(data.resultValue.items,'已审批')
+                }
+            })
+            $('#departed').combobox({
+                width:140,
+                valueField:'id',
+                textField:'text',
+                height: 30,
+                data:[
+                    {
+                        'id':'',//默认显示第一项
+                        'text' : '全部'
+                    },
+                    {
+                        'id': '1',
+                        'text': '办公厅'
+                    }
+                ]
+            });
+            $('#typed').combobox({
+                valueField:'id',
+                textField:'text',
+                height: 30,
+                width:140,
+                data:[
+                    {
+                        'id':'',//默认显示第一项
+                        'text' : '全部'
+                    },
+                    {
+                        'id': '1',
+                        'text': '变更'
+                    }
+                ]
+            });
+            $('#setname').textbox({
+                height:'30px',
+                width:'180px',
+                prompt:'请输入关键字'
+            });
+            //获取已选个数
+            function InsexFun() {
+                var len = $('#alreadyApprovalTable').datagrid('getChecked').length
+                $(".index_ok").html("已选择 " + len + " 项")
+            }
+            function alreadyApprovalTable(data){
+                $('#alreadyApprovalTable').datagrid({
+                    onLoadSuccess: function () {
+                        var scrolly = 0
+                        $(".scroll_record").scroll(function (x) {
+                            scrolly = $(this).scrollTop()
+                        });
+                        $(".easyui-tooltipa").hover(function (e) {
+                            $(".more_and_more").show()
+                            var hoverDomObj = e.target;
+                            var top = $(hoverDomObj).position().top
+                            var left = $(hoverDomObj).position().left
+                            console.log(top)
+                            if (scrolly > top - 50) {
+                                $(".more_and_more").css({
+                                    top: top + 85 + 40,
+                                    left: left - 150,
+                                })
+                            } else {
+                                $(".more_and_more").css({
+                                    top: top + 85 - 140,
+                                    left: left - 150,
+                                })
+                            }
+                        }, function () {
+                            $(".more_and_more").hide()
+                        })
+                    },
+                    height: $(window).height-180,
+                    width: '100%',
+                    fitColumns: true,
+                    // pagination: true,
+                    striped: true,
+                    data:data,
+                    selectOnCheck: false,
+                    checkOnSelect: false,
+                    onCheckAll: function () {
+                        InsexFun()
+                    },
+                    onUncheckAll: function () {
+                        InsexFun()
+                    },
+                    onCheck: function (index, row) {
+                        InsexFun()
+                    },
+                    onUncheck: function () {
+                        InsexFun()
+                    },
+                    columns: [
+                        [
+                        {"title":"申请信息","colspan":6},
+                        {"title":"修改信息","colspan":4},
+                        {"title":"审批信息","colspan":4},
+                        ],
+                        [
+                        // { field: 'checkbox', checkbox: "true", halign: 'center', align: 'center', width: '3%' },
+                        {
+                            field: 'index', title: '序号', width: '5%', halign: 'center', align: 'center', formatter(value, row, index) {
+                                return `<span>${index + 1}</span>`
+                            }
+                        },
+                        { field: 'orderNum', title: '申请单号', width: '10%', halign: 'center', align: 'center',formatter(value, row, index) {
+                                return "<span onclick='skipysp()' class='view' data-id='"+row.id+"' style='color:rgb(24,98,223);cursor:pointer'>"+row.orderNum+"</span> "
+                            }
+                        },
+                        { field: 'applyEmpName', title: '申请人', width: '5%', halign: 'center', align: 'center' },
+                        { field: 'applyDeptName', title: '申请部门', width: '10%', halign: 'center', align: 'center' },
+                        { field: 'empName', title: '姓名', width: '5%', halign: 'center', align: 'center', formatter(value, row, index) { return value; } },
+                        { field: 'applyDate', title: '申请时间', width: '10%', halign: 'center', align: 'center',formatter:function(value, row, index){
+                            return timeType(value)
+                        }  },
+                        { field: 'empId', title: '人员编码', width: '10%', halign: 'center', align: 'center' },
+                        { field: 'type', title: '类型', width: '5%', halign: 'center', align: 'center' },
+                        {
+                            field: 'updateFileds', title: '修改字段', width: '5%', halign: 'center', align: 'center',
+                            formatter(value, row, index) { return row.updateFileds+'<a href="#" class="easyui-tooltipa"><img style="width:16px;margin-left:5px" src="assets/icon/filed_search.png"/></a>'; }
+                        },
+                        {
+                            field: 'resorce', title: '佐证材料', width: '5%', halign: 'center', align: 'center',
+                            formatter(value, row, index) {
+                                return ' <a href="#" class="easyui-tooltipa"><img style="width:16px" src="assets/icon/img_icon.png"/></a>'+' '+'<a href="#" class="easyui-tooltipa"><img style="width:16px;margin-left:10px" src="assets/icon/field.png"/></a>';
+                                // if(row.resorce == 0){
+                                //     return ' <a href="#" title="This is the tooltip message." class="easyui-tooltipa"><img style="width:12px" src="/assets/home/icon_edit.png"/></a>';
+                                // }else if(row.resorce == 1){
+                                //     return ' <a href="#" title="This is the tooltip message." class="easyui-tooltipa"><img style="width:12px" src="/assets/home/icon_edit.png"/></a>'+' '+'<a href="#" title="This is the tooltip message." class="easyui-tooltipa"><img style="width:12px" src="/assets/home/icon_edit.png"/></a>';
+                                // }
+                        }},
+                        { field: 'status', title: '状态', width: '5%', halign: 'center', align: 'center' },
+                        { field: 'auditTime', title: '审批时间', width: '10%', halign: 'center', align: 'center' },
+                        { field: 'remark', title: '备注', width: '10%', halign: 'center', align: 'center' },
+                        {
+                            field: 'handle', title: '操作', width: '5%', halign: 'center', align: 'center', formatter(value, row, index) {
+                                return "<span onclick='tableSubmit(${row.id})' style='color:rgb(24,98,223);cursor:pointer'>作废</span> "
+                            }
+                        }
+                        // {
+                        //     field: 'handle', title: '操作', width: '10%', halign: 'center', align: 'center', formatter(value, row, index) {
+                        //         var pushHtml = []
+                        //         pushHtml.push("<span onclick='tableSubmit(${row.id})' style='color:rgb(24,98,223);cursor:pointer'>通过</span> ")
+                        //         pushHtml.push("<span onclick='tableSubmit(${row.id})' style='color:rgb(24,98,223);cursor:pointer'>驳回</span> ")
+                        //         pushHtml.push("<span class='view' data-id='"+row.id+"' style='color:rgb(24,98,223);cursor:pointer'>查看</span> ")
+                        //         return pushHtml.join("")
+                        //     }
+                        // }
+                    ]]
+                });
+            }
+    
+        });
+
+        //
+        function skipysp(id){
+            opentab("/people/data/alert/sqxqYsp", "申请详情", false, id)
+        }
+    
+    </script>

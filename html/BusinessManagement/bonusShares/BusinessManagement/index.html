@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="bonus-summary" style="padding: 20px;">
+        <h3 class="box-title">奖金分配列表</h3>
+        <div class="bs-search">
+            <span>创建时间：</span>
+            <input id="bg-datestart">
+            <span style="margin: 0 8px;">至</span>
+            <input id="bg-dateend">
+            <span style="margin-left: 20px;">奖金名称：</span>
+            <input id="jjfpsname">
+            <button class="search-btn primary-btn">查 询</button>
+        </div>
+        <div class="bs-table">
+            <div id="dg"></div>
+            <div id="bs-pagination" style="background:#efefef;border:1px solid #ccc;"></div> 
+        </div>
+    </div>
+    <div id="department"></div>
+    <script type="text/javascript">
+        var tableData1 = [];
+        $(function(){
+            rewardAjax()
+            // $('#bs-pagination').pagination({
+            //     total:data.length,
+            //     pageSize:2,
+            //     layout:['prev','links','next','manual'],
+            //     links:3
+            // });
+            // grid_page('dg',5);
+            $('#bg-datestart').datebox({
+                editable:false,
+                width:140,
+                height:34,
+            })
+            $('#bg-dateend').datebox({
+                editable:false,
+                width:140,
+                height:34,
+            });
+            $('#jjfpsname').textbox({
+                width:140,
+                height:34,
+            })
+        })
+        function rewardGatherTable(data){
+            $('#dg').datagrid({
+                fitColumns:true,
+                // pagination: false,
+                striped:true,
+                data:data,
+                columns:[[
+                    {field:'index',title:'序号',width:'6%',halign:'center',align:'center',formatter:function(value,row,index){
+                        return '<span>'+(index+1)+'</span>'
+                    }},
+                    {field:'packageId',title:'分配单号',width:'13%',halign:'center',align:'center',formatter:function(value,row,index){
+                        return '<span onclick="deBonusShares('+row.packageId+')" class="primary-color" style="cursor:pointer">'+row.packageId+'</span>'
+                    }},
+                    {field:'rewardName',title:'奖金名称',width:'13%',halign:'center',align:'center'},
+                    
+                    {field:'totalAmount',title:'总金额',width:'14%',halign:'center',align:'center',formatter:function(value,row,index){
+                        return '<span>'+value+'</span>'
+                    }},
+                    {field:'endDate',title:'截止时间',width:'12%',halign:'center',align:'center',formatter:function(value,row,index){
+                        return '<span>'+timeType(value)+'</span>'
+                    }},
+                    {field:'submitStatus',title:'状态',width:'10%',halign:'center',align:'center',formatter:function(value,row,index){
+                        if(row.submitStatus == 2){
+                            return '<span>已提交</span>'
+                        }else{
+                            return '<span class="primary-color">未提交</span>'
+                        }
+                    }},
+                    {field:'putProgress',title:'发放进度',width:'10%',halign:'center',align:'center',formatter:function(value,row,index){
+                        return '<span>'+value+'</span>'
+                    }},
+                    {field:'beginDate',title:'创建时间',width:'12%',halign:'center',align:'center',formatter:function(value,row,index){
+                        return '<span>'+timeType(value)+'</span>'
+                    }},
+                    {field:'handle',title:'操作',width:'10%',halign:'center',align:'center',formatter:function(value,row,index){
+                        if (row.submitStatus != 2) {
+                            return "<span onclick='tableSubmit("+row.id+")' class='primary-color' style='cursor:pointer'>提交</span>"
+                        }
+                    }}
+                ]]
+            });
+        }
+        function rewardAjax(){
+            //奖金汇总-index
+            $.ajax({
+                type:'post',
+                url:BASE_URL+'/rewardGatherMA/findByCondition',
+                contentType:'application/json',
+                data:JSON.stringify({
+                    "beginDate":'2000-01-01',
+                    "endDate":'9999-12-31',
+                    "index":1,
+                    "pageNum":10,
+                    "name":""
+                }),
+                success:function(data){
+                    console.log(data,'奖金汇总-index')
+                    tableData1=data.resultValue.items;
+                    rewardGatherTable(tableData1)
+                }
+            })
+        }
+        //提交
+        function tableSubmit(id){
+            $('#dg').datagrid('reload');
+        }
+        
+        function deBonusShares(id){
+            // showPanalAlert('100%', '100%', "#department","","./department.html");
+            //closeTab(this)
+            opentab("BusinessManagement/bonusShares/BusinessManagement/department", "分配详情", false,id);
+        }
+    </script>
+</body>
+</html>

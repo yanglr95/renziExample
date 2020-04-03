@@ -1,0 +1,52 @@
+<div style="padding: 15px">
+    <p style="margin-bottom: 10px;">审批备注：</p>
+    <input id="approval-msg" class="easyui-textbox">
+    <div style="margin-top: 20px;padding: 10px 0;width: 100%;border-top: 1px solid #ccc">
+        <div class="fr">
+            <button class="primary-btn" onclick="peoSave(this)">确定</button>
+            <button class="border-btn " onclick="hideAlert(this)">取消</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        $('#approval-msg').textbox({
+            width: 350,
+            height: 150,
+            editable: true,
+            multiline: true
+        })
+    })
+
+    //保存
+    function peoSave(e){
+        if (approvalStatus == 0) {
+            //驳回
+            approvalFnc(thisPageId,'/hrEmp/empAuditReject',e)
+        }else {
+            //通过
+            approvalFnc(thisPageId,'/hrEmp/empAuditPasss',e)
+        }
+    }
+    function approvalFnc(id,statusUrl,e){
+        // console.log(id,'---',statusUrl,'---',$('#dsptgalert').textbox('getValue'))
+        $.ajax({
+            type:'get',
+            url:BASE_URL + statusUrl,
+            data:{
+                recordId:id,
+                message:$('#approval-msg').textbox('getValue')
+            },
+            success:function(data){
+                console.log(data)
+                if (data.resultCode==200) {
+                    hideAlert(e)
+                    closetabTitle("信息审批");
+                    closetabTitle("申请详情");
+                    opentab("people/approval", "信息审批", false)
+                }
+            }
+        })
+    }
+</script>

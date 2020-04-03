@@ -1,0 +1,346 @@
+
+    <div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+        <div class="tab_card">
+            <div style="padding: 20px 0 20px 20px">
+                <p class="box-title">人员信息</p>
+                <div class="title_record" style="margin-right:20px;">申请记录</div>
+            </div>
+            <!--<div class="title_line">
+                <div class="box-title">人员信息</div>
+                <div class="title_record">申请记录</div>
+            </div>-->
+            <div style="width:100%;height: 100%;padding: 0 20px;">
+                <div id="peoplelayout" class="easyui-layout" style="width:100%;height: 100%;">
+                    <div class="people-left" data-options="region:'west',split:true,collapsedSize: 1" style="width:250px;">
+                        <div class="peoples_west">
+                            <div style="margin-bottom: 10px;"><input style="width: 100%;" class="input_seach" placeholder="请输入关键字"></div>
+                            <ul id="people-tree"></ul>
+                        </div>
+                        <div class="collapse"></div>
+                    </div>
+
+                    <div class="people-right" data-options="region:'center',split:true">
+                        <div style="padding: 0 0 0 20px;width: 100%;height: 100%;font-size: 14px;">
+                            <div class="table_tab1">
+                                <ul class="lf">
+                                    <li class="active">全口径用工</li>
+                                    <li>职工</li>
+                                    <li>农电用工</li>
+                                    <li>劳务派遣</li>
+                                    <li>非全日制</li>
+                                    <li>业务委托</li>
+                                    <li>其他从业人员</li>
+                                </ul>
+                                <div style="display: inline-block;padding: 5px 0;line-height: 40px;float:right;">
+                                    <label>姓名:&nbsp;</label>
+                                    <div style="display: inline-block;position: relative;border: solid 1px #dfe0e4;line-height:30px;">
+                                        <input type="text" style="width: 80%;">
+                                        <img src="assets/icon/search-icon.png" style="position: absolute;right: 5px;top: 5px;cursor: pointer;">
+                                    </div>
+                                    <img class="per_icon_set" style="width: 20px;" onclick="$('#dlg2').dialog('open')"
+                                        src="assets/home/people_set_icon.png" alt="">
+                                </div>
+                            </div>
+                            <div class="easyui-layout" fit="true">
+                                <div id="peopleTable" data-options="region:'center',border:false,split:false,href:'html/people/alert/people1.html'">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="expand"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dlg2" class="easyui-dialog" closed="true" title="表头配置" style="width:800px;height:500px;padding:10px;display: none;">
+        <div class="easyui-layout" style="width: 100%;height: 100%;">
+            <div data-options="region:'center'" style="padding-right: 10px;">
+                <div class="data_fieid">数据字段</div>
+                <div class="basis_group">
+                    <div class="basis_titlt"><label><input type="checkbox" name="basisall" />基本信息</label></div>
+                    <div class="basis_list">
+                        <label><input type="checkbox" value="姓名" name="basis_checkbox" />姓名</label>
+                        <label><input type="checkbox" value="性别" name="basis_checkbox" />性别</label>
+                        <label><input type="checkbox" value="人资编码" name="basis_checkbox" />人资编码</label>
+                        <label><input type="checkbox" value="年龄" name="basis_checkbox" />年龄</label>
+                        <label><input type="checkbox" value="政治面貌" name="basis_checkbox" />政治面貌</label>
+                        <label><input type="checkbox" value="民族" name="basis_checkbox" />民族</label>
+                        <label><input type="checkbox" value="技能等级" name="basis_checkbox" />技能等级</label>
+                        <label><input type="checkbox" value="所在部门" name="basis_checkbox" />所在部门</label>
+                        <label><input type="checkbox" value="部门" name="basis_checkbox" />部门</label>
+                        <label><input type="checkbox" value="岗位" name="basis_checkbox" />岗位</label>
+                        <label><input type="checkbox" value="入职时间" name="basis_checkbox" />入职时间</label>
+                        <label><input type="checkbox" value="职称" name="basis_checkbox" />职称</label>
+                    </div>
+                </div>
+                <div class="basis_group">
+                    <div class="basis_titlt"><label><input type="checkbox" name="educationall" />教育经历</label></div>
+                    <div class="basis_list">
+                        <label><input type="checkbox" value="学历" name="education_checkbox" />学历</label>
+                        <label><input type="checkbox" value="学位" name="education_checkbox" />学位</label>
+                    </div>
+                </div>
+                <div class="basis_group">
+                    <div class="basis_titlt"><label><input type="checkbox" name="talentall" />专家人才</label></div>
+                    <div class="basis_list">
+                        <label><input type="checkbox" value="专家等级" name="talent_checkbox" />专家等级</label>
+                        <label><input type="checkbox" value="人才称号" name="talent_checkbox" />人才称号</label>
+                        <label><input type="checkbox" value="人才类别" name="talent_checkbox" />人才类别</label>
+                        <label><input type="checkbox" value="专业类别" name="talent_checkbox" />专业类别</label>
+                        <label><input type="checkbox" value="系统内/外" name="talent_checkbox" />系统内/外</label>
+                    </div>
+                </div>
+
+            </div>
+            <div data-options="region:'east'" style="width:150px;">
+                <div class="east_basis_box">
+                    <div class="east_basis_title">已选字段</div>
+                    <ul class="east_ul">
+
+                    </ul>
+                </div>
+
+            </div>
+            <div data-options="region:'south'" style="height:50px;">
+                <div class="save_group_log_box">
+                    <div class="save_group_log">
+                        <button class="save_group_col">取消</button>
+                        <button class="save_group_add">确定</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        //获取表格数据
+        function queryPeopleTable(querySelector,status){
+            $.ajax({
+                type:'post',
+                url:BASE_URL + '/hrEmp/loadEmpList',
+                contentType:'application/json',
+                data:JSON.stringify({
+                    filter:{
+                        "empSubGroup":status,
+                        "chnName":"",
+                        "id":"69001242"
+                    },
+                    "pageIndex":1,
+                    "pageSize":10
+                }),
+                success:function(data){
+                    if (data.resultCode == 200) {
+                        console.log(data.resultValue.items)
+                        peopleTableAll(querySelector,data.resultValue.items)
+                    }
+                }
+            })
+        }
+        //渲染表格
+        function peopleTableAll(querySelector,data){
+            $('#'+querySelector).datagrid({
+                width: '100%',
+                height:490,
+                fitColumns: true,
+                striped: true,
+                data:data,
+                columns: [[
+                    {
+                        field: 'index', title: '序号', width: '5%', halign: 'center', align: 'center', formatter(value, row, index) {
+                            return `<span>${index + 1}</span>`
+                        }
+                    },
+                    { field: 'empId', title: '人员编码', width: '8%', halign: 'center', align: 'center'},
+                    { field: 'chnName', title: '姓名', width: '6%', halign: 'center', align: 'center',
+                        formatter(value, row, index) {
+                            return `<span class="view" style="color:rgb(0,160,159);cursor:pointer" onclick='peopleDetail(${row.empId})'>${row.chnName}</span>`
+                        }
+                    },
+                    { field: 'belongUnit', title: '所在单位', width: '15%', halign: 'center', align: 'center',formatter(value, row, index){
+                        return `<div style="width:100%" class="overflow-ellipsis" title="${value}">${value}</div>`
+                    } },
+                    { field: 'belongDept', title: '部门', width: '15%', halign: 'center', align: 'center' ,formatter(value, row, index){
+                        return `<div style="width:100%" class="overflow-ellipsis" title="${value}">${value}</div>`
+                    }},
+                    { field: 'belongTeam', title: '岗位', width: '10%', halign: 'center', align: 'center' },
+                    { field: 'gender', title: '性别', width: '6%', halign: 'center', align: 'center', formatter(value, row, index) { 
+                        if (value==0) {
+                            return '女'
+                        }else{
+                            return '男'
+                        }
+                    } },
+                    { field: 'birthDay', title: '年龄', width: '6%', halign: 'center', align: 'center' ,formatter:function(value, row, index){
+                        return ageSwitch(value)
+                    }},
+                    { field: 'heightEduCodeName', title: '学历/学位', width: '10%', halign: 'center', align: 'center' },
+                    { field: 'skillIdentGrade', title: '技能等级', width: '7%', halign: 'center', align: 'center' },
+                    { field: 'qualifName', title: '职称', width: '7%', halign: 'center', align: 'center' },
+                    { field: 'handle', title: '操作', width: '5%', halign: 'center', align: 'center', formatter(value, row, index) {
+                            return "<span class='edit' style='color:rgb(24,98,223);cursor:pointer' onclick='peopleChangePage("+row.empId+")'>变更</span> "
+                        }
+                    }
+                ]]
+            });
+        }
+        //详情
+        function peopleDetail(id){
+            var params = {
+                id:id,
+                status: 3
+            }
+            // console.log(params)
+            closetabTitle("申请详情");
+            opentab("/people/recordlist/alert/ytjbkch", "申请详情", false, params)
+        }
+        //变更
+        function peopleChangePage(id){
+            closetabTitle("申请详情");
+            opentab("people/peoplesDetail", "申请详情", false,id);
+        }
+        $(function () {
+            //面板收缩
+            $(".collapse").click(function () {
+                $("#peoplelayout").layout("collapse", "west");
+                $(".expand").show();
+                $(this).hide();
+            });
+            //面板展开
+            $(".expand").click(function () {
+                $("#peoplelayout").layout("expand", "west");
+                $(".collapse").show();
+                $(this).hide();
+            });
+
+            $('#namesearch').searchbox({
+                width: 150,
+                height: 34,
+            })
+
+            $(".table_tab1 li").click(function(){
+                $(this).addClass("active").siblings().removeClass("active");
+                switch($(this).index()){
+                    case 0:
+                        $("#peopleTable").panel("refresh","html/people/alert/people1.html");
+                        break;
+                    case 1:
+                        $("#peopleTable").panel("refresh","html/people/alert/people2.html");
+                        break;
+                    case 2:
+                        $("#peopleTable").panel("refresh","html/people/alert/people3.html");
+                        break;
+                    case 3:
+                        $("#peopleTable").panel("refresh","html/people/alert/people4.html");
+                        break;
+                    case 4:
+                        $("#peopleTable").panel("refresh","html/people/alert/people5.html");
+                        break;
+                    case 5:
+                        $("#peopleTable").panel("refresh","html/people/alert/people6.html");
+                        break;
+                    case 6:
+                        $("#peopleTable").panel("refresh","html/people/alert/people7.html");
+                        break;
+                }
+            })
+            //申请记录
+            $(".title_record").on("click",function(){
+                closetabTitle('申请记录');
+                opentab("people/recordlist", "申请记录", !secondary);
+            })
+            //表头选择框
+            var checkedBox = {
+                "姓名":true
+            }
+            boxInputfun()
+            checkallfun("basisall", "basis_checkbox", checkedBox)
+            checkallfun("educationall", "education_checkbox", checkedBox)
+            checkallfun("talentall", "talent_checkbox", checkedBox)
+            function checkallfun(checkall, checkbox, checkedBox) {
+                $('input[name="' + checkall + '"]').on("click", function () {
+                    if ($(this).is(':checked')) {
+                        $('input[name="' + checkbox + '"]').each(function () {
+                            checkedBox[$(this).val()] = true
+                            $(this).prop("checked", true);
+                        });
+                    } else {
+                        $('input[name="' + checkbox + '"]').each(function () {
+                            $(this).prop("checked", false);
+                            checkedBox[$(this).val()] = false
+                        });
+                    }
+                    boxInputfun()
+                });
+            }
+            $('.basis_list input[type="checkbox"]').on("click", function () {
+                if ($(this).is(':checked')) {
+                    checkedBox[$(this).val()] = true
+                } else {
+                    checkedBox[$(this).val()] = false
+                }
+                boxInputfun()
+            })
+            function boxInputfun() {
+                var boxInput = ""
+                for (key in checkedBox) {
+                    if (checkedBox[key] == true) {
+                        boxInput += "<li>" + key + "<span class='basis_x'></span></li>"
+                        $('.basis_list input[value="' + key + '"]').prop("checked", true);
+                    }
+                }
+                
+                $(".east_ul").html(boxInput)
+            }
+            $("body").on("click", ".east_ul li .basis_x", function () {
+                var html = $(this).parent().text()
+                checkedBox[html] = false
+                $('.basis_list input[value="' + html + '"]').prop("checked", false);
+                boxInputfun()
+            })//表头选择框 end
+            $(".save_group_log .save_group_col").on("click", function () {
+                $('#dlg2').dialog('close')
+            })
+            $(".save_group_log .save_group_add").on("click", function () {
+                var iskong = true
+                for (key in checkedBox) {
+                    if (checkedBox[key] == true) {
+                        iskong=false
+                    }
+                }
+                if(iskong){
+                    alert("请先选择表头配置！")
+                }else{
+                    $('#dlg2').dialog('close')
+                }
+                
+            })
+            //组织机构树
+            peopleTree();
+            function peopleTree(){
+                $('#people-tree').tree({
+                    url:BASE_URL + '/hrEmp/tree',
+                    method: 'get',
+                    queryParams:{
+                        id:0
+                    },
+                    formatter:function(node){
+                        return node.text
+                    },
+                    onLoadSuccess:function(node,data){
+                    },
+                    onClick:function(node){
+                        
+                    }
+                });
+            }
+                      
+        });
+
+        //表头设置
+        // function dialogalert(){
+        //     showPanalAlert(800,500,'#alertplane','表头设置','html/portal/alert/alert1.html')
+        // }
+    </script>

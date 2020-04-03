@@ -1,0 +1,89 @@
+<div class="alert-content">
+        <div id="grade-tabs" class="easyui-tabs content-tabs">
+            <div title="男">
+                <div class="alert-table-box">
+                    <div id="grade1"></div>
+                </div>
+            </div>
+            <div title="女">
+                <div class="alert-table-box">
+                    <div id="grade2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="education-name-search">
+            <span>姓名：</span>
+            <div class="education-search-box">
+                <input type="text" class="education-inp" placeholder="请输入关键字">
+                <img src="/assets/icon/search.png">
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            var tabIndex = null;
+            $('#grade-tabs').tabs({
+                onSelect:function(title,index){
+                    tabIndex = index;
+                    $('.education-inp').val('')
+                    if (tabIndex==0) {
+                        educationTable('grade1','','1');
+                    }else if (tabIndex==1) {
+                        educationTable('grade2','','2');
+                    }
+                }
+            })
+            $('.education-search-box img').click(function(){
+                if (tabIndex==0) {
+                    educationTable('grade1',$('.education-inp').val().trim(),'1');
+                }else if (tabIndex==1) {
+                    educationTable('grade2',$('.education-inp').val().trim(),'2');
+                }
+            })
+            $('.education-inp').keypress(function(e){
+                if (e.which == 13) {
+                    if (tabIndex==0) {
+                        educationTable('grade1',$('.education-inp').val().trim(),'1');
+                    }else if (tabIndex==1) {
+                        educationTable('grade2',$('.education-inp').val().trim(),'2');
+                    }
+                }
+            })
+        })
+        function educationTable(querySelector,searchName,searchVariableValue){
+            $('#'+querySelector).datagrid({
+                fitColumns:true,
+                // pagination: true,
+                height:450,
+                striped:true,
+                url:BASE_URL+'/index/detailsList',
+                method:'get',
+                queryParams:{
+                    token:'',
+                    param:JSON.stringify({
+                        "belongDeptId":"10554186",
+                        "searchName":searchName,
+                        "searchType":"gender",
+                        "searchVariableValue":searchVariableValue
+                    })
+                },
+                columns:[[
+                    {field:'index',title:'序号',width:'6%',halign:'left',align:'left',formatter:function(value,row,index){
+                        return '<span>'+(index+1)+'</span>'
+                    }},
+                    {field:'belongDeptId',title:'人员编码',width:'10%',halign:'left',align:'left'},
+                    {field:'chnName',title:'姓名',width:'10%',halign:'left',align:'left'},
+                    {field:'belongUnit',title:'所在单位',width:'25%',halign:'left',align:'left',formatter:function(value,row,index){
+                        return '<span class="home-overflow">'+value+'</span>'
+                    }},
+                    {field:'belongDept',title:'部门',width:'25%',halign:'left',align:'left',formatter:function(value,row,index){
+                        return '<span class="home-overflow">'+value+'</span>'
+                    }},
+                    {field:'postName',title:'岗位',width:'14%',halign:'left',align:'left',formatter:function(value,row,index){
+                        return '<span class="home-overflow">'+value+'</span>'
+                    }},
+                    {field:'dictVal',title:'性别',width:'10%',halign:'left',align:'left'}
+                ]]
+            })
+        }
+    </script>

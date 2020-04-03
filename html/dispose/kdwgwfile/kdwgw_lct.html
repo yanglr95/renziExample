@@ -1,0 +1,146 @@
+<div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+    <div class="easyui-layout" style="width:100%;height: 100%">
+
+        <div data-options="region:'center'" style="padding:10px 20px 20px 20px;position: relative;">
+
+            <div class="shared_box" style="position: relative;">
+                <div class="per_back" style="margin-bottom: 10px;padding-bottom: 10px; border-bottom: 1px solid #eee;">
+                    <div class="ray_back"><img style="height: 10px;position: relative;top: -2px;"
+                            src="assets/home/icon_back_left.png"" alt=""> 返回</div>
+                </div>
+                <div>
+                    <div class=" box-title">
+                        红山县公司挂职锻炼申请（国网层级）
+                    </div>
+                    <div style="padding: 10px 0;">
+                        <span>配置单号：2103090876382277</span>
+                        <span>报名有效期：2019-04-01-2019-06-01</span>
+                    </div>
+                    <div style="overflow: hidden;">
+                        <div class="lf" style="width: 200px;">
+                            <ul class="kdwgw_lct_ul_left">
+                                <li><img src="assets/home/icon_quan_ok.png" alt="">
+                                    <div class="xian"></div> 开始
+                                </li>
+                                <li><img src="assets/home/icon_quan_ok.png" alt="">
+                                    <div class="xian"></div> 配置单申请
+                                </li>
+                                <li><img src="assets/home/icon_quan_ok.png" alt="">
+                                    <div class="xian"></div> 员工报名及考评
+                                </li>
+                                <li><img src="assets/home/icon_quan_ok.png" alt="">
+                                    <div class="xian"></div> 筛选录用及信息补充
+                                </li>
+                                <li><img src="assets/home/icon_quan_lg.png" alt="">
+                                    <div class="xian"></div> 执行岗位变动
+                                </li>
+                                <li><img style="width: 10px;margin-left: 7px;top: 0;" src="assets/home/icon_quan_sm.png"
+                                        alt=""> 完成</li>
+                            </ul>
+                        </div>
+                        <div class="rg" style="width: calc(100% - 200px);">
+                            <ul class="kdwgw_lct_ul_right">
+                                <li style="height: 120px;"></li>
+                                <li>
+                                    <div>
+                                        <div class="kuang">配置提交</div>
+                                        <div class="zhi">
+                                            <p>李毅</p>
+                                            <p>2019-10-01 12:00</p>
+                                        </div>
+                                    </div>
+                                    <img src="assets/home/jiantou.png" alt="">
+                                    <div>
+                                        <div class="kuangs">
+                                            配置审批<br>
+                                            （市层级）
+                                        </div>
+                                        <div class="zhi">
+                                            <p class="col_00DF1A">李毅</p>
+                                            <p>2019-10-01 12:00</p>
+                                        </div>
+                                    </div>
+                                    <img src="assets/home/jiantou.png" alt="">
+                                    <div>
+                                        <div class="kuangs">
+                                            结束报名<br>
+                                            （省层级、国网级）
+                                        </div>
+                                        <div class="zhi">
+                                            <p>李毅</p>
+                                            <p>2019-10-01 12:00</p>
+                                        </div>
+                                    </div>
+                                    <img src="assets/home/jiantou.png" alt="">
+                                    <div>
+                                        <div class="kuang">配置提交</div>
+                                        <div class="zhi">
+                                            <p class="col_00DF1A">李毅</p>
+                                            <p>2019-10-01 12:00</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <div class="kuang">配置提交</div>
+                                        <div class="zhi">
+                                            <p>李毅</p>
+                                            <p>2019-10-01 12:00</p>
+                                        </div>
+                                    </div>
+                                    <img src="assets/home/jiantou.png" alt="">
+                                    <div>
+                                        <div class="kuang">配置提交</div>
+                                        <div class="zhi">
+                                            <p class="col_00DF1A">李毅</p>
+                                            <p>2019-10-01 12:00</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <div class="kuang">配置提交</div>
+                                        <div class="zhi">
+                                            <p>李毅</p>
+                                            <p>2019-10-01 12:00</p>
+                                        </div>
+                                    </div>
+                                    <img src="assets/home/jiantou.png" alt="">
+                                    <div>
+                                        <div class="kuang kuang_act">配置提交</div>
+                                        <div class="zhi"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div>
+                                        <div class="kuang">配置提交</div>
+                                    </div>
+                                    <img src="assets/home/jiantou.png" alt="">
+                                    <div>
+                                        <div class="kuang">配置提交</div>
+                                    </div>
+                                </li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        console.log($("#mainTabs").tabs("options").id)
+        $(".zhankai_act").on("click", function () {
+            var html = $(this).html()
+            var htmlact = html == "展开" ? "关闭" : "展开"
+            $(this).html(htmlact)
+            $(this).parent().next().toggle()
+        })
+    });
+</script>

@@ -1,0 +1,159 @@
+<div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+    <div class="easyui-layout" style="width:100%;height: 100%">
+
+        <div data-options="region:'west',split:true" style="padding: 20px;position: relative;" data-spy="scroll"
+            data-target="#navbar-example">
+
+            <div class="per_west_box" style="position: relative;">
+                <div class="per_back">
+                    <div class="ray_back">返回</div>
+                </div>
+                <div class="top_box">
+                    <div class="top_img"><img src="assets/home/icon_set.png" alt=""></div>
+                    <div class="top_con" style="width: calc(100% - 50px);">
+                        <div class="sxly_top_con_name" style="height: 30px;width: 100%;">
+                            <div><span>姓名：</span> <b class="name_top"></b></div>
+                            <div><span>籍贯：</span><b>浙江杭州</b></div>
+                            <div><span>出生地：</span><b>浙江杭州</b></div>
+                            <div><span>工作时间：</span><b>1988-07-20</b></div>
+                            <div><span>人员编码：</span><b>112345678</b></div>
+                        </div>
+                        <div class="sxly_top_con_list" style="height: 30px;">
+                            <div><span>部门：</span><b>监察局监察3室</b></div>
+                            <div><span>岗位：</span><b>副处长</b></div>
+                            <div><span>任职时间：</span><b>1998-07-01</b></div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+                <div class="per_main_list" style="margin:0;padding:0 0 0 80px">
+                    <!-- <div class="per_main_title">基本信息</div> -->
+                    <div class="per_main_con">
+                        <div><span>性别：</span> <b>男</b></div>
+                        <div><span>年龄：</span> <b>23岁</b></div>
+                        <div><span>民资：</span> <b>汉</b></div>
+                        <div><span>政治面貌：</span> <b>党员</b></div>
+                        <div><span>入职时间：</span> <b>2000.02</b></div>
+                        <div><span>职称：</span> <b>副高级</b></div>
+                        <div><span>技能等级：</span> <b>高级工程师</b></div>
+                        <div><span>固定电话：</span> <b>13999999999</b></div>
+
+                    </div>
+                </div>
+                <div class="per_main_list">
+                    <div class="per_main_title">工作履历</div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian">
+                                <div class="xian"></div>
+                            </b>
+                            <b class="cv_name">太原供电公司变电检修工区</b>
+                            <span class="cv_state">见习</span>
+                            <span class="cv_department">科院</span>
+                            <span class="cv_level">科长</span>
+                        </div>
+                    </div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian">
+                                    <div class="xian"></div>
+                            </b>
+                            <b class="cv_name">山西电力集团公司太原供电公司变电检修工区</b>
+                            <span class="cv_state">见习</span>
+                            <span class="cv_department">科院</span>
+                            <span class="cv_level">科长</span>
+                        </div>
+                    </div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2010-01-01</b> ~ <b
+                                    class="cv_time_end">2010-10-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name">山西电力集团公司太远供电公司变电检修工区变电检修二班</b>
+                            <span class="cv_state">见习</span>
+                            <span class="cv_department">科院</span>
+                            <span class="cv_level">科长</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="per_main_list" id="three">
+                    <div class="per_main_title">教育经历</div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name">清华大学(全日制)</b>
+                            <span class="cv_state">本科</span>
+                            <span class="cv_department">学士</span>
+                            <span class="cv_level">计算机-网络编程</span>
+                            <span class="cv_data">佐证材料</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="per_main_list" id="five">
+                    <div class="per_main_title">家庭主要成员</div>
+                    <div style="height: 500px;padding: 20px 0;">
+                        <table id="jianliTable" class="easyui-datagrid"
+                            data-options="singleSelect:true,collapsible:true," style="border: 1px solid #eee;"></table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+   var uerName = $("#mainTabs").tabs("options").id;
+   $(".name_top").text(uerName);
+    $(".main_btn").on("click", function () {
+        closetabTitle("申请详情");
+        opentab("people/peoplesDetail", "申请详情", !secondary);
+    })
+    $(function () {
+        var data = [
+            {
+                num: '20190382',
+                name: '月度',
+                date: '2019年11月',
+                total: '130,000,000',
+                endTime: '2019.06.03',
+                state: '无',
+                cfdate: '2019.06.03',
+                fhdate: '2019.06.03',
+                ccdate: '2019.06.03',
+                reason: '无',
+                adress: '详情',
+                file: '无'
+            },
+        ]
+        $('#jianliTable').datagrid({
+            height: 360,
+            width: '100%',
+            fitColumns: true,
+            //pagination: true,
+            striped: true,
+            data,
+            columns: [[{ field: 'cfdate', title: '称谓', halign: 'center', align: 'left' },
+            { field: 'fhdate', title: '姓名', halign: 'center', align: 'left' },
+            { field: 'ccdate', title: '年龄', halign: 'center', align: 'left' },
+            { field: 'reason', title: '政治面貌', halign: 'center', align: 'left' },
+            {
+                field: 'adress', title: '工作单位及主要职务', halign: 'center', align: 'left', formatter(value, row, index) {
+                    return "90"
+                }
+            }
+            ]]
+        });
+        $(".cv_data").on("click", function () {
+            $(".imageGallery_box").show()
+        })
+    });
+</script>

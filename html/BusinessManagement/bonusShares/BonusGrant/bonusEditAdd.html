@@ -1,0 +1,307 @@
+<body>
+        <div class="bonus-add" style="padding: 20px;">
+            <div class="ba-btn">
+                <button class="primary-btn" style="display: none" onclick="saves()">保存</button>
+                <button class="primary-btn" style="display: none" onclick="saveIssue()">保存并下发</button>
+                <button class="disabled-btn">保存</button>
+                <button class="disabled-btn">保存并提交</button>
+                <button class="border-btn cancel-btn">取消</button>
+            </div>
+            <div class="ba-baseinfo">
+                <h3 class="box-title">基本信息</h3>
+                <ul>
+                    <li>
+                        <i class="required-icon">*</i>
+                        <span>奖金名称：</span>
+                        <!-- <input id="b-name" class="b-name"> -->
+                        <input type="text" class="b-name">
+                    </li>
+                    <!-- <li>
+                        <i class="required-icon">*</i>
+                        <span>奖金时间：</span>
+                        <input class="easyui-datebox cv_time_start_edit" id="bones-date" label="" placeholder="开始"
+                            data-options="formatter:myformatter,parser:myparser" style="width:140px;height: 25px;">
+                        <!-- <input id="bones-date"> 
+    
+                    </li> -->
+                    <li>
+                        <i class="required-icon">*</i>
+                        <span>截止时间：</span>
+                        <input class="easyui-datebox cv_time_end_edit" id="end-date" label=""
+                            data-options="formatter:myformatter,parser:myparser" style="width:140px;height: 34px;">
+                        <!-- <input id="end-date" class="stop-time"> -->
+                        <!-- <i id="ba-tip">i</i> -->
+                        <a href="#" id="ba-tip" title="部门最晚提交时间" class="easyui-tooltip">i</a>
+                    </li>
+                    <li>
+                        <span>下发部门：</span>
+                        <span class="shallow-color deptName">组织部</span>
+                    </li>
+                    <li>
+                        <span>下发人：</span>
+                        <span class="shallow-color empName">凉音</span>
+                    </li>
+                    <li style="display: none">
+                        <span>分配单号</span>
+                        <span class="code"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="ba-allocinfo">
+                <h3 class="box-title">分配信息</h3>
+                <ul>
+                    <li>
+                        <i class="required-icon">*</i>
+                        <span>总金额：</span>
+                        <input type="text" class="totalAmounts">
+                        <!-- <input id='total-money' class="totalAmount"> -->
+                    </li>
+                    <li>
+                        <span>已下发金额：</span>
+                        <span class="shallow-color residueMoney">80,000</span>
+                    </li>
+                </ul>
+                <div class="btn-group">
+                    <button class="border-btn">导入</button>
+                    <button class="border-btn">导出</button>
+                </div>
+                <div class="table-group">
+                    <div class="table-left">
+                        <div id="tab-left"></div>
+                    </div>
+                    <div class="table-right">
+                        <div id="tab-right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(function () {
+    
+                // $('#b-name').textbox({
+                //     required:false,
+                //     width:200,
+                //     height:36,
+                // });
+                $('#total-money').textbox({
+                    required: false,
+                    width: 200,
+                    height: 36,
+                });
+                $('#bones-date').datebox({
+                    required: false,
+                    editable: false,
+                    width: 140,
+                    height: 36,
+                })
+                $('#end-date').datebox({
+                    required: false,
+                    editable: false,
+                    width: 140,
+                    height: 36,
+                })
+                // $('#ba-tip').tooltip({
+                //     position: 'top',
+                //     content: '<span style="color:#fff">部门最晚提交时间</span>',
+                //     onShow: function () {
+                //         $(this).tooltip('tip').css({
+                //             backgroundColor: '#666',
+                //             borderColor: '#666',
+                //         });
+                //     }
+                // });
+                $('.b-name').on('input',function(){
+                    $('.ba-btn').find('.primary-btn').show()
+                    $('.ba-btn').find('.disabled-btn').hide()
+                })
+                $('.totalAmounts').on('input',function(){
+                    $('.ba-btn').find('.primary-btn').show()
+                    $('.ba-btn').find('.disabled-btn').hide()
+                    var rule = /^\d*$/     //验证是否为有效数字
+                    if(!rule.test($(this).val())){
+                        alert('请输入有效数字！')
+                    }
+                })
+                //
+                ajaxTable();
+    
+            })
+    
+    
+    
+            $('.cancel-btn').click(function () {
+                closeTab()
+            })
+     
+            
+            var dateList = [];
+            var moreMoey = null;//超额数
+            function tableTotal(id, tableData) {
+                $('#' + id).datagrid({
+                    fitColumns: true,
+                    striped: true,
+                    checkOnSelect: false,
+                    data: tableData,
+                    onLoadSuccess:function(){
+                        $('.bonus-tab').on('input',function(){
+                            var newMoney = 0
+                            indexs=$('.bonus-tab').index(this)
+                            dateList[indexs].sumMoney = Number($(this).val())
+                            $('.ba-btn').find('.primary-btn').show()
+                            $('.ba-btn').find('.disabled-btn').hide()
+                            for(var i = 0;i<$('.bonus-tab').length;i++){
+                                newMoney += $('.bonus-tab').eq(i).val()*1
+                            }
+                            if($('.totalAmounts').val() == 0){
+                                alert('当前总金额为0，无法进行分配')
+                                return
+                            }
+                            if(($('.totalAmounts').val()-newMoney) < 0){
+                                moreMoey = -($('.totalAmounts').val()-newMoney);
+                                $(this).val('')
+                                showPanalAlert(460, 220,'#full_excess','提示','html/BusinessManagement/bonusShares/BonusGrant/alert/addExcess.html')
+                            }
+                            // console.log($('.totalAmounts').val()-newMoney) 
+                        })
+                        .click(function(e){
+                            e.stopPropagation()
+                        })
+                    },
+                    columns: [[
+                        { field: 'checkbox', checkbox: "true", halign: 'left', align: 'left',width:'5%' },
+                        {
+                            field: 'index', title: '序号',width:'5%', halign: 'left', align: 'left', formatter: function (value, row, index) {
+                                if(id == 'tab-left'){
+                                    return '<span>'+((index+1)*2-1)+'</span>'
+                                }else{
+                                    return '<span>'+((index+1)*2)+'</span>'
+                                }
+                            }
+                        },
+                        { field: 'deptCode', title: '部门编码', halign: 'center', align: 'center', hidden: true },
+                        { field: 'deptName', title: '部门',width:'38%', halign: 'center', align: 'center' ,formatter:function(value,row,index){
+                            return '<div class="overflow-ellipsis" title="'+value+'">'+value+'</div>'
+                        }},
+                        {field:'sumMoney',title:'金额',width:'20%',halign:'center',align:'center',formatter:function(value,row,index){
+                            if(row.taskStatus==1){
+                                return '<span>'+value+'</span><input class="bonus-tab" style="display:none">'
+                            }else{   
+                              return '<input class="bonus-tab" type="number">'
+                            }
+                        }},
+                        {
+                            field: 'taskStatus', title: '状态',width:'10%', halign: 'center', align: 'center', formatter: function (value, row, index) {
+                                if (row.taskStatus == 1) {
+                                    return '<span>已下发</span>'
+                                } else {
+                                    return '<span>未下发</span>'
+                                }
+                            }
+                        },
+                        {
+                            field: 'issueDate', title: '下发时间',width:'20%', halign: 'center', align: 'center', formatter: function (value, row, index) {
+                                if (row.taskStatus == 1) {
+                                    return '<span>' + timeType(value) + '</span>'
+                                } else {
+                                    return ''
+                                }
+                            }
+                        },
+                    ]]
+                })
+            }
+            function ajaxTable() {
+                $.ajax({
+                    type: 'get',
+                    url: BASE_URL + '/rewardIssueMA/find',
+                    data: {
+                        pacakgeId: $('#mainTabs').tabs('options').id
+                    },
+                    success: function (data) {
+                        var dataleft = []
+                        var dataright = []
+                        console.log(data, '奖金下发-index-新增页')
+                        var aaa = data.resultValue.rewardDeptList;
+                        for(var i = 0;i<aaa.length;i++){
+                            aaa[i].index = i;
+                        }
+                        dateList=aaa;
+                        var dataleft = aaa.slice(0, Math.ceil(aaa.length / 2));
+                        var dataright = aaa.slice(Math.ceil(aaa.length / 2), aaa.length);
+                        tableTotal('tab-left', dataleft);
+                        tableTotal('tab-right', dataright);
+                        console.log(dataleft);
+                        console.log(dataright)
+                        $('.code').text(data.resultValue.rewardId);
+                        $('.b-name').val(data.resultValue.rewardName);
+                        $('.totalAmounts').val(data.resultValue.totalAmount);
+                        // $('.totalAmount').textbox('setText',data.resultValue.totalAmount);
+                        console.log(data.resultValue.totalAmount)
+                        // $('#bones-date').datebox('setValue', data.resultValue.beginDate);
+                        // console.log(data.resultValue.beginDate)
+                        $('#end-date').datebox('setValue', data.resultValue.endDate);
+                        $('.deptName').text(data.resultValue.deptName);
+                        $('.empName').text(data.resultValue.empName);
+                        $('.residueMoney').text(data.resultValue.residueMoney);
+                    }
+                })
+            };
+            // 新增-保存
+            function saves() {
+                var getDate = {
+                    "rewardName": $('.b-name').val(),
+                    "beginDate": $('#bones-date').datebox('getValue'),
+                    "endDate": $('#end-date').datebox('getValue'),
+                    "totalAmount": $('.totalAmounts').val(),
+                    "rewardDeptList": dateList
+                }
+                $.ajax({
+                    type: 'post',
+                    contentType: 'application/json',
+                    url: BASE_URL + '/rewardIssueMA/save',
+                    data: JSON.stringify(
+                        getDate
+                    ),
+                    success: function (data) {
+                        console.log(data, '奖金下发-index-保存')
+                        if (data.resultCode == 200) {
+                            closeTab()
+                        }
+                    }
+                })
+            }
+            // 新增-保存并下发
+            function saveIssue() {
+                var bonus_money = $('#tab-left').datagrid('getChecked').concat($('#tab-right').datagrid('getChecked'))
+                console.log(bonus_money)
+                if(bonus_money.length == 0){
+                    alert('请选择需要下发的数据')
+                }else{
+                    var getDate = {
+                        "rewardName": $('.b-name').val(),
+                        "endDate": $('#end-date').datebox('getValue'),
+                        "totalAmount": $('.totalAmounts').val(),
+                        "rewardDeptList": bonus_money
+                    }
+                    $.ajax({
+                        type: 'post',
+                        contentType: 'application/json',
+                        url: BASE_URL + '/rewardIssueMA/issueSave',
+                        data: JSON.stringify(
+                            getDate
+                        ),
+                        success: function (data) {
+                            console.log(data, '奖金下发-index-保存')
+                            if (data.resultCode == 200) {
+                                closetabTitle("新增编辑");
+                                closetabTitle('奖金下发')
+                                opentab("BusinessManagement/bonusShares/BonusGrant/index", "奖金下发", false);
+                            }
+                        }
+                    })
+                }
+                
+                
+            }
+        </script>
+    </body>

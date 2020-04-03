@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="bonus-shares" style="padding: 20px;">
+        <h3 class="box-title">奖金分配</h3>
+        <div class="bs-search">
+            <span>创建时间：</span><input id="bonus-datestart"><span style="margin: 0 8px;">至</span><input id="bonus-dateend">
+            <span style="margin-left: 20px;">奖金名称：</span><input id="b-bonusname"><button class="search-btn primary-btn">查 询</button>
+        </div>
+        <div class="bonus-table">
+            <div id="bonus-main-table"></div>
+        </div>
+    </div>
+    <div id="bonus-shares-edit"></div>
+    <script>
+        var tableData1 = [];
+        $(function(){
+            rewardAllot()
+            
+            $('#bonus-datestart').datebox({
+                editable:false,
+                height:34,
+            })
+            $('#bonus-dateend').datebox({
+                editable:false,
+                height:34,
+            });
+            $('#b-bonusname').textbox({
+                height:34
+            })
+            
+        })
+        function tableIndex(mainData){
+            $('#bonus-main-table').datagrid({
+                fitColumns:true,
+                // pagination: true,
+                striped:true,
+                data:mainData,
+                columns:[[
+                    {field:'index',title:'序号',width:'10%',halign:'center',align:'center',formatter:function(value,row,index){
+                        return '<span>'+(index+1)+'</span>'
+                    }},
+                    {field:'packageId',title:'分配单号',width:'15%',halign:'center',align:'center',formatter:function(value,row,index){
+                        return '<span onclick="deBonusShares('+row.packageId+')" class="primary-color" style="cursor:pointer">'+row.packageId+'</span>'
+                    }},
+                    {field:'rewardName',title:'奖金名称',width:'15%',halign:'center',align:'center'},
+                    {field:'beginDate',title:'奖金时间',width:'15%',halign:'center',align:'center',formatter:function(value,row,index){
+                        return '<span>'+timeType(value)+'</span>'
+                    }},
+                    {field:'totalAmount',title:'总金额',width:'15%',halign:'center',align:'center'},
+                    {field:'endDate',title:'截止时间',width:'15%',halign:'center',align:'center',formatter:function(value,row,index){
+                        return '<span>'+timeType(value)+'</span>'
+                    }},
+                    {field:'putProgress',title:'发放进度',width:'15%',halign:'center',align:'center'},
+                ]]
+            })
+        }
+        function rewardAllot(){
+            //奖金分配-index
+            $.ajax({
+                type:'post',
+                url:BASE_URL+'/rewardAllotMA/findByCondition',
+                contentType:'application/json',
+                data:JSON.stringify({
+                    "beginDate":'2000-01-01',
+                    "endDate":'9999-12-31',
+                    "index":1,
+                    "pageNum":10,
+                    "name":""
+                }),
+                success:function(data){
+                    console.log(data,'奖金分配-index')
+                    tableData1=data.resultValue.items;
+                    tableIndex(tableData1)
+                }
+            })
+        }
+        function deBonusShares(id){
+            // showPanalAlert('100%', '100%', "#bonus-shares-edit","","html/BusinessManagement/bonusShares/bonusSharesEdit.html");
+            opentab("BusinessManagement/bonusShares/bonusSharesEdit", "分配详情", false,id);
+        }
+    </script>
+</body>
+
+</html>
+

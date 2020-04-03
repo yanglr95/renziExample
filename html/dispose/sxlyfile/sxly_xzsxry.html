@@ -1,0 +1,485 @@
+<div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+    <div class="easyui-layout" style="width:100%;height: 100%">
+
+        <div data-options="region:'center'" style="padding: 20px 20px 0 20px;position: relative;background: #fff;">
+
+            <div class="shared_box" style="position: relative;">
+                <div class="shared_btn_box" style="border: 0;">
+                    <button class="main_btn" style="cursor: pointer;" onclick="submitWorkflow()">提 交</button>
+                    <button class="main_btn_col" style="cursor: pointer;" onclick="goListTabs()">返 回</button>
+                </div>
+            </div>
+            <div class="box-title" style="display: block;" id="headTitle"><span class="renzhi rg">任职要求</span></div>
+            <p style="margin: 10px 15px 10px;border-bottom: 1px solid #eee; padding: 0 0 10px 0;">配置单号：<span
+                    id='staffingDeptInfo'></span>
+            </p>
+
+            <div>
+                <div style="width:100px;float: left ;height: 100%;">
+                    <div>
+                        <ul class="left_nav myNav">
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="width:calc(100% - 100px);float: left;">
+                    <div>
+                        <div class="sxly_xzsxry_box" style="line-height: 50px;">
+                            <span style="margin: 0;">岗位分类:</span>
+                            <input id="sxly_xzsxry1">
+                            <span>人员编码:</span>
+                            <input style="border:1px solid #eee;line-height: 30px;">
+                            <span>姓名:</span>
+                            <input style="border:1px solid #eee;line-height: 30px;">
+                            <span style="margin-right: 0;">工作年限:</span>
+                            <input id="sxly_xzsxry2" editable="false">年及以上
+                            <button class="main_btn" style="margin-left: 20px;">查询</button>
+                            <span class="gaoji">高级 》 </span>
+                        </div>
+                        <div class="gaoji_box sxly_xzsxry_box" style="display: none;">
+                            <span>专业技术资格名称:</span>
+                            <input style="border:1px solid #eee;line-height: 30px;">
+                            <span style="margin-right: 0;">等级:</span>
+                            <input id="sxly_xzsxry3">年及以上
+                            <span>技能工种名称:</span>
+                            <input style="border:1px solid #eee;line-height: 30px;">
+                            <span style="margin-right: 0;">等级:</span>
+                            <input id="sxly_xzsxry4">年及以上
+                        </div>
+                    </div>
+                    <div style="overflow: hidden;margin-top: 10px;">
+                        <div class="lf lfList"
+                            style="width: calc(100% - 240px); padding-right:20px ; border-right: 1px dashed #eee;overflow: hidden;">
+                        </div>
+                        <div class="rg" style="width: 240px;padding: 10px;">
+
+                            <div class="box-title" style="display: block;padding-bottom:10px ;">已选人员（<span
+                                    class="totalNumber"></span>） <span class="renzhi rg col_00A09F">导出</span></div>
+                            <ul class="sxly_ul">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="main_btn rg" onclick="saveDatas()"
+                        style="cursor: pointer;margin-right: 245px;">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<style>
+    /*进度条start*/
+    .sxly_xzsxry_box>span {
+        margin: 0 10px;
+    }
+
+    .order_status {
+        height: 175px;
+        float: right;
+    }
+
+    .order_status .s-step {
+        float: left;
+        width: 115px;
+        height: 60px;
+        position: relative;
+    }
+
+    .order_status .s-step:nth-child(3n) {
+        width: 0px;
+    }
+
+    .order_status .s-step.active {
+        float: left;
+        width: 115px;
+        height: 60px;
+        position: relative;
+    }
+
+    .order_status .s-step>b>b.active {
+        background-color: #22AEA8
+    }
+
+    .order_status .s-step>b {
+        display: block;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        position: absolute;
+        margin-left: -16px;
+        top: -10px;
+    }
+
+    .order_status .s-step>b>b {
+        display: block;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #B5BBCE;
+    }
+
+    .order_status .s-step>p {
+        width: 100px;
+        border: 1px dashed #B5BBCE;
+        top: 0px;
+        position: absolute;
+    }
+
+    .order_status .s-step>p.active {
+        width: 100px;
+        border: 1px dashed #22AEA8;
+        top: 0px;
+        position: absolute;
+    }
+
+    .order_status .s-step em {
+        display: block;
+        padding-top: 20px;
+        font-style: normal;
+        text-align: center;
+        color: #B5BBCE;
+        font-size: 12px;
+        margin-left: -65px;
+        width: 130px
+    }
+
+    /*步骤条end*/
+</style>
+
+<script type="text/javascript">
+    //获取列表数据ID
+    var staffingId = $("#mainTabs").tabs("options").id;
+    $('#sxly_xzsxry1').combobox({
+        prompt: '请输入',
+        height: 25,
+        data: [
+            { id: "", text: "全部" },
+            { id: 1, text: "审核中" }
+        ]
+    });
+    $('#sxly_xzsxry2').combobox({
+        prompt: '请输入',
+        height: 25,
+        data: [
+            { id: "", text: "全部" },
+            { id: 1, text: "审核中" }
+        ]
+    });
+    $('#sxly_xzsxry3').combobox({
+        prompt: '请输入',
+        height: 25,
+        data: [
+            { id: "", text: "全部" },
+            { id: 1, text: "审核中" }
+        ]
+    });
+    $('#sxly_xzsxry4').combobox({
+        prompt: '请输入',
+        height: 25,
+        data: [
+            { id: "", text: "全部" },
+            { id: 1, text: "审核中" }
+        ]
+    });
+    $('#configureLevel').combobox({
+        valueField: 'id',
+        textField: 'text',
+        height: 25,
+        data: [
+            {
+                'id': '',//默认显示第一项
+                'text': '国网层级'
+            },
+            {
+                'id': '1',
+                'text': '国网层级1'
+            },
+            {
+                'id': '2',
+                'text': '国网层级2'
+            },
+            {
+                'id': '3',
+                'text': '国网层级3'
+            }
+        ]
+    });
+    $(".gaoji").on("click", function () {
+        $(".gaoji_box").toggle()
+    })
+    // $("div").on("click", '.sxly_li_bom span', function () {
+    //     alert($('.empcode').text());
+    //     var empId = $(this).siblings().find('.empcode').text();
+    //     //var empId = '08000005';
+    //     opentab("/dispose/sxlyfile/sxly_bcxx", "补充人员信息", false, empId)
+    // })
+    function eidtInfo(empId, staffingId, postCategory) {
+        var obj = {
+            empId: empId,
+            staffingId: staffingId,
+            postCategory: postCategory
+        }
+        opentab("/dispose/sxlyfile/sxly_bcxx", "补充人员信息", false, obj)
+    }
+    $("body").on("click", '.sxly_xzsxry_name', function () {
+        opentab("/dispose/sxlyfile/sxly_grjl", "个人简历", false, $(this).text())
+    })
+    if ($(".s-step0").hasClass("active")) {
+        $(".s-step0>b>b,.s-step0>div").addClass("active");
+    }
+    else if ($(".s-step1").hasClass("active")) {
+        $(".s-step1>b>b,.s-step1>div,.s-step0>b>b,.s-step0>p,.s-step0>div").addClass("active");
+    }
+    else if ($(".s-step2").hasClass("active")) {
+        $(".s-step2>b>b,.s-step2>div,.s-step1>p,.s-step1>b>b,.s-step1>div,.s-step0>b>b,.s-step0>p,.s-step0>div").addClass("active");
+    }
+
+    //定义标识用于判断是否允许提交流程
+    var allowSubmitWorkflow = false;
+    //未补充信息人员的数量
+    var isUnEditInfoNums = 0;
+    //已选人员数量
+    var totalNumber = 0;
+    //提交配置单
+    function submitWorkflow() {
+        //如果没有已选人员或者存在没有补充信息的人员，则不允许提交流程
+        if (isUnEditInfoNums > 0 || totalNumber == 0) {
+            allowSubmitWorkflow = false;
+        } else {
+            allowSubmitWorkflow = true;
+        }
+        if (!allowSubmitWorkflow) {
+            $.messager.alert("提示信息", "请先补充已选人员信息再提交");
+            return;
+        }
+        $.ajax({
+            url: BASE_URL3 + '/empApply/submitFilter?staffingId=' + staffingId,
+            type: 'get',
+            success: function (data) {
+                $.messager.alert("提示信息", "提交成功");
+            }
+        })
+    }
+    //获取人员信息
+    getEmpRecodeData();
+    var categorys = [];
+    function getEmpRecodeData(queryData) {
+        $.ajax({
+            url: BASE_URL3 + '/empApply/queryStaffingAndPost?staffingId=' + staffingId,
+            type: 'get',
+            success: function (data) {
+                categorys = data.resultValue.categorysAndName;
+                var levText = '';
+                if (data.resultValue.publishLevel == '01') {
+                    levText = '本单位'
+                }
+                if (data.resultValue.publishLevel == '02') {
+                    levText = '地市公司级'
+                }
+                if (data.resultValue.publishLevel == '03') {
+                    levText = '省公司级'
+                }
+                if (data.resultValue.publishLevel == '04') {
+                    levText = '国网级'
+                }
+                var headTitleText = data.resultValue.staffingName + '（' + levText + '）';
+                $("#headTitle").text(headTitleText)
+                $("#staffingDeptInfo").text(staffingId)
+                var categorysArr = [];
+                for (var x = 0; x < categorys.length; x++) {
+                    for (i in categorys[x]) {
+                        var obj = {
+                            key: i,
+                            value: categorys[x][i]
+                        }
+                        categorysArr.push(obj)
+                    }
+                }
+                getAllTabs(categorysArr);
+            }
+        })
+    }
+
+    //获取左边tabs信息
+    function getAllTabs(categorysArr) {
+        var str = '';
+        for (x in categorysArr) {
+            str += '<li>' + categorysArr[x].value + '<input type="hidden" value=' + categorysArr[x].key + '></li>'
+        }
+        $(".myNav").html(str);
+        $(".myNav>li").eq(0).addClass("act");
+        setTimeout(function () {
+            $(".act").click();
+        })
+    }
+    var postCategory = "";
+    $(".left_nav.myNav").on('click', 'li', function () {
+        $(this).addClass('act').siblings().removeClass('act');
+        postCategory = $(this).find('input').val();
+        var resultValue = [];
+        var str = '';
+        var sxlyUlStr = '';
+        $.ajax({
+            url: BASE_URL3 + '/empApply/empsHire',
+            type: 'post',
+            contentType: 'application/json',
+            //    data: JSON.stringify({staffingId:'6004',postCategory:postCategory}),
+            data: JSON.stringify({ staffingId: staffingId, postCategory: postCategory }),
+            success: function (data) {
+                resultValue = data.resultValue;
+                var index = $(this).index();
+                var str = '<div class="box-title" style="display: block; margin-top: 10px;margin-bottom: 20px;">人员筛选结果'
+                    + '<span class="renzhi rg col_00A09F">导出全部</span></div>';
+                if (resultValue && resultValue.length > 0) {
+                    for (var i = 0; i < resultValue.length; i++) {
+                        if (resultValue[i].confirmStatus == '1') {
+                            totalNumber++;
+                            if (resultValue[i].infoStatus == '0') {
+                                isUnEditInfoNums++;
+                                sxlyUlStr += '<li style="margin-bottom:10px">'
+                                    + '<div class="sxly_li_top">' + resultValue[i].chnName + '<span style="color:#333;margin-left: 5px;">' + resultValue[i].responseEmpId + '</span><span class="rg closeBtn">X</span></div>'
+                                    + '<div class="sxly_li_bom">未补充 <span class="rg" onclick="eidtInfo(' + resultValue[i].responseEmpId + ',\'' + resultValue[i].staffingId + '\',\'' + resultValue[i].postCategory + '\')">补充信息</span></div>'
+                                    + '</li>'
+                            } else {
+                                sxlyUlStr += '<li style="margin-bottom:10px">'
+                                    + '<div class="sxly_li_top">' + resultValue[i].chnName + '<span style="color:#333;margin-left: 5px;">' + resultValue[i].responseEmpId + '</span><span class="rg closeBtn">X</span></div>'
+                                    + '<div class="sxly_li_bom">已补充 <span class="rg" onclick="eidtInfo(' + resultValue[i].responseEmpId + ',\'' + resultValue[i].staffingId + '\',\'' + resultValue[i].postCategory + '\')">补充信息</span></div>'
+                                    + '</li>'
+                            }
+                        } else {
+                            str += '<div class="renyuan_list" style="margin-bottom:20px;">'
+                                + '<div class="renyuan_img">'
+                                + '<img src="http://192.168.100.66/static/userImg/12352047.png">'
+                                + '</div>'
+                                + '<div class="renyuan_con">'
+                                + '<div>'
+                                + '<span><b class="sxly_xzsxry_name">' + resultValue[i].chnName + '</b>  ' + resultValue[i].sex + '</span>'
+                                + '<span>年龄：36</span>'
+                                + '<span>工作年限：' + resultValue[i].workYear + '年</span>'
+                                + '</div>'
+                                + ' <div>'
+                                + ' <span title="' + resultValue[i].belongUnit + '">' + resultValue[i].belongUnit + '</span>'
+                                + '<span title="' + resultValue[i].belongDept + '">' + resultValue[i].belongDept + '</span>'
+                                + '<span title="' + resultValue[i].objText + '">' + resultValue[i].objText + '</span>'
+                                // + ' <span title="'+resultValue[i].belongUnit+'">' + resultValue[i].belongUnit.substr(0,7)+'...' + '</span>'
+                                // + '<span title="'+resultValue[i].belongDept+'">' + resultValue[i].belongDept.substr(0,7)+'...' + '</span>'
+                                // + '<span title="'+resultValue[i].objText+'">' + resultValue[i].objText.substr(0,7)+'...' + '</span>'
+                                + '<input class="rg" type="checkbox" name="responseEmpId" value=' + resultValue[i].responseEmpId + '>'
+                                + '</div>'
+                                + '<div>'
+                                + '<span>' + resultValue[i].qualificationName + '</span>'
+                                + '<span>' + resultValue[i].skillIdentGrade + '</span>'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>';
+                        }
+
+                    }
+
+                }
+                $(".sxly_ul").html(sxlyUlStr);
+                $(".lfList").html(str);
+                $(".totalNumber").text(totalNumber);
+            }
+        })
+
+    })
+
+    function saveDatas() {
+        var checkDatas = $("input[name=responseEmpId]:checked");
+        var arr = [];
+        checkDatas.each(function () {
+            arr.push($(this).val());
+        });
+
+        var savData = {
+            "staffingId": staffingId,
+            "postCategory": postCategory,
+            "staffingEmpIds": arr
+        }
+        $.ajax({
+            url: BASE_URL3 + '/empApply/addConfirm',
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify(savData),
+            success: function (data) {
+                if (data.resultCode == "200") {
+                    getEmpRecodeData();
+                    $.messager.alert("提示信息", "保存成功");
+                    // showMessageWin('成功', '保存成功', 'success');
+                } else {
+                    $.messager.alert("提示信息", "保存失败");
+                    // showMessageWin('失败', '保存失败', 'error');
+                }
+            }
+        })
+    }
+    //删除选中的人员
+    $('.sxly_ul').on('click', 'span.closeBtn', function () {
+        var deleteData = {
+            "staffingId": staffingId,
+            "postCategory": postCategory,
+            "staffingEmpIds": [$(this).prev().text()]
+        }
+        // swal({
+        //     title: '警告',
+        //     text: '确定要删除该条信息吗？',
+        //     type: "warning",
+        //     showCancelButton: true,
+        //     confirmButtonColor: "#00A09F",
+        //     confirmButtonText: "确定",
+        //     cancelButtonText: "取消",
+        //     customClass: "custom_swal"
+        // }).then(
+        //     function (isConfirm) {
+        //         if (isConfirm) {
+        //             $.ajax({
+        //                 url: BASE_URL3 + '/empApply/deleteConfirm',
+        //                 type: 'post',
+        //                 contentType: 'application/json',
+        //                 data: JSON.stringify(deleteData),
+        //                 success: function (data) {
+        //                     if (data.resultCode == "200") {
+        //                         getEmpRecodeData();
+        //                         showMessageWin('成功',  '删除成功', 'success');
+        //                     } else {
+        //                         showMessageWin('失败',   '删除失败', 'error');
+        //                     }
+        //                 }
+        //             })
+        //         } else {
+        //         }
+        //     });
+        $.messager.confirm("操作确认", "确定要删除该条信息吗？", function (ok) {
+            if (ok) {
+                $.ajax({
+                    url: BASE_URL3 + '/empApply/deleteConfirm',
+                    type: 'post',
+                    contentType: 'application/json',
+                    data: JSON.stringify(deleteData),
+                    success: function (data) {
+                        if (data.resultCode == "200") {
+                            $.messager.alert("提示信息", "删除成功");
+                            getEmpRecodeData();
+                        } else {
+                            $.messager.alert("提示信息", "删除失败");
+                        }
+                    }
+                })
+            }
+        });
+    })
+    function goListTabs() {
+        closetabTitle('筛选录用列表');
+        closetabTitle('筛选录用');
+        opentab("/dispose/sxly", "筛选录用", false)
+    }
+</script>

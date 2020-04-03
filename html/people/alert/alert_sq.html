@@ -1,0 +1,56 @@
+<div style="padding-top: 10px;">
+    <div style="padding-bottom: 10px;">
+        <button class="main_btn">导出</button>
+    </div>
+    <div id="peoplesaudit"></div>
+</div>
+<script>
+    $(function(){
+    
+        var data11={
+                'status': 1,
+                'fullPath': mx.fullPathId1,
+                // 'fullPath': '00000001|10000029|10000001|10554191',
+                'batchNo': mx.sqxqydhId
+            }
+            if(mx.fullPathId1 == undefined){
+                data11.fullPath = '';
+            }
+            if(mx.gxryckTreeId){
+                data11.organId=mx.gxryckTreeId
+            }else{
+                data11.id="";
+            }    
+            sqalertfun(data11);   
+    })
+
+    function sqalertfun(e){
+        $('#peoplesaudit').datagrid({
+            method: 'get',
+            height: 360,
+            width: '100%',
+            fitColumns: true,
+            //pagination: true,
+            queryParams:e,
+            striped: true,
+            // url: BASE_URL3+'/sharingApply/queryByEmpId',
+            url: BASE_URL+'/sharingApply/queryByEmpId',
+            columns: [[
+                {
+                    field: 'index', title: '序号', width: '5%', halign: 'center', align: 'center', formatter(value, row, index) {
+                        return `<span>${index + 1}</span>`
+                    }
+                },
+                {
+                    field: 'empId', title: '人员编码', width: '10%', halign: 'center', align: 'center', formatter(value, row, index) {
+                        return '<span>'+value+'</span>'
+                    }
+                },
+                { field: 'empName', title: '姓名', width: '10%', halign: 'center', align: 'center' },
+                { field: 'unitName', title: '所在单位', width: '25%', halign: 'center', align: 'center' },
+                { field: 'deptName', title: '部门', width: '25%', halign: 'center', align: 'center' },
+                { field: 'organName', title: '岗位', width: '25%', halign: 'center', align: 'center' },
+            ]]
+        });
+    }
+</script>

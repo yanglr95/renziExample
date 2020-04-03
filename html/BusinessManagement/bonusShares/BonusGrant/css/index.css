@@ -1,0 +1,155 @@
+/* index */
+.bs-title{
+    padding: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+.bs-search{
+    text-align: right;
+    font-size: 14px;
+    margin: 16px 0;
+}
+.search-btn{
+    margin-left: 10px;
+}
+.bs-search button.add{
+    float: left;
+}
+.base-info{
+    margin-bottom: 50px;
+}
+.base-info ul,.ai-allocinfo ul{
+    margin-top: 10px;
+    font-size: 0;
+    padding-left: 15px;
+}
+.base-info li,.ai-allocinfo li{
+    display: inline-block;
+    margin-right: 60px;
+    color: #666;
+    font-size: 0;
+}
+.base-info li span,.ai-allocinfo li span{
+    font-size: 14px;
+}
+.base-info li span:nth-of-type(2),.ai-allocinfo li span:nth-of-type(2){
+    color: #333;
+    font-weight: bold;
+}
+#ai-tip{
+    display: inline-block;
+    width: 16px;
+    line-height: 16px;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    background-color: #067877;
+    font-size: 12px;
+    margin-left: 5px;
+}
+.table-left,.table-right{
+    display: inline-block;
+    width: 49%;
+}
+.table-left{
+    margin-right: 2%;
+}
+.table-group{
+    font-size: 0;
+    margin-top: 16px;
+}
+/* add */
+.ba-btn{
+    font-size: 0;
+    border-bottom: 1px solid #e9e7e7;
+    padding-bottom: 16px;
+}
+.ba-btn button,.btn-group button{
+    margin-right: 10px;
+}
+.ba-baseinfo{
+    margin-bottom: 50px;
+}
+.ba-baseinfo ul,.ba-allocinfo ul{
+    font-size: 0;
+    padding-left: 15px;
+    margin-top: 10px;
+}
+.ba-baseinfo li,.ba-allocinfo li{
+    display: inline-block;
+    margin-right: 50px;
+    font-size: 14px;
+    color: #666;
+}
+.shallow-color{
+    color: #333;
+    font-weight: bold;
+}
+.textbox-text{
+    color: #333;
+}
+.validatebox-invalid{
+    background: #fff;
+}
+.textbox-invalid{
+    background: #fff;
+}
+.required-icon{
+    color: #f00;
+}
+#ba-tip{
+    display: inline-block;
+    width: 16px;
+    line-height: 16px;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    background-color: #067877;
+    font-size: 12px;
+    margin-left: 5px;
+}
+.btn-group{
+    margin: 20px 0;
+}
+.table-group{
+    font-size: 0;
+}
+.table-left,.table-right{
+    display: inline-block;
+    width: 49%;
+}
+.table-left{
+    margin-right: 2%;
+}
+/* detail */
+.export-btn{
+    margin: 16px 0 0 5px;
+}
+.bonus-detail ul{
+    font-size: 0;
+    padding-left: 15px;
+    margin-top: 10px;
+}
+.bonus-detail li{
+    display: inline-block;
+    margin-right: 100px;
+    color: #666;
+    font-size: 0;
+}
+.bonus-detail li span{
+    font-size: 14px;
+}
+.bonus-detail ul span:last-child{
+    color: #333;
+    font-weight: bold;
+}
+.table-box{
+    margin-top: 16px;
+}
+.total-money{
+    margin: 20px 0 50px 0;
+}
+.base-info{
+    margin-bottom: 50px;
+}

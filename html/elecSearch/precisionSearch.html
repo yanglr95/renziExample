@@ -1,0 +1,533 @@
+<div id="navbar-example1">
+    <ul class="nav may_nav" role="tablist">
+        <li><a href="#one">基本信息</a></li>
+        <li><a href="#two">工作简历</a></li>
+        <li><a href="#three">教育经历</a></li>
+        <li><a href="#four">专家人才</a></li>
+        <li><a href="#five">家庭成员</a></li>
+        <li><a href="#six">绩效信息</a></li>
+    </ul>
+</div>
+<div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #fff;">
+    <div class="easyui-layout" style="width:100%;height: 100%">
+
+        <div data-options="region:'center',split:true" style="padding: 20px;position: relative;" 
+        id="personInfo_index"
+            data-spy="scroll" data-target="#navbar-example1">
+
+            <div class="per_west_box per_west_detail" style="position: relative;font-size: 14px;">
+                <div style="height: 40px;">
+                    <div style="float: left;width: 400px;height: 40px;background-color: #f7f7f8;border-radius: 4px;">
+                        <input type="text" class="zh-detail-input" style="width: 360px;height: 40px;background-color: #f7f7f8;padding-left: 10px;">
+                        <img class="zh-detail-search" src="assets/icon/search-icon.png" style="cursor: pointer;width: 20px;height: 20px;margin: 0 0 3px 6px;">
+                    </div>
+                    <div class="zh-detail-export" style="float: right;cursor: pointer;">
+                        <img src="assets/icon/dc.png">
+                        <span style="color: #00a09f;">导出</span>
+                    </div>
+                </div>
+                <div class="top-title" style="margin-top: 15px;">员工详情</div>
+                <div class="top_box">
+                    <div class="top_img"><img id="yfwdxxpic" src="" alt=""></div>
+                    <div class="top_con">
+                        <div class="top_con_name" style="height: 30px;">
+                            <span>姓名：</span> <b id="yfwdxxname" class="name_top"></b>
+                        </div>
+                        <div class="top_con_list" style="height: 30px;">
+                            <span>人员编码：</span><b id="yfwdxxrybm"></b>
+                            <span>部门：</span><b id="yfwdxxbm"></b>
+                            <span>岗位：</span><b id="yfwdxxgw"></b>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="per_main_list" id="one">
+                    <div class="box-title">基本信息</div>
+                    <div class="per_main_con">
+                        <div><span>性别：</span> <b id="yfwdsex">男</b></div>
+                        <div class="per-center-item"><span>年龄：</span> <b id="yfwdage">23岁</b></div>
+                        <div class="per-center-item"><span>民族：</span> <b id="yfwdnation">汉</b></div>
+                        <div><span>政治面貌：</span> <b id="yfwdpolity">党员</b></div>
+                        <div class="per-center-item"><span>入职时间：</span> <b id="yfwdTime">2000.03</b></div>
+                        <div class="per-center-item"><span>职称：</span> <b id="yfwdAcademic">副高级</b></div>
+                        <div><span>技能等级：</span> <b id="yfwdlevel">高级工程师</b></div>
+                        <div class="per-center-item"><span>固定电话：</span> <b id="yfwdphone">18100000000</b></div>
+                        <div class="per-center-item"><span></span> <b></b></div>
+                    </div>
+                </div>
+                <div class="per_main_list" id="two">
+                    <div class="box-title">工作履历</div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                                    <b class="dian">
+                                        <div class="xian"></div>
+                                    </b>
+                            <b class="cv_name">太原供电公司变电检修工区</b>
+                            <span class="cv_state">见习</span>
+                            <span class="cv_department">科院</span>
+                            <span class="cv_level">科长</span>
+                        </div>
+                    </div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name">太原供电公司变电检修工区</b>
+                            <span class="cv_state">见习</span>
+                            <span class="cv_department">科院</span>
+                            <span class="cv_level">科长</span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="per_main_list" id="three">
+                    <div class="box-title">教育经历</div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name">太原供电公司变电检修工区</b>
+                            <span class="cv_state">见习</span>
+                            <span class="cv_department">科院</span>
+                            <span class="cv_level">科长</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="per_main_list" id="four">
+                    <div class="box-title">专家人才</div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                                    <b class="dian">
+                                        <div class="xian"></div>
+                                    </b>
+                            <b class="cv_name">太原供电公司变电检修工区</b>
+                            <span class="cv_state">见习</span>
+                            <span class="cv_department">科院</span>
+                            <span class="cv_level">科长</span>
+                        </div>
+                    </div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name">太原供电公司变电检修工区</b>
+                            <span class="cv_state">见习</span>
+                            <span class="cv_department">科院</span>
+                            <span class="cv_level">科长</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="per_main_list" id="five">
+                    <div class="box-title">家庭成员 <img class="add_cv" style="width: 16px;height: 16px;margin-left: 3px;cursor: pointer;" src="assets/icon/add-detail.png"></div>
+                    <div class="per_cv_con">
+                        <div class="f_info">
+                            <li class="cv_name" style="width:20%;">
+                                <span><i>*</i>姓名:</span>
+                                <span>李华</span>
+                            </li>
+                            <li class="cv_relate" style="width:30%;">
+                                <span><i>*</i>成员关系:</span>
+                                <span>母亲</span>
+                            </li>
+                            <li class="cv_sex" style="width:30%;">
+                                <span><i>*</i>性别:</span>
+                                <span>女</span>
+                            </li>
+                            <li class="cv_time_start" style="width:20%;">
+                                <span><i>*</i>出生日期:</span>
+                                <span>2012-03-23</span>
+                            </li>
+                            <li class="cv_job" style="width:20%;">
+                                <span><i>*</i>工作单位及职务:</span>
+                                <span>物流职员</span>
+                            </li>
+                            <li class="cv_time_start" style="width:30%;">
+                                <span><i>*</i>参加工作、学习入伍时间:</span>
+                                <span>2012-03-23</span>
+                            </li>
+                            <li class="cv_time_start" style="width:30%;">
+                                <span><i>*</i>离开工作、学习入伍时间:</span>
+                                <span>2017-01-13</span>
+                            </li>
+                            <li class="cv_status" style="width:20%;">
+                                <span><i>*</i>工作状态:</span>
+                                <span>退休</span>
+                            </li>
+                            <img style="top: 8px;width: 13px;" class="top_edit_btn" src="assets/home/top_edit_btn.png"
+                                alt="">
+                        </div>
+                    </div>
+                    <div class="per_cv_con_add" style="margin-top: 5px;display: none;">
+                        <div class="per_cv_con_edit">
+                            <div class="per_cv_con_edit_span">
+                                <span>* 姓名</span><input class="cv_name_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 成员关系</span><input class="cv_relate_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 性别</span><input class="cv_sex_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 出生日期</span>
+                                <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:140px;height: 25px;">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 工作单位及职务</span><input class="cv_job_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 参加工作、学习入伍时间:</span>
+                                <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:140px;height: 25px;">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 离开工作、学习入伍时间:</span>
+                                <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:140px;height: 25px;">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 工作状态:</span><input class="cv_status_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_p">
+                                <div class="save_group">
+                                    <button class="save_group_add">添加</button>
+                                    <button class="save_group_col_add save_group_col">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="per_main_list" id="six">
+                    <div class="box-title">绩效信息</div>
+                    <div class="easyui-tabs content-tabs">
+                        <div title="月度绩效"></div>
+                        <div title="季度绩效"></div>
+                        <div title="年度绩效"></div>
+                    </div>
+                    <div class="nian_box" style="padding: 10px 0;">
+                        年份： <input id="bmrysh_nian1" />
+                    </div>
+                    <div style="height: 500px;width: 90%;">
+                        <table id="peoplesDetail" class="easyui-datagrid" data-options="singleSelect:true,collapsible:true,"
+                        style="border: 1px solid #eee;"></table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    $('#personInfo_index').scrollspy({ target: '#navbar-example1' })
+    $('#bmrysh_nian1').combobox({
+        valueField: "id",
+        textField: "text",
+        editable: false,
+        value:"2019",
+        data: [
+            { id: "2019", text: "2019年" },
+            { id: "2018", text: "2018年" }
+        ]
+    })
+    function zhDetailPerInfo(id){
+        $.ajax({
+            type:'get',
+            url:BASE_URL2+'/personalInfo/getUserInfo',
+            data:{
+                userId:id
+            },
+            success:function(data){
+                console.log(data,'员服首页信息')
+                $('#yfwdxxname').text(data.resultValue.applyName);   //名称
+                $('#yfwdxxrybm').text(data.resultValue.empId);    //员服人员编号
+                $('#yfwdxxbm').text(data.resultValue.belongDept);    //员服首页部门
+                $('#yfwdxxgw').text(data.resultValue.postName);    //员服首页岗位
+                $('#yfwdsex').text(data.resultValue.otherProperties.gender);    //员服我的信息-基本信息
+                $('#yfwdage').text(data.resultValue.otherProperties.age);    //员服我的信息-基本信息
+                $('#yfwdnation').text(data.resultValue.otherProperties.nationGroup);    //员服我的信息-基本信息
+                $('#yfwdpolity').text(data.resultValue.otherProperties.partyStatus);    //员服我的信息-基本信息
+                $('#yfwdTime').text(data.resultValue.otherProperties.dateVal);    //员服我的信息-基本信息
+                $('#yfwdAcademic').text(data.resultValue.otherProperties.qualifiTitlesGrade);    //员服我的信息-基本信息
+                $('#yfwdlevel').text(data.resultValue.otherProperties.skillIdentGrade);    //员服我的信息-基本信息
+                $('#yfwdphone').text(data.resultValue.otherProperties.tel);    //员服我的信息-基本信息
+                $('#yfwdxxpic').attr('src','http://192.168.100.66/static/userImg/'+data.resultValue.empId+'.png');//员服首页头像
+            }
+        })
+    }
+    $(function () {
+        //员服人员信息
+        zhDetailPerInfo($('#mainTabs').tabs('options').id)
+        $('.zh-detail-input').val($('#mainTabs').tabs('options').id)
+        .keypress(function(e){
+            if (e.which == 13 && $(this).val().trim()){
+                zhDetailPerInfo($(this).val());
+            }
+        })
+        $('.zh-detail-search').click(function(){
+            if($('.zh-detail-input').val().trim()){
+                zhDetailPerInfo($('.zh-detail-input').val());
+            }
+        })
+
+        $('.easyui-datebox').datebox({
+            required: true,
+        });
+        //个人履历
+        $('.per_cv_con > div').hover(function () {
+            $(this).find(".top_edit_btn").show()
+        }, function () {
+            $(this).find(".top_edit_btn").hide()
+        })
+        //获取
+        $(".per_west_detail").on("click", ".per_cv_con > div .top_edit_btn", function () {
+            var editdiv = $(this).parent()//编辑框
+            var adddiv = editdiv//获取需要显示的值
+
+            var cv_time_start = adddiv.find(".cv_time_start").html()//开始时间
+            var cv_name = adddiv.find(".cv_name").html()//姓名
+            var cv_relate = adddiv.find(".cv_relate").html()//成员关系
+            var cv_sex = adddiv.find(".cv_sex").html()//性别
+            var cv_job = adddiv.find(".cv_job").html()//工作单位
+            var cv_status = adddiv.find(".cv_status").html()//工作状态
+
+            var html = `<div class="per_cv_con_edit">
+                    <div class="per_cv_con_edit_span">
+                                <span>* 姓名</span><input class="cv_name_edit" type="text" value="" />
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 成员关系</span><input class="cv_relate_edit" type="text" value="">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 性别</span><input class="cv_sex_edit" type="text" value="">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 出生日期</span>
+                                <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    value=""
+                                    style="width:140px;height: 25px;">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 工作单位及职务</span><input class="cv_job_edit" type="text" value="">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 参加工作、学习入伍时间:</span>
+                                <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    value="${cv_time_start}"
+                                    style="width:140px;height: 25px;">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 离开工作、学习入伍时间:</span>
+                                <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    value="${cv_time_start}"
+                                    style="width:140px;height: 25px;">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 工作状态:</span><input class="cv_status_edit" type="text" value="">
+                            </div>
+                            <div class="per_cv_con_edit_p">
+                                <div class="save_group">
+                                    <button class="save_group_save">确定</button>
+                                    <button class="save_group_col">取消</button>
+                                </div>
+                            </div>
+                        </div>`
+
+            editdiv.after(html)//显示编辑框
+            $('.easyui-datebox').datebox({
+                required: true,
+            });
+            adddiv.hide()//隐藏显示框
+        })
+        //取消
+        $(".per_west_detail").on("click", ".per_cv_con > div .save_group_col", function () {
+            var editdiv = $(this).parents(".per_cv_con_edit")//编辑框
+            var adddiv = editdiv.prev()//获取需要显示的值
+
+            editdiv.remove()//显示编辑框
+            adddiv.show()//隐藏显示框
+        })
+        //保存 
+        $(".per_west_detail").on("click", ".per_cv_con > div .save_group_save ", function () {
+            var editdiv = $(this).parents(".per_cv_con_edit")//编辑框
+            var adddiv = editdiv.prev()//获取需要显示的值
+
+            var cv_time_start = adddiv.find(".cv_time_start_edit").datebox("getValue")//开始时间
+            var cv_name = adddiv.find(".cv_name_edit").val()//姓名
+            var cv_relate = adddiv.find(".cv_relate_edit").val()//成员关系
+            var cv_sex = adddiv.find(".cv_sex_edit").val()//性别
+            var cv_job = adddiv.find(".cv_job_edit").val()//工作单位
+            var cv_status = adddiv.find(".cv_status_edit").val()//工作状态
+
+
+            var regC = /^\1|2\d{3}-\d{1,2}-\d{1,2}$/; //匹配日期  2014-1-20
+            if (cv_name == "") {
+                alert("cv_name不能为空")
+            } else if (cv_relate == "") {
+                alert("cv_relate不能为空")
+            } else if (cv_sex == "") {
+                alert("cv_sex不能为空")
+            } else if (cv_job == "") {
+                alert("cv_job不能为空")
+            } else if (cv_status == "") {
+                alert("cv_status不能为空")
+            }else if (cv_time_start == "") {
+                alert("时间不能为空")
+            } else if (!regC.test(cv_time_start)) {
+                alert("时间格式不正确")
+            } else {
+                adddiv.find(".cv_time_start").html(cv_time_start)//开始时间
+                adddiv.find(".cv_name").html(cv_name);//
+                adddiv.find(".cv_relate").html(cv_relate);//
+                adddiv.find(".cv_sex").html(cv_sex);//
+                adddiv.find(".cv_job").html(cv_job);//
+                adddiv.find(".cv_status").html(cv_status);//
+                adddiv.show()
+                editdiv.hide()
+            }
+        })
+        //添加
+        $(".per_west_detail").on("click", ".add_cv", function () {
+            var adddiv = $(this).parent().siblings(".per_cv_con_add")
+            adddiv.find(".cv_time_start_edit").datebox("setValue", "")//开始时间
+            adddiv.find(".cv_name_edit").val("");//
+            adddiv.find(".cv_relate_edit").val("");//
+            adddiv.find(".cv_sex_edit").val("");//
+            adddiv.find(".cv_job_edit").val("");//
+            adddiv.find(".cv_status_edit").val("");//
+            adddiv.show()
+        });
+        $(".per_west_detail").on("click", ".save_group_add", function () {
+
+            var div = $(this).parents(".per_cv_con_add")//编辑框
+            var adddiv = div//获取需要显示的值
+
+            var cv_time_start = adddiv.find(".cv_time_start_edit").datebox("getValue")//开始时间
+            var cv_name = adddiv.find(".cv_name_edit").val()//姓名
+            var cv_relate = adddiv.find(".cv_relate_edit").val()//成员关系
+            var cv_sex = adddiv.find(".cv_sex_edit").val()//性别
+            var cv_job = adddiv.find(".cv_job_edit").val()//工作单位
+            var cv_status = adddiv.find(".cv_status_edit").val()//工作状态
+
+
+            var regC = /^\1|2\d{3}-\d{1,2}-\d{1,2}$/; //匹配日期  2014-1-20
+            if (cv_name == "") {
+                alert("cv_name不能为空")
+            } else if (cv_relate == "") {
+                alert("cv_relate不能为空")
+            } else if (cv_sex == "") {
+                alert("cv_sex不能为空")
+            } else if (cv_job == "") {
+                alert("cv_job不能为空")
+            } else if (cv_status == "") {
+                alert("cv_status不能为空")
+            }else if (cv_time_start == "") {
+                alert("时间不能为空")
+            } else if (!regC.test(cv_time_start)) {
+                alert("时间格式不正确")
+            } else {
+                var html = `<div class="per_cv_con">
+                        <div class="f_info">
+                            <li class="cv_name" style="width:20%;">
+                                <span><i>*</i>姓名:</span>
+                                <span>${cv_name}</span>
+                            </li>
+                            <li class="cv_relate" style="width:30%;">
+                                <span><i>*</i>成员关系:</span>
+                                <span>${cv_relate}</span>
+                            </li>
+                            <li class="cv_sex" style="width:30%;">
+                                <span><i>*</i>性别:</span>
+                                <span>${cv_sex}</span>
+                            </li>
+                            <li class="cv_time_start" style="width:20%;">
+                                <span><i>*</i>出生日期:</span>
+                                <span>${cv_time_start}</span>
+                            </li>
+                            <li class="cv_job" style="width:20%;">
+                                <span><i>*</i>工作单位及职务:</span>
+                                <span>${cv_job}</span>
+                            </li>
+                            <li class="cv_time_start" style="width:30%;">
+                                <span><i>*</i>参加工作、学习入伍时间:</span>
+                                <span>${cv_time_start}</span>
+                            </li>
+                            <li class="cv_time_start" style="width:30%;">
+                                <span><i>*</i>离开工作、学习入伍时间:</span>
+                                <span>${cv_time_start}</span>
+                            </li>
+                            <li class="cv_status" style="width:20%;">
+                                <span><i>*</i>工作状态:</span>
+                                <span>${cv_status}</span>
+                            </li>
+                            <img style="top: 8px;width: 13px;" class="top_edit_btn" src="assets/home/top_edit_btn.png"
+                                alt="">
+                        </div>
+                    </div>`
+                div.before(html)
+                div.hide();
+                $('.per_cv_con > div').hover(function () {
+                    $(this).find(".top_edit_btn").show()
+                }, function () {
+                    $(this).find(".top_edit_btn").hide()
+                })
+            }
+        });
+        $(".per_west_detail").on("click", ".save_group_col_add", function () {
+            var adddiv = $(this).parents(".per_cv_con_add")//编辑框
+            adddiv.hide()
+        }); 
+        var data = [
+            {
+                num: '20190382',
+                name: '月度',
+                date: '2019年11月',
+                total: '130,000,000',
+                endTime: '2019.06.03',
+                state: '无',
+                cfdate: '2019.06.03',
+                fhdate: '2019.06.03',
+                ccdate: '2019.06.03',
+                reason: '无',
+                adress: '详情',
+                file: '无'
+            },
+        ]
+        $('#peoplesDetail').datagrid({
+            height: 360,
+            width: '100%',
+            fitColumns: true,
+            //pagination: true,
+            striped: true,
+            data,
+            columns: [[{ field: 'cfdate', title: '开始日期', halign: 'center', align: 'center' },
+                { field: 'fhdate', title: '结束日期', halign: 'center', align: 'center' },
+                { field: 'ccdate', title: '考核绩效类型', halign: 'center', align: 'center' },
+                { field: 'reason', title: '绩效等级', halign: 'center', align: 'center',formatter(value, row, index) {
+                        return "<span class='A_col'> A</span>"
+                    } },
+                {
+                    field: 'adress', title: '绩效得分',  halign: 'center', align: 'center', formatter(value, row, index) {
+                        return "90"
+                    }
+                }
+            ]]
+        });
+    });
+</script>

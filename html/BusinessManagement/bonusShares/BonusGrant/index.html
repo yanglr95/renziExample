@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="bonus-grant" style="padding: 20px;">
+        <h3 class="box-title">奖金下发</h3>
+        <div class="bs-search">
+            <button class="add primary-btn" onclick="routerTo('null')">新 增</button>
+            <span>创建时间：</span>
+            <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                data-options="formatter:myformatter,parser:myparser"
+                style="width:140px;height: 34px;">
+            至
+            <input class="easyui-datebox cv_time_end_edit" label=""
+                data-options="formatter:myformatter,parser:myparser"
+                style="width:140px;height: 34px;">
+            <!-- <input id="bg-datestart" class="easyui-datebox" type="text"> -->
+            <!-- <input  id="bg-datestart"  type= "text" class= "easyui-datebox" required ="required"> </input>   
+            <span style="margin: 0 8px;">至</span>
+            <input id="bg-dateend" class="dateend"> -->
+            <span style="margin-left: 20px;">奖金名称：</span>
+            <input id="bg-bonusname">
+            <button class="search-btn primary-btn">查 询</button>
+        </div>
+        <div id="grant-table"></div>
+    </div>
+    <script>
+        var tableData1 = [];
+        $(function(){
+            tablelist()
+            $('#bg-datestart').datebox({
+                // editable:false,
+                // value:'1212',
+                prompt:'111',
+                height:34,
+                onSelect: function(date){
+                    // $('#bg-datestart').datebox.value(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate());
+                }
+
+            });
+            $('#bg-dateend').datebox({
+                editable:false,
+                height:34,
+            });
+            $('#bg-bonusname').textbox({
+                height:34
+            });
+        })
+
+        function table1(data){
+            $('#grant-table').datagrid({
+                fitColumns:true,
+                data:data,
+                pagination: true,
+                striped:true,
+                columns:[[
+                    {field:'index',title:'序号',width:'6%',halign:'center',align:'center',formatter:function(value,row,index){
+                        return '<span>'+(index+1)+'</span>'
+                    }},
+                    {field:'packageId',title:'分配单号',width:'12%',halign:'center',align:'center',formatter:function(value,row,index){
+                        if (row.submitStatus==1 || row.submitStatus==0) {
+                            // return "<span onclick='routerTo()'></span>"
+                            return '<span onclick="numClick('+value+')" class="primary-color" style="cursor:pointer">'+value+'</span>'
+                        }else{
+                            return ''
+                        }
+                    }},
+                    {field:'rewardName',title:'奖金名称',width:'10%',halign:'center',align:'center'},
+                    
+                    {field:'totalAmount',title:'总金额',width:'12%',halign:'center',align:'center'},
+                    {field:'remanentAmount',title:'待下发金额',width:'12%',halign:'center',align:'center',formatter:function(value,row,index){
+                        // if (row.submitStatus==1 || row.submitStatus==0) {
+                        //     return '<span>vl</span>'
+                        // }else{
+                            return '<span>'+value+'</span>'
+                        // }
+                    }},
+                    {field:'endDate',title:'截止时间',width:'12%',halign:'center',align:'center',formatter:function(value,row,index){
+                        return '<span>'+timeType(value)+'</span>'
+                    }},
+                    {field:'putProgress',title:'提交进度',width:'10%',halign:'center',align:'center',formatter:function(value,row,index){
+                        if (row.submitStatus==1 || row.submitStatus==0) {
+                            return '<span>'+value+'</span>'
+                        }else{
+                            return ''
+                        }
+                    }},
+                    {field:'beginDate',title:'创建时间',width:'12%',halign:'center',align:'center',formatter:function(value,row,index){
+                        return '<span>'+timeType(value)+'</span>'
+                    }},
+                    {field:'handle',title:'操作',width:'14%',halign:'center',align:'center',formatter:function(value,row,index){
+                        if (row.taskStatus==1 && row.remanentAmount == 0) {
+                            return ''
+                        }else{
+                            return '<span class="primary-color" style="cursor:pointer;margin-right:5px;" onclick="issue('+row.packageId+')"> 下发 </span><span onclick="routerTo('+row.packageId+')" class="primary-color" style="cursor:pointer;margin-right:5px;"> 编辑 </span><span class="primary-color" style="cursor:pointer" onclick="del('+row.packageId+')"> 删除 </span>'
+                        }
+                    }},
+                ]]
+            });
+        }
+        function routerTo(value){
+                opentab("BusinessManagement/bonusShares/BonusGrant/bonusEditAdd", "新增编辑", false,value);
+                // showPanalAlert('100%', '100%', "#bonus-add","","./bonusEditAdd.html");
+        };
+        function numClick(value){
+            opentab("BusinessManagement/bonusShares/BonusGrant/alreadyIssued", "下发详情",false, value);
+            // showPanalAlert('100%', '100%', "#already-issued","","./alreadyIssued.html");
+        }
+        //奖金下发-index
+        function tablelist(){
+            $.ajax({
+            type:'post',
+            url:BASE_URL+'/rewardIssueMA/findByCondition',
+            contentType:'application/json',
+            data:JSON.stringify({
+                "beginDate":'2000-01-01',
+                "endDate":'9999-12-31',
+                "index":1,
+                "pageNum":10,
+                "name":""
+                }),
+                success:function(data){
+                    console.log(data,'奖金下发-index')
+                    tableData1=data.resultValue.items;
+                    table1(tableData1)
+                }
+            });
+        }
+        //奖金下发-index-删除 
+        function del(id){
+            jjxfdelId = id;
+            showPanalAlert(400, 220, "#del","提示","html/BusinessManagement/bonusShares/BonusGrant/alert/alert_deltip.html");
+        }
+        // 奖金下发-index-下发
+        function issue(id){
+            jjxfissueId = id;
+            showPanalAlert(400, 220, "#del","提示","html/BusinessManagement/bonusShares/BonusGrant/alert/alert_issuetip.html");
+            $.ajax({
+                type:'get',
+                url:BASE_URL+'/rewardIssueMA/issue',
+                data:{
+                    pacakgeId:id
+                },
+                success:function(data){
+                    console.log(data,'奖金下发-index-下发')
+                    if(data.resultCode == '200'){
+                        tablelist();
+                    }
+                    
+                }
+            });  
+        }
+    </script>
+</body>
+
+</html>

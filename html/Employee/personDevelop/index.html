@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+</head>
+<body>
+    <div style="padding: 20px;">
+        <div class="back">
+            <div><!--onclick="hideAlert(this)" -->
+                <span></span>
+                <span>返回</span>
+            </div>
+        </div>
+        <div class="pd-base-info">
+            <div class="pd-base-content">
+                <div class="leftImg">
+                    <!--<img src="assets/yf/memberImg.png">-->
+                    <img id="yfryxxpic" src="">
+                </div>
+                <div class="rightInfo">
+
+                    <ul class="infoList">
+                        <li>
+                            <span>姓名：</span>
+                            <span id="yfrcfzname"></span>
+                        </li>
+                        <li>
+                            <span>单位：</span>
+                            <span id="yfrcfzdw"></span>
+                        </li>
+                        <li>
+                            <span>部门：</span>
+                            <span id="yfrcfzbm"></span>
+                        </li>
+                        <li>
+                            <span>岗位：</span>
+                            <span id="yfrcfzgw"></span>
+                        </li>
+                        <li>
+                            <span>专业大类：</span>
+                            <span>电网运行</span>
+                        </li>
+                        <li>
+                            <span>专业小类：</span>
+                            <span>电力调控技术</span>
+                        </li>
+                        <li>
+                            <span>身份证号：</span>
+                            <span>138283978402304830</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 我的积分 -->
+        <div class="mem-info">
+            <h3 class="box-title">我的积分</h3>
+            <div id="lineTable" class="lineTable"></div>
+        </div>
+        <!-- 测评 -->
+        <div class="text-info">
+            <h3 class="box-title" onclick="toDetail()">我的测评</h3>
+            <div id="textTable" class="textTable"></div>
+        </div>
+        <!-- 其他 -->
+        <div class="needs-info">
+            <h3 class="box-title">其他信息</h3>
+            <ul class="otherInfo" style="font-size: 14px;">
+                <li>
+                    <div class="inside">
+                        
+                        <div class="i_center">
+                            <p>
+                                <span>日期:</span>
+                                <span>2008.07.01-2012.07.31</span>
+                            </p>
+                            <p>
+                                <span>院校:</span>
+                                <span>山东大学(威海分校)</span>
+                            </p>
+                            <p>
+                                <span>专业:</span>
+                                <span>计算机类</span>
+                            </p>
+                        </div>
+                        <div class="stairs">
+                            <span class="i_title">学历信息</span>
+                            <img src="assets/yf/peo.png" class="peo">
+                            <!-- 博士 -->
+                           <div class="boshi">
+                             <div class="b_color">
+                                <p></p>
+                                <span>博士</span>
+                             </div>
+                           </div>
+                           <!-- 硕士 -->
+                           <div class="shuoshi">
+                            <div class="s_color">
+                               <p></p>
+                               <span>硕士</span>
+                            </div>
+                          </div>  
+                          <!-- 本科 -->
+                          <div class="benke">
+                            <div class="k_color">
+                                <p></p>
+                                <span>本科</span>
+                            </div>
+                          </div>  
+                          <!-- 专科 -->
+                          <div class="zhuanke">
+                                <div class="z_color">
+                                    <p></p>
+                                    <span>专科及以下</span>
+                                </div>
+                                <!-- <span class="i_title">学历信息</span> -->
+                          </div>  
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="inside">
+                        <div class="i_center">
+                            <p>
+                                <span>聘任:</span>
+                                <span>2013.01.01</span>
+                            </p>
+                            <p>
+                                <span>职位:</span>
+                                <span>教授</span>
+                            </p>
+                            <p>
+                                <span>专业:</span>
+                                <span>统计专业</span>
+                            </p>
+                        </div>
+                        <div class="stairs">
+                            <span class="i_title2">专业技术资格信息</span>
+                            <img src="assets/yf/peo.png" class="peo2">
+                            <!-- 博士 -->
+                            <div class="boshi">
+                                <div class="b_color">
+                                <p></p>
+                                <span>正高级</span>
+                                </div>
+                            </div>
+                            <!-- 硕士 -->
+                            <div class="shuoshi">
+                            <div class="s_color">
+                                <p></p>
+                                <span>副高级</span>
+                            </div>
+                            </div>  
+                            <!-- 本科 -->
+                            <div class="benke">
+                            <div class="k_color">
+                                <p></p>
+                                <span>中级</span>
+                            </div>
+                            </div>  
+                            <!-- 专科 -->
+                            <div class="zhuanke">
+                                <div class="z_color">
+                                    <p></p>
+                                    <span>初级</span>
+                                </div>
+                                <!-- <span class="i_title">学历信息</span> -->
+                            </div>  
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="inside">
+                            <div class="i_center">
+                                <p>
+                                    <span>聘任:</span>
+                                    <span>2013.01.01</span>
+                                </p>
+                                <p>
+                                    <span>工种:</span>
+                                    <span>旅店服务员</span>
+                                </p>
+                            </div>
+                            <div class="stairs">
+                                <span class="i_title2">职业技能鉴定信息</span>
+                                <img src="assets/yf/peo.png" class="peo2">
+                                <!-- 高级技师 -->
+                                <div class="gaojijishi">
+                                    <div class="jj_color">
+                                    <p></p>
+                                    <span>高级技师</span>
+                                    </div>
+                                </div>
+                                <!-- 技师 -->
+                                <div class="jishi">
+                                <div class="i_color">
+                                    <p></p>
+                                    <span>技师</span>
+                                </div>
+                                </div>  
+                                <!-- 高级工 -->
+                                <div class="gaoji">
+                                <div class="g_color">
+                                    <p></p>
+                                    <span>高级工</span>
+                                </div>
+                                </div>  
+                                <!-- 中级工 -->
+                                <div class="zhongji">
+                                    <div class="o_color">
+                                        <p></p>
+                                        <span>中级工</span>
+                                    </div>
+                                </div> 
+                                <!-- 初级工 -->
+                                <div class="chuji">
+                                        <div class="c_color">
+                                            <p></p>
+                                            <span>初级工</span>
+                                        </div>
+                                    </div> 
+                            </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="inside">
+                        <div class="i_center2">
+                            <p>
+                                <span>聘任:</span>
+                                <span>2008.07.01</span>
+                            </p>
+                            <p>
+                                <span>称号:</span>
+                                <span>外国科学院院士</span>
+                            </p>
+                            <p>
+                                <span>人才类别:</span>
+                                <span>技术类</span>
+                            </p>
+                            <p>
+                                <span>专业类别:</span>
+                                <span>规划计划</span>
+                            </p>
+                        </div>
+                        <div class="stairs">
+                            <span class="i_title3">专家人才信息</span>
+                            <img src="assets/yf/peo.png" class="peo2">
+                            <!-- 国家级 -->
+                            <div class="boshi">
+                                <div class="b_color">
+                                <p></p>
+                                <span>国家级</span>
+                                </div>
+                            </div>
+                            <!-- 公司级 -->
+                            <div class="gongsiji">
+                            <div class="gs_color">
+                                <p></p>
+                                <span>公司级</span>
+                            </div>
+                            </div>  
+                            <!-- 备公司级 -->
+                            <div class="bei">
+                            <div class="e_color">
+                                <p></p>
+                                <span>备公司级</span>
+                            </div>
+                            </div>  
+                            <!-- 地市公司级 -->
+                            <div class="dishi">
+                                <div class="d_color">
+                                    <p></p>
+                                    <span>地市公司级</span>
+                                </div>
+                                <!-- <span class="i_title">学历信息</span> -->
+                            </div>  
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- <div id="already-issued"></div> -->
+    </div>
+    
+    <script>
+        loadResources({
+            id: 'js-echarts',
+            src: 'easyui/echarts.min.js'
+        });
+        $(function () {
+            //员服人员信息
+            $.ajax({
+                type:'get',
+                url:BASE_URL2+'/personalInfo/getUserInfo',
+                data:{
+                 
+                },
+                success:function(data){
+                    console.log(data,'员服首页信息')
+                    $('#yfrcfzname').text(data.resultValue.applyName);   //名称
+                    $('#yfrcfzdw').text(data.resultValue.belongUnit);    //员服首页单位
+                    $('#yfrcfzbm').text(data.resultValue.belongDept);    //员服首页部门
+                    $('#yfrcfzgw').text(data.resultValue.postName);    //员服首页岗位
+                    $('#yfryxxpic').attr('src','http://192.168.100.66/static/userImg/'+data.resultValue.empId+'.png');//员服首页头像
+                }
+            })
+            // 测评图表
+            var myChart = echarts.init(document.getElementById('lineTable'));
+            var dataAP = [55,61,57,59,55,59,44,45,40,45,35,39];
+            var dataBP = [65,62,72,60,70,60,69,55,41,55,41,20];
+            var option = {
+                    tooltip: {
+                        trigger: 'axis', //触发类型,'item'数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。 'axis'坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用。
+                        triggerOn: "mousemove", //提示框触发的条件,'mousemove'鼠标移动时触发。'click'鼠标点击时触发。'mousemove|click'同时鼠标移动和点击时触发。'none'不在 'mousemove' 或 'click' 时触发
+                        showContent: true, //是否显示提示框浮层
+                        alwaysShowContent: true, //是否永远显示提示框内容
+                        showDelay: 0, //浮层显示的延迟，单位为 ms
+                        hideDelay: 100, //浮层隐藏的延迟，单位为 ms
+                        enterable: false, //鼠标是否可进入提示框浮层中
+                        confine: false, //是否将 tooltip 框限制在图表的区域内
+                        // transitionDuration: 0.4, //提示框浮层的移动动画过渡时间，单位是 s,设置为 0 的时候会紧跟着鼠标移动
+                        // position: ['50%', '50%'], //提示框浮层的位置，默认不设置时位置会跟随鼠标的位置,[10, 10],回掉函数，inside鼠标所在图形的内部中心位置，top、left、bottom、right鼠标所在图形上侧，左侧，下侧，右侧，
+                        formatter: "积分是:{b}<br/>"+"{a0}:{c0}"+' '+"{a1}:{c1}", //提示框浮层内容格式器，支持字符串模板和回调函数两种形式,模板变量有 {a}, {b}，{c}，{d}，{e}，分别表示系列名，数据名，数据值等
+                        backgroundColor: "#fff", //标题背景色
+                        borderColor: "#ddd", //边框颜色
+                        borderWidth: 1, //边框线宽
+                        padding: 10, //图例内边距，单位px  5  [5, 10]  [5,10,5,10]
+                        color:'#000',
+                        textStyle: {
+                            width:200,
+                            height:100,
+                            color: '#000' //字体颜色
+                        }
+                    },
+                    legend: {
+                        color: ["#f8851d", "#017efe"],
+                        data:['本单位', '本专业'],
+                        itemGap: 20,
+                        icon: "circle",
+                        top: '1.5%',
+                        left: '7%' //距离左侧
+                    },
+                    grid: {
+                        top: '15%',
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        height: '80%',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'category',
+                        name:'分',
+                        data: [0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550],
+                        axisTick: {
+                            show: false, //是否显示刻度
+                        },
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+                                color: '#000' //字体颜色
+                            }
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                type: 'dashed',
+                                color: '#ddd'
+                            }
+                        }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        name:'人数(人)',
+                        max: 100,
+                        axisTick: {
+                            show: false, //是否显示刻度
+                        },
+                        splitLine: {
+                            lineStyle: {
+                                type: 'dashed',
+                                color: '#DDD'
+                            }
+                        },
+                        axisLine: {
+                            show: false,
+                            lineStyle: {
+                                color: "#333"
+                            },
+                        },
+                        nameTextStyle: {
+                            color: "#999"
+                        },
+                        splitArea: {
+                            show: false
+                        }
+                    },
+                    series: [{
+                            name: '本单位',
+                            type: 'line',
+                            smooth: true,
+                            symbol: 'none', //取消折点圆圈
+                            data: [55, 61, 57, 59, 55, 59, 44, 45, 40, 45, 35, 39],
+                            color: "#F58080",
+                            lineStyle: {
+                                normal: {
+                                    width: 2,
+                                    color: '#f8851d',
+                                    shadowColor: 'rgba(248,122,29, 0.5)',
+                                    shadowBlur: 5,
+                                    shadowOffsetY: 5
+                                }
+                            },
+                            itemStyle: {
+                                normal: {
+                                    color: '#F58080',
+                                    borderWidth: 2,
+                                    /*shadowColor: 'rgba(72,216,191, 0.3)',
+                                    shadowBlur: 100,*/
+                                    borderColor: "#F58080"
+                                }
+                            },
+
+                        },
+                        {
+                            name: '本专业',
+                            type: 'line',
+                            smooth: true,
+                            symbol: 'none', //取消折点圆圈
+                            data: [65, 62, 72, 60, 70, 60, 69, 55, 41, 55, 41, 20],
+                            lineStyle: {
+                                normal: {
+                                    width: 2,
+                                    color: '#017efe',
+                                    shadowColor: 'rgba(1,126,254, 0.5)',
+                                    shadowBlur: 5,
+                                    shadowOffsetY: 5
+                                }
+                            },
+
+                        },
+                    ]
+                };
+            myChart.setOption(option);
+            // 测评表
+            var myChart2 = echarts.init(document.getElementById('textTable'));
+            var option2 = {
+                tooltip : {
+                    trigger: 'axis',
+                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                        type : 'line'        // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                grid: {
+                    left: '5%',
+                    right: '12%',
+                    bottom: '3%',
+                    top:'6%',
+                    containLabel: true
+                },
+                xAxis:  {
+                    type: 'value',
+                    name:'分数（分）',
+                    interval:50,
+                    max:400,
+                    axisTick: {
+                    show: false, //是否显示刻度
+                    },
+                    axisLine: {
+                        show: true,
+                        lineStyle: {//纵坐标线条颜色
+                            color: '#ccc',
+                            width: 1, 
+                            type:'dashed',
+                        }
+                    },
+                    axisLabel: {//纵坐标文字颜色
+                        show: true,
+                        textStyle: {
+                            color: '#afafb7', 
+                            // fontWeight:'bold',
+                            fontSize:14
+                        }
+                    },
+                    splitLine: {
+                        show: false  //  false没有网格线,true,有网格线
+                    }
+                },
+                yAxis: {
+                    type: 'category',
+                    
+                    data: ['绩效考核','个人荣誉','培训培养','竞赛调考','专利成果','规章制度'
+                    ,'论著课题','创新成果','基本素质'],
+                    axisTick: {
+                    show: false, //是否显示刻度
+                    },
+                    axisLine: {
+                        show: true,
+                        lineStyle: {//纵坐标线条颜色
+                            type:'dashed',
+                            color: '#ccc',
+                            width: 1, 
+                            fontSize:"14px"
+                        }
+                    },
+                    axisLabel: {//纵坐标文字颜色
+                        show: true,
+                        textStyle: {
+                            color: '#333333', 
+                            fontWeight:'bold',
+                            fontSize:14
+                        }
+                    },
+                },
+                series: [
+                    {
+                        name: '',
+                        type: 'bar',
+                        stack: '总量',
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'right',//数据值位置
+                                distance:10,
+                            }
+                        },
+                        barWidth: 14,  //柱宽度
+                        data: [350, 110, 162, 110, 162, 62,162,110,62],
+                        itemStyle:{
+                                normal:{    //柱状图颜色
+                                    barBorderRadius: [0, 10, 10, 0],//圆角
+                                    color:'#0092ff',
+                                    label:{
+                                        show: true,   //显示文本
+                                        textStyle:{
+                                            color:'#000',
+                                            fontSize:'14',
+                                            fontWeight:'bold',
+                                            // padding:10,
+                                        }
+                                    }
+                                }
+                            }
+                    },
+                ]
+            };
+            myChart2.setOption(option2);
+        });
+        function toDetail(){
+        //    $(location).attr('href', './patentManagement.html');
+        opentab("Employee/personDevelop/patentManagement", "专利成果添加", false);
+        //   showPanalAlert('100%', '100%', "#already-issued","","./patentManagement.html");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+</head>
+<body>
+    <!-- <h3 class="box-title"></h3> -->
+    <div class="bonus-grant" style="padding: 20px;">
+        <h3 class="box-title">报表管理</h3>
+        <!-- 新增、删除等按钮 -->
+        <div class="bs-search">
+            <div>
+              <button class="add primary-btn" onclick="routerTo()">新 增</button>
+              <button class="del primary-btn">批量删除</button>
+              <div class="selected">
+                  <p class="ai-tip">i</p>
+                  <span>已选择<i id="checks" class="checks">0</i>项</span>
+              </div>
+            </div>
+            <span>创建时间：</span>
+            <input id="bg-datestart">
+            <span style="margin: 0 8px;">至</span>
+            <input id="bg-dateend">
+            <span style="margin-left: 20px;">报表名称：</span>
+            <input id="bg-bonusname" placeholder="请输入关键字" data-options="prompt:'请输入关键字'">
+            <button class="search-btn primary-btn">查 询</button>
+        </div>
+        <!-- 表格 -->
+        <div id="bbgllistTable"></div>
+    </div>
+<script>
+    function myformatter(date){
+        var y = date.getFullYear();
+        var m = date.getMonth()+1;
+        // var d = date.getDate();
+        return y+'-'+(m<10?('0'+m):m);
+    }
+    function myparser(s){
+            if (!s) return new Date();
+            var ss = (s.split('-'));
+            var y = parseInt(ss[0],10);
+            var m = parseInt(ss[1],10);
+            // var d = parseInt(ss[2],10);
+            if (!isNaN(y) && !isNaN(m)){
+                return new Date(y,m-1);
+            } else {
+                return new Date();
+            }
+        }
+    // 表格数据
+    $(function(){
+        var grantData = [
+            {
+                id:'1',
+                name:'用工情况统计表',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:1
+            },{
+                id:'2',
+                name:'职工结构情况表',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:1
+            },{
+                id:'3',
+                name:'职工劳动合同情况表',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:1
+            },{
+                id:'4',
+                name:'企业职工情况表',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:1
+            },{
+                id:'5',
+                name:'职工人数增加情况表',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:0
+            },{
+                id:'6',
+                name:'企业不在岗职工基本情况表',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:1
+            },{
+                id:'7',
+                name:'企业用工总量情况表（一）',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:1
+            },{
+                id:'8',
+                name:'企业用工总量情况表（二）',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:0
+            },{
+                id:'9',
+                name:'全资控股与代管单位用工总量计划情况表',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:1
+            },{
+                id:'10',
+                name:'企业不在岗职工结构情况表',
+                period:'2019.06',
+                unit:'办公厅',
+                builder:'胡和义',
+                build_time:'2019.06.03',
+                progress:'37/37',
+                status:1
+            },
+            
+        ];
+        $('#bbgllistTable').datagrid({ //name period unit builder build_time
+            fitColumns:true,
+            data:grantData,
+            pagination: true,
+            striped:true,
+            // 选中行
+            onSelect:function(index,row){
+                $('#checks').html($('#bbgllistTable').datagrid('getSelections').length)
+            },
+            // 取消选中行
+            onUnselect:function(index,row){
+                $('#checks').html($('#bbgllistTable').datagrid('getSelections').length)
+            },
+            // 全选
+            onSelectAll:function(index,row){
+                $('#checks').html($('#bbgllistTable').datagrid('getSelections').length)
+            },
+            // 取消全选
+            onUnselectAll:function(index,row){
+                $('#checks').html($('#bbgllistTable').datagrid('getSelections').length)
+            },
+            columns:[[  
+                {field:'check',title:'',width:'10%',checkbox:true},
+                {field:'index',title:'序号',width:'5%',halign:'left',align:'left',formatter:function(value,row,index){
+                    return '<span>'+(index+1)+'</span>'
+                }},
+                {field:'name',title:'报表名称',width:'15%',halign:'left',align:'left',formatter:function(value,row,index){
+                    // if (row.status==1) {
+                    //     return '<span onclick="numClick('+row.id+')" class="primary-color" style="cursor:pointer">'+row.name+'</span>'
+                    // }else{
+                    //     return ''
+                    // }
+                    return '<span onclick="numClick('+row.id+')" class="primary-color" style="cursor:pointer">'+row.name+'</span>'
+                }},
+                {field:'period',title:'报告期',width:'15%',halign:'left',align:'left'},
+                {field:'unit',title:'所属单位',width:'15%',halign:'left',align:'left'},
+                {field:'builder',title:'创建者',width:'15%',halign:'left',align:'left'},
+                {field:'build_time',title:'创建时间',width:'15%',halign:'left',align:'left',formatter:function(value,row,index){
+                    // if (row.status==1) {
+                    //     return '<span></span>'
+                    // }else{
+                    //     return '<span>'+value+'</span>'
+                    // }
+                    return '<span>'+value+'</span>'
+                }},
+                {field:'handle',title:'操作',width:'10%',halign:'left',align:'left',formatter:function(value,row,index){
+                    // if (row.status==1) {
+                    //     return ''
+                    // }else{
+                    //     return '<span class="primary-color" style="cursor:pointer"> 删除 </span>'
+                    // }
+                    return '<span class="primary-color" style="cursor:pointer"> 删除 </span>'
+                }},
+                
+            ]]
+        });
+        $('#bg-datestart').datebox({
+            editable:false,
+            height:34,
+        });
+        $('#bg-dateend').datebox({
+            editable:false,
+            height:34,
+        });
+        $('#bg-bonusname').textbox({
+            height:34,
+        });
+        // var a = $("#bbgllistTable").datagrid("getSelections");   //获取到列表选中的行
+        // console.log(a);
+        
+    });
+    
+    function routerTo(id,type){
+        opentab("reviewers/reportList", "111", false);
+    };
+    function numClick(){
+        // $(location).attr('href', './alreadyIssued.html');
+        // opentab("DataSharing/ReportPush/ReportManage/applyRecord", "222", false);
+    }
+    
+</script>
+</body>
+
+</html>

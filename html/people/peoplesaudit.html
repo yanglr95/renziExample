@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+        <div class="tab_card">
+            <div>
+                <div class="per_main_list">
+                    <div class="box-title">基本信息</div>
+                    <div class="per_main_con">
+                        <div><span>申请单号：</span> <b id="sqdh5"></b></div>
+                        <div><span>传输频率：</span> <b id="cspl5"></b></div>
+                        <div><span>申请部门：</span> <b id="sqbm5"></b></div>
+                        <div><span>申请人：</span> <b id="sqr5"></b></div>
+                        <div><span>联系方式：</span> <b>15242152635</b></div>
+                        <div><span>申请日期：</span> <b id="sqrq5"></b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="easyui-layout" style="width:100%;height: 100%;">
+                <div data-options="region:'west',split:true" style="width:300px;padding: 0 10px;">
+                    <div id="gxryckTree"></div>
+                </div>
+
+                <div data-options="region:'center',split:true">
+                    <div id="audittype" class="auditul">
+                        <ul>
+                            <li class="active" data-index="0">未授权</li>
+                            <li data-index="1">已授权</li>
+                        </ul>
+                    </div>
+                    <div class="easyui-layout" fit="true">
+                        <div id="auditpanal" data-options="region:'center',border:false,split:false,href:'html/people/alert/alert_wsq.html'" style="height:400px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            mx.sqxqydhId = $("#mainTabs").tabs("options").id;
+            $.ajax({
+                // url: BASE_URL3 + '/sharingApply/queryEmployeeByBatchNo',
+                url: BASE_URL + '/sharingApply/queryEmployeeByBatchNo',
+                type: 'get',
+                data: {
+                    'batchNo': mx.sqxqydhId
+                },
+                success: function (data) {
+                    console.log('vdgvdxfvdgx', data)
+                    $('#sqdh5').text(data.resultValue.batchNo);
+                    // $('#cspl5').text(data.resultValue.transFrequency);
+                    if(data.resultValue.transFrequency == '1'){
+                        $('#cspl5').text('实时更新');
+                    }else if(data.resultValue.transFrequency == '2'){
+                        $('#cspl5').text('单一');
+                    }else if(data.resultValue.transFrequency == '3'){
+                        $('#cspl5').text('每日一次');
+                    }
+                    $('#sqbm5').text(data.resultValue.organName);
+                    $('#sqr5').text(data.resultValue.userName);
+                    $('#sqrq5').text(data.resultValue.beginDate);
+                }
+            })
+
+            $("#audittype li").click(function () {
+
+                $(this).addClass("active").siblings().removeClass("active");
+                switch ($(this).index()) {
+                    case 0:
+                        $("#auditpanal").panel("refresh", "html/people/alert/alert_wsq.html");
+                        break;
+                    case 1:
+                        $("#auditpanal").panel("refresh", "html/people/alert/alert_sq.html");
+                        break;
+                }
+
+            })
+
+
+
+            //树
+            $('#gxryckTree').tree({
+                // url: BASE_URL3 + '/sharingApply/queryOrganizationInfo',
+                url: BASE_URL + '/sharingApply/queryOrganizationInfo',
+                method: 'get',
+                animate: true,
+                queryParams: {
+                    'id': ''
+                },
+                formatter: function (node) {
+                    return node.text
+                },
+                onClick: function (node) {
+                    console.log('node', node)
+                    mx.gxryckTreeId = node.id;
+                    mx.fullPathId1 = node.attributes;
+                    var index = $("#audittype li.active").data("index");
+                    switch (index) {
+                        case 0:
+                            $("#auditpanal").panel("refresh", "html/people/alert/alert_wsq.html");
+                            break;
+                        case 1:
+                            $("#auditpanal").panel("refresh", "html/people/alert/alert_sq.html");  
+                            break;
+                    }
+
+                },
+                onLoadSuccess: function (node, data) {
+                    // console.log('data', data)
+                    // console.log( $('#gxryckTree').children('li'),'asdadadasdasfasfaf')
+                   console.log('mx.zzjgselectTree',mx.zzjgselectTree)
+                    for(var i=0;i<data.length;i++){
+                        var aaaaa = $('#gxryckTree>li').eq(i).children('.tree-node').children('.tree-title').text();
+                        if(!mx.zzjgselectTree.includes(aaaaa)){
+                            $('#gxryckTree').children('li').eq(i).hide();
+                        }
+                    }
+                    // console.log($('#gxryckTree li'))
+                    //console.log('00000000',$('#gxryckTree li').find('.tree-title').text());
+
+                    // console.log('data', data[0].attributes)
+
+                    // var a=data[0];
+                    // mx.gxryckTreeId = a.id;
+                    // mx.fullPathId1 = a.attributes;
+                    // var index = $("#audittype li.active").data("index");                   
+                    // switch (index) {
+                    //     case 0:
+                    //         $("#auditpanal").panel("refresh", "html/people/alert/alert_sq.html");
+                    //         break;
+                    //     case 1:
+                    //         $("#auditpanal").panel("refresh", "html/people/alert/alert_wsq.html");
+                    //         break;
+                    // }
+
+                }
+            })
+
+        });
+    </script>
+</body>
+
+</html>

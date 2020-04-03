@@ -1,0 +1,883 @@
+<!-- <div id="navbar-example1">
+    <ul class="nav may_nav" role="tablist">
+        <li><a href="#one1">基本信息</a></li>
+        <li><a href="#two1">工作履历</a></li>
+        <li><a href="#three1">教育经历</a></li>
+        <li><a href="#four1">专家人才</a></li>
+    </ul>
+</div> -->
+<div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+    <div class="easyui-layout" style="width:100%;height: 100%;font-size: 14px;">
+
+        <div data-options="region:'west',split:true" style="padding: 20px;position: relative;" class="per_west11"
+            data-spy="scroll" data-target="#navbar-example1">
+
+            <div id="per_west_detail" class="per_west_box per_west_detail" style="position: relative;">
+                <div class="per_btn_box">
+                    <!-- <button class="main_btn_col">调出</button> -->
+                    <button class="main_btn save-submit">保存并提交</button>
+                    <button class="main_btn_col save-only">保存</button>
+                    <button class="main_btn_col ray_back">取消</button>
+                </div>
+                <div class="top_box">
+                    <img class="top_edit_btn" src="assets/home/top_edit_btn.png" alt="">
+                    <div class="top_img" style="width: 60px;height: 60px;"><img src="assets/icon/ava.png" alt=""></div>
+                    <div class="top_con">
+                        <div class="top_con_name" style="height: 30px;font-size: 14px;">
+                            <span>姓名：</span> <b class="name_top"></b>
+                            <input style="display: none;" class="name_top_edit" type="text" value="张小小">
+                        </div>
+                        <div class="top_con_list" style="height: 30px;font-size: 14px;">
+                            <span>人员编码：</span><b class="peo-empId"></b>
+                            <span style="margin-left: 30px;">部门：</span><b class="peo-deptName"></b>
+                            <span style="margin-left: 30px;">岗位：</span><b class="peo-postName"></b>
+                        </div>
+                    </div>
+
+                    <div class="save_group" style="top:auto;bottom:10px;right:20px;display: none;">
+                        <button class="save_group_add">保存</button>
+                        <button class="save_group_col_add save_group_col">取消</button>
+                    </div>
+
+                </div>
+                <div class="per_main_list" id="one1" style="font-size: 14px;">
+                    <div class="box-title">基本信息</div>
+                    <div class="per_main_con">
+                            <div><span>性别：</span> <b>男</b></div>
+                            <div><span>年龄：</span> <b>23岁</b></div>
+                            <div><span>民族：</span> <b>汉</b></div>
+                            <div><span>政治面貌：</span> <b>党员</b></div>
+                            <div><span>入职时间：</span> <b></b></div>
+                            <div><span>职称：</span> <b></b></div>
+                            <div><span>技能等级：</span> <b></b></div>
+                            <div><span>固定电话：</span> <b></b></div>
+
+                    </div>
+                </div>
+                <div class="per_main_list" id="two1" style="font-size: 14px;">
+
+                    <div class="box-title">工作履历 <span class="add_cv"><img style="cursor: pointer;;width: 16px; margin-left: 10px;" src="assets/icon/add-detail.png"></span></div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name">太原供电公司变电检修工区</b>
+                            <span class="cv_state">检修部</span>
+                            <span class="cv_department">变检二班作业</span>
+                            <span class="cv_level">科院</span>
+                            <img style="top: 8px;width: 13px;" class="top_edit_btn" src="assets/home/top_edit_btn.png"
+                                alt="">
+                        </div>
+                    </div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name">太原供电公司变电检修工区</b>
+                            <span class="cv_state">见习</span>
+                            <span class="cv_department">科院</span>
+                            <span class="cv_level">科长</span>
+                            <img style="top: 8px;width: 13px;" class="top_edit_btn" src="assets/home/top_edit_btn.png"
+                                alt="">
+                        </div>
+
+                    </div>
+                    <div class="per_cv_con_add" style="margin-top: 5px;display: none;">
+                        <div class="per_cv_con_edit">
+                            <div class="per_cv_con_edit_span">
+                                <span>* 任职单位</span><input class="cv_name_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 部门名称</span><input class="cv_state_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 职务名称</span><input class="cv_department_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 职务级别</span><input class="cv_level_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 时间</span>
+                                <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:140px;height: 25px;">
+                                至
+                                <input class="easyui-datebox cv_time_end_edit" label=""
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:140px;height: 25px;">
+                            </div>
+                            <div class="per_cv_con_edit_p">
+                                <span> 上传附件 </span><button class="file_box">上传 <input name="uploadImage"
+                                        id="uploadImage" type="file" /></button> <b id="prevPic">上传材料.jpg <span
+                                        class='basis_x'></span></b>
+                                <div class="save_group">
+                                    <button class="save_group_add">添加</button>
+                                    <button class="save_group_col_add save_group_col">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="per_main_list" id="three1" style="font-size: 14px;">
+                    <div class="box-title education-title">教育经历 <span class="add_cv"><img style="cursor: pointer;;width: 16px; margin-left: 10px;" src="assets/icon/add-detail.png"></span></div>
+                    <!-- 演示暂增 class education-first-->
+                    <div class="per_cv_con education-first" style="display: none;">
+                        <div class="education-items">
+                            <span class="cv_time"><b class="cv_time_start ed-start-time">2008-12-20</b> ~ <b
+                                    class="cv_time_end ed-end-time">2009-12-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name" style="padding: 0;"></b><b class="education-type"></b>
+                            <span class="cv_state"></span>
+                            <span class="cv_department"></span>
+                            <span class="cv_level"></span>
+                            <span class="ed-is-top" style="display: none;">最高学历、学位</span>
+                            <span class="cv_data material"><img src="assets/icon/field.png"> 证明材料</span>
+                                <!-- 演示 -->
+                            <img style="position: absolute;right: 15%;top: 50%;width: 15px;display:none" class="education_edit_btn" src="assets/home/top_edit_btn.png">
+                        </div>
+                    </div>
+                    <div class="per_cv_con education-first" style="display: none;">
+                        <div class="education-items">
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name" style="padding: 0;"></b><b class="education-type"></b>
+                            <span class="cv_state"></span>
+                            <span class="cv_department"></span>
+                            <span class="cv_level"></span>
+                            <span class="ed-is-top" style="display: none;">最高学历、学位</span>
+                            <span class="cv_data material"><img src="assets/icon/field.png"> 证明材料</span>
+                                <!-- 演示 -->
+                            <img style="position: absolute;right: 15%;top: 50%;width: 15px;display:none" class="education_edit_btn" src="assets/home/top_edit_btn.png">
+                        </div>
+                    </div>
+                    <div class="per_cv_con education-first" style="display: none;">
+                        <div class="education-items">
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name" style="padding: 0;"></b><b class="education-type"></b>
+                            <span class="cv_state"></span>
+                            <span class="cv_department"></span>
+                            <span class="cv_level"></span>
+                            <span class="ed-is-top" style="display: none;">最高学历、学位</span>
+                            <span class="cv_data material"><img src="assets/icon/field.png"> 证明材料</span>
+                                <!-- 演示 -->
+                            <img style="position: absolute;right: 15%;top: 50%;width: 15px;display:none" class="education_edit_btn" src="assets/home/top_edit_btn.png">
+                        </div>
+                    </div>
+                    <div class="per_cv_con_add" style="margin-top: 5px;display: none;">
+                        <div class="per_cv_con_edit">
+                            <div class="per_cv_con_edit_span">
+                                <span>* 毕业学校</span><input class="cv_name_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 职务级别</span><input class="cv_state_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 所学专业</span><input class="cv_department_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 专业名称</span><input class="cv_level_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 学历</span><input class="cv_level_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 是否是最高学历</span><input class="cv_level_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 学位</span><input class="cv_level_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 时间</span>
+                                <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:140px;height: 25px;">
+                                至
+                                <input class="easyui-datebox cv_time_end_edit" label=""
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:140px;height: 25px;">
+                            </div>
+                            <div class="per_cv_con_edit_p">
+                                <span> 上传附件</span><button>上传</button> <b>上传材料.jpg</b>
+                                <div class="save_group">
+                                    <button class="save_group_add">确认</button>
+                                    <button class="save_group_col_add save_group_col">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 演示--暂增class education_edit_box-->
+                    <div class="education_edit_box" style="padding: 5px;margin-top: 5px;display: none;background: #E6F1F1;">
+                        <div class="per_cv_con_edit">
+                            <div class="per_cv_con_edit_span">
+                                <span><span style="color: #f00;">*</span> 时间</span>
+                                <input id="edit-start" class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:120px;height: 25px;">
+                                至
+                                <input id="edit-end" class="easyui-datebox cv_time_end_edit" label=""
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:120px;height: 25px;">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span><span style="color: #f00;">*</span> 毕业学校</span><input class="cv_name_edit" style="width: 200px;height: 27px;border: 1px solid #eee;" type="text">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span><span style="color: #f00;">*</span> 教育类型</span>
+                                <select style="width: 200px;" class="easyui-combobox" id="jylx" data-options="editable:false,panelHeight:'auto'">
+                                    <option>全日制</option>
+                                    <option>自考</option>
+                                    <option>夜大</option>
+                                    <option>电大</option>
+                                    <option>职大</option>
+                                    <option>远程教育</option>
+                                    <option>函授</option>
+                                    <option>党校</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                            <!-- <div class="per_cv_con_edit_span">
+                                <span><span style="color: #f00;">*</span> 所学专业</span><input class="cv_department_edit" type="text">
+                            </div> -->
+                            <div class="per_cv_con_edit_span">
+                                <span><span style="color: #f00;">*</span> 专业名称</span><input style="width: 200px;height: 27px;border: 1px solid #eee;" class="cv_department_edit" type="text">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span><span style="color: #f00;">*</span> 学历</span>
+                                <select class="easyui-combobox" style="width: 200px;" id="xueli" data-options="editable:false,panelHeight:'auto'">
+                                    <option>博士研究生毕业</option>
+                                    <option>大学本科毕业</option>
+                                    <option>大学专科毕业</option>
+                                    <option>中等专科毕业</option>
+                                    <option>职业高中毕业</option>
+                                    <option>普通高中毕业</option>
+                                    <option>初中毕业</option>
+                                    <option>小学毕业</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span><span style="color: #f00;">*</span> 是否是最高学历</span>
+                                <select class="easyui-combobox" style="width: 200px;" id="is-Top-education" data-options="editable:false,panelHeight:'auto'">
+                                    <option>是</option>
+                                    <option>否</option>
+                                </select>
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span><span style="color: #f00;">*</span> 学位</span>
+                                <select class="easyui-combobox" style="width: 200px;" id="xuewei" data-options="editable:false,panelHeight:'auto'">
+                                    <option>名誉博士</option>
+                                    <option>博士</option>
+                                    <option>哲学博士学位</option>
+                                    <option>文学博士学位</option>
+                                    <option>理学博士学位</option>
+                                    <option>工学博士学位</option>
+                                    <option>管理学博士学位</option>
+                                    <option>硕士</option>
+                                    <option>哲学硕士学位</option>
+                                    <option>教育学硕士学位</option>
+                                    <option>文学硕士学位</option>
+                                    <option>历史学硕士学位</option>
+                                    <option>理学硕士学位</option>
+                                    <option>工学硕士学位</option>
+                                    <option>学士</option>
+                                    <option>哲学学士学位</option>
+                                    <option>经济学学士学位</option>
+                                    <option>理学学士学位</option>
+                                    <option>工学学士学位</option>
+                                    <option>农学学士学位</option>
+                                    <option>管理学学士学位</option>
+                                    <option>建筑学学士专业学位</option>
+                                    <option>双学士</option>
+                                </select>
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span><span style="color: #f00;">*</span> 是否是最高学位</span>
+                                <select class="easyui-combobox" style="width: 200px;" id="is-Top-degree" data-options="editable:false,panelHeight:'auto'">
+                                    <option>是</option>
+                                    <option>否</option>
+                                </select>
+                            </div>
+                            <div class="per_cv_con_edit_p">
+                                <span> 上传附件</span><button>上传</button> <b>上传材料.jpg</b>
+                                <div class="save_group">
+                                    <button class="education-save">完成</button>
+                                    <button class="education-cancel save_group_col">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ------以上演示暂增------- -->
+                </div>
+                <div class="per_main_list" id="four1" style="font-size: 14px;">
+                    <div class="box-title">专家人才 <span class="add_cv"><img style="cursor: pointer;;width: 16px; margin-left: 10px;" src="assets/icon/add-detail.png"></span></div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name">太原供电公司变电检修工区</b>
+                            <span class="cv_state">见习</span>
+                            <span class="cv_department">科院</span>
+                            <span class="cv_level">科长</span>
+                            <img style="top: 8px;width: 13px;" class="top_edit_btn" src="assets/home/top_edit_btn.png"
+                                alt="">
+                        </div>
+                    </div>
+                    <div class="per_cv_con">
+                        <div>
+                            <span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b
+                                    class="cv_time_end">2009-12-30</b></span>
+                            <b class="dian"></b>
+                            <b class="cv_name">太原供电公司变电检修工区</b>
+                            <span class="cv_state">见习</span>
+                            <span class="cv_department">科院</span>
+                            <span class="cv_level">科长</span>
+                            <img style="top: 8px;width: 13px;" class="top_edit_btn" src="assets/home/top_edit_btn.png"
+                                alt="">
+                        </div>
+                    </div>
+                    <div class="per_cv_con_add" style="margin-top: 5px;display: none;">
+                        <div class="per_cv_con_edit">
+                            <div class="per_cv_con_edit_span">
+                                <span>* 任职单位</span><input class="cv_name_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 部门名称</span><input class="cv_state_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 职务名称</span><input class="cv_department_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 职务级别</span><input class="cv_level_edit" type="text" value="张小小">
+                            </div>
+                            <div class="per_cv_con_edit_span">
+                                <span>* 时间</span>
+                                <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:140px;height: 25px;">
+                                至
+                                <input class="easyui-datebox cv_time_end_edit" label=""
+                                    data-options="formatter:myformatter,parser:myparser"
+                                    style="width:140px;height: 25px;">
+                            </div>
+                            <div class="per_cv_con_edit_p">
+                                <span> 上传附件</span><button>上传</button> <b>上传材料.jpg</b>
+                                <div class="save_group">
+                                    <button class="save_group_add">添加</button>
+                                    <button class="save_group_col_add save_group_col">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    var submitInfo = null;
+    var eduIndex = null;
+    var editArray = [];
+    var isTopEducation = null;//是否最高学历
+    var isTopDegree = null;//是否最高学位
+    $.ajax({
+        type:'get',
+        url:BASE_URL+'/hrEmp/toUpdateEmp',
+        data:{
+            empId:$('#mainTabs').tabs('options').id
+        },
+        success:function(data){
+            console.log(data,'1235454')
+            if (data.resultCode==200) {
+                submitInfo = data.resultValue;
+                peoBaseInfo();
+                peoRecord();
+            }
+        }
+    })
+    function peoBaseInfo(){ //基本信息
+        $('.name_top').text(submitInfo.chnName);
+        $('.peo-empId').text(submitInfo.empId);
+        $('.peo-deptName').text(submitInfo.deptName);
+        $('.peo-postName').text(submitInfo.postName);
+        $('.per_main_con b').eq(0).text(submitInfo.gender);
+        $('.per_main_con b').eq(1).text(ageSwitch(submitInfo.birthDay));
+        $('.per_main_con b').eq(2).text(submitInfo.nationGroup);
+        $('.per_main_con b').eq(3).text(submitInfo.partyStatus);
+        $('.per_main_con b').eq(4).text(timeType(submitInfo.dateVal));
+        $('.per_main_con b').eq(5).text(submitInfo.qualificationLevel);
+        $('.per_main_con b').eq(6).text(submitInfo.skillIdentGrade);
+        $('.per_main_con b').eq(7).text(submitInfo.contactCode);
+    }
+    function peoRecord(){ //履历
+        for (var i = 0; i < submitInfo.workList.length; i++) {
+            $('#two1 .cv_time_start').eq(i).text(timeType(submitInfo.workList[i].beginDate));
+            $('#two1 .cv_time_end').eq(i).text(timeType(submitInfo.workList[i].endDate));
+            $('#two1 .cv_name').eq(i).text(submitInfo.workList[i].unitName);
+            $('#two1 .cv_state').eq(i).text(submitInfo.workList[i].deptName);
+            $('#two1 .cv_department').eq(i).text(submitInfo.workList[i].duty?submitInfo.workList[i].duty:'无');
+        }
+        var eduData = submitInfo.eduList;
+        //学历
+        for (var i = 0; i < eduData.length; i++) {
+            $('.education-first').eq(i).show();
+            $('#three1 .cv_time_start').eq(i).text(timeType(eduData[i].beginDate));//开始时间
+            $('#three1 .cv_time_end').eq(i).text(timeType(eduData[i].endDate));//结束时间
+            $('#three1 .cv_name').eq(i).text(eduData[i].eduOrgan);//毕业学校
+            $('#three1 .education-type').eq(i).text('('+eduData[i].educationType+')');//教育类型
+            $('#three1 .cv_level').eq(i).text(eduData[i].proressionName);//专业
+            $('#three1 .cv_department').eq(i).text(eduData[i].degree?submitInfo.eduList[i].degree:'');//学位
+            $('#three1 .cv_state').eq(i).text(eduData[i].education);//学历
+            isTopEducation = eduData[i].majorEducationFlag=='1'?'是':'否';
+            isTopDegree = eduData[i].majorDegreeFlag=='1'?'是':'否';
+            if(eduData[i].majorEducationFlag == '1' && eduData[i].majorDegreeFlag == '1'){
+                $('#three1 .ed-is-top').show();
+            }
+        }
+        
+        //编辑学历
+        $('.education_edit_btn').click(function(){
+            eduIndex = $('.education_edit_btn').index(this);
+            var editBox = $('.education_edit_box');
+            var eduItem = $('.education-first').eq(eduIndex);
+            editBox.insertBefore(eduItem);//交换节点位置
+            $('.education_edit_box').show();
+            $('.education-first').eq(eduIndex).hide();
+            $('#edit-start').datebox('setValue',$('#three1 .cv_time_start').eq(eduIndex).text());//开始时间
+            $('#edit-end').datebox('setValue',$('#three1 .cv_time_end').eq(eduIndex).text());//结束时间
+            $('.education_edit_box .cv_name_edit').val($('#three1 .cv_name').eq(eduIndex).text());//毕业学校
+            $('#jylx').combobox('setValue',$('#three1 .education-type').eq(eduIndex).text().replace('(','').replace(')',''));//教育类型
+            $('.education_edit_box .cv_department_edit').val(eduData[eduIndex].proressionName);//专业//submitInfo.eduList[0].proressionName.trim()
+            $('#xueli').combobox('setValue',$('#three1 .cv_state').eq(eduIndex).text());//学历
+            $('#is-Top-education').combobox('setValue',isTopEducation);//是否最高学历
+            $('#xuewei').combobox('setValue',$('#three1 .cv_department').eq(eduIndex).text());//学位
+            $('#is-Top-degree').combobox('setValue',isTopDegree);//是否最高学历
+        })
+        //保存编辑
+        $('.education-save').click(function(){
+            for (var i = 0; i < editArray.length; i++) {
+                if (editArray[i].recordId == submitInfo.eduList[eduIndex].recordId) {
+                    //时间
+                    editArray[i].beginDateAfter = $('#edit-start').datebox('getValue');
+                    editArray[i].endDateAfter = $('#edit-end').datebox('getValue');
+                    //毕业院校
+                    editArray[i].eduOrganAfter = $('.education_edit_box .cv_name_edit').val();
+                    //教育类型
+                    editArray[i].educationTypeAfter = $('#jylx').combobox('getValue');
+                    //专业
+                    editArray[i].educationTypeAfter = $('.education_edit_box .cv_department_edit').val();
+                    //学位
+                    editArray[i].degreeAfter = $('#xuewei').combobox('getValue');
+                    //学历
+                    editArray[i].educationAfter = $('#xueli').combobox('getValue');
+                    //是否最高学历
+                    editArray[i].majorEducationFlagAfter = $('#is-Top-education').combobox('getValue')=='是'?'1':'0';
+                    //是否最高学位
+                    editArray[i].majorDegreeFlagAfter = $('#is-Top-degree').combobox('getValue')=='是'?'1':'0';
+                    //重复了，暂时这么写
+                    $('#three1 .cv_time_start').eq(eduIndex).text($('#edit-start').datebox('getValue'));
+                    $('#three1 .cv_time_end').eq(eduIndex).text($('#edit-end').datebox('getValue'));
+                    $('#three1 .cv_name').eq(eduIndex).text($('.education_edit_box .cv_name_edit').val());//毕业院校
+                    $('#three1 .education-type').eq(eduIndex).text('('+$('#jylx').combobox('getValue')+')');//教育类型
+                    $('#three1 .cv_level').eq(eduIndex).text($('.education_edit_box .cv_department_edit').val());//专业
+                    $('#three1 .cv_department').eq(eduIndex).text($('#xuewei').combobox('getValue'));//学位
+                    $('#three1 .cv_state').eq(eduIndex).text($('#xueli').combobox('getValue'));//学历
+                    isTopEducation = $('#is-Top-education').combobox('getValue');
+                    isTopDegree = $('#is-Top-degree').combobox('getValue');
+                    if($('#is-Top-education').combobox('getValue')=='是' && $('#is-Top-degree').combobox('getValue')=='是'){
+                        $('#three1 .ed-is-top').eq(eduIndex).show();
+                    }else{
+                        $('#three1 .ed-is-top').eq(eduIndex).hide();
+                    }
+                    $('.education_edit_box').hide();
+                    $('.education-first').eq(eduIndex).show();
+                    return
+                }
+            }
+            editArray.push({
+                "recordId":submitInfo.eduList[eduIndex].recordId,
+                "beginDate":submitInfo.eduList[eduIndex].beginDate,
+                "beginDateAfter":$('#edit-start').datebox('getValue'),
+                "endDate":submitInfo.eduList[eduIndex].endDate,
+                "endDateAfter":$('#edit-end').datebox('getValue'),
+                "eduOrgan":submitInfo.eduList[eduIndex].eduOrgan,
+                "eduOrganAfter":$('.education_edit_box .cv_name_edit').val(),
+                "educationType":submitInfo.eduList[eduIndex].educationType,
+                "educationTypeAfter":$('#jylx').combobox('getValue'),
+                "proressionName":submitInfo.eduList[eduIndex].proressionName,
+                "proressionNameAfter":$('.education_edit_box .cv_department_edit').val(),
+                "degree":submitInfo.eduList[eduIndex].degree,
+                "degreeAfter":$('#xuewei').combobox('getValue'),
+                "education":submitInfo.eduList[eduIndex].education,
+                "educationAfter":$('#xueli').combobox('getValue'),
+                "majorEducationFlag":submitInfo.eduList[eduIndex].majorEducationFlag,
+                "majorEducationFlagAfter":$('#is-Top-education').combobox('getValue')=='是'?'1':'0',
+                "majorDegreeFlag":submitInfo.eduList[eduIndex].majorDegreeFlag,
+                "majorDegreeFlagAfter":$('#is-Top-degree').combobox('getValue')=='是'?'1':'0'
+            })
+            $('#three1 .cv_time_start').eq(eduIndex).text($('#edit-start').datebox('getValue'));
+            $('#three1 .cv_time_end').eq(eduIndex).text($('#edit-end').datebox('getValue'));
+            $('#three1 .cv_name').eq(eduIndex).text($('.education_edit_box .cv_name_edit').val());//毕业院校
+            $('#three1 .education-type').eq(eduIndex).text('('+$('#jylx').combobox('getValue')+')');//教育类型
+            $('#three1 .cv_level').eq(eduIndex).text($('.education_edit_box .cv_department_edit').val());//专业
+            $('#three1 .cv_department').eq(eduIndex).text($('#xuewei').combobox('getValue'));//学位
+            $('#three1 .cv_state').eq(eduIndex).text($('#xueli').combobox('getValue'));//学历
+            isTopEducation = $('#is-Top-education').combobox('getValue');
+            isTopDegree = $('#is-Top-degree').combobox('getValue');
+            if($('#is-Top-education').combobox('getValue')=='是' && $('#is-Top-degree').combobox('getValue')=='是'){
+                $('#three1 .ed-is-top').eq(eduIndex).show();
+            }else{
+                $('#three1 .ed-is-top').eq(eduIndex).hide();
+            }
+            $('.education_edit_box').hide();
+            $('.education-first').eq(eduIndex).show();
+        })
+        //取消编辑
+        $('.education-cancel').click(function(){
+            $('.education_edit_box').hide();
+            $('.education-first').eq(eduIndex).show();
+        })
+
+        $('.education-first .education-items').mouseenter(function(){
+            $(this).children('.education_edit_btn').show()
+        }).mouseleave(function(){
+            $(this).children('.education_edit_btn').hide()
+        })
+
+
+        // var item = '<div class="per_cv_con">'+
+        //     '<div>'+
+        //         '<span class="cv_time"><b class="cv_time_start">2008-12-20</b> ~ <b class="cv_time_end">2009-12-30</b></span>'+
+        //         '<b class="dian"></b>'+
+        //         '<b class="cv_name">太原供电公司变电检修工区</b>'+
+        //         '<span class="cv_state">检修部</span>'+
+        //         '<span class="cv_department">变检二班作业</span>'+
+        //         '<span class="cv_level">科院</span>'+
+        //         '<img style="top: 8px;width: 13px;" class="top_edit_btn" src="assets/home/top_edit_btn.png">'+
+        //     '</div>'+
+        // '</div>'
+    }
+    //保存并提交
+    $('.save-submit').click(function(){
+        submitClick(1)
+    })
+    //保存
+    $('.save-only').click(function(){
+        submitClick(0)
+    })
+    function submitClick(buttonType){
+        var params = {
+            "recordId":submitInfo.recordId,
+            "operationType":"2",
+            "empId":$('#mainTabs').tabs('options').id,
+            "chnName":submitInfo.chnName,
+            "buttonType":buttonType,
+            "eduInfo":{
+                "2":editArray
+            }
+        }
+        // console.log(params)
+        console.log(params,'----------------------------')
+        $.ajax({
+            type:'post',
+            url:BASE_URL+'/hrEmp/updateEmpInfo',
+            contentType:'application/json',
+            data:JSON.stringify(params),
+            success:function(data){
+                console.log(data,'dvfdhdfhddgfd')
+                if (data.resultCode == 200) {
+                    closetabTitle("申请详情");
+                    closetabTitle("信息核对");
+                    opentab("people/peoples", "信息核对", false)
+                }
+            }
+        })
+    }
+    $('#uploadImage').change(function (e) {
+        var e = event || widow.event;
+        if (navigator.userAgent.indexOf('MSIE 8') >= 0 || navigator.userAgent.indexOf('MSIE 9') >= 0) {
+            $(this).select();
+            window.parent.document.body.focus();
+            var realpath = document.selection.createRange().text;
+            $(this).parent().css("filter", "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true',src=\"" + realpath + "\",sizingMethod=scale)");
+        }
+        else {
+            var file = e.target.files[0];
+            var reader = new FileReader();
+            var targetId = e.target.id;
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                var picString = reader.result;
+                console.log(file.name)
+                $("#prevPic").html(file.name).show().attr("data-bas", picString);
+            };
+        }
+    });
+
+    // $('#per_west_detail').resize(function () {
+        
+    //     $('.per_west11').scrollspy({ target: '#navbar-example1' })
+    // })
+    // $('.per_west11').scrollspy({ target: '#navbar-example1' })
+    $(function () {
+        $('.easyui-datebox').datebox({
+            required: true,
+        });
+        //个人信息
+        $('.top_box').hover(function () {
+            $(".top_box .top_edit_btn").show()
+        }, function () {
+            $(".top_box .top_edit_btn").hide()
+        })
+        $(".per_west_detail").on("click", ".top_edit_btn", function () {
+            $('.top_box').css('background','#E6F1F1');
+            $(".top_box .save_group").show()
+            $(".name_top_edit").show().val($(".name_top").html())
+            $(".name_top").hide()
+        })
+        $(".per_west_detail").on("click", ".top_box .save_group_add", function () {
+            $('.top_box').css('background','#fff');
+            $(".name_top").show().html($(".name_top_edit").val())
+            $(".top_box .save_group").hide()
+            $(".name_top_edit").hide()
+        })
+        $(".per_west_detail").on("click", ".top_box .save_group_col", function () {
+            $('.top_box').css('background','#fff');
+            $(".top_box .save_group").hide()
+            $(".name_top_edit").hide()
+            $(".name_top").show()
+        })
+
+        //个人履历
+        // $('.per_cv_con > div').hover(function () {
+        //     $(this).find(".top_edit_btn").show()
+        // }, function () {
+        //     $(this).find(".top_edit_btn").hide()
+        // })
+        // 删除修改项
+        $(".per_west_detail").on("click", ".per_cv_con_edit_x", function () {
+            $(this).parent(".per_cv_con_edit").remove()
+        })
+        //获取
+        $(".per_west_detail").on("click", ".per_cv_con > div .top_edit_btn", function () {
+            var editdiv = $(this).parent()//编辑框
+            var adddiv = editdiv//获取需要显示的值
+
+            var cv_time_start = adddiv.find(".cv_time_start").html()//开始时间
+            var cv_time_end = adddiv.find(".cv_time_end").html()//结束时间
+            var cv_name = adddiv.find(".cv_name").html()//
+            var cv_state = adddiv.find(".cv_state").html()//
+            var cv_department = adddiv.find(".cv_department").html()//
+            var cv_level = adddiv.find(".cv_level").html()//
+
+            var html = `<div class="per_cv_con_edit">
+                <div class="per_cv_con_edit_x">x</div>
+                <div class="per_cv_con_edit_span">
+                <span>* 任职单位</span><input class="cv_name_edit" type="text" value="${cv_name}">
+                </div>
+                <div class="per_cv_con_edit_span"> 
+                <span>* 部门名称</span><input class="cv_state_edit" type="text" value="${cv_state}">
+                </div>
+                <div class="per_cv_con_edit_span">
+                <span>* 职务名称</span><input class="cv_department_edit" type="text" value="${cv_department}">
+                </div>
+                <div class="per_cv_con_edit_span">
+                <span>* 职务级别</span><input class="cv_level_edit" type="text" value="${cv_level}"> 
+                </div> 
+                <div class="per_cv_con_edit_span"> 
+                <span>* 时间</span> 
+                <input class="easyui-datebox cv_time_start_edit" label="" placeholder="开始"
+                data-options="formatter:myformatter,parser:myparser"
+                value="${cv_time_start}" 
+                style="width:140px;height: 25px;">
+                至
+                <input class="easyui-datebox cv_time_end_edit" label=""
+                data-options="formatter:myformatter,parser:myparser" 
+                value="${cv_time_end}" 
+                style="width:140px;height: 25px;"> 
+                </div> 
+                <div class="per_cv_con_edit_p"> 
+                <span> 上传附件</span><button>上传</button> <b>上传材料.jpg</b> 
+                <div class="save_group"> 
+                <button class="save_group_save">确定</button> 
+                <button class="save_group_col">取消</button> 
+                </div> 
+                </div> 
+                </div>`
+
+            editdiv.after(html)//显示编辑框
+            $('.easyui-datebox').datebox({
+                required: true,
+            });
+            adddiv.hide()//隐藏显示框
+        })
+        //取消
+        $(".per_west_detail").on("click", ".per_cv_con > div .save_group_col", function () {
+            var editdiv = $(this).parents(".per_cv_con_edit")//编辑框
+            var adddiv = editdiv.prev()//获取需要显示的值
+
+            editdiv.remove()//显示编辑框
+            adddiv.show()//隐藏显示框
+        })
+        //保存 
+        $(".per_west_detail").on("click", ".per_cv_con > div .save_group_save ", function () {
+            var editdiv = $(this).parents(".per_cv_con_edit")//编辑框
+            var adddiv = editdiv.prev()//获取需要显示的值
+
+            var cv_time_start = editdiv.find(".cv_time_start_edit").datebox("getValue")//开始时间
+            var cv_time_end = editdiv.find(".cv_time_end_edit").datebox("getValue")//结束时间
+            var cv_name = editdiv.find(".cv_name_edit").val()//
+            var cv_state = editdiv.find(".cv_state_edit").val()//
+            var cv_department = editdiv.find(".cv_department_edit").val()//
+            var cv_level = editdiv.find(".cv_level_edit").val()//
+
+
+
+
+            var regC = /^\1|2\d{3}-\d{1,2}-\d{1,2}$/; //匹配日期  2014-1-20
+            if (cv_name == "") {
+                alert("cv_name不能为空")
+            } else if (cv_state == "") {
+                alert("cv_state不能为空")
+            } else if (cv_department == "") {
+                alert("cv_department不能为空")
+            } else if (cv_level == "") {
+                alert("cv_level不能为空")
+            } else if (cv_time_start == "") {
+                alert("开始时间不能为空")
+            } else if (!regC.test(cv_time_start)) {
+                alert("开始时间格式不正确")
+            } else if (cv_time_end == "") {
+                alert("结束时间不能为空")
+            } else if (!regC.test(cv_time_end)) {
+                alert("结束时间格式不正确")
+            } else if (cv_time_start > cv_time_end) {
+                alert("开始时间不能大于结束时间")
+            } else {
+                adddiv.find(".cv_time_start").html(cv_time_start)//开始时间
+                adddiv.find(".cv_time_end").html(cv_time_end)//开始时间
+                adddiv.find(".cv_name").html(cv_name);//
+                adddiv.find(".cv_state").html(cv_state);//
+                adddiv.find(".cv_department").html(cv_department);//
+                adddiv.find(".cv_level").html(cv_level);//
+                adddiv.show()
+                editdiv.hide()
+            }
+        })
+        //添加
+        $(".per_west_detail").on("click", ".add_cv", function () {
+            var adddiv = $(this).parent().siblings(".per_cv_con_add")
+            adddiv.find(".cv_time_start_edit").datebox("setValue", "")//开始时间
+            adddiv.find(".cv_time_end_edit").datebox("setValue", "")//开始时间
+            adddiv.find(".cv_name_edit").val("");//
+            adddiv.find(".cv_state_edit").val("");//
+            adddiv.find(".cv_department_edit").val("");//
+            adddiv.find(".cv_level_edit").val("");//
+            adddiv.show()
+        });
+        $(".per_west_detail").on("click", ".save_group_add", function () {
+
+            var div = $(this).parents(".per_cv_con_add")//编辑框
+            var editdiv = div//获取需要显示的值
+
+            var cv_time_start = editdiv.find(".cv_time_start_edit").datebox("getValue")//开始时间
+            var cv_time_end = editdiv.find(".cv_time_end_edit").datebox("getValue")//结束时间
+            var cv_name = editdiv.find(".cv_name_edit").val()//
+            var cv_state = editdiv.find(".cv_state_edit").val()//
+            var cv_department = editdiv.find(".cv_department_edit").val()//
+            var cv_level = editdiv.find(".cv_level_edit").val()//
+
+
+            var regC = /^\1|2\d{3}-\d{1,2}-\d{1,2}$/; //匹配日期  2014-1-20
+            if (cv_name == "") {
+                alert("cv_name不能为空")
+            } else if (cv_state == "") {
+                alert("cv_state不能为空")
+            } else if (cv_department == "") {
+                alert("cv_department不能为空")
+            } else if (cv_level == "") {
+                alert("cv_level不能为空")
+            } else if (cv_time_start == "") {
+                alert("开始时间不能为空")
+            } else if (!regC.test(cv_time_start)) {
+                alert("开始时间格式不正确")
+            } else if (cv_time_end == "") {
+                alert("结束时间不能为空")
+            } else if (!regC.test(cv_time_end)) {
+                alert("结束时间格式不正确")
+            } else if (cv_time_start > cv_time_end) {
+                alert("开始时间不能大于结束时间")
+            } else {
+                var html = '<div class="per_cv_con">'+
+                        '<div>'+
+                            '<span class="cv_time"><b class="cv_time_start">${cv_time_start}</b> ~ <b'+
+                                    'class="cv_time_end">${cv_time_end}</b></span>'+
+                            '<b class="dian"></b>'+
+                            '<b class="cv_name">${cv_name}</b>'+
+                            '<span class="cv_state">${cv_state}</span>'+
+                            '<span class="cv_department">${cv_department}</span>'+
+                            '<span class="cv_level">${cv_level}</span>'+
+                            '<img style="top: 8px;width: 13px;" class="top_edit_btn"'+
+                                'src="assets/home/top_edit_btn.png" alt="">'+
+                        '</div>'+
+                    '</div>'
+                div.before(html)
+                div.hide();
+                $('.per_cv_con > div').hover(function () {
+                    $(this).find(".top_edit_btn").show()
+                }, function () {
+                    $(this).find(".top_edit_btn").hide()
+                })
+            }
+        });
+        $(".per_west_detail").on("click", ".save_group_col_add", function () {
+            var adddiv = $(this).parents(".per_cv_con_add")//编辑框
+            adddiv.hide()
+        });
+        var data = [
+            {
+                num: '20190382',
+                name: '月度',
+                date: '2019年11月',
+                total: '130,000,000',
+                endTime: '2019.06.03',
+                state: '无',
+                cfdate: '2019.06.03',
+                fhdate: '2019.06.03',
+                ccdate: '2019.06.03',
+                reason: '无',
+                adress: '详情',
+                file: '无'
+            },
+        ]
+        $('#peoplesDetail').datagrid({
+            height: 360,
+            width: '100%',
+            fitColumns: true,
+            //pagination: true,
+            striped: true,
+            data,
+            columns: [[{ field: 'cfdate', title: '出发日期', halign: 'center', align: 'left' },
+            { field: 'fhdate', title: '返回日期', halign: 'center', align: 'left' },
+            { field: 'ccdate', title: '出差时长（天）', halign: 'center', align: 'left' },
+            { field: 'reason', title: '事由', halign: 'center', align: 'left' },
+            {
+                field: 'adress', title: '行程', halign: 'center', align: 'left', formatter(value, row, index) {
+                    return "90"
+                }
+            }
+            ]]
+        });
+    });
+</script>

@@ -1,0 +1,301 @@
+<body>
+    <div class="department-bonus" style="padding: 20px;">
+        <div class="back">
+            <div onclick="closeTab()">
+                <span></span>
+                <span>返回</span>
+            </div>
+            <div class="personal-btn">
+                <button class="primary-btn" style="display: none">保存</button>
+                <button class="disabled-btn">保存</button>
+                <button class="primary-btn" onclick="savetosubmit(this)">保存并提交</button>
+                <button class="border-btn">导入</button>
+                <button class="border-btn">导出</button>
+            </div>
+        </div>
+        <div class="db-header">
+            <ul>
+                <li>
+                    <span>总金额：</span>
+                    <span class="totalAmount">1,000,000</span>
+                </li>
+                <li>
+                    <span>待分配：</span>
+                    <span class="residueMoney">2,000</span>
+                </li>
+                <li class="end-time primary-date">
+                    截止时间：还有<span class="days">24</span>天(<span id="endDate">2019-05-09</span>)
+                </li>
+            </ul>
+        </div>
+        <div class="db-baseinfo">
+            <h1 class="box-title">基本信息</h1>
+            <ul>
+                <li>
+                    <span>奖金名称：</span>
+                    <span class='bonus-name'>月度</span>
+                </li>
+                <li>
+                    <span>创建时间：</span>
+                    <span id='start-time'>2019年1月</span>
+                </li>
+                <li>
+                    <span>分配单号：</span>
+                    <span class="code">20190931</span>
+                </li>
+                <li>
+                    <span>下发人：</span>
+                    <span class="empName">凉音</span>
+                </li>
+                <li>
+                    <span>下发部门：</span>
+                    <span class='deptName'>组织部</span>
+                </li>
+            </ul>
+        </div>
+        <div class="db-sharesinfo">
+            <h1 class="box-title" style="margin-bottom: 30px;">分配信息</h1>
+            <div id="db-tabs" class="easyui-tabs content-tabs">
+                <!-- <div title="部门">
+                    <div style="font-size: 0;">
+                        <div class="tab-department-left" style="vertical-align: top">
+                            <div id="department-left"></div>
+                        </div>
+                        <div class="tab-department-right" style="vertical-align: top">
+                            <div id="department-right"></div>
+                        </div>
+                    </div>
+                </div> -->
+                <div title="个人">
+                    <div class="personal-search">
+                        <span>姓名：</span>
+                        <input id="db-search-name">
+                    </div>
+                    <div id="personal-table"></div>
+                </div>
+            </div>
+        </div>
+        <div id="department-detail-page"></div>
+    </div>
+    <script>
+        $(function(){
+            // getherdeptAjax()
+            getPeopleAjax()
+            $('#db-search-name').textbox({
+                required:false,
+                width:200,
+                height:36,
+            })
+            //选项卡
+            $('#db-tabs').tabs({
+                onSelect:function(title,index){
+                    if (title == '个人') {
+                        $('.personal-btn').show();
+                    }else{
+                        $('.personal-btn').hide();
+                    }
+                }
+            })
+            
+            
+        })
+        // 奖金汇总-部门
+        // var deptList = [];
+        // function getherdeptTable(id,gdate){
+        //     $('#'+id).datagrid({
+        //         fitColumns:true,
+        //         striped:true,
+        //         data:gdate,
+                
+        //         columns:[[
+        //         {field:'index',title:'序号',width:'20%',halign:'left',align:'left',formatter:function(value,row,index){
+        //             if(id == 'department-left'){
+        //                 return '<span>'+((index+1)*2-1)+'</span>'
+        //             }else{
+        //                 return '<span>'+((index+1)*2)+'</span>'
+        //             }
+        //         }},
+        //         {field:'deptCode',title:'部门编码',halign:'left',align:'left',hidden:true},
+        //         {field:'deptName',title:'部门',width:'26%',halign:'left',align:'left',formatter:function(value,row,index){
+        //             return '<span class="primary-color" onclick="departmentDetail('+row.deptCode+')" style="cursor: pointer;">'+row.deptName+'</span>'
+        //         }},
+        //         {field:'sumMoney',title:'金额',width:'28%',halign:'left',align:'left'},
+        //         {field:'residue',title:'发放进度',width:'26%',halign:'left',align:'left'},
+        //         ]]
+        //     })
+        // }
+        // function getherdeptAjax(){
+        //     console.log($('#mainTabs').tabs('options').id)
+        //     $.ajax({
+        //         type:'get',
+        //         url:BASE_URL+'/rewardGatherMA/findByPackageId',
+        //         data:{
+        //             packageId:$('#mainTabs').tabs('options').id
+        //         },
+        //         success:function(data){
+        //                 var dataleft = []
+        //                 var dataright = []
+        //                 console.log(data,'奖金下发-index-已下发详情')
+        //                 var bbb = data.resultValue.rewardDeptList
+        //                 for(var i = 0;i<bbb.length;i++){
+        //                     bbb[i].index = i;
+        //                 }
+        //                 var dataleft = bbb.slice(0,Math.ceil(bbb.length/2))
+        //                 var dataright = bbb.slice(Math.ceil(bbb.length/2),bbb.length)
+        //                 getherdeptTable('department-left',dataleft);
+        //                 getherdeptTable('department-right',dataright);
+        //                 // // console.log(dataleft)
+        //                 // // console.log(dataright)
+        //                 // // console.log(bbb)
+        //                 $('.code').text(data.resultValue.rewardId)
+        //                 $('.bonus-name').text(data.resultValue.rewardName)
+        //                 $('#start-time').text(timeType(data.resultValue.beginDate))
+        //                 $('#endDate').text(timeType(data.resultValue.endDate))
+        //                 $('.deptName').text(data.resultValue.deptName)
+        //                 $('.empName').text(data.resultValue.empName)
+        //                 $('.totalAmount').text(data.resultValue.totalAmount)
+        //                 $('.residueMoney').text(data.resultValue.residueMoney)
+        //                 $('.days').text(data.resultValue.residueDay)
+        //         }
+        //     })
+        // }
+        
+        // 奖金汇总-个人
+        var peoList = [];
+        var totalAmount = null;//总金额
+        var moreMoey = null;//超额数
+        var residueMoney = null  //待分配金额剩余
+        function getherpersonTable(perData){
+            $('#personal-table').datagrid({
+                fitColumns:true,
+                striped:true,
+                data:perData,
+                onLoadSuccess:function(){
+                    $('.department-money').click(function(){
+                        // console.log()
+                        $(this).children('.depart-inp').on('input',function(){
+                            var testMoney = 0;
+                            $('.personal-btn').find('.primary-btn').show()
+                            $('.personal-btn').find('.disabled-btn').hide()
+                            for(var i = 0;i<$('.depart-inp').length;i++){
+                                testMoney += $('.depart-inp').eq(i).val()*1
+                            }
+                            if((totalAmount-testMoney) < 0){
+                                moreMoey = -(totalAmount-testMoney);
+                                $(this).val('')
+                                showPanalAlert(460, 220,'#full_excess','提示','html/BusinessManagement/bonusShares/BusinessManagement/alert/excess.html')
+                            }else{
+                                $('.residueMoney').text(
+                                    totalAmount-testMoney
+                                )
+                            }
+
+                        })
+                        $('.depart-inp').blur()
+                        $(this).children('span').hide();
+                        if($(this).children('span').text()==0){
+                            $(this).children('.depart-inp').val('0')
+                        }
+                        $(this).children('.depart-inp').show().focus()
+                        .blur(function(){
+                            $(this).hide().prev().show().text($(this).val()?$(this).val():'0')
+                        })
+                       
+                    })
+                },
+                columns:[[
+                {field:'index',title:'序号',width:'6%',halign:'center',align:'center',formatter:function(value,row,index){
+                    return '<span>'+(index+1)+'</span>'
+                }},
+                {field:'empName',title:'姓名',width:'8%',halign:'center',align:'center'},
+                {field:'empId',title:'人员编码',width:'10%',halign:'center',align:'center'},
+                {field:'deptName',title:'部门',width:'20%',halign:'center',align:'center',formatter:function(value,row,index){
+                    return '<div class="overflow-ellipsis">'+value+'</div>'
+                }},
+                {field:'postName',title:'岗位',width:'17%',halign:'center',align:'center'},
+                {field:'dutyGrade',title:'职级',width:'12%',halign:'center',align:'center'},
+                {field:'sericeYears',title:'服务年限',width:'12%',halign:'center',align:'center'},
+                {field:'amount',title:'金额',width:'10%',halign:'center',align:'center',formatter:function(value,row,index){
+                    return '<div class="department-money"><span>'+value+'</span><input class="depart-inp" style="display:none" value="'+value+'"></div>'
+                }}
+                ]]
+            })
+        }
+        function getPeopleAjax(){
+            $.ajax({
+                type:'get',
+                url:BASE_URL+'/rewardGatherMA/findByPackageId',
+                data:{
+                    packageId:$('#mainTabs').tabs('options').id
+                },
+                success:function(data){
+                        console.log(data,'奖金下发-index-已下发详情')
+                        var ddd = data.resultValue.rewarEmpMAVOList
+                        getherpersonTable(ddd)
+                        peoList = ddd;
+                        totalAmount = data.resultValue.totalAmount;
+                        $('.code').text(data.resultValue.rewardId)
+                        $('.bonus-name').text(data.resultValue.rewardName)
+                        $('#start-time').text(timeType(data.resultValue.beginDate))
+                        $('#endDate').text(timeType(data.resultValue.endDate))
+                        $('.deptName').text(data.resultValue.deptName)
+                        $('.empName').text(data.resultValue.empName)
+                        $('.totalAmount').text(data.resultValue.totalAmount)
+                        $('.residueMoney').text(data.resultValue.residueMoney)
+                }
+            })
+        }
+        // 奖金汇总 个人-保存并提交
+        function savetosubmit(e){
+            console.log($('.depart-inp'))
+            for(var i=0;i<peoList.length;i++){
+                peoList[i].amount = Number($('.depart-inp').eq(i).val())
+                console.log(peoList[i].amount)
+            }
+            var getpersonDate = {
+                // "rewardName": $('.bonus-name').text(),
+                "beginDate": $('#start-time').text(),
+                "endDate":$('#endDate').text(),
+                "rewardId": $('.code').text(),
+                "empName":$('.empName').text(),
+                "deptName":$('.deptName').text(),
+                "totalAmount": $('.totalAmount').text(),
+                "residueMoney":$('.residueMoney').text(),
+                "rewarEmpMAVOList": peoList
+            }
+            if($('.residueMoney').text()  != 0){
+                residueMoney = $('.residueMoney').text()
+                showPanalAlert(460, 220,'#full_excess','提示','html/BusinessManagement/bonusShares/BusinessManagement/alert/jjfp-excess.html')
+            }else{
+              $.ajax({
+                type: 'post',
+                contentType: 'application/json',
+                url:BASE_URL+'/rewardGatherMA/submitEmp',
+                data: JSON.stringify(
+                    getpersonDate
+                ),
+                success: function (data) {
+                    console.log(data,'奖金汇总-个人保存并提交')
+                    if (data.resultCode == 200) {
+                        closetabTitle("分配详情");
+                        // closeTab(this)
+                        closetabTitle("奖金分配");
+                        opentab("BusinessManagement/bonusShares/BusinessManagement/index", "奖金分配", false);
+                    }
+                }
+            })  
+            }
+            
+        }
+        //跳转部门详情
+        // function departmentDetail(value){
+        //     console.log(value);
+        //     var deptId = Number($('.code').text())
+        //     // console.log()
+        //     var result = []
+        //     result.push(deptId,value)
+        //     // console.log(result)
+        //     opentab("BusinessManagement/bonusShares/BusinessManagement/departmentDetail", "部门详情", false,result);
+        // }
+    </script>
+</body>

@@ -1,0 +1,253 @@
+<div class="easyui-layout animated fadeInRight" data-options="fit:true" style="background: #edf1f2;">
+    <div class="easyui-layout" style="width:100%;height: 100%">
+
+        <div data-options="region:'center'" style="padding: 20px;position: relative;">
+
+            <div class="shared_box" style="position: relative;">
+                <div class="back">
+                    <div onclick="closeTab()">
+                        <span></span>
+                        <span>返回</span>
+                    </div>
+                </div>
+                <div class="shared_main_list">
+                    <h3 class="box-title">基本信息</h3>
+                    <div class="shared_list">
+                        <input type="hidden" id="userid">
+                        <div><span>申请单号:  </span><b id="sqdh"></b></div>
+                        <div><span>传输频率:  </span><b id="cspl"></b></div>
+                        <div><span>申请部门:  </span><b id="sqbm"></b></div>
+                        <div><span>申请系统名称:  </span><b id="sqxtmc"></b></div>
+                        <div><span>申请人:  </span><b id="sqr"></b></div>
+                        <div><span>联系方式:  </span><b id="lxfs">15242152635</b></div>
+                        <div><span>申请日期:  </span><b id="sqrq"></b></div>
+                        <div><span>授权日期:  </span><b id="sqrqsqrq"></b></div>
+                    </div>
+                </div>
+                <div class="shared_main_list">
+                    <h3 class="box-title">人员范围</h3>
+                    <div class="shared_scope_list"><span>组织机构：</span> <div class="box" id="zzjg"></div></div>
+                    <div class="shared_scope_list"><span>岗位分类：</span> <div class="box" id="gwfl"></div></div>
+                    <div class="shared_scope_list">
+                        <span>授权情况：</span> 
+                        <div class="box" >
+                            <div class="wsqdiv">
+                                <p class="wsqry" onclick="opensqpeople()">未授权人员></p>
+                                <p>共<i id="wsqnum">0</i>人</p>
+                            </div>
+                            <div class="wsqdiv">
+                                <p class="wsqry" onclick="opensqpeople()">已授权人员></p>
+                                <p>共<i id="ysqnm">0</i>人</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="shared_main_list">
+                    <h3 class="box-title">需求字段</h3>
+                    <div class="shared_main_title_sm">基础信息</div>
+                    <div class="shared_scope_list"><span>人员信息：</span> <div class="box" id="jcryxx"></div></div>
+                    <div class="shared_scope_list"><span>教育信息：</span> <div class="box" id="jyxx"></div></div>
+                    <div class="shared_scope_list"><span>绩效考核：</span> <div class="box" id="jxkh"></div></div>
+                    <div class="shared_scope_list"><span>工作履历：</span> <div class="box" id="gzll"></div></div>
+                    <div class="shared_scope_list"><span>专家人才信息：</span> <div class="box" id="zjrcxx"></div></div>
+                    <div class="shared_main_title_sm">需员工授权数据</div>
+                    <div class="shared_scope_list"><span>人员信息：</span> <div class="box" id="ygryxx"></div></div>
+                    <div class="shared_scope_list"><span>（行政、党派）职务变动：</span> <div class="box" id="zwbd"></div></div>
+                    <div class="shared_scope_list"><span>家庭成员：</span> <div class="box" id="jtcy"></div></div>
+                    <div class="shared_main_title_sm">其他字段</div>
+                    <div class="box" style="margin-top: 10px;"><b style="padding: 3px 8px;font-weight: 400;background: #F2F3F8;color: rgb(71, 104, 201)">人员信息、绩效工资考核新增字段</b></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div data-options="region:'east'"  style="width:200px; padding: 10px;">
+            <div class="east_box">
+                <h3 class="box-title">审核进度</h3>
+                <ul class="progress_ul">
+                    <li>
+                        <div class="li_img_list"><img src="/assets/home/icon_quan_ok.png" alt=""> 提交申请</div>
+                        <div class="li_time">
+                            <span id="shjdname"></span>
+                            <p id="shjdrq"></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="li_img_list"><img id="shjdimg"  src="" alt=""> 人资审核</div>
+                        <div class="li_time">
+                            <span id="shjdstatus"></span>
+                            <p id="shjdsprq"></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="li_img_list"><img id="ygsqimg"  src="" alt=""> 员工授权</div>
+                        <div class="li_time">
+                            <span id="ygsqstatus"></span>
+                            <p id="ygsqsprq"></p>
+                        </div>
+                    </li>
+                    <!--<li>
+                        <div class="li_img_list"><img src="/assets/home/icon_quan_lg.png" alt=""> 重新提交</div>
+                        <div class="li_time">
+                            <span class="progress_x">李毅</span>
+                            <p>2019-10-10</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="li_img_list"><img src="/assets/home/icon_quan_x.png" alt=""> 人资审核</div>
+                        <div class="li_time">
+                            <span class="progress_x">周毛毛</span>
+                            <p>2019-10-10</p>
+                        </div>
+                    </li>-->
+                    <li>
+                        <div class="li_img_list"><img style=" width: 15px;margin-left: 8px;margin-right: 2px;" src="/assets/home/icon_quan_sm.png" alt=""> 完成</div>
+                    </li>
+                    <li class="xian_li">
+                        <div class="xian"></div>
+                    </li>
+                </ul>
+            </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+         mx.sqjlxqId = $("#mainTabs").tabs("options").id;
+        $.ajax({
+            // url: BASE_URL3+'/sharingApply/queryEmployeeByBatchNo',
+            url: BASE_URL+'/sharingApply/queryEmployeeByBatchNo',
+            type: 'get',
+            data: {
+                'batchNo': mx.sqjlxqId
+            },
+            success: function(data){
+                $('#wsqnum').text(data.resultValue.unApplyNumber);  //
+                $('#ysqnm').text(data.resultValue.applyNumber);  //
+                $('#sqdh').text(data.resultValue.batchNo);
+                if(data.resultValue.transFrequency == '1'){
+                    $('#cspl').text('实时更新');
+                }else if(data.resultValue.transFrequency == '2'){
+                    $('#cspl').text('单一');
+                }else if(data.resultValue.transFrequency == '3'){
+                    $('#cspl').text('每日一次');
+                }
+                // $('#cspl').text(data.resultValue.transFrequency);
+                $('#sqbm').text(data.resultValue.organName);
+                $('#sqxtmc').text(data.resultValue.applySystemName);
+                $('#sqr').text(data.resultValue.userName);
+                //$('#lxfs').text(data.resultValue.batchNo);
+                $('#sqrq').text(data.resultValue.beginDate);
+                $('#sqrqsqrq').text(data.resultValue.endDate);    //授权日期
+                $('#userid').val(data.resultValue.userId);
+                $('#shjdname').text(data.resultValue.userName); //审核进度名字
+                $('#shjdrq').text(data.resultValue.beginDate);   //审核进度日期                 
+                if(data.resultValue.applyStatus == '7'){//已驳回
+                    $('#shjdimg').attr('src','/assets/home/icon_quan_x.png');
+                    $('#shjdsprq').text(data.resultValue.approveDate); //审批日期
+                    $('#shjdstatus').text('胡静-审批驳回');  //人名
+                    $('#shjdstatus').addClass('progress_x');
+                    //员工授权
+                    $('#ygsqimg').attr('src','/assets/home/icon_quan_sm.png');
+                    $('#ygsqimg').css({'width': '15px','margin-left': '8px','margin-right': '2px'});
+                    $('#ygsqstatus').text('');
+                    $('#ygsqsprq').text('');
+                }else if(data.resultValue.applyStatus == '5'){//已审批
+                    $('#shjdimg').attr('src','/assets/home/icon_quan_ok.png');
+                    if(data.resultValue.approveDate == null){
+                        $('#shjdsprq').text(''); //审批日期
+                    }else{
+                        $('#shjdsprq').text(data.resultValue.approveDate); //审批日期
+                    }       
+                    $('#shjdstatus').text('胡静-审批通过');  //人名
+                    //员工授权
+                    if(data.resultValue.applyNumber>0){
+                        $('#ygsqimg').attr('src','/assets/home/icon_quan_ok.png');
+                        $('#ygsqstatus').text('员工已授权');
+                        $('#ygsqsprq').text(data.resultValue.approveDate);
+                    }else{
+                        $('#ygsqimg').attr('src','/assets/home/icon_quan_sm.png');
+                        $('#ygsqimg').css({'width': '15px','margin-left': '8px','margin-right': '2px'});
+                        $('#ygsqstatus').text('');
+                        $('#ygsqsprq').text('');
+                    }
+                }else if(data.resultValue.applyStatus == '4'){//已提交-待审批
+                    $('#shjdimg').attr('src','/assets/home/icon_quan_sm.png');
+                    $('#shjdimg').css({'width': '15px','margin-left': '8px','margin-right': '2px'})
+                    $('#shjdsprq').text(''); //审批日期
+                    $('#shjdstatus').text('');  //人名
+                    //员工授权
+                    $('#ygsqimg').attr('src','/assets/home/icon_quan_sm.png');
+                    $('#ygsqimg').css({'width': '15px','margin-left': '8px','margin-right': '2px'});
+                    $('#ygsqstatus').text('');
+                    $('#ygsqsprq').text('');
+                }else if(data.resultValue.applyStatus == '3'){
+                    $('#shjdsprq').text(''); //审批日期
+                    $('#shjdstatus').text('');  //人名
+                }
+                var gwfl = data.resultValue.warrantSort;
+                for(var i=0;i<gwfl.length;i++){
+                    var arreach = JSON.parse(gwfl[i]);
+                    var s = $('<b>'+arreach.name+'</b>');
+                    $('#gwfl').append(s);
+                }
+                var zzjg = data.resultValue.warrantObj;
+                mx.zzjgselectTree = [];
+                for(var j=0;j<zzjg.length;j++){
+                    var zzjgeach = JSON.parse(zzjg[j]); 
+                    mx.zzjgselectTree.push(zzjgeach.name);
+                    var m = $('<b>'+zzjgeach.name+'</b>')
+                    $('#zzjg').append(m);
+                }
+                var xqzdtotal = JSON.parse(data.resultValue.warrantContent);  //[[],[],[],[]]                    
+                var nodeList = [$('#jcryxx'),$('#jyxx'),$('#jxkh'),$('#gzll'),$('#zjrcxx'),$('#zjrcxx'),$('#ygryxx')]
+                // for(var i = 0;i<xqzdtotal.length;i++){
+                //     for(var j = 0;j<xqzdtotal[i].length;j++){
+                //         nodeList[i].append($('<b>'+xqzdtotal[i][j]+'</b>'))
+                //     }
+                // }
+
+                for(var n = 0;n<xqzdtotal[0].length;n++){
+                    var h = $('<b>'+xqzdtotal[0][n]+'</b>');
+                    $('#jcryxx').append(h);
+                }
+                for(var n = 0;n<xqzdtotal[1].length;n++){
+                    var h = $('<b>'+xqzdtotal[1][n]+'</b>');
+                    $('#jyxx').append(h);
+                }
+                for(var n = 0;n<xqzdtotal[2].length;n++){
+                    var h = $('<b>'+xqzdtotal[2][n]+'</b>');
+                    $('#jxkh').append(h);
+                }
+                
+                for(var n = 0;n<xqzdtotal[3].length;n++){
+                    var h = $('<b>'+xqzdtotal[3][n]+'</b>');
+                   $('#gzll').append(h);
+                }
+                for(var n = 0;n<xqzdtotal[4].length;n++){
+                    var h = $('<b>'+xqzdtotal[4][n]+'</b>');
+                    $('#zjrcxx').append(h);
+                }
+                for(var n = 0;n<xqzdtotal[5].length;n++){
+                    var h = $('<b>'+xqzdtotal[5][n]+'</b>');
+                    $('#ygryxx').append(h);
+                }
+                for(var n = 0;n<xqzdtotal[6].length;n++){
+                    var h = $('<b>'+xqzdtotal[6][n]+'</b>');
+                    $('#zwbd').append(h);
+                }
+                for(var n = 0;n<xqzdtotal[7].length;n++){
+                    var h = $('<b>'+xqzdtotal[7][n]+'</b>');
+                    $('#jtcy').append(h);
+                }
+            }
+        })
+
+    });
+
+    //授权与未授权详情页面
+    function opensqpeople(){
+        opentab("people/peoplesaudit", "共享人员查看", false,mx.sqjlxqId);
+    }
+</script>

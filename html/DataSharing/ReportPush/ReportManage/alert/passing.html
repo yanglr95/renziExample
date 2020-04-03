@@ -1,0 +1,25 @@
+<div style="padding: 15px">
+        <p style="margin-bottom: 10px;">审批备注：</p>
+        <input id="dsptgalert" class="easyui-textbox">
+        <div style="margin-top: 20px;padding: 10px 0;width: 100%;border-top: 1px solid #ccc">
+            <div class="fr">
+                <button class="border-btn ">取消</button>
+                <button class="primary-btn" onclick="dsptgsave(this)">确认</button>
+            </div>       
+        </div>
+    </div>
+
+    <script>
+        $(function(){
+            $('#dsptgalert').textbox({
+                width: 350,
+                height: 150,
+                editable: true,
+                multiline: true
+            })
+            
+        })
+        function dsptgsave(e){
+            hideAlert(e);
+        }
+        </script>
